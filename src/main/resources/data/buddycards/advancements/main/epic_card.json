@@ -1,0 +1,27 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.epic_card"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.epic_card.desc"
+    },
+    "icon": {
+      "item": "buddycards:card.1.26"
+    },
+    "hidden": false
+  },
+  "parent": "buddycards:main/root",
+  "criteria": {
+    "set1_epic": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag":"buddycards:epic_cards"
+          }
+        ]
+      }
+    }
+  }
+}

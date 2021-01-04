@@ -1,0 +1,26 @@
+{
+    "display": {
+        "title": {
+            "translate": "advancements.buddycards.main.root"
+        },
+        "description": {
+            "translate": "advancements.buddycards.main.root.desc"
+        },
+        "icon": {
+            "item": "buddycards:pack.1"
+        },
+        "background": "minecraft:textures/block/smooth_stone.png"
+    },
+    "criteria": {
+        "pack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "tag":"buddycards:packs"
+                    }
+                ]
+            }
+        }
+    }
+}

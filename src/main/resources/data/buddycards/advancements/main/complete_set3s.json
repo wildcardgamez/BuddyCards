@@ -1,0 +1,104 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.complete_set3s"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.complete_set3s.desc"
+    },
+    "icon": {
+      "item": "buddycards:pack.3"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "buddycards:main/complete_set3",
+  "requirements": [
+    ["card1"],
+    ["card2"],
+    ["card3"],
+    ["card4"],
+    ["card5"],
+    ["card6"],
+    ["card7"],
+    ["card8"],
+    ["card9"],
+    ["card10"],
+    ["card11"],
+    ["card12"],
+    ["card13"],
+    ["card14"],
+    ["card15"],
+    ["card16"],
+    ["card17"],
+    ["card18"],
+    ["card19"],
+    ["card20"],
+    ["card21"],
+    ["card22"],
+    ["card23"],
+    ["card24"],
+    ["card25"],
+    ["card26"],
+    ["card27"]
+  ],
+  "criteria": {
+    "card1": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.1s"}]}},
+    "card2": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.2s"}]}},
+    "card3": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.3s"}]}},
+    "card4": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.4s"}]}},
+    "card5": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.5s"}]}},
+    "card6": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.6s"}]}},
+    "card7": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.7s"}]}},
+    "card8": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.8s"}]}},
+    "card9": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.9s"}]}},
+    "card10": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.10s"}]}},
+    "card11": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.11s"}]}},
+    "card12": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.12s"}]}},
+    "card13": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.13s"}]}},
+    "card14": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.14s"}]}},
+    "card15": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.15s"}]}},
+    "card16": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.16s"}]}},
+    "card17": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.17s"}]}},
+    "card18": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.18s"}]}},
+    "card19": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.19s"}]}},
+    "card20": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.20s"}]}},
+    "card21": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.21s"}]}},
+    "card22": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.22s"}]}},
+    "card23": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.23s"}]}},
+    "card24": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.24s"}]}},
+    "card25": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.25s"}]}},
+    "card26": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.26s"}]}},
+    "card27": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.3.27s"}]}}
+  },
+  "rewards" : {
+    "loot": ["buddycards:item/medals/3"]
+  }
+}

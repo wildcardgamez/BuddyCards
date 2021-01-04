@@ -1,0 +1,26 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.end_pack"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.end_pack.desc"
+    },
+    "icon": {
+      "item": "buddycards:pack.3"
+    }
+  },
+  "parent": "buddycards:main/root",
+  "criteria": {
+    "pack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item":"buddycards:pack.3"
+          }
+        ]
+      }
+    }
+  }
+}
