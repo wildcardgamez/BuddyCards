@@ -32,6 +32,8 @@ public class ConfigManager {
     public static ForgeConfigSpec.DoubleValue shulkerChance;
     public static ForgeConfigSpec.DoubleValue dragonChance;
     public static ForgeConfigSpec.IntValue dragonMaxPacks;
+    public static ForgeConfigSpec.BooleanValue piglinBartering;
+    public static ForgeConfigSpec.BooleanValue lootChestPacks;
 
     public static void init()
     {
@@ -52,5 +54,9 @@ public class ConfigManager {
                 .defineInRange("mobDrops.dragonChance", 1f, 0, 1);
         dragonMaxPacks = builder.comment("\nMaximum amount of packs dropped when a dragon drops packs, default is 4")
                 .defineInRange("mobDrops.dragonMaxPacks", 4, 1, 16);
+        piglinBartering = builder.comment("\nAllow packs to be obtained through Piglin bartering, default is true")
+                .define("lootTables.piglinBartering", true);
+        lootChestPacks = builder.comment("\nAllow natural generation of packs in loot chests, default is true")
+                .define("lootTables.lootChestPacks", true);
     }
 }
