@@ -44,7 +44,8 @@ public class MobDropHandler {
                 drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_END.get(), 1)));
             }
             else if (entity instanceof EnderDragonEntity && Math.random() < ConfigManager.dragonChance.get()) {
-                drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_END.get(), (int) (Math.random() * 4) + 1)));
+                drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_END.get(),
+                        (int) (Math.random() * ConfigManager.dragonMaxPacks.get()) + 1)));
             }
         }
     }
