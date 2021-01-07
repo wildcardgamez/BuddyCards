@@ -95,6 +95,16 @@ dependencies {
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.0:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.0")
+    compileOnly fg.deobf("byg:byg:1.1.6")
+    runtimeOnly fg.deobf("byg:byg:1.1.6")
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+    flatDir { dirs "testmods" }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -128,12 +138,5 @@ publishing {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
-    }
-}
-
-repositories {
-    mavenCentral()
-    maven {
-        url = "https://maven.theillusivec4.top/"
     }
 }
