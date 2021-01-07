@@ -5,10 +5,12 @@ import com.wildcard.buddycards.integration.CuriosIntegration;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -18,9 +20,9 @@ import net.minecraftforge.fml.ModList;
 import java.util.List;
 
 public class MedalItem extends Item {
-    public MedalItem(int set) {
+    public MedalItem(int setNumber) {
         super(new Item.Properties().group(BuddyCards.TAB).maxStackSize(1).isImmuneToFire());
-        SET_NUMBER = set;
+        SET_NUMBER = setNumber;
     }
 
     final int SET_NUMBER;
@@ -48,5 +50,12 @@ public class MedalItem extends Item {
             return CuriosIntegration.initCapabilities(SET_NUMBER);
         }
         return super.initCapabilities(stack, unused);
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
+            return;
+        super.fillItemGroup(group, items);
     }
 }

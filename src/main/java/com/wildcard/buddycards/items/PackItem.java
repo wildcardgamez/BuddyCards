@@ -4,6 +4,7 @@ import com.wildcard.buddycards.BuddyCards;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.loot.LootContext;
@@ -11,11 +12,13 @@ import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootTable;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.List;
@@ -56,5 +59,12 @@ public class PackItem extends Item {
             return ActionResult.resultConsume(playerIn.getHeldItem(handIn));
         }
         return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
+            return;
+        super.fillItemGroup(group, items);
     }
 }

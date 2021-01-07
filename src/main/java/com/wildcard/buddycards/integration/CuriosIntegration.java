@@ -59,6 +59,10 @@ public class CuriosIntegration {
                         if (player.isPotionActive(Effects.LEVITATION))
                             player.removePotionEffect(Effects.LEVITATION);
                     }
+                    else if(setNumber == 4) {
+                        player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, 2, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 300, 0, true, false));
+                    }
                 }
             }
         };

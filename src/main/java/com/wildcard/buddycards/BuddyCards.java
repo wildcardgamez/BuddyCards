@@ -1,18 +1,16 @@
 package com.wildcard.buddycards;
 
-import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
+import com.wildcard.buddycards.datagen.DataGeneration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.util.ConfigManager;
 import com.wildcard.buddycards.util.LootInjectionHandler;
 import com.wildcard.buddycards.util.MobDropHandler;
 import com.wildcard.buddycards.util.RegistryHandler;
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -39,6 +37,7 @@ public class BuddyCards
         ConfigManager.loadConfig(FMLPaths.CONFIGDIR.get().resolve("buddycards-client.toml").toString());
 
         RegistryHandler.cardItemCreation();
+
         RegistryHandler.init();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

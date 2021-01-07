@@ -3,11 +3,14 @@ package com.wildcard.buddycards.items;
 import com.wildcard.buddycards.BuddyCards;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.ModList;
 
 import java.util.List;
 
@@ -51,6 +54,13 @@ public class CardItem extends Item {
         else if(CARD_NUMBER <= 25)
             return Rarity.RARE;
         return Rarity.EPIC;
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
+            return;
+        super.fillItemGroup(group, items);
     }
 
 }

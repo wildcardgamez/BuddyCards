@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -17,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -24,6 +26,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
 
@@ -37,7 +40,16 @@ public class CardDisplayBlock extends Block {
     public CardDisplayBlock() {
         super(Block.Properties.from(Blocks.OAK_PLANKS));
         this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
+        NEEDED_MOD = "";
     }
+
+    public CardDisplayBlock(String neededMod) {
+        super(Block.Properties.from(Blocks.OAK_PLANKS));
+        this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
+        NEEDED_MOD = neededMod;
+    }
+
+    final String NEEDED_MOD;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -193,5 +205,12 @@ public class CardDisplayBlock extends Block {
         if (world.getTileEntity(pos) instanceof CardDisplayTile)
             InventoryHelper.dropItems(world, pos, ((CardDisplayTile) (world.getTileEntity(pos))).getInventory());
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if(NEEDED_MOD != "" && !ModList.get().isLoaded(NEEDED_MOD))
+            return;
+        super.fillItemGroup(group, items);
     }
 }
