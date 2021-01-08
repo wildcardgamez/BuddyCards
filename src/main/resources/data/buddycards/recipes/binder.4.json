@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "byg",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "minecraft:leather"
+          },
+          {
+            "tag": "buddycards:set4_cards"
+          },
+          {
+            "tag": "buddycards:set4_cards"
+          },
+          {
+            "tag": "buddycards:set4_cards"
+          }
+        ],
+        "result": {
+          "item": "buddycards:binder.4",
+          "count": 1
+        }
+      }
+    }
+  ]
+}

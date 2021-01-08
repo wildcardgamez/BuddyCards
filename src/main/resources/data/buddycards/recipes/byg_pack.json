@@ -1,0 +1,41 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "byg",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " A ",
+          "B#C",
+          " D "
+        ],
+        "key": {
+          "#": {
+            "item": "buddycards:pack.1"
+          },
+          "A": {
+            "tag": "byg:rainbow_eucalyptus_logs"
+          },
+          "B": {
+            "item": "byg:therium_shard"
+          },
+          "C": {
+            "item": "byg:embur_gel_ball"
+          },
+          "D": {
+            "tag": "byg:glacial_oak_logs"
+          }
+        },
+        "result": {
+          "item": "buddycards:pack.4"
+        }
+      }
+    }
+  ]
+}

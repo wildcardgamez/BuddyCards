@@ -108,6 +108,34 @@ public class RegistryHandler {
     public static final RegistryObject<Block> WARPED_CARD_DISPLAY = BLOCKS.register("warped_card_display", CardDisplayBlock::new);
     //Byg Card Display Blocks
     public static final RegistryObject<Block> ASPEN_CARD_DISPLAY = BLOCKS.register("aspen_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> BAOBAB_CARD_DISPLAY = BLOCKS.register("baobab_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> BLUE_ENCHANTED_CARD_DISPLAY = BLOCKS.register("blue_enchanted_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> BULBIS_CARD_DISPLAY = BLOCKS.register("bulbis_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> CHERRY_CARD_DISPLAY = BLOCKS.register("cherry_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> CIKA_CARD_DISPLAY = BLOCKS.register("cika_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> CYPRESS_CARD_DISPLAY = BLOCKS.register("cypress_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> EBONY_CARD_DISPLAY = BLOCKS.register("ebony_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> EMBUR_CARD_DISPLAY = BLOCKS.register("embur_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> ETHER_CARD_DISPLAY = BLOCKS.register("ether_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> FIR_CARD_DISPLAY = BLOCKS.register("fir_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> GLACIAL_OAK_CARD_DISPLAY = BLOCKS.register("glacial_oak_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> GREEN_ENCHANTED_CARD_DISPLAY = BLOCKS.register("green_enchanted_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> HOLLY_CARD_DISPLAY = BLOCKS.register("holly_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> JACARANDA_CARD_DISPLAY = BLOCKS.register("jacaranda_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> LAMENT_CARD_DISPLAY = BLOCKS.register("lament_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> MAHOGANY_CARD_DISPLAY = BLOCKS.register("mahogany_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> MANGROVE_CARD_DISPLAY = BLOCKS.register("mangrove_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> MAPLE_CARD_DISPLAY = BLOCKS.register("maple_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> NIGHTSHADE_CARD_DISPLAY = BLOCKS.register("nightshade_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> PALM_CARD_DISPLAY = BLOCKS.register("palm_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> PINE_CARD_DISPLAY = BLOCKS.register("pine_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> RAINBOW_EUCALYPTUS_CARD_DISPLAY = BLOCKS.register("rainbow_eucalyptus_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> REDWOOD_CARD_DISPLAY = BLOCKS.register("redwood_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> SKYRIS_CARD_DISPLAY = BLOCKS.register("skyris_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> SYTHIAN_CARD_DISPLAY = BLOCKS.register("sythian_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> WILLOW_CARD_DISPLAY = BLOCKS.register("willow_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> WITCH_HAZEL_CARD_DISPLAY = BLOCKS.register("witch_hazel_card_display", () -> new CardDisplayBlock("byg"));
+    public static final RegistryObject<Block> ZELKOVA_CARD_DISPLAY = BLOCKS.register("zelkova_card_display", () -> new CardDisplayBlock("byg"));
 
     //Card Display Items
     public static final RegistryObject<BlockItem> OAK_CARD_DISPLAY_ITEM = ITEMS.register("oak_card_display", () -> new BlockItem(OAK_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
@@ -118,12 +146,47 @@ public class RegistryHandler {
     public static final RegistryObject<BlockItem> DARK_OAK_CARD_DISPLAY_ITEM = ITEMS.register("dark_oak_card_display", () -> new BlockItem(DARK_OAK_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> CRIMSON_CARD_DISPLAY_ITEM = ITEMS.register("crimson_card_display", () -> new BlockItem(CRIMSON_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> WARPED_CARD_DISPLAY_ITEM = ITEMS.register("warped_card_display", () -> new BlockItem(WARPED_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    //Card Display Items
+    //Byg Card Display Items
     public static final RegistryObject<BlockItem> ASPEN_CARD_DISPLAY_ITEM = ITEMS.register("aspen_card_display", () -> new BlockItem(ASPEN_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> BAOBAB_CARD_DISPLAY_ITEM = ITEMS.register("baobab_card_display", () -> new BlockItem(BAOBAB_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> BLUE_ENCHANTED_CARD_DISPLAY_ITEM = ITEMS.register("blue_enchanted_card_display", () -> new BlockItem(BLUE_ENCHANTED_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> BULBIS_CARD_DISPLAY_ITEM = ITEMS.register("bulbis_card_display", () -> new BlockItem(BULBIS_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> CHERRY_CARD_DISPLAY_ITEM = ITEMS.register("cherry_card_display", () -> new BlockItem(CHERRY_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> CIKA_CARD_DISPLAY_ITEM = ITEMS.register("cika_card_display", () -> new BlockItem(CIKA_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> CYPRESS_CARD_DISPLAY_ITEM = ITEMS.register("cypress_card_display", () -> new BlockItem(CYPRESS_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> EBONY_CARD_DISPLAY_ITEM = ITEMS.register("ebony_card_display", () -> new BlockItem(EBONY_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> EMBUR_CARD_DISPLAY_ITEM = ITEMS.register("embur_card_display", () -> new BlockItem(EMBUR_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> ETHER_CARD_DISPLAY_ITEM = ITEMS.register("ether_card_display", () -> new BlockItem(ETHER_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> FIR_CARD_DISPLAY_ITEM = ITEMS.register("fir_card_display", () -> new BlockItem(FIR_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> GLACIAL_OAK_CARD_DISPLAY_ITEM = ITEMS.register("glacial_oak_card_display", () -> new BlockItem(GLACIAL_OAK_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> GREEN_ENCHANTED_CARD_DISPLAY_ITEM = ITEMS.register("green_enchanted_card_display", () -> new BlockItem(GREEN_ENCHANTED_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> HOLLY_CARD_DISPLAY_ITEM = ITEMS.register("holly_card_display", () -> new BlockItem(HOLLY_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> JACARANDA_CARD_DISPLAY_ITEM = ITEMS.register("jacaranda_card_display", () -> new BlockItem(JACARANDA_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> LAMENT_CARD_DISPLAY_ITEM = ITEMS.register("lament_card_display", () -> new BlockItem(LAMENT_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> MAHOGANY_CARD_DISPLAY_ITEM = ITEMS.register("mahogany_card_display", () -> new BlockItem(MAHOGANY_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> MANGROVE_CARD_DISPLAY_ITEM = ITEMS.register("mangrove_card_display", () -> new BlockItem(MANGROVE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> MAPLE_CARD_DISPLAY_ITEM = ITEMS.register("maple_card_display", () -> new BlockItem(MAPLE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> NIGHTSHADE_CARD_DISPLAY_ITEM = ITEMS.register("nightshade_card_display", () -> new BlockItem(NIGHTSHADE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> PALM_CARD_DISPLAY_ITEM = ITEMS.register("palm_card_display", () -> new BlockItem(PALM_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> PINE_CARD_DISPLAY_ITEM = ITEMS.register("pine_card_display", () -> new BlockItem(PINE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> RAINBOW_EUCALYPTUS_CARD_DISPLAY_ITEM = ITEMS.register("rainbow_eucalyptus_card_display", () -> new BlockItem(RAINBOW_EUCALYPTUS_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> REDWOOD_CARD_DISPLAY_ITEM = ITEMS.register("redwood_card_display", () -> new BlockItem(REDWOOD_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> SKYRIS_CARD_DISPLAY_ITEM = ITEMS.register("skyris_card_display", () -> new BlockItem(SKYRIS_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> SYTHIAN_CARD_DISPLAY_ITEM = ITEMS.register("sythian_card_display", () -> new BlockItem(SYTHIAN_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> WILLOW_CARD_DISPLAY_ITEM = ITEMS.register("willow_card_display", () -> new BlockItem(WILLOW_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> WITCH_HAZEL_CARD_DISPLAY_ITEM = ITEMS.register("witch_hazel_card_display", () -> new BlockItem(WITCH_HAZEL_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> ZELKOVA_CARD_DISPLAY_ITEM = ITEMS.register("zelkova_card_display", () -> new BlockItem(ZELKOVA_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
 
     public static final RegistryObject<TileEntityType<CardDisplayTile>> CARD_DISPLAY_TILE = TILE_ENTITIES.register("card_display",
             () -> TileEntityType.Builder.create(CardDisplayTile::new, OAK_CARD_DISPLAY.get(), SPRUCE_CARD_DISPLAY.get(),
                     BIRCH_CARD_DISPLAY.get(), JUNGLE_CARD_DISPLAY.get(), ACACIA_CARD_DISPLAY.get(), DARK_OAK_CARD_DISPLAY.get(),
-                    CRIMSON_CARD_DISPLAY.get(), WARPED_CARD_DISPLAY.get(), ASPEN_CARD_DISPLAY.get()).build(null));
+                    CRIMSON_CARD_DISPLAY.get(), WARPED_CARD_DISPLAY.get(), ASPEN_CARD_DISPLAY.get(), BAOBAB_CARD_DISPLAY.get(),
+                    BLUE_ENCHANTED_CARD_DISPLAY.get(), BULBIS_CARD_DISPLAY.get(), CHERRY_CARD_DISPLAY.get(), CIKA_CARD_DISPLAY.get(),
+                    CYPRESS_CARD_DISPLAY.get(), EBONY_CARD_DISPLAY.get(), EMBUR_CARD_DISPLAY.get(), ETHER_CARD_DISPLAY.get(),
+                    FIR_CARD_DISPLAY.get(), GLACIAL_OAK_CARD_DISPLAY.get(), GREEN_ENCHANTED_CARD_DISPLAY.get(), HOLLY_CARD_DISPLAY.get(),
+                    JACARANDA_CARD_DISPLAY.get(), LAMENT_CARD_DISPLAY.get(), MAHOGANY_CARD_DISPLAY.get(), MANGROVE_CARD_DISPLAY.get(),
+                    MAPLE_CARD_DISPLAY.get(), NIGHTSHADE_CARD_DISPLAY.get(), PALM_CARD_DISPLAY.get(), PINE_CARD_DISPLAY.get(),
+                    RAINBOW_EUCALYPTUS_CARD_DISPLAY.get(), REDWOOD_CARD_DISPLAY.get(), SKYRIS_CARD_DISPLAY.get(), SYTHIAN_CARD_DISPLAY.get(),
+                    WILLOW_CARD_DISPLAY.get(), WITCH_HAZEL_CARD_DISPLAY.get(), ZELKOVA_CARD_DISPLAY.get()).build(null));
 
 }

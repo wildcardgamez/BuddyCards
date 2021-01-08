@@ -63,8 +63,8 @@ public class PackItem extends Item {
 
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
-            return;
+        //if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
+            //return;
         super.fillItemGroup(group, items);
     }
 }

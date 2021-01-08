@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "byg",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "###",
+          " X ",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "minecraft:stick"
+          },
+          "X": {
+            "item": "byg:sythian_planks"
+          }
+        },
+        "result": {
+          "item": "buddycards:sythian_card_display"
+        }
+      }
+    }
+  ]
+}

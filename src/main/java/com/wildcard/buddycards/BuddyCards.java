@@ -1,6 +1,5 @@
 package com.wildcard.buddycards;
 
-import com.wildcard.buddycards.datagen.DataGeneration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.util.ConfigManager;
 import com.wildcard.buddycards.util.LootInjectionHandler;

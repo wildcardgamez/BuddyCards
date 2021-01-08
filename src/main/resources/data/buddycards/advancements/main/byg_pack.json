@@ -1,0 +1,26 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.byg_pack"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.byg_pack.desc"
+    },
+    "icon": {
+      "item": "buddycards:pack.4"
+    }
+  },
+  "parent": "buddycards:main/root",
+  "criteria": {
+    "pack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item":"buddycards:pack.4"
+          }
+        ]
+      }
+    }
+  }
+}
