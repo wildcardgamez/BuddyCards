@@ -209,8 +209,8 @@ public class CardDisplayBlock extends Block {
 
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        //if(NEEDED_MOD != "" && !ModList.get().isLoaded(NEEDED_MOD))
-            //return;
+        if(NEEDED_MOD != "" && !ModList.get().isLoaded(NEEDED_MOD))
+            return;
         super.fillItemGroup(group, items);
     }
 }

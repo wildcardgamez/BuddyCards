@@ -1,4 +1,10 @@
 {
+  "conditions": [
+    {
+      "modid": "byg",
+      "type": "forge:mod_loaded"
+    }
+  ],
   "display": {
     "title": {
       "translate": "advancements.buddycards.main.byg_pack"
