@@ -35,6 +35,11 @@ Packs can be found in end city chests, by killing the dragon, or as a rare drop 
 Shulkers. If you have curios installed, the medal will give you resistance 1 when
 equipped in the medal slot, along with occasionally clearing you of levitation.
 
+Byg Set
+Packs currently are obtained by combining a base set pack with rainbow eucalyptus
+logs, ebony logs, therium, and embur gel. If you have curios installed, the medal
+will give you speed 2 and jump boost 1.
+
 Binders
 Binders can be crafted similarly to books, except with buddycards instead of paper.
 The color of the binder depends on the cards used to make it. Each binder can hold
@@ -43,7 +48,8 @@ given set.
 
 Card Displays
 Made with 1 wood plank and 6 sticks, a card display can be placed to hold 6 cards
-on a wall. They come in all vanilla wood varieties.
+on a wall. They come in all vanilla wood varieties. If you have Byg installed, they
+also come in all byg varieties.
 
 Config
 The config file of the mod allows adjusting of the odds of packs dropping when the
