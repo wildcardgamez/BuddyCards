@@ -52,6 +52,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> PACK_NETHER = ITEMS.register("pack.2", () -> new PackItem(2));
     public static final RegistryObject<Item> PACK_END = ITEMS.register("pack.3", () -> new PackItem(3));
     public static final RegistryObject<Item> PACK_BYG = ITEMS.register("pack.4", () -> new PackItem(4));
+    public static final RegistryObject<Item> PACK_MYSTERY = ITEMS.register("mystery_pack", () -> new PackItem(0));
 
     //Binder Container
     public static final RegistryObject<ContainerType<BinderContainer>> BINDER_CONTAINER = CONTAINERS.register("binder",

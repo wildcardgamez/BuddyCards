@@ -51,6 +51,13 @@ Made with 1 wood plank and 6 sticks, a card display can be placed to hold 6 card
 on a wall. They come in all vanilla wood varieties. If you have Byg installed, they
 also come in all byg varieties.
 
+Mystery Packs
+Mystery packs can be made with one of any pack, combined with 2 emerald blocks, 2
+iron blocks, 2 phantom membranes, and 2 diamonds. These packs contain 9 cards, 7
+normal cards and 2 shiny variants. The mystery pack can include cards from every
+set, wether it's possible to get those cards in your modpack or not. This allows
+all cards to be obtainable.
+
 Config
 The config file of the mod allows adjusting of the odds of packs dropping when the
 player kills specific mobs. Type in a decimal value of what percentage of kills

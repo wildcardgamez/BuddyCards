@@ -35,7 +35,10 @@ public class PackItem extends Item {
     public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         //Set name and explanation of what the pack is
         tooltip.add(new TranslationTextComponent("item.buddycards.set." + SET_NUMBER));
-        tooltip.add(new TranslationTextComponent("item.buddycards.contains"));
+        if (SET_NUMBER == 0)
+            tooltip.add(new TranslationTextComponent("item.buddycards.mystery_contains"));
+        else
+            tooltip.add(new TranslationTextComponent("item.buddycards.contains"));
     }
 
     @Override
@@ -52,7 +55,11 @@ public class PackItem extends Item {
             //Generate the associated loot table with the pack and give the cards to the player on server side
             ServerWorld server = (ServerWorld) worldIn;
             LootContext.Builder builder = (new LootContext.Builder(server).withRandom(worldIn.rand));
-            ResourceLocation resourcelocation = new ResourceLocation(BuddyCards.MOD_ID, "item/packs/" + SET_NUMBER);
+            ResourceLocation resourcelocation;
+            if(SET_NUMBER == 0)
+                resourcelocation = new ResourceLocation(BuddyCards.MOD_ID, "item/packs/mystery");
+            else
+                resourcelocation = new ResourceLocation(BuddyCards.MOD_ID, "item/packs/" + SET_NUMBER);
             LootTable loottable = server.getServer().getLootTableManager().getLootTableFromLocation(resourcelocation);
             List<ItemStack> cards = loottable.generate(builder.build(LootParameterSets.EMPTY));
             cards.forEach((card) -> ItemHandlerHelper.giveItemToPlayer(playerIn, card));

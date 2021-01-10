@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABC",
+    "D#D",
+    "CBA"
+  ],
+  "key": {
+    "#": {
+      "tag": "buddycards:packs"
+    },
+    "A": {
+      "item": "minecraft:diamond"
+    },
+    "B": {
+      "item": "minecraft:emerald_block"
+    },
+    "C": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "D": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "item": "buddycards:mystery_pack"
+  }
+}
