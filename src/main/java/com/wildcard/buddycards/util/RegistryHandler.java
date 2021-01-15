@@ -6,10 +6,7 @@ import com.wildcard.buddycards.blocks.CardDisplayTile;
 import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.integration.CuriosIntegration;
-import com.wildcard.buddycards.items.BinderItem;
-import com.wildcard.buddycards.items.CardItem;
-import com.wildcard.buddycards.items.MedalItem;
-import com.wildcard.buddycards.items.PackItem;
+import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.screen.BinderScreen;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
@@ -52,6 +49,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> PACK_NETHER = ITEMS.register("pack.2", () -> new PackItem(2));
     public static final RegistryObject<Item> PACK_END = ITEMS.register("pack.3", () -> new PackItem(3));
     public static final RegistryObject<Item> PACK_BYG = ITEMS.register("pack.4", () -> new PackItem(4));
+    public static final RegistryObject<Item> PACK_CREATE = ITEMS.register("pack.5", () -> new PackItem(5));
     public static final RegistryObject<Item> PACK_MYSTERY = ITEMS.register("mystery_pack", () -> new PackItem(0));
 
     //Binder Container
@@ -63,12 +61,18 @@ public class RegistryHandler {
     public static final RegistryObject<Item> BINDER_NETHER = ITEMS.register("binder.2", () -> new BinderItem(2));
     public static final RegistryObject<Item> BINDER_END = ITEMS.register("binder.3", () -> new BinderItem(3));
     public static final RegistryObject<Item> BINDER_BYG = ITEMS.register("binder.4", () -> new BinderItem(4));
+    public static final RegistryObject<Item> BINDER_CREATE = ITEMS.register("binder.5", () -> new BinderItem(5));
 
     //Medals
     public static final RegistryObject<Item> MEDAL_BASE = ITEMS.register("medal.1", () -> new MedalItem(1));
     public static final RegistryObject<Item> MEDAL_NETHER = ITEMS.register("medal.2", () -> new MedalItem(2));
     public static final RegistryObject<Item> MEDAL_END = ITEMS.register("medal.3", () -> new MedalItem(3));
     public static final RegistryObject<Item> MEDAL_BYG = ITEMS.register("medal.4", () -> new MedalItem(4));
+    public static final RegistryObject<Item> MEDAL_CREATE = ITEMS.register("medal.5", () -> new MedalItem(5));
+
+    //Misc
+    public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () ->
+            new ModSpecificItem(new Item.Properties().group(BuddyCards.TAB), "create"));
 
     //Cards
     public static void cardItemCreation() {
@@ -93,8 +97,14 @@ public class RegistryHandler {
         //Create all byg set cards
         for(int i = 1; i <= 27; i++) {
             final int num = i;
-            RegistryHandler.ITEMS.register("card.4." + num, () -> new CardItem(4, num, false));
-            RegistryHandler.ITEMS.register("card.4." + num + "s", () -> new CardItem(4, num, true));
+            ITEMS.register("card.4." + num, () -> new CardItem(4, num, false));
+            ITEMS.register("card.4." + num + "s", () -> new CardItem(4, num, true));
+        }
+        //Create all create set cards
+        for(int i = 1; i <= 27; i++) {
+            final int num = i;
+            ITEMS.register("card.5." + num, () -> new CardItem(5, num, false));
+            ITEMS.register("card.5." + num + "s", () -> new CardItem(5, num, true));
         }
     }
 

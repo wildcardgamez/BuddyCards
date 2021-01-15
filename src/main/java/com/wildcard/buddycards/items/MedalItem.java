@@ -56,6 +56,8 @@ public class MedalItem extends Item {
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
             return;
+        else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
+            return;
         super.fillItemGroup(group, items);
     }
 }

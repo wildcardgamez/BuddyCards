@@ -63,6 +63,8 @@ public class CuriosIntegration {
                         player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, 2, true, false));
                         player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 300, 0, true, false));
                     }
+                    else if(setNumber == 5)
+                        player.addPotionEffect(new EffectInstance(Effects.HASTE, 300, 1, true, false));
                 }
             }
         };

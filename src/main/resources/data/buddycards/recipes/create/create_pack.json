@@ -1,0 +1,32 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "buddycards:shredded_buddycard"
+    },
+    {
+      "item": "buddycards:shredded_buddycard"
+    },
+    {
+      "item": "buddycards:shredded_buddycard"
+    },
+    {
+      "item": "buddycards:shredded_buddycard"
+    },
+    {
+      "item": "create:brass_sheet"
+    }
+  ],
+  "results": [
+    {
+      "item": "buddycards:pack.5"
+    }
+  ],
+  "heatRequirement": "heated"
+}

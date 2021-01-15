@@ -1,0 +1,25 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "tag": "buddycards:cards"
+    }
+  ],
+  "results": [
+    {
+      "item": "buddycards:shredded_buddycard",
+      "chance": 0.75
+    },
+    {
+      "item": "buddycards:shredded_buddycard",
+      "chance": 0.25
+    }
+  ],
+  "processingTime": 300
+}
