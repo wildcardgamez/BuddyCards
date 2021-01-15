@@ -38,7 +38,12 @@ equipped in the medal slot, along with occasionally clearing you of levitation.
 Byg Set
 Packs currently are obtained by combining a base set pack with rainbow eucalyptus
 logs, ebony logs, therium, and embur gel. If you have curios installed, the medal
-will give you speed 2 and jump boost 1.
+will give you speed 3 and jump boost 1.
+
+Create Set
+Packs can only be obtained by crushing down old packs or cards into shredded
+buddycards, which then must be combined with a brass sheet using a heated mixer.
+If you have curios installed the medal will give you hase 2.
 
 Binders
 Binders can be crafted similarly to books, except with buddycards instead of paper.
