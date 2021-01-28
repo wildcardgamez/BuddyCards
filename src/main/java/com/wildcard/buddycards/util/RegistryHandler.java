@@ -5,11 +5,13 @@ import com.wildcard.buddycards.blocks.CardDisplayBlock;
 import com.wildcard.buddycards.blocks.CardDisplayTile;
 import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.container.BinderContainer;
+import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.screen.BinderScreen;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -28,12 +30,14 @@ public class RegistryHandler {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, BuddyCards.MOD_ID);
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, BuddyCards.MOD_ID);
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, BuddyCards.MOD_ID);
+    public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, BuddyCards.MOD_ID);
 
     public static void init() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         if (ModList.get().isLoaded("curios"))
             CuriosIntegration.Imc();
@@ -199,5 +203,7 @@ public class RegistryHandler {
                     MAPLE_CARD_DISPLAY.get(), NIGHTSHADE_CARD_DISPLAY.get(), PALM_CARD_DISPLAY.get(), PINE_CARD_DISPLAY.get(),
                     RAINBOW_EUCALYPTUS_CARD_DISPLAY.get(), REDWOOD_CARD_DISPLAY.get(), SKYRIS_CARD_DISPLAY.get(), SYTHIAN_CARD_DISPLAY.get(),
                     WILLOW_CARD_DISPLAY.get(), WITCH_HAZEL_CARD_DISPLAY.get(), ZELKOVA_CARD_DISPLAY.get()).build(null));
+
+    public static final RegistryObject<Enchantment> BUDDY_BINDING = ENCHANTMENTS.register("buddy_binding", EnchantmentBuddyBinding::new);
 
 }

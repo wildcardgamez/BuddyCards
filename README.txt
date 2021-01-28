@@ -63,6 +63,13 @@ normal cards and 2 shiny variants. The mystery pack can include cards from every
 set, wether it's possible to get those cards in your modpack or not. This allows
 all cards to be obtainable.
 
+Buddy Binding
+An enchant that you can get on medals and binders. Whenever you die and an item
+with Buddy Binding on it would normally drop on the floor and eventually despawn,
+it has a chance to stay in your inventory after death. This chance goes up with
+every level of Buddy Binding, from 81%, to 90%, to 100%. In order to get Buddy
+Binding III, you require a full enchanting setup.
+
 Config
 The config file of the mod allows adjusting of the odds of packs dropping when the
 player kills specific mobs. Type in a decimal value of what percentage of kills

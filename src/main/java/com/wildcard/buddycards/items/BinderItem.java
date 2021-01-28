@@ -3,6 +3,8 @@ package com.wildcard.buddycards.items;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.inventory.BinderInventory;
+import com.wildcard.buddycards.util.RegistryHandler;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
@@ -43,5 +45,13 @@ public class BinderItem extends Item {
         else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
             return;
         super.fillItemGroup(group, items);
+    }
+
+    public boolean isEnchantable(ItemStack stack) {
+        return stack.getCount() == 1;
+    }
+
+    public int getItemEnchantability() {
+        return 2;
     }
 }

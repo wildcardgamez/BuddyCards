@@ -2,7 +2,9 @@ package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.integration.CuriosIntegration;
+import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -59,5 +61,16 @@ public class MedalItem extends Item {
         else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
             return;
         super.fillItemGroup(group, items);
+    }
+
+    public boolean isEnchantable(ItemStack stack) {
+        return stack.getCount() == 1;
+    }
+
+    /**
+     * Return the enchantability factor of the item, most of the time is based on material.
+     */
+    public int getItemEnchantability() {
+        return 1;
     }
 }

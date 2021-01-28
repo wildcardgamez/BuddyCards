@@ -1,10 +1,7 @@
 package com.wildcard.buddycards;
 
 import com.wildcard.buddycards.integration.CuriosIntegration;
-import com.wildcard.buddycards.util.ConfigManager;
-import com.wildcard.buddycards.util.LootInjectionHandler;
-import com.wildcard.buddycards.util.MobDropHandler;
-import com.wildcard.buddycards.util.RegistryHandler;
+import com.wildcard.buddycards.util.*;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -49,6 +46,7 @@ public class BuddyCards
     private void setup(final FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new MobDropHandler());
         MinecraftForge.EVENT_BUS.register(new LootInjectionHandler());
+        MinecraftForge.EVENT_BUS.register(new EnchantmentHandler());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

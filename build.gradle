@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.4-1.6.2'
+version = '1.16.5-1.6.3'
 group = 'com.wildcard.buddycards' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'buddycards'
 
@@ -100,8 +100,8 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.4-35.1.0'
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.0:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.0")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
