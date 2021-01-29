@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.container;
 
+import com.wildcard.buddycards.items.BinderItem;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,6 +10,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import org.lwjgl.system.CallbackI;
 
 public class BinderContainer extends Container {
 
@@ -35,12 +37,12 @@ public class BinderContainer extends Container {
         //Set up slots for inventory
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 9; x++) {
-                this.addSlot(new Slot(playerInv, x + y * 9 + 9, 8 + x * 18, 140 + y * 18));
+                this.addSlot(new InvSlot(playerInv, x + y * 9 + 9, 8 + x * 18, 140 + y * 18));
             }
         }
         //Set up slots for hotbar
         for (int x = 0; x < 9; x++) {
-            this.addSlot(new Slot(playerInv, x, 8 + x * 18, 198));
+            this.addSlot(new InvSlot(playerInv, x, 8 + x * 18, 198));
         }
 
         binderInv.openInventory(playerInv.player);
@@ -59,6 +61,16 @@ public class BinderContainer extends Container {
         @Override
         public boolean isItemValid(ItemStack stack) {
             return stack.getItem() instanceof CardItem;
+        }
+    }
+    public class InvSlot extends Slot {
+        public InvSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+            super(inventoryIn, index, xPosition, yPosition);
+        }
+
+        @Override
+        public boolean canTakeStack(PlayerEntity playerIn) {
+            return !(this.getStack().getItem() instanceof BinderItem);
         }
     }
 

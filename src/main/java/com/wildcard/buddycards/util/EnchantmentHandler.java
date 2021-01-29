@@ -23,6 +23,7 @@ public class EnchantmentHandler {
     private Map<String, NonNullList<ItemStack>> items = new HashMap<String, NonNullList<ItemStack>>();
 
     public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", i -> (i instanceof MedalItem || i instanceof BinderItem));
+    public static final EnchantmentType BUDDY_MEDAL = EnchantmentType.create("BUDDY_MEDAL", i -> (i instanceof MedalItem));
 
     @SubscribeEvent
     public void drop(LivingDropsEvent event) {
@@ -33,10 +34,10 @@ public class EnchantmentHandler {
             for (ItemEntity i: event.getDrops()) {
                 switch(EnchantmentHelper.getEnchantmentLevel(RegistryHandler.BUDDY_BINDING.get(), i.getItem())) {
                     case 1:
-                        if (Math.random() < .1)
+                        if (Math.random() < .3)
                             break;
                     case 2:
-                        if (Math.random() < .1)
+                        if (Math.random() < .2)
                             break;
                     case 3:
                         itemsToSave.add(i.getItem());

@@ -1,13 +1,24 @@
 package com.wildcard.buddycards.integration;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.items.MedalItem;
+import com.wildcard.buddycards.util.RegistryHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -35,7 +46,7 @@ public class CuriosIntegration {
         return CuriosApi.getCuriosHelper().findEquippedCurio(stack.getItem(), entity).isPresent();
     }
 
-    public static ICapabilityProvider initCapabilities(int setNumber) {
+    public static ICapabilityProvider initCapabilities(int setNumber, ItemStack itemStack) {
         ICurio curio = new ICurio() {
             @Override
             public boolean canRightClickEquip() {
@@ -49,22 +60,29 @@ public class CuriosIntegration {
                     //At certain times, refresh the enchant based on the medals set number
                     if(player.world.getGameTime() % 80L != 0L)
                         return;
-                    else if(setNumber == 1)
-                        player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, 0, true, false));
-                    else if(setNumber == 2)
+                    //Get the level of Buddy Boost to use when calculating what effects to give
+                    int boostVal = EnchantmentHelper.getEnchantmentLevel(RegistryHandler.BUDDY_BOOST.get(), itemStack);
+                    if(setNumber == 1) {
+                        player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, boostVal, true, false));
+                    }
+                    else if(setNumber == 2) {
                         player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 300, 0, true, false));
+                        if(boostVal > 0)
+                            player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 300, boostVal - 1, true, false));
+                    }
                     else if(setNumber == 3) {
-                        player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 300, 0, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 300, boostVal / 2, true, false));
                         //Cancel out any levitation
-                        if (player.isPotionActive(Effects.LEVITATION))
+                        if (player.isPotionActive(Effects.LEVITATION) && boostVal > 0)
                             player.removePotionEffect(Effects.LEVITATION);
                     }
                     else if(setNumber == 4) {
-                        player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, 2, true, false));
-                        player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 300, 0, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 300, boostVal / 2, true, false));
+                        if (boostVal > 0)
+                            player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, 0, true, false));
                     }
                     else if(setNumber == 5)
-                        player.addPotionEffect(new EffectInstance(Effects.HASTE, 300, 1, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.HASTE, 300, boostVal, true, false));
                 }
             }
         };
@@ -73,8 +91,7 @@ public class CuriosIntegration {
             private final LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
             @Nonnull
             @Override
-            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap,
-                                                     @Nullable Direction side) {
+            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
                 return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
             }
         };

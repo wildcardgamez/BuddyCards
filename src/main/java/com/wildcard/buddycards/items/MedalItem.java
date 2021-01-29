@@ -2,9 +2,7 @@ package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.integration.CuriosIntegration;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -49,7 +47,7 @@ public class MedalItem extends Item {
     @Override
     public ICapabilityProvider initCapabilities(final ItemStack stack, CompoundNBT unused) {
         if (ModList.get().isLoaded("curios")) {
-            return CuriosIntegration.initCapabilities(SET_NUMBER);
+            return CuriosIntegration.initCapabilities(SET_NUMBER, stack);
         }
         return super.initCapabilities(stack, unused);
     }
@@ -67,10 +65,25 @@ public class MedalItem extends Item {
         return stack.getCount() == 1;
     }
 
-    /**
-     * Return the enchantability factor of the item, most of the time is based on material.
-     */
     public int getItemEnchantability() {
         return 1;
+    }
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack itemStack) {
+        return itemStack.copy();
+    }
+
+    @Override
+    public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putString("Collector", playerIn.getName().getString());
+        stack.setTag(nbt);
+        super.onCreated(stack, worldIn, playerIn);
     }
 }

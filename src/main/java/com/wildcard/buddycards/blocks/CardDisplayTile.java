@@ -57,6 +57,11 @@ public class CardDisplayTile extends TileEntity implements IClearable {
         return write(new CompoundNBT());
     }
 
+    @Override
+    public CompoundNBT serializeNBT() {
+        return null;
+    }
+
     public NonNullList<ItemStack> getInventory() {
         return inventory;
     }

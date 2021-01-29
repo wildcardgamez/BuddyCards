@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "buddycards:medal_token"
+    },
+    {
+      "item": "buddycards:medal.4"
+    },
+    {
+      "item": "buddycards:pack.4"
+    },
+    {
+      "item": "buddycards:pack.4"
+    }
+  ],
+  "result":
+  {
+    "item": "buddycards:medal.4",
+    "count": 1
+  }
+}

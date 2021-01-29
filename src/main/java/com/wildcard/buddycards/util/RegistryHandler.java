@@ -6,6 +6,7 @@ import com.wildcard.buddycards.blocks.CardDisplayTile;
 import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
+import com.wildcard.buddycards.enchantment.EnchantmentBuddyBoost;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.screen.BinderScreen;
@@ -77,6 +78,7 @@ public class RegistryHandler {
     //Misc
     public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () ->
             new ModSpecificItem(new Item.Properties().group(BuddyCards.TAB), "create"));
+    public static final RegistryObject<Item> MEDAL_TOKEN = ITEMS.register("medal_token", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
 
     //Cards
     public static void cardItemCreation() {
@@ -205,5 +207,6 @@ public class RegistryHandler {
                     WILLOW_CARD_DISPLAY.get(), WITCH_HAZEL_CARD_DISPLAY.get(), ZELKOVA_CARD_DISPLAY.get()).build(null));
 
     public static final RegistryObject<Enchantment> BUDDY_BINDING = ENCHANTMENTS.register("buddy_binding", EnchantmentBuddyBinding::new);
+    public static final RegistryObject<Enchantment> BUDDY_BOOST = ENCHANTMENTS.register("buddy_boost", EnchantmentBuddyBoost::new);
 
 }

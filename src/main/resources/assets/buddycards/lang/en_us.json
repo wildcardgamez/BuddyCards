@@ -17,6 +17,7 @@
   "item.buddycards.medal.1": "Base Set Buddy Medalion",
   "item.buddycards.medal.2": "Nether Set Buddy Medalion",
   "item.buddycards.medal.3": "End Set Buddy Medalion",
+  "item.buddycards.medal_token": "Medalion Token",
   "item.buddycards.set.0": "All Sets",
   "item.buddycards.set.1": "Base Set",
   "item.buddycards.set.2": "Nether Set",
@@ -292,6 +293,7 @@
   "advancements.buddycards.main.complete_set3s": "End Set Completionist",
   "advancements.buddycards.main.complete_set3s.desc": "Get every card from the end set, including shiny variants",
   "enchantment.buddycards.buddy_binding": "Buddy Binding",
+  "enchantment.buddycards.buddy_boost": "Buddy Boost",
   "curios.identifier.medal": "Medal",
 
   "block.buddycards.aspen_card_display": "Aspen Card Display",

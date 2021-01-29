@@ -20,30 +20,46 @@ the moment each player can only get 1 of each.
 Base Set
 Packs can be found in abandoned mineshafts, buried treasure, desert pyramids,
 shipwreck treasure, dungeons, villages, and bonus chests. You can also farm the
-packs by killing baby variants of zombies, villagers, and zombie villagers. If you
-have curios installed, the medal will give you speed 1 when equipped in the medal
-slot.
+packs by killing baby variants of zombies, villagers, and zombie villagers.
 
 Nether Set
 Packs can be found in bastions, ruined portals, and nether fortresses. You can also
 farm the packs by killing baby piglins or zombified piglins. You can also rarely get
-them as an extra gift while bartering. If you have curios installed, the medal will
-give you fire resistance 1 when equipped in the medal slot.
+them as an extra gift while bartering.
 
 End Set
 Packs can be found in end city chests, by killing the dragon, or as a rare drop from
-Shulkers. If you have curios installed, the medal will give you resistance 1 when
-equipped in the medal slot, along with occasionally clearing you of levitation.
+Shulkers.
 
 Byg Set
 Packs currently are obtained by combining a base set pack with rainbow eucalyptus
-logs, ebony logs, therium, and embur gel. If you have curios installed, the medal
-will give you speed 3 and jump boost 1.
+logs, ebony logs, therium, and embur gel.
 
 Create Set
 Packs can only be obtained by crushing down old packs or cards into shredded
 buddycards, which then must be combined with a brass sheet using a heated mixer.
-If you have curios installed the medal will give you hase 2.
+
+Medals
+Medals can be obtained when you collect all 54 cards of a set. Once you get one,
+you can duplicate them by making a medal token and combining it with two matching
+packs and the medal you want to duplicate. Medals can be enchanted with Buddy
+Binding (see Buddy Binding section) and Buddy Boost. Buddy Boost has two levels,
+and they increase the abilities of medals. These are the abilities of every medal:
+Base Medal - Speed I
+Base Medal (BBI) - Speed II
+Base Medal (BBII) - Speed III
+Nether Medal - Fire Res I
+Nether Medal (BBI) - Fire Res I & Absorbtion I
+Nether Medal (BBII) - Fire Res I & Absorbtion II
+End Medal - Resistance I
+End Medal (BBI) - Resistance I & Levitation Reversal
+End Medal (BBII) - Resistance II & Levitation Reversal
+Byg Medal - Jump Boost I
+Byg Medal (BBI) - Jump Boost I & Speed I
+Byg Medal (BBII) - Jump Boost II & Speed I
+Create Medal - Haste I
+Create Medal (BBI) - Haste II
+Create Medal (BBII) - Haste III
 
 Binders
 Binders can be crafted similarly to books, except with buddycards instead of paper.
@@ -67,7 +83,7 @@ Buddy Binding
 An enchant that you can get on medals and binders. Whenever you die and an item
 with Buddy Binding on it would normally drop on the floor and eventually despawn,
 it has a chance to stay in your inventory after death. This chance goes up with
-every level of Buddy Binding, from 81%, to 90%, to 100%. In order to get Buddy
+every level of Buddy Binding, from 56%, to 80%, to 100%. In order to get Buddy
 Binding III, you require a full enchanting setup.
 
 Config
