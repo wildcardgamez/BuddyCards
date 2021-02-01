@@ -1,11 +1,14 @@
 package com.wildcard.buddycards.blocks;
 
+import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.IClearable;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 
@@ -43,26 +46,35 @@ public class CardDisplayTile extends TileEntity implements IClearable {
     }
 
     @Override
-    public void clear() {
-        this.inventory.clear();
-    }
-
-    @Override
-    public void handleUpdateTag(BlockState state, CompoundNBT nbt) {
-        read(state, nbt);
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return write(new CompoundNBT());
+        return this.write(new CompoundNBT());
     }
 
     @Override
-    public CompoundNBT serializeNBT() {
-        return null;
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        this.read(this.getBlockState(), pkt.getNbtCompound());
     }
 
     public NonNullList<ItemStack> getInventory() {
         return inventory;
+    }
+
+    public int getCardsAmt() {
+        int amt = 0;
+        for (int i = 0; i < 6; i++) {
+            if (inventory.get(i).getItem() instanceof CardItem)
+                amt++;
+        }
+        return amt;
+    }
+
+    @Override
+    public void clear() {
+        this.inventory.clear();
     }
 }

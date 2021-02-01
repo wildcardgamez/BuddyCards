@@ -120,6 +120,7 @@ public class CardDisplayBlock extends Block {
                 stack.shrink(1);
             }
         }
+        world.updateComparatorOutputLevel(pos, this);
         return ActionResultType.SUCCESS;
     }
 
@@ -212,5 +213,22 @@ public class CardDisplayBlock extends Block {
         if(NEEDED_MOD != "" && !ModList.get().isLoaded(NEEDED_MOD))
             return;
         super.fillItemGroup(group, items);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean hasComparatorInputOverride(BlockState state) {
+        return true;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public int getComparatorInputOverride(BlockState blockState, World world, BlockPos pos) {
+        TileEntity tileentity = world.getTileEntity(pos);
+        if (tileentity instanceof CardDisplayTile) {
+            return ((CardDisplayTile) tileentity).getCardsAmt();
+        }
+        else
+            return 0;
     }
 }
