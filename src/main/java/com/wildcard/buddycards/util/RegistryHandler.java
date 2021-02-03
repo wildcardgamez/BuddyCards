@@ -79,6 +79,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () ->
             new ModSpecificItem(new Item.Properties().group(BuddyCards.TAB), "create"));
     public static final RegistryObject<Item> MEDAL_TOKEN = ITEMS.register("medal_token", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<Item> GRADING_SLEEVES = ITEMS.register("grading_sleeves", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
 
     //Cards
     public static void cardItemCreation() {

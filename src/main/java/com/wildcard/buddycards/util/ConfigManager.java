@@ -39,15 +39,15 @@ public class ConfigManager {
     {
         builder.comment("Buddycards config");
         zombieChance = builder.comment("\nOdds of baby zombie dropping base set packs, 0 for 0%, 1 for 100%, default is 20%")
-                .defineInRange("mobDrops.zombieChance", .2, 0, 1);
+                .defineInRange("mobDrops.zombieChance", .05, 0, 1);
         villagerChance = builder.comment("\nOdds of baby villager dropping base set packs, 0 for 0%, 1 for 100%, default is 20%")
-                .defineInRange("mobDrops.villagerChance", .2, 0, 1);
+                .defineInRange("mobDrops.villagerChance", .05, 0, 1);
         zombieVillagerChance = builder.comment("\nOdds of baby zombie villager dropping base set packs, 0 for 0%, 1 for 100%, default is 40%")
-                .defineInRange("mobDrops.zombieVillagerChance", .4, 0, 1);
+                .defineInRange("mobDrops.zombieVillagerChance", .1, 0, 1);
         piglinChance = builder.comment("\nOdds of baby piglin dropping nether set packs, 0 for 0%, 1 for 100%, default is 20%")
-                .defineInRange("mobDrops.piglinChance", .2, 0, 1);
+                .defineInRange("mobDrops.piglinChance", .05, 0, 1);
         zombiePiglinChance = builder.comment("\nOdds of baby zombie piglin dropping nether set , 0 for 0%, 1 for 100%, default is 20%")
-                .defineInRange("mobDrops.zombiePiglinChance", .2, 0, 1);
+                .defineInRange("mobDrops.zombiePiglinChance", .05, 0, 1);
         shulkerChance = builder.comment("\nOdds of shulkers dropping end set packs, 0 for 0%, 1 for 100%, default is 5%")
                 .defineInRange("mobDrops.shulkerChance", .05, 0, 1);
         dragonChance = builder.comment("\nOdds of ender dragons dropping end set packs, 0 for 0%, 1 for 100%, default is 100%")
