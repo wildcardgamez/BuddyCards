@@ -27,9 +27,9 @@ public class CardItem extends Item {
         SHINY = isShiny;
     }
 
-    final int SET_NUMBER;
-    final int CARD_NUMBER;
-    final boolean SHINY;
+    public final int SET_NUMBER;
+    public final int CARD_NUMBER;
+    public final boolean SHINY;
 
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
