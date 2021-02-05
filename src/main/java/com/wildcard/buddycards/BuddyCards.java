@@ -33,8 +33,6 @@ public class BuddyCards
 
         ConfigManager.loadConfig(FMLPaths.CONFIGDIR.get().resolve("buddycards-client.toml").toString());
 
-        RegistryHandler.cardItemCreation();
-
         RegistryHandler.init();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

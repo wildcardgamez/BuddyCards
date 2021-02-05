@@ -5,6 +5,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -29,34 +30,27 @@ public class CardModelGen extends ItemModelProvider {
      * @param cardNum card number of card to generate models for
      */
     void genCardModels(int setNum, int cardNum) {
-        for (int grade = 0; grade <= 5; grade++) {
-            final ResourceLocation location;
-            if (grade != 0)
-                location = new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card." + setNum + "." + cardNum + "g" + grade);
-            else
-                location = new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card." + setNum + "." + cardNum);
-            ItemModelBuilder card = factory.apply(location)
-                    .parent(factory.apply(new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card")))
-                    .texture("layer0", new ResourceLocation(BuddyCards.MOD_ID,getSetFolder(setNum) + cardNum));
-            if (grade != 0)
-                generatedModels.put(location, card.texture("layer1", new ResourceLocation(BuddyCards.MOD_ID,"items/grade/" + grade)));
-            else
-                generatedModels.put(location, card);
-        }
-        for (int grade = 0; grade <= 5; grade++) {
-            final ResourceLocation location;
-            if (grade != 0)
-                location = new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card." + setNum + "." + cardNum + "sg" + grade);
-            else
-                location = new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card." + setNum + "." + cardNum + "s");
-            ItemModelBuilder card = factory.apply(location)
-                    .parent(factory.apply(new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card")))
-                    .texture("layer0", new ResourceLocation(BuddyCards.MOD_ID,getSetFolder(setNum) + cardNum));
-            if (grade != 0)
-                generatedModels.put(location, card.texture("layer1", new ResourceLocation(BuddyCards.MOD_ID, "items/grade/" + grade)));
-            else
-                generatedModels.put(location, card);
-        }
+        final ResourceLocation location1 = new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card." + setNum + "." + cardNum);
+        ItemModelBuilder card = factory.apply(location1)
+                .parent(factory.apply(new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card")))
+                .texture("layer0", new ResourceLocation(BuddyCards.MOD_ID, getSetFolder(setNum) + cardNum));
+        card.override().predicate(new ResourceLocation("grade"), 1).model(genGradedCardModel(setNum, cardNum, 1, false));
+        card.override().predicate(new ResourceLocation("grade"), 2).model(genGradedCardModel(setNum, cardNum, 2, false));
+        card.override().predicate(new ResourceLocation("grade"), 3).model(genGradedCardModel(setNum, cardNum, 3, false));
+        card.override().predicate(new ResourceLocation("grade"), 4).model(genGradedCardModel(setNum, cardNum, 4, false));
+        card.override().predicate(new ResourceLocation("grade"), 5).model(genGradedCardModel(setNum, cardNum, 5, false));
+        generatedModels.put(location1, card);
+
+        final ResourceLocation location2 = new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card." + setNum + "." + cardNum + "s");
+        ItemModelBuilder cards = factory.apply(location2)
+                .parent(factory.apply(new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card")))
+                .texture("layer0", new ResourceLocation(BuddyCards.MOD_ID, getSetFolder(setNum) + cardNum));
+        cards.override().predicate(new ResourceLocation("grade"), 1).model(genGradedCardModel(setNum, cardNum, 1, true));
+        cards.override().predicate(new ResourceLocation("grade"), 2).model(genGradedCardModel(setNum, cardNum, 2, true));
+        cards.override().predicate(new ResourceLocation("grade"), 3).model(genGradedCardModel(setNum, cardNum, 3, true));
+        cards.override().predicate(new ResourceLocation("grade"), 4).model(genGradedCardModel(setNum, cardNum, 4, true));
+        cards.override().predicate(new ResourceLocation("grade"), 5).model(genGradedCardModel(setNum, cardNum, 5, true));
+        generatedModels.put(location2, cards);
     }
 
     /**
@@ -73,5 +67,26 @@ public class CardModelGen extends ItemModelProvider {
             case 5: return "items/create_set/";
             default: return "error";
         }
+    }
+
+    /**
+     * Creates a single graded card of specific card and grade
+     * @param setNum set number in
+     * @param cardNum card number in
+     * @param grade grade number in
+     * @param shiny should the card be shiny
+     * @return The created model
+     */
+    ModelFile genGradedCardModel(int setNum, int cardNum, int grade, boolean shiny) {
+        final ResourceLocation location;
+        if (shiny)
+            location = new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card." + setNum + "." + cardNum + "sg" + grade);
+        else
+            location = new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card." + setNum + "." + cardNum + "g" + grade);
+        ItemModelBuilder card = factory.apply(location)
+                .parent(factory.apply(new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card")))
+                .texture("layer0", new ResourceLocation(BuddyCards.MOD_ID, getSetFolder(setNum) + cardNum));
+        generatedModels.put(location, card.texture("layer1", new ResourceLocation(BuddyCards.MOD_ID,"items/grade/" + grade)));
+        return card;
     }
 }

@@ -16,7 +16,9 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -24,6 +26,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
 
 public class RegistryHandler {
 
@@ -46,8 +50,17 @@ public class RegistryHandler {
 
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> ScreenManager.registerFactory(BINDER_CONTAINER.get(), BinderScreen::new));
+        for (RegistryObject<Item> card:CARDS.CARDS) {
+            event.enqueueWork(() -> ItemModelsProperties.registerProperty(card.get(), new ResourceLocation("grade"), (stack, world, entity) -> {
+                if(stack.getTag() != null)
+                    return stack.getTag().getInt("grade");
+                return 0;
+            }));
+        }
         ClientRegistry.bindTileEntityRenderer(CARD_DISPLAY_TILE.get(), CardDisplayTileRenderer::new);
     }
+
+    public static CardRegistry CARDS = new CardRegistry();
 
     //Packs
     public static final RegistryObject<Item> PACK_BASE = ITEMS.register("pack.1", () -> new PackItem(1));
@@ -80,40 +93,6 @@ public class RegistryHandler {
             new ModSpecificItem(new Item.Properties().group(BuddyCards.TAB), "create"));
     public static final RegistryObject<Item> MEDAL_TOKEN = ITEMS.register("medal_token", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<Item> GRADING_SLEEVES = ITEMS.register("grading_sleeves", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
-
-    //Cards
-    public static void cardItemCreation() {
-        //Create all base set cards
-        for(int i = 1; i <= 27; i++) {
-            final int num = i;
-            ITEMS.register("card.1." + num, () -> new CardItem(1, num, false));
-            ITEMS.register("card.1." + num + "s", () -> new CardItem(1, num, true));
-        }
-        //Create all nether set cards
-        for(int i = 1; i <= 27; i++) {
-            final int num = i;
-            ITEMS.register("card.2." + num, () -> new CardItem(2, num, false));
-            ITEMS.register("card.2." + num + "s", () -> new CardItem(2, num, true));
-        }
-        //Create all end set cards
-        for(int i = 1; i <= 27; i++) {
-            final int num = i;
-            ITEMS.register("card.3." + num, () -> new CardItem(3, num, false));
-            ITEMS.register("card.3." + num + "s", () -> new CardItem(3, num, true));
-        }
-        //Create all byg set cards
-        for(int i = 1; i <= 27; i++) {
-            final int num = i;
-            ITEMS.register("card.4." + num, () -> new CardItem(4, num, false));
-            ITEMS.register("card.4." + num + "s", () -> new CardItem(4, num, true));
-        }
-        //Create all create set cards
-        for(int i = 1; i <= 27; i++) {
-            final int num = i;
-            ITEMS.register("card.5." + num, () -> new CardItem(5, num, false));
-            ITEMS.register("card.5." + num + "s", () -> new CardItem(5, num, true));
-        }
-    }
 
     //Card Display Blocks
     public static final RegistryObject<Block> OAK_CARD_DISPLAY = BLOCKS.register("oak_card_display", CardDisplayBlock::new);

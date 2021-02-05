@@ -107,7 +107,9 @@ public class CardDisplayBlock extends Block {
             if(displayTile.getCardInSlot(slot).getItem() instanceof CardItem) {
                 ItemStack oldCard = displayTile.getCardInSlot(slot);
                 if (stack.getItem() instanceof CardItem) {
-                    displayTile.putCardInSlot(new ItemStack(stack.getItem(), 1), slot);
+                    ItemStack card = new ItemStack(stack.getItem(), 1);
+                    card.setTag(stack.getTag());
+                    displayTile.putCardInSlot(card, slot);
                     stack.shrink(1);
                 }
                 else {
@@ -116,7 +118,9 @@ public class CardDisplayBlock extends Block {
                 player.addItemStackToInventory(oldCard);
             }
             else if(stack.getItem() instanceof CardItem) {
-                displayTile.putCardInSlot(new ItemStack(stack.getItem(), 1), slot);
+                ItemStack card = new ItemStack(stack.getItem(), 1);
+                card.setTag(stack.getTag());
+                displayTile.putCardInSlot(card, slot);
                 stack.shrink(1);
             }
         }
