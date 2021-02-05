@@ -86,6 +86,17 @@ it has a chance to stay in your inventory after death. This chance goes up with
 every level of Buddy Binding, from 56%, to 80%, to 100%. In order to get Buddy
 Binding III, you require a full enchanting setup.
 
+Graded Buddycards
+Graded Buddycards allow you to use grading sleeves, to grade your cards. Each card
+will be given a random grade, with better grades being rarer. There are 5 grades
+in total: D, C, B, A, and S. While most of them are likely to be found every few
+packs, an S grade means the card is in mint condition, which is extremely rare.
+The grading sleeves you need to grade cards can be crafted with 2 gold, 2 iron,
+and 2 glass panes, but can also be found naturally in villages, bastions, end
+cities, shipwrecks, and buried treasures. Hold a grading sleeve in you offhand
+and a card in your right hand, and then use the grading sleeve in order to grade
+a card.
+
 Config
 The config file of the mod allows adjusting of the odds of packs dropping when the
 player kills specific mobs. Type in a decimal value of what percentage of kills

@@ -77,8 +77,8 @@ public class CardItem extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if(handIn == Hand.MAIN_HAND) {
-            if (playerIn.getHeldItem(Hand.OFF_HAND).getItem() == RegistryHandler.GRADING_SLEEVES.get()) {
+        if (handIn == Hand.MAIN_HAND) {
+            if (playerIn.getHeldItem(Hand.OFF_HAND).getItem() == RegistryHandler.GRADING_SLEEVE.get()) {
                 CompoundNBT nbt = playerIn.getHeldItem(handIn).getTag();
                 if (nbt == null)
                     nbt = new CompoundNBT();
@@ -86,24 +86,26 @@ public class CardItem extends Item {
                     //Take the grading sleeve
                     playerIn.getHeldItem(Hand.OFF_HAND).shrink(1);
                     //Get a grade using maths for rarity
-                    int i = (int) (Math.random() * 200) + 1;
+                    int i = (int) (Math.random() * 500) + 1;
                     int grade;
-                    if(i < 85)
+                    if (i < 200)
                         grade = 1;
-                    else if(i < 140)
+                    else if (i < 360)
                         grade = 2;
-                    else if(i < 180)
+                    else if (i < 450)
                         grade = 3;
-                    else if (i < 200)
+                    else if (i < 500)
                         grade = 4;
                     else
                         grade = 5;
-                    //Make a new card based on the original, add the grade, take one card from the original stack, and give the newly graded card
-                    ItemStack card = new ItemStack(playerIn.getHeldItem(handIn).getItem(), 1);
+                    //Make new graded card and give it to the player, remove old card
                     nbt.putInt("grade", grade);
+                    ItemStack card = new ItemStack(playerIn.getHeldItem(handIn).getItem(), 1);
                     card.setTag(nbt);
                     playerIn.getHeldItem(handIn).shrink(1);
                     ItemHandlerHelper.giveItemToPlayer(playerIn, card);
+
+                    return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
                 }
             }
         }
