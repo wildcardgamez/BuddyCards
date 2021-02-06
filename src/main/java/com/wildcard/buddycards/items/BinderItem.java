@@ -3,6 +3,8 @@ package com.wildcard.buddycards.items;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.inventory.BinderInventory;
+import com.wildcard.buddycards.util.RegistryHandler;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
@@ -29,8 +31,18 @@ public class BinderItem extends Item {
     {
         if(playerIn instanceof ServerPlayerEntity) {
             //Open the GUI on server side
+            int slots = 54;
+            switch (EnchantmentHelper.getEnchantmentLevel(RegistryHandler.EXTRA_PAGE.get(), playerIn.getHeldItem(handIn))) {
+                case 3:
+                    slots += 24;
+                case 2:
+                    slots += 24;
+                case 1:
+                    slots += 18;
+            }
+            int finalSlots = slots;
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, new SimpleNamedContainerProvider(
-                    (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, new BinderInventory())
+                    (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, new BinderInventory(finalSlots))
                     , playerIn.getHeldItem(handIn).getDisplayName()));
         }
         return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));

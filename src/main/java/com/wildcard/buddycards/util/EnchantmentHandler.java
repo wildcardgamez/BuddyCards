@@ -24,6 +24,7 @@ public class EnchantmentHandler {
 
     public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", i -> (i instanceof MedalItem || i instanceof BinderItem));
     public static final EnchantmentType BUDDY_MEDAL = EnchantmentType.create("BUDDY_MEDAL", i -> (i instanceof MedalItem));
+    public static final EnchantmentType BUDDY_BINDER = EnchantmentType.create("BUDDY_BINDER", i -> (i instanceof BinderItem));
 
     @SubscribeEvent
     public void drop(LivingDropsEvent event) {

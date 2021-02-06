@@ -9,8 +9,8 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.Constants;
 
 public class BinderInventory extends Inventory {
-    public BinderInventory() {
-        super(54);
+    public BinderInventory(int slots) {
+        super(slots);
     }
 
     @Override

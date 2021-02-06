@@ -3,6 +3,7 @@ package com.wildcard.buddycards.container;
 import com.wildcard.buddycards.items.BinderItem;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.RegistryHandler;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -10,39 +11,92 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.system.CallbackI;
 
 public class BinderContainer extends Container {
 
     private final IInventory binderInv;
+    private static int[] slotsForLevel = {54, 72, 96, 120};
 
     public static BinderContainer makeContainer(int id, PlayerInventory playerInventory) {
         return new BinderContainer(id, playerInventory);
     }
 
     public BinderContainer(int id, PlayerInventory playerInventory) {
-        this(id, playerInventory, new Inventory(54));
+        this(id, playerInventory, new Inventory(slotsForLevel[EnchantmentHelper.getEnchantmentLevel(RegistryHandler.EXTRA_PAGE.get(), playerInventory.getCurrentItem())]));
     }
 
     public BinderContainer(int id, PlayerInventory playerInv, IInventory binderInvIn) {
         super(RegistryHandler.BINDER_CONTAINER.get(), id);
-        assertInventorySize(binderInvIn, 54);
+        assertInventorySize(binderInvIn, binderInvIn.getSizeInventory());
         binderInv = binderInvIn;
         //Set up slots for binder
-        for (int y = 0; y < 6; y++) {
+        if (binderInv.getSizeInventory() == 54) {
+            for (int y = 0; y < 6; y++) {
+                for (int x = 0; x < 9; x++) {
+                    this.addSlot(new BinderSlot(binderInv, x + (y * 9), 8 + x * 18, 18 + y * 18));
+                }
+            }
+            //Set up slots for inventory
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < 9; x++) {
+                    this.addSlot(new InvSlot(playerInv, x + (y * 9) + 9, 8 + x * 18, 140 + y * 18));
+                }
+            }
+            //Set up slots for hotbar
             for (int x = 0; x < 9; x++) {
-                this.addSlot(new BinderSlot(binderInv, x + y * 9, 8 + x * 18, 18 + y * 18));
+                this.addSlot(new InvSlot(playerInv, x, 8 + x * 18, 198));
             }
         }
-        //Set up slots for inventory
-        for (int y = 0; y < 3; y++) {
+        else if (binderInv.getSizeInventory() == 72) {
+            for (int y = 0; y < 6; y++) {
+                for (int x = 0; x < 12; x++) {
+                    this.addSlot(new BinderSlot(binderInv, x + (y * 12), 8 + x * 18, 18 + y * 18));
+                }
+            }
+            //Set up slots for inventory
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < 9; x++) {
+                    this.addSlot(new InvSlot(playerInv, x + (y * 9) + 9, 35 + x * 18, 140 + y * 18));
+                }
+            }
+            //Set up slots for hotbar
             for (int x = 0; x < 9; x++) {
-                this.addSlot(new InvSlot(playerInv, x + y * 9 + 9, 8 + x * 18, 140 + y * 18));
+                this.addSlot(new InvSlot(playerInv, x, 35 + x * 18, 198));
             }
         }
-        //Set up slots for hotbar
-        for (int x = 0; x < 9; x++) {
-            this.addSlot(new InvSlot(playerInv, x, 8 + x * 18, 198));
+        else if (binderInv.getSizeInventory() == 96) {
+            for (int y = 0; y < 8; y++) {
+                for (int x = 0; x < 12; x++) {
+                    this.addSlot(new BinderSlot(binderInv, x + (y * 12), 8 + x * 18, 18 + y * 18));
+                }
+            }
+            //Set up slots for inventory
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < 9; x++) {
+                    this.addSlot(new InvSlot(playerInv, x + (y * 9) + 9, 35 + x * 18, 176 + y * 18));
+                }
+            }
+            //Set up slots for hotbar
+            for (int x = 0; x < 9; x++) {
+                this.addSlot(new InvSlot(playerInv, x, 35 + x * 18, 234));
+            }
+        }
+        else if (binderInv.getSizeInventory() == 120) {
+            for (int y = 0; y < 10; y++) {
+                for (int x = 0; x < 12; x++) {
+                    this.addSlot(new BinderSlot(binderInv, x + (y * 12), 8 + x * 18, 18 + y * 18));
+                }
+            }
+            //Set up slots for inventory
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < 9; x++) {
+                    this.addSlot(new InvSlot(playerInv, x + (y * 9) + 9, 35 + x * 18, 212 + y * 18));
+                }
+            }
+            //Set up slots for hotbar
+            for (int x = 0; x < 9; x++) {
+                this.addSlot(new InvSlot(playerInv, x, 35 + x * 18, 270));
+            }
         }
 
         binderInv.openInventory(playerInv.player);

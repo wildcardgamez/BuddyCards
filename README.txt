@@ -24,8 +24,8 @@ packs by killing baby variants of zombies, villagers, and zombie villagers.
 
 Nether Set
 Packs can be found in bastions, ruined portals, and nether fortresses. You can also
-farm the packs by killing baby piglins or zombified piglins. You can also rarely get
-them as an extra gift while bartering.
+farm the packs by killing baby piglins, zombified piglins, or withers. You can also
+rarely get them as an extra gift while bartering.
 
 End Set
 Packs can be found in end city chests, by killing the dragon, or as a rare drop from
@@ -65,7 +65,12 @@ Binders
 Binders can be crafted similarly to books, except with buddycards instead of paper.
 The color of the binder depends on the cards used to make it. Each binder can hold
 54 cards each, which means it can hold every card, including shiny variants, of a
-given set.
+given set. Binders can be enchanted with Buddy Binding (see Buddy Binding section)
+and Extra Page. Extra Page has three levels, and each one has more card slots.
+No EP - 54 slots
+EP I - 72 slots
+EP II - 96 slots
+EP III - 120 slots
 
 Card Displays
 Made with 1 wood plank and 6 sticks, a card display can be placed to hold 6 cards

@@ -7,6 +7,7 @@ import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBoost;
+import com.wildcard.buddycards.enchantment.EnchantmentExtraPage;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.screen.BinderScreen;
@@ -188,5 +189,6 @@ public class RegistryHandler {
 
     public static final RegistryObject<Enchantment> BUDDY_BINDING = ENCHANTMENTS.register("buddy_binding", EnchantmentBuddyBinding::new);
     public static final RegistryObject<Enchantment> BUDDY_BOOST = ENCHANTMENTS.register("buddy_boost", EnchantmentBuddyBoost::new);
+    public static final RegistryObject<Enchantment> EXTRA_PAGE = ENCHANTMENTS.register("extra_page", EnchantmentExtraPage::new);
 
 }
