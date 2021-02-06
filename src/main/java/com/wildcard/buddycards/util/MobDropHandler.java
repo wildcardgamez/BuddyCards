@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.util;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
@@ -46,6 +47,10 @@ public class MobDropHandler {
             else if (entity instanceof EnderDragonEntity && Math.random() < ConfigManager.dragonChance.get()) {
                 drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_END.get(),
                         (int) (Math.random() * ConfigManager.dragonMaxPacks.get()) + 1)));
+            }
+            else if (entity instanceof WitherEntity && Math.random() < ConfigManager.witherChance.get()) {
+                drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_NETHER.get(),
+                        (int) (Math.random() * ConfigManager.witherMaxPacks.get()) + 1)));
             }
         }
     }
