@@ -142,7 +142,7 @@ public class BinderContainer extends Container {
         if(slot != null && slot.getHasStack())
         {
             stack = slot.getStack().copy();
-            if (index < 54)
+            if (index < inventorySlots.size() - 36)
             {
                 if(!this.mergeItemStack(slot.getStack(), 54, inventorySlots.size(), true))
                     return ItemStack.EMPTY;

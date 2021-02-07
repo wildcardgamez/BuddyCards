@@ -38,6 +38,25 @@ public class ConfigManager {
     public static ForgeConfigSpec.BooleanValue piglinBartering;
     public static ForgeConfigSpec.BooleanValue lootChestPacks;
 
+    public static ForgeConfigSpec.BooleanValue challengeMode;
+    public static ForgeConfigSpec.IntValue challengePointsCommon;
+    public static ForgeConfigSpec.IntValue challengePointsUncommon;
+    public static ForgeConfigSpec.IntValue challengePointsRare;
+    public static ForgeConfigSpec.IntValue challengePointsEpic;
+    public static ForgeConfigSpec.DoubleValue challengeShinyMult;
+    public static ForgeConfigSpec.DoubleValue challengeSet1Mult;
+    public static ForgeConfigSpec.DoubleValue challengeSet2Mult;
+    public static ForgeConfigSpec.DoubleValue challengeSet3Mult;
+    public static ForgeConfigSpec.DoubleValue challengeSet4Mult;
+    public static ForgeConfigSpec.DoubleValue challengeSet5Mult;
+    public static ForgeConfigSpec.DoubleValue challengeGrade1Mult;
+    public static ForgeConfigSpec.DoubleValue challengeGrade2Mult;
+    public static ForgeConfigSpec.DoubleValue challengeGrade3Mult;
+    public static ForgeConfigSpec.DoubleValue challengeGrade4Mult;
+    public static ForgeConfigSpec.DoubleValue challengeGrade5Mult;
+
+
+
     public static void init()
     {
         builder.comment("Buddycards config");
@@ -61,9 +80,43 @@ public class ConfigManager {
                 .defineInRange("mobDrops.dragonChance", .5f, 0, 1);
         witherMaxPacks = builder.comment("\nMaximum amount of packs dropped when a wither drops packs, default is 3")
                 .defineInRange("mobDrops.dragonMaxPacks", 3, 1, 16);
+
         piglinBartering = builder.comment("\nAllow packs to be obtained through Piglin bartering, default is true")
                 .define("lootTables.piglinBartering", true);
         lootChestPacks = builder.comment("\nAllow natural generation of packs in loot chests, default is true")
                 .define("lootTables.lootChestPacks", true);
+
+        challengeMode = builder.comment("\nEnable Challenge mode, assigning cards point values, and giving each player a challenge binder, default is false")
+                .define("challenge.doChallengeMode", false);
+        challengePointsCommon = builder.comment("\nBase challenge points for common cards, 1-100, default is 1")
+                .defineInRange("challenge.pointsCommon", 1, 1, 100);
+        challengePointsUncommon = builder.comment("\nBase challenge points for uncommon cards, 1-100, default is 2")
+                .defineInRange("challenge.pointsUncommon", 2, 1, 100);
+        challengePointsRare = builder.comment("\nBase challenge points for rare cards, 1-100, default is 3")
+                .defineInRange("challenge.pointsRare", 3, 1, 100);
+        challengePointsEpic = builder.comment("\nBase challenge points for epic cards, 1-100, default is 5")
+                .defineInRange("challenge.pointsEpic", 5, 1, 100);
+        challengeShinyMult = builder.comment("\nMultiplier for challenge points on shiny cards, 0-10, default is 1.25")
+                .defineInRange("challenge.shinyMultiplier", 1.25, 1, 10);
+        challengeSet1Mult = builder.comment("\nMultiplier for challenge points from base set, 0-10, default is .8")
+                .defineInRange("challenge.set1Multiplier", .8, 1, 10);
+        challengeSet2Mult = builder.comment("\nMultiplier for challenge points from nether set, 0-10, default is 1")
+                .defineInRange("challenge.set2Multiplier", 1f, 1, 10);
+        challengeSet3Mult = builder.comment("\nMultiplier for challenge points from end set, 0-10, default is 2")
+                .defineInRange("challenge.set3Multiplier", 2f, 1, 10);
+        challengeSet4Mult = builder.comment("\nMultiplier for challenge points from byg set, 0-10, default is 2")
+                .defineInRange("challenge.set4Multiplier", 2f, 1, 10);
+        challengeSet5Mult = builder.comment("\nMultiplier for challenge points from create set, 0-10, default is 1.4")
+                .defineInRange("challenge.set5Multiplier", 1.4f, 1, 10);
+        challengeGrade1Mult = builder.comment("\nMultiplier for challenge points with grade D, 0-10, default is 1")
+                .defineInRange("challenge.grade1Multiplier", 1f, 1, 10);
+        challengeGrade2Mult = builder.comment("\nMultiplier for challenge points with grade C, 0-10, default is 1.4")
+                .defineInRange("challenge.grade2Multiplier", 1.4f, 1, 10);
+        challengeGrade3Mult = builder.comment("\nMultiplier for challenge points with grade B, 0-10, default is 1.8")
+                .defineInRange("challenge.grade3Multiplier", 1.8f, 1, 10);
+        challengeGrade4Mult = builder.comment("\nMultiplier for challenge points with grade A, 0-10, default is 2.5")
+                .defineInRange("challenge.grade4Multiplier", 2.5f, 1, 10);
+        challengeGrade5Mult = builder.comment("\nMultiplier for challenge points with grade S, 0-10, default is 10")
+                .defineInRange("challenge.grade5Multiplier", 10f, 1, 10);
     }
 }

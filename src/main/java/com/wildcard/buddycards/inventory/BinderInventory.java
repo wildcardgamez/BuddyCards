@@ -1,6 +1,8 @@
 package com.wildcard.buddycards.inventory;
 
 import com.wildcard.buddycards.items.BinderItem;
+import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -45,6 +47,8 @@ public class BinderInventory extends Inventory {
     @Override
     public void closeInventory(PlayerEntity player)
     {
+        boolean calcPoints = ConfigManager.challengeMode.get();
+        int points = 0;
         ItemStack binder;
         //Find hand with binder
         if (player.getHeldItemMainhand().getItem() instanceof BinderItem)
@@ -64,11 +68,15 @@ public class BinderInventory extends Inventory {
                 ItemStack itemstack = this.getStackInSlot(i);
                 if (!itemstack.isEmpty()) {
                     CompoundNBT compoundnbt = new CompoundNBT();
+                    if (calcPoints)
+                        points += ((CardItem)itemstack.getItem()).getPointValue(itemstack) * itemstack.getCount();
                     compoundnbt.putByte("Slot", (byte)i);
                     itemstack.write(compoundnbt);
                     list.add(compoundnbt);
                 }
             }
+            if (calcPoints)
+                nbt.putInt("points", points);
             nbt.put("Items", list);
             binder.setTag(nbt);
         }

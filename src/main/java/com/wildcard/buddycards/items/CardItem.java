@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.util.ConfigManager;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
@@ -46,6 +47,9 @@ public class CardItem extends Item {
         if (stack.getTag() != null && stack.getTag().getInt("grade") != 0)
             tooltip.add(new TranslationTextComponent("item.buddycards.grade_info").append(
                     new TranslationTextComponent("item.buddycards.grade_" + stack.getTag().getInt("grade"))));
+        if (ConfigManager.challengeMode.get())
+            tooltip.add(new TranslationTextComponent("item.buddycards.points_info").appendString(
+                    "" + ((CardItem)stack.getItem()).getPointValue(stack)));
     }
 
     @Override
@@ -110,5 +114,43 @@ public class CardItem extends Item {
             }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
+
+    public int getPointValue(ItemStack card) {
+        double points = 0;
+        if(CARD_NUMBER <= 12)
+            points = ConfigManager.challengePointsCommon.get();
+        else if(CARD_NUMBER <= 21)
+            points = ConfigManager.challengePointsUncommon.get();
+        else if(CARD_NUMBER <= 25)
+            points = ConfigManager.challengePointsRare.get();
+        else
+            points = ConfigManager.challengePointsEpic.get();
+        if(SET_NUMBER == 1)
+            points *= ConfigManager.challengeSet1Mult.get();
+        else if(SET_NUMBER == 2)
+            points *= ConfigManager.challengeSet2Mult.get();
+        else if(SET_NUMBER == 3)
+            points *= ConfigManager.challengeSet3Mult.get();
+        else if(SET_NUMBER == 4)
+            points *= ConfigManager.challengeSet4Mult.get();
+        else if(SET_NUMBER == 5)
+            points *= ConfigManager.challengeSet5Mult.get();
+        if(card.getTag() != null) {
+            int grade = card.getTag().getInt("grade");
+            if(grade == 1)
+                points *= ConfigManager.challengeGrade1Mult.get();
+            else if(grade == 2)
+                points *= ConfigManager.challengeGrade2Mult.get();
+            else if(grade == 3)
+                points *= ConfigManager.challengeGrade3Mult.get();
+            else if(grade == 4)
+                points *= ConfigManager.challengeGrade4Mult.get();
+            else if(grade == 5)
+                points *= ConfigManager.challengeGrade5Mult.get();
+        }
+        if(SHINY)
+            points *= ConfigManager.challengeShinyMult.get();
+        return (int) (points + .5);
     }
 }

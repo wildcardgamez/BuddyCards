@@ -81,6 +81,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> BINDER_END = ITEMS.register("binder.3", () -> new BinderItem(3));
     public static final RegistryObject<Item> BINDER_BYG = ITEMS.register("binder.4", () -> new BinderItem(4));
     public static final RegistryObject<Item> BINDER_CREATE = ITEMS.register("binder.5", () -> new BinderItem(5));
+    public static final RegistryObject<Item> CHALLENGE_BINDER = ITEMS.register("challenge_binder", ChallengeBinder::new);
 
     //Medals
     public static final RegistryObject<Item> MEDAL_BASE = ITEMS.register("medal.1", () -> new MedalItem(1));
