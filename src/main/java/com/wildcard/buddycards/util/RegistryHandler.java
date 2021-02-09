@@ -8,6 +8,7 @@ import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBoost;
 import com.wildcard.buddycards.enchantment.EnchantmentExtraPage;
+import com.wildcard.buddycards.integration.AquacultureIntegration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.screen.BinderScreen;
@@ -39,6 +40,9 @@ public class RegistryHandler {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, BuddyCards.MOD_ID);
 
     public static void init() {
+        if (ModList.get().isLoaded("aquaculture"))
+            AquacultureIntegration.init();
+
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -69,6 +73,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> PACK_END = ITEMS.register("pack.3", () -> new PackItem(3));
     public static final RegistryObject<Item> PACK_BYG = ITEMS.register("pack.4", () -> new PackItem(4));
     public static final RegistryObject<Item> PACK_CREATE = ITEMS.register("pack.5", () -> new PackItem(5));
+    public static final RegistryObject<Item> PACK_AQUACULTURE = ITEMS.register("pack.6", () -> new PackItem(6));
     public static final RegistryObject<Item> PACK_MYSTERY = ITEMS.register("mystery_pack", () -> new PackItem(0));
 
     //Binder Container
@@ -81,6 +86,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> BINDER_END = ITEMS.register("binder.3", () -> new BinderItem(3));
     public static final RegistryObject<Item> BINDER_BYG = ITEMS.register("binder.4", () -> new BinderItem(4));
     public static final RegistryObject<Item> BINDER_CREATE = ITEMS.register("binder.5", () -> new BinderItem(5));
+    public static final RegistryObject<Item> BINDER_AQUACULTURE = ITEMS.register("binder.6", () -> new BinderItem(6));
     public static final RegistryObject<Item> CHALLENGE_BINDER = ITEMS.register("challenge_binder", ChallengeBinder::new);
 
     //Medals
@@ -89,6 +95,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> MEDAL_END = ITEMS.register("medal.3", () -> new MedalItem(3));
     public static final RegistryObject<Item> MEDAL_BYG = ITEMS.register("medal.4", () -> new MedalItem(4));
     public static final RegistryObject<Item> MEDAL_CREATE = ITEMS.register("medal.5", () -> new MedalItem(5));
+    public static final RegistryObject<Item> MEDAL_AQUACULTURE = ITEMS.register("medal.5", () -> new MedalItem(6));
 
     //Misc
     public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () ->

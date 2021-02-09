@@ -43,7 +43,7 @@ public class LootInjectionHandler {
             event.getTable().addPool(makePool("buddycards:inject/piglin_bartering"));
     }
 
-    private static LootPool makePool(String location){
+    public static LootPool makePool(String location){
         return LootPool.builder()
                 .addEntry(TableLootEntry.builder(new ResourceLocation(location)).weight(1))
                 .bonusRolls(0, 1)

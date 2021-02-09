@@ -1,0 +1,103 @@
+{
+  "pools": [{
+    "name": "buddycards",
+    "rolls": 1,
+    "entries": [
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.6.1"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.6.2"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.6.3"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.6.4"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.6.5"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.6.6"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.6.7"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.6.8"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.6.9"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.6.10"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.6.11"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.6.12"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.6.13"
+      },
+      {
+        "type": "item",
+        "weight": 2,
+        "name": "buddycards:card.6.14"
+      },
+      {
+        "type": "item",
+        "weight": 2,
+        "name": "buddycards:card.6.15"
+      },
+      {
+        "type": "item",
+        "weight": 2,
+        "name": "buddycards:card.6.16"
+      },
+      {
+        "type": "item",
+        "weight": 3,
+        "name": "buddycards:card.6.17"
+      },
+      {
+        "type": "item",
+        "weight": 3,
+        "name": "buddycards:card.6.18"
+      },
+      {
+        "type": "item",
+        "weight": 30,
+        "name": "buddycards:pack.6"
+      }
+    ]
+  }]
+}

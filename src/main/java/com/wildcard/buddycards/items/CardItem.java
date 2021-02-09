@@ -21,16 +21,52 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import java.util.List;
 
 public class CardItem extends Item {
+    /**
+     * Sets up a card number for a set with 27 cards
+     * @param setNumber set number for card
+     * @param cardNumber card number for card
+     * @param isShiny is it a shiny card
+     */
     public CardItem(int setNumber, int cardNumber, boolean isShiny) {
         super(new Item.Properties().group(BuddyCards.TAB));
         SET_NUMBER = setNumber;
         CARD_NUMBER = cardNumber;
         SHINY = isShiny;
+        if(CARD_NUMBER <= 12)
+            rarity = Rarity.COMMON;
+        else if(CARD_NUMBER <= 21)
+            rarity = Rarity.UNCOMMON;
+        else if(CARD_NUMBER <= 25)
+            rarity = Rarity.RARE;
+        else
+            rarity = Rarity.EPIC;
     }
 
+    /**
+     * Sets up a card number for a set with less or more than 27 cards
+     * @param setNumber set number for card
+     * @param cardNumber card number for card
+     * @param isShiny is it a shiny card
+     * @param raritySeperators the final common uncommon and rare card numbers to setup the rarities based on card number
+     */
+    public CardItem(int setNumber, int cardNumber, boolean isShiny, int[] raritySeperators) {
+        super(new Item.Properties().group(BuddyCards.TAB));
+        SET_NUMBER = setNumber;
+        CARD_NUMBER = cardNumber;
+        SHINY = isShiny;
+        if(CARD_NUMBER <= raritySeperators[0])
+            rarity = Rarity.COMMON;
+        else if(CARD_NUMBER <= raritySeperators[1])
+            rarity = Rarity.UNCOMMON;
+        else if(CARD_NUMBER <= raritySeperators[2])
+            rarity = Rarity.RARE;
+        else
+            rarity = Rarity.EPIC;
+    }
     public final int SET_NUMBER;
     public final int CARD_NUMBER;
     public final boolean SHINY;
+    private final Rarity rarity;
 
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -60,14 +96,7 @@ public class CardItem extends Item {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        //The higher the card number the rarer the card
-        if(CARD_NUMBER <= 12)
-            return Rarity.COMMON;
-        else if(CARD_NUMBER <= 21)
-            return Rarity.UNCOMMON;
-        else if(CARD_NUMBER <= 25)
-            return Rarity.RARE;
-        return Rarity.EPIC;
+        return rarity;
     }
 
     @Override

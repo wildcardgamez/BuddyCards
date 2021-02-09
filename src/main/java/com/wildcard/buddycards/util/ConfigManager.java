@@ -55,6 +55,8 @@ public class ConfigManager {
     public static ForgeConfigSpec.DoubleValue challengeGrade4Mult;
     public static ForgeConfigSpec.DoubleValue challengeGrade5Mult;
 
+    public static ForgeConfigSpec.DoubleValue aquacultureFishingChance;
+
 
 
     public static void init()
@@ -86,6 +88,9 @@ public class ConfigManager {
         lootChestPacks = builder.comment("\nAllow natural generation of packs in loot chests, default is true")
                 .define("lootTables.lootChestPacks", true);
 
+        aquacultureFishingChance = builder.comment("\nOdds of fishing up an Aquaculture set card or pack while using a buddycard hook, 0-1, default is .075")
+                .defineInRange("integration.aquacultureFishingChance", .075, 0, 1);
+
         challengeMode = builder.comment("\nEnable Challenge mode, assigning cards point values, and giving each player a challenge binder, default is false")
                 .define("challenge.doChallengeMode", false);
         challengePointsCommon = builder.comment("\nBase challenge points for common cards, 1-100, default is 1")
@@ -97,26 +102,26 @@ public class ConfigManager {
         challengePointsEpic = builder.comment("\nBase challenge points for epic cards, 1-100, default is 5")
                 .defineInRange("challenge.pointsEpic", 5, 1, 100);
         challengeShinyMult = builder.comment("\nMultiplier for challenge points on shiny cards, 0-10, default is 1.25")
-                .defineInRange("challenge.shinyMultiplier", 1.25, 1, 10);
+                .defineInRange("challenge.shinyMultiplier", 1.25, 0, 10);
         challengeSet1Mult = builder.comment("\nMultiplier for challenge points from base set, 0-10, default is .8")
-                .defineInRange("challenge.set1Multiplier", .8, 1, 10);
+                .defineInRange("challenge.set1Multiplier", .8, 0, 10);
         challengeSet2Mult = builder.comment("\nMultiplier for challenge points from nether set, 0-10, default is 1")
-                .defineInRange("challenge.set2Multiplier", 1f, 1, 10);
+                .defineInRange("challenge.set2Multiplier", 1f, 0, 10);
         challengeSet3Mult = builder.comment("\nMultiplier for challenge points from end set, 0-10, default is 2")
-                .defineInRange("challenge.set3Multiplier", 2f, 1, 10);
+                .defineInRange("challenge.set3Multiplier", 2f, 0, 10);
         challengeSet4Mult = builder.comment("\nMultiplier for challenge points from byg set, 0-10, default is 2")
-                .defineInRange("challenge.set4Multiplier", 2f, 1, 10);
+                .defineInRange("challenge.set4Multiplier", 2f, 0, 10);
         challengeSet5Mult = builder.comment("\nMultiplier for challenge points from create set, 0-10, default is 1.4")
-                .defineInRange("challenge.set5Multiplier", 1.4f, 1, 10);
+                .defineInRange("challenge.set5Multiplier", 1.4f, 0, 10);
         challengeGrade1Mult = builder.comment("\nMultiplier for challenge points with grade D, 0-10, default is 1")
-                .defineInRange("challenge.grade1Multiplier", 1f, 1, 10);
+                .defineInRange("challenge.grade1Multiplier", 1f, 0, 10);
         challengeGrade2Mult = builder.comment("\nMultiplier for challenge points with grade C, 0-10, default is 1.4")
-                .defineInRange("challenge.grade2Multiplier", 1.4f, 1, 10);
+                .defineInRange("challenge.grade2Multiplier", 1.4f, 0, 10);
         challengeGrade3Mult = builder.comment("\nMultiplier for challenge points with grade B, 0-10, default is 1.8")
-                .defineInRange("challenge.grade3Multiplier", 1.8f, 1, 10);
+                .defineInRange("challenge.grade3Multiplier", 1.8f, 0, 10);
         challengeGrade4Mult = builder.comment("\nMultiplier for challenge points with grade A, 0-10, default is 2.5")
-                .defineInRange("challenge.grade4Multiplier", 2.5f, 1, 10);
+                .defineInRange("challenge.grade4Multiplier", 2.5f, 0, 10);
         challengeGrade5Mult = builder.comment("\nMultiplier for challenge points with grade S, 0-10, default is 10")
-                .defineInRange("challenge.grade5Multiplier", 10f, 1, 10);
+                .defineInRange("challenge.grade5Multiplier", 10f, 0, 10);
     }
 }

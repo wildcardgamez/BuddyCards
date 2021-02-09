@@ -1,0 +1,38 @@
+{
+  "parent": "buddycards:item/card",
+  "textures": {
+    "layer0": "buddycards:items/aquaculture_set/3"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "minecraft:grade": 1.0
+      },
+      "model": "buddycards:item/card.6.3g1"
+    },
+    {
+      "predicate": {
+        "minecraft:grade": 2.0
+      },
+      "model": "buddycards:item/card.6.3g2"
+    },
+    {
+      "predicate": {
+        "minecraft:grade": 3.0
+      },
+      "model": "buddycards:item/card.6.3g3"
+    },
+    {
+      "predicate": {
+        "minecraft:grade": 4.0
+      },
+      "model": "buddycards:item/card.6.3g4"
+    },
+    {
+      "predicate": {
+        "minecraft:grade": 5.0
+      },
+      "model": "buddycards:item/card.6.3g5"
+    }
+  ]
+}

@@ -46,6 +46,8 @@ public class BuddyCards
         MinecraftForge.EVENT_BUS.register(new MobDropHandler());
         MinecraftForge.EVENT_BUS.register(new LootInjectionHandler());
         MinecraftForge.EVENT_BUS.register(new EnchantmentHandler());
+        if (ModList.get().isLoaded("aquaculture"))
+            MinecraftForge.EVENT_BUS.register(new EnchantmentHandler());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
