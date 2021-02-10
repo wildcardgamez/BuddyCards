@@ -1,0 +1,29 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "patchouli",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "minecraft:book"
+          },
+          {
+            "tag": "buddycards:cards"
+          }
+        ],
+        "result":
+        {
+          "item": "buddycards:buddycard_guidebook",
+          "count": 1
+        }
+      }
+    }
+  ]
+}

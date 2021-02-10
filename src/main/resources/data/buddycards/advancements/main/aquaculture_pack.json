@@ -1,0 +1,32 @@
+{
+  "conditions": [
+    {
+      "modid": "aquaculture",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.aquaculture_pack"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.aquaculture_pack.desc"
+    },
+    "icon": {
+      "item": "buddycards:buddycard_hook"
+    }
+  },
+  "parent": "buddycards:main/root",
+  "criteria": {
+    "pack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item":"buddycards:buddycard_hook"
+          }
+        ]
+      }
+    }
+  }
+}

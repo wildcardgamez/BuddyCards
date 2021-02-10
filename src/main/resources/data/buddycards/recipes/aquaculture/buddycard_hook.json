@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "aquaculture",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " # ",
+          "#X#",
+          " # "
+        ],
+        "key": {
+          "X": {
+            "item": "aquaculture:iron_hook"
+          },
+          "#": {
+            "tag": "buddycards:packs"
+          }
+        },
+        "result": {
+          "item": "buddycards:buddycard_hook"
+        }
+      }
+    }
+  ]
+}

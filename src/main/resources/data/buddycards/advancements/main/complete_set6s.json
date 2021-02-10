@@ -1,0 +1,77 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.complete_set6s"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.complete_set6s.desc"
+    },
+    "icon": {
+      "item": "buddycards:medal.6"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "buddycards:main/complete_set6",
+  "requirements": [
+    ["card1"],
+    ["card2"],
+    ["card3"],
+    ["card4"],
+    ["card5"],
+    ["card6"],
+    ["card7"],
+    ["card8"],
+    ["card9"],
+    ["card10"],
+    ["card11"],
+    ["card12"],
+    ["card13"],
+    ["card14"],
+    ["card15"],
+    ["card16"],
+    ["card17"],
+    ["card18"]
+  ],
+  "criteria": {
+    "card1": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.1s"}]}},
+    "card2": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.2s"}]}},
+    "card3": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.3s"}]}},
+    "card4": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.4s"}]}},
+    "card5": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.5s"}]}},
+    "card6": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.6s"}]}},
+    "card7": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.7s"}]}},
+    "card8": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.8s"}]}},
+    "card9": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.9s"}]}},
+    "card10": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.10s"}]}},
+    "card11": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.11s"}]}},
+    "card12": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.12s"}]}},
+    "card13": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.13s"}]}},
+    "card14": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.14s"}]}},
+    "card15": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.15s"}]}},
+    "card16": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.16s"}]}},
+    "card17": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.17s"}]}},
+    "card18": {
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.18s"}]}}
+  },
+  "rewards" : {
+    "loot": ["buddycards:item/medals/6"]
+  }
+}

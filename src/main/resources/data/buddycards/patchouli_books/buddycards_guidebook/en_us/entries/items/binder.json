@@ -20,7 +20,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "buddycards:create/binder.5"
+      "recipe": "buddycards:create/binder.5",
+      "recipe2": "buddycards:aquaculture/binder.6"
     },
     {
       "type": "relations",

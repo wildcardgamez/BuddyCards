@@ -7,7 +7,7 @@
       "translate": "advancements.buddycards.main.complete_set1s.desc"
     },
     "icon": {
-      "item": "buddycards:pack.1"
+      "item": "buddycards:medal.1"
     },
     "frame": "challenge",
     "hidden": false
