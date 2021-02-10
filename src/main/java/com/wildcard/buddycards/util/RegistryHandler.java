@@ -29,8 +29,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
-
 public class RegistryHandler {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BuddyCards.MOD_ID);
@@ -95,7 +93,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> MEDAL_END = ITEMS.register("medal.3", () -> new MedalItem(3));
     public static final RegistryObject<Item> MEDAL_BYG = ITEMS.register("medal.4", () -> new MedalItem(4));
     public static final RegistryObject<Item> MEDAL_CREATE = ITEMS.register("medal.5", () -> new MedalItem(5));
-    public static final RegistryObject<Item> MEDAL_AQUACULTURE = ITEMS.register("medal.5", () -> new MedalItem(6));
+    public static final RegistryObject<Item> MEDAL_AQUACULTURE = ITEMS.register("medal.6", () -> new MedalItem(6));
 
     //Misc
     public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () ->

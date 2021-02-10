@@ -83,6 +83,10 @@ public class CuriosIntegration {
                     }
                     else if(setNumber == 5)
                         player.addPotionEffect(new EffectInstance(Effects.HASTE, 300, boostVal, true, false));
+                    else if(setNumber == 6)
+                        player.addPotionEffect(new EffectInstance(Effects.LUCK, 300, boostVal / 2, true, false));
+                        if (boostVal > 0)
+                            player.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 300, 0, true, false));
                 }
             }
         };

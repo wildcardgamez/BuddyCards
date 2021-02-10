@@ -1,6 +1,7 @@
 package com.wildcard.buddycards;
 
 import com.wildcard.buddycards.datagen.DataGen;
+import com.wildcard.buddycards.integration.AquacultureIntegration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.util.*;
 import net.minecraft.item.ItemGroup;
@@ -47,7 +48,7 @@ public class BuddyCards
         MinecraftForge.EVENT_BUS.register(new LootInjectionHandler());
         MinecraftForge.EVENT_BUS.register(new EnchantmentHandler());
         if (ModList.get().isLoaded("aquaculture"))
-            MinecraftForge.EVENT_BUS.register(new EnchantmentHandler());
+            MinecraftForge.EVENT_BUS.register(new AquacultureIntegration());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
