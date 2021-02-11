@@ -1,10 +1,10 @@
 {
-  "flag": "mod:create",
+  "flag": "mod:aquaculture",
   "secret": true,
   "name": "Aquaculture Set",
-  "icon": "buddycards:pack.5",
+  "icon": "buddycards:pack.6",
   "category": "buddycards:sets",
-  "sortnum": 4,
+  "sortnum": 5,
   "pages": [
     {
       "type": "text",
@@ -12,15 +12,15 @@
     },
     {
       "type": "crafting",
-      "recipe": "buddycards:buddycard_hook",
-      "text": "In order to get aquaculture set packs, you must first make a buddycard hook. $(br2)This hook can than be applied to a fishing rod using a tackle box, and gives a chance to fish up cards and packs while fishing.",
+      "recipe": "buddycards:aquaculture/buddycard_hook",
+      "text": "In order to get aquaculture set packs, you must first make a buddycard hook. $(br2)This hook can than be applied to a fishing rod using a tackle box, and gives a chance to fish up cards or packs while fishing.",
       "link_recipe": true
     },
     {
       "type": "spotlight",
       "title": "Aquaculture Set Packs",
       "item": "buddycards:pack.6",
-      "text": "Found randomly when fishing with a rod that is using a Buddycard hook, the aquaculture packs are the only way to get ",
+      "text": "Found randomly when fishing with a rod that is using a Buddycard hook. While you can fish up normal cards with the hook, the aquaculture packs are the only way to get shiny variantes.",
       "link_recipe": true
     },
     {

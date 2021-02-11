@@ -105,6 +105,8 @@ public class CardItem extends Item {
             return;
         else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
             return;
+        else if(SET_NUMBER == 6 && !ModList.get().isLoaded("aquaculture"))
+            return;
         super.fillItemGroup(group, items);
     }
 

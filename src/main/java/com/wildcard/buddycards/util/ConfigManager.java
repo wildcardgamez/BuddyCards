@@ -49,6 +49,7 @@ public class ConfigManager {
     public static ForgeConfigSpec.DoubleValue challengeSet3Mult;
     public static ForgeConfigSpec.DoubleValue challengeSet4Mult;
     public static ForgeConfigSpec.DoubleValue challengeSet5Mult;
+    public static ForgeConfigSpec.DoubleValue challengeSet6Mult;
     public static ForgeConfigSpec.DoubleValue challengeGrade1Mult;
     public static ForgeConfigSpec.DoubleValue challengeGrade2Mult;
     public static ForgeConfigSpec.DoubleValue challengeGrade3Mult;
@@ -113,6 +114,8 @@ public class ConfigManager {
                 .defineInRange("challenge.set4Multiplier", 2f, 0, 10);
         challengeSet5Mult = builder.comment("\nMultiplier for challenge points from create set, 0-10, default is 1.4")
                 .defineInRange("challenge.set5Multiplier", 1.4f, 0, 10);
+        challengeSet6Mult = builder.comment("\nMultiplier for challenge points from aquaculture set, 0-10, default is 1")
+                .defineInRange("challenge.set6Multiplier", 1f, 0, 10);
         challengeGrade1Mult = builder.comment("\nMultiplier for challenge points with grade D, 0-10, default is 1")
                 .defineInRange("challenge.grade1Multiplier", 1f, 0, 10);
         challengeGrade2Mult = builder.comment("\nMultiplier for challenge points with grade C, 0-10, default is 1.4")
