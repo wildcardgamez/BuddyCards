@@ -42,7 +42,7 @@ public class BinderItem extends Item {
             }
             int finalSlots = slots;
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, new SimpleNamedContainerProvider(
-                    (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, new BinderInventory(finalSlots))
+                    (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, new BinderInventory(finalSlots, playerIn.getHeldItem(handIn)))
                     , playerIn.getHeldItem(handIn).getDisplayName()));
         }
         return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));

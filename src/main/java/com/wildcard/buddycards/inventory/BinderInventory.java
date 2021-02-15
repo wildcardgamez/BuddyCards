@@ -11,9 +11,12 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.Constants;
 
 public class BinderInventory extends Inventory {
-    public BinderInventory(int slots) {
+    public BinderInventory(int slots, ItemStack binderIn) {
         super(slots);
+        binder = binderIn;
     }
+
+    public ItemStack binder;
 
     @Override
     public void openInventory(PlayerEntity player)
@@ -22,12 +25,6 @@ public class BinderInventory extends Inventory {
         for(int i = 0; i < this.getSizeInventory(); i++) {
             setInventorySlotContents(i, ItemStack.EMPTY);
         }
-        ItemStack binder;
-        //Find hand with binder
-        if (player.getHeldItemMainhand().getItem() instanceof BinderItem)
-            binder = player.getHeldItemMainhand();
-        else
-            binder = player.getHeldItemOffhand();
 
         if(binder.hasTag())
         {
@@ -49,12 +46,7 @@ public class BinderInventory extends Inventory {
     {
         boolean calcPoints = ConfigManager.challengeMode.get();
         int points = 0;
-        ItemStack binder;
-        //Find hand with binder
-        if (player.getHeldItemMainhand().getItem() instanceof BinderItem)
-            binder = player.getHeldItemMainhand();
-        else
-            binder = player.getHeldItemOffhand();
+
         if(!binder.isEmpty())
         {
             //When the binder has cards in it, turn them into nbt data and put them in the binder

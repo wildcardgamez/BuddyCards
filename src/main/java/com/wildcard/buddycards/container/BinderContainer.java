@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.container;
 
+import com.wildcard.buddycards.inventory.BinderInventory;
 import com.wildcard.buddycards.items.BinderItem;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.RegistryHandler;
@@ -14,23 +15,20 @@ import net.minecraft.item.ItemStack;
 
 public class BinderContainer extends Container {
 
-    private final IInventory binderInv;
+    private final BinderInventory binderInv;
     private static int[] slotsForLevel = {54, 72, 96, 120};
 
-    public static BinderContainer makeContainer(int id, PlayerInventory playerInventory) {
-        return new BinderContainer(id, playerInventory);
-    }
-
     public BinderContainer(int id, PlayerInventory playerInventory) {
-        this(id, playerInventory, new Inventory(slotsForLevel[EnchantmentHelper.getEnchantmentLevel(RegistryHandler.EXTRA_PAGE.get(), playerInventory.getCurrentItem())]));
+        this(id, playerInventory, new BinderInventory(slotsForLevel[EnchantmentHelper.getEnchantmentLevel(RegistryHandler.EXTRA_PAGE.get(), playerInventory.getCurrentItem())], playerInventory.getCurrentItem()));
     }
 
-    public BinderContainer(int id, PlayerInventory playerInv, IInventory binderInvIn) {
+    public BinderContainer(int id, PlayerInventory playerInv, BinderInventory binderInvIn) {
         super(RegistryHandler.BINDER_CONTAINER.get(), id);
         assertInventorySize(binderInvIn, binderInvIn.getSizeInventory());
         binderInv = binderInvIn;
-        //Set up slots for binder
+
         if (binderInv.getSizeInventory() == 54) {
+            //Set up slots for binder
             for (int y = 0; y < 6; y++) {
                 for (int x = 0; x < 9; x++) {
                     this.addSlot(new BinderSlot(binderInv, x + (y * 9), 8 + x * 18, 18 + y * 18));
@@ -48,6 +46,7 @@ public class BinderContainer extends Container {
             }
         }
         else if (binderInv.getSizeInventory() == 72) {
+            //Set up slots for binder
             for (int y = 0; y < 6; y++) {
                 for (int x = 0; x < 12; x++) {
                     this.addSlot(new BinderSlot(binderInv, x + (y * 12), 8 + x * 18, 18 + y * 18));
@@ -65,6 +64,7 @@ public class BinderContainer extends Container {
             }
         }
         else if (binderInv.getSizeInventory() == 96) {
+            //Set up slots for binder
             for (int y = 0; y < 8; y++) {
                 for (int x = 0; x < 12; x++) {
                     this.addSlot(new BinderSlot(binderInv, x + (y * 12), 8 + x * 18, 18 + y * 18));
@@ -82,6 +82,7 @@ public class BinderContainer extends Container {
             }
         }
         else if (binderInv.getSizeInventory() == 120) {
+            //Set up slots for binder
             for (int y = 0; y < 10; y++) {
                 for (int x = 0; x < 12; x++) {
                     this.addSlot(new BinderSlot(binderInv, x + (y * 12), 8 + x * 18, 18 + y * 18));
@@ -112,6 +113,7 @@ public class BinderContainer extends Container {
             super(inventoryIn, index, xPosition, yPosition);
         }
 
+        //Only let cards go into card slots
         @Override
         public boolean isItemValid(ItemStack stack) {
             return stack.getItem() instanceof CardItem;
@@ -122,9 +124,15 @@ public class BinderContainer extends Container {
             super(inventoryIn, index, xPosition, yPosition);
         }
 
+        //Only let the stack move if it isn't the open binder
         @Override
         public boolean canTakeStack(PlayerEntity playerIn) {
-            return !(this.getStack().getItem() instanceof BinderItem);
+            return !(this.getStack().equals(((BinderInventory)binderInv).binder));
+        }
+
+        @Override
+        public boolean isItemValid(ItemStack stack) {
+            return !(this.getStack().equals(((BinderInventory)binderInv).binder));
         }
     }
 
