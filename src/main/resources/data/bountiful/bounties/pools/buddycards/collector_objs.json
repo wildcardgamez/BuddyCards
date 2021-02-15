@@ -1,0 +1,102 @@
+{
+  "content": [
+    {
+      "type": "item-tag",
+      "name": "Any Card",
+      "content": "buddycards:cards",
+      "amountRange": {
+        "min": 1,
+        "max": 64
+      },
+      "unitWorth": 350,
+      "weight": 1000
+    },
+    {
+      "type": "item-tag",
+      "name": "Base Set Card",
+      "content": "buddycards:set1_cards",
+      "amountRange": {
+        "min": 1,
+        "max": 32
+      },
+      "unitWorth": 350,
+      "weight": 1000
+    },
+    {
+      "type": "item-tag",
+      "name": "Shiny Base Set Card",
+      "content": "buddycards:set1s_cards",
+      "amountRange": {
+        "min": 1,
+        "max": 12
+      },
+      "unitWorth": 400,
+      "weight": 600
+    },
+    {
+      "type": "item-tag",
+      "name": "Nether Set Card",
+      "content": "buddycards:set2_cards",
+      "amountRange": {
+        "min": 1,
+        "max": 24
+      },
+      "unitWorth": 375,
+      "weight": 150
+    },
+    {
+      "type": "item-tag",
+      "name": "End Set Card",
+      "content": "buddycards:set3_cards",
+      "amountRange": {
+        "min": 1,
+        "max": 16
+      },
+      "unitWorth": 400,
+      "weight": 75
+    },
+    {
+      "type": "item-tag",
+      "name": "Any Epic Card",
+      "content": "buddycards:epic_cards",
+      "amountRange": {
+        "min": 1,
+        "max": 12
+      },
+      "unitWorth": 900,
+      "weight": 200
+    },
+    {
+      "type": "item-tag",
+      "name": "Any Pack",
+      "content": "buddycards:packs",
+      "amountRange": {
+        "min": 1,
+        "max": 32
+      },
+      "unitWorth": 2500,
+      "weight": 500
+    },
+    {
+      "type": "item-tag",
+      "name": "Any Disc",
+      "content": "minecraft:music_discs",
+      "amountRange": {
+        "min": 1,
+        "max": 3
+      },
+      "unitWorth": 800,
+      "weight": 400
+    },
+    {
+      "type": "entity",
+      "content": "minecraft:pillager",
+      "amountRange": {
+        "min": 1,
+        "max": 4
+      },
+      "unitWorth": 400,
+      "weight": 100
+    }
+  ]
+}
