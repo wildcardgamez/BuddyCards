@@ -28,7 +28,7 @@ public class CardItem extends Item {
      * @param isShiny is it a shiny card
      */
     public CardItem(int setNumber, int cardNumber, boolean isShiny) {
-        super(new Item.Properties().group(BuddyCards.TAB));
+        super(new Item.Properties().group(BuddyCards.CARDS_TAB));
         SET_NUMBER = setNumber;
         CARD_NUMBER = cardNumber;
         SHINY = isShiny;
@@ -50,7 +50,7 @@ public class CardItem extends Item {
      * @param raritySeperators the final common uncommon and rare card numbers to setup the rarities based on card number
      */
     public CardItem(int setNumber, int cardNumber, boolean isShiny, int[] raritySeperators) {
-        super(new Item.Properties().group(BuddyCards.TAB));
+        super(new Item.Properties().group(BuddyCards.CARDS_TAB));
         SET_NUMBER = setNumber;
         CARD_NUMBER = cardNumber;
         SHINY = isShiny;

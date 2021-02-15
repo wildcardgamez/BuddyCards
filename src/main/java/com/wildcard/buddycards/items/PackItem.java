@@ -35,10 +35,7 @@ public class PackItem extends Item {
     public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         //Set name and explanation of what the pack is
         tooltip.add(new TranslationTextComponent("item.buddycards.set." + SET_NUMBER));
-        if (SET_NUMBER == 0)
-            tooltip.add(new TranslationTextComponent("item.buddycards.mystery_contains"));
-        else
-            tooltip.add(new TranslationTextComponent("item.buddycards.contains"));
+        tooltip.add(new TranslationTextComponent("item.buddycards.contains." + SET_NUMBER));
     }
 
     @Override

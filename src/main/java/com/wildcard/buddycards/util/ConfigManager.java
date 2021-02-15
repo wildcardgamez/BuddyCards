@@ -80,9 +80,9 @@ public class ConfigManager {
         dragonMaxPacks = builder.comment("\nMaximum amount of packs dropped when a dragon drops packs, default is 4")
                 .defineInRange("mobDrops.dragonMaxPacks", 4, 1, 16);
         witherChance = builder.comment("\nOdds of withers dropping nether set packs, 0 for 0%, 1 for 100%, default is 50%")
-                .defineInRange("mobDrops.dragonChance", .5f, 0, 1);
+                .defineInRange("mobDrops.witherChance", .5f, 0, 1);
         witherMaxPacks = builder.comment("\nMaximum amount of packs dropped when a wither drops packs, default is 3")
-                .defineInRange("mobDrops.dragonMaxPacks", 3, 1, 16);
+                .defineInRange("mobDrops.witherMaxPacks", 3, 1, 16);
 
         piglinBartering = builder.comment("\nAllow packs to be obtained through Piglin bartering, default is true")
                 .define("lootTables.piglinBartering", true);

@@ -15,16 +15,14 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.ModList;
 
@@ -66,6 +64,46 @@ public class CardDisplayBlock extends Block {
             case WEST:
                 return WSHAPE;
         }
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
+        switch(direction) {
+            case CLOCKWISE_90:
+                switch(state.get(DIR)) {
+                    case NORTH:
+                        return state.with(DIR, Direction.EAST);
+                    case EAST:
+                        return state.with(DIR, Direction.SOUTH);
+                    case SOUTH:
+                        return state.with(DIR, Direction.WEST);
+                    case WEST:
+                        return state.with(DIR, Direction.NORTH);
+                }
+            case CLOCKWISE_180:
+                switch(state.get(DIR)) {
+                    case NORTH:
+                        return state.with(DIR, Direction.SOUTH);
+                    case EAST:
+                        return state.with(DIR, Direction.WEST);
+                    case SOUTH:
+                        return state.with(DIR, Direction.NORTH);
+                    case WEST:
+                        return state.with(DIR, Direction.EAST);
+                }
+            case COUNTERCLOCKWISE_90:
+                switch(state.get(DIR)) {
+                    case NORTH:
+                        return state.with(DIR, Direction.WEST);
+                    case EAST:
+                        return state.with(DIR, Direction.NORTH);
+                    case SOUTH:
+                        return state.with(DIR, Direction.EAST);
+                    case WEST:
+                        return state.with(DIR, Direction.SOUTH);
+                }
+        }
+        return state;
     }
 
     @Override

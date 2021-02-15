@@ -61,4 +61,11 @@ public class BuddyCards
             return new ItemStack(RegistryHandler.PACK_BASE.get());
         }
     };
+
+    public static final ItemGroup CARDS_TAB = new ItemGroup("buddycards_cards") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(CardRegistry.CARDS.get((int)(Math.random() * CardRegistry.CARDS.size())).get());
+        }
+    };
 }
