@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.integration;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.util.ConfigManager;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
@@ -45,7 +46,7 @@ public class CuriosIntegration {
 
             @Override
             public void curioTick(String identifier, int index, LivingEntity livingEntity) {
-                if (livingEntity instanceof PlayerEntity) {
+                if (livingEntity instanceof PlayerEntity && ConfigManager.doMedalEffects.get()) {
                     PlayerEntity player = (PlayerEntity)livingEntity;
                     //At certain times, refresh the enchant based on the medals set number
                     if(player.world.getGameTime() % 80L != 0L)
@@ -57,8 +58,11 @@ public class CuriosIntegration {
                     }
                     else if(setNumber == 2) {
                         player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 300, 0, true, false));
-                        if(boostVal > 0)
-                            player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, 300, boostVal - 1, true, false));
+                        if(boostVal > 0 && player.isBurning()) {
+                            player.addPotionEffect(new EffectInstance(Effects.SPEED, 1800, 0, true, false));
+                            if (boostVal > 1)
+                                player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 300, 0, true, false));
+                        }
                     }
                     else if(setNumber == 3) {
                         player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 300, boostVal / 2, true, false));
@@ -73,10 +77,11 @@ public class CuriosIntegration {
                     }
                     else if(setNumber == 5)
                         player.addPotionEffect(new EffectInstance(Effects.HASTE, 300, boostVal, true, false));
-                    else if(setNumber == 6)
+                    else if(setNumber == 6) {
                         player.addPotionEffect(new EffectInstance(Effects.LUCK, 300, boostVal / 2, true, false));
                         if (boostVal > 0)
                             player.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 300, 0, true, false));
+                    }
                 }
             }
         };

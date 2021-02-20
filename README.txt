@@ -39,6 +39,11 @@ Create Set
 Packs can only be obtained by crushing down old packs or cards into shredded
 buddycards, which then must be combined with a brass sheet using a heated mixer.
 
+Aquaculture Set
+Packs can only be caught by using a buddycard hook on a fishing rod, and you can
+also get non shiny cards this way. You can apply the hook to a rod using a tackle
+box.
+
 Medals
 Medals can be obtained when you collect all 54 cards of a set. Once you get one,
 you can duplicate them by making a medal token and combining it with two matching
@@ -60,6 +65,9 @@ Byg Medal (BBII) - Jump Boost II & Speed I
 Create Medal - Haste I
 Create Medal (BBI) - Haste II
 Create Medal (BBII) - Haste III
+Aquaculture Medal - Luck I
+Aquaculture Medal (BBI) - Luck I & Dolphins Grace I
+Aquaculture Medal (BBII) - Luck II & Dolphins Grace I
 
 Binders
 Binders can be crafted similarly to books, except with buddycards instead of paper.

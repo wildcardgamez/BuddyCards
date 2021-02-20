@@ -38,6 +38,8 @@ public class ConfigManager {
     public static ForgeConfigSpec.BooleanValue piglinBartering;
     public static ForgeConfigSpec.BooleanValue lootChestPacks;
 
+    public static ForgeConfigSpec.BooleanValue doMedalEffects;
+
     public static ForgeConfigSpec.BooleanValue challengeMode;
     public static ForgeConfigSpec.IntValue challengePointsCommon;
     public static ForgeConfigSpec.IntValue challengePointsUncommon;
@@ -88,6 +90,9 @@ public class ConfigManager {
                 .define("lootTables.piglinBartering", true);
         lootChestPacks = builder.comment("\nAllow natural generation of packs in loot chests, default is true")
                 .define("lootTables.lootChestPacks", true);
+
+        doMedalEffects = builder.comment("\nEnables medal effects, default is true")
+                .define("misc.doMedalEffects", true);
 
         aquacultureFishingChance = builder.comment("\nOdds of fishing up an Aquaculture set card or pack while using a buddycard hook, 0-1, default is .075")
                 .defineInRange("integration.aquacultureFishingChance", .075, 0, 1);
