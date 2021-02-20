@@ -25,7 +25,6 @@ public class AquacultureIntegration {
 
     @SubscribeEvent
     public void onItemFished(ItemFishedEvent event) {
-        System.out.println(AquaFishingRodItem.getHookType(event.getPlayer().getHeldItemMainhand()).equals(BUDDY_HOOK));
         if(AquaFishingRodItem.getHookType(event.getPlayer().getHeldItemMainhand()).equals(BUDDY_HOOK) &&
                 Math.random() < ConfigManager.aquacultureFishingChance.get()) {
             List<ItemStack> list = event.getPlayer().getServer().getLootTableManager().getLootTableFromLocation(

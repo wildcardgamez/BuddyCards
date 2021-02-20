@@ -96,6 +96,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> MEDAL_AQUACULTURE = ITEMS.register("medal.6", () -> new MedalItem(6));
 
     //Misc
+    public static final RegistryObject<Item> GUIDEBOOK = ITEMS.register("buddycard_guidebook", PatchouliGuidebookItem::new);
     public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () ->
             new ModSpecificItem(new Item.Properties().group(BuddyCards.TAB), "create"));
     public static final RegistryObject<Item> MEDAL_TOKEN = ITEMS.register("medal_token", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
