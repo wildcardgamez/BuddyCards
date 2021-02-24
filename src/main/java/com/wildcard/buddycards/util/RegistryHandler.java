@@ -209,4 +209,13 @@ public class RegistryHandler {
     public static final RegistryObject<Enchantment> BUDDY_BOOST = ENCHANTMENTS.register("buddy_boost", EnchantmentBuddyBoost::new);
     public static final RegistryObject<Enchantment> EXTRA_PAGE = ENCHANTMENTS.register("extra_page", EnchantmentExtraPage::new);
 
+    //Buddysteel
+    public static final RegistryObject<Item> BUDDYSTEEL_INGOT = ITEMS.register("buddysteel_ingot", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<Item> BUDDYSTEEL_BLEND = ITEMS.register("buddysteel_blend", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<Item> BUDDYSTEEL_NUGGET = ITEMS.register("buddysteel_nugget", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<Item> BUDDYSTEEL_HELMET = ITEMS.register("buddysteel_helmet", () -> new BuddysteelArmorItem(new BuddysteelArmorMaterial(0), EquipmentSlotType.HEAD));
+    public static final RegistryObject<Item> BUDDYSTEEL_CHESTPLATE = ITEMS.register("buddysteel_chestplate", () -> new BuddysteelArmorItem(new BuddysteelArmorMaterial(0), EquipmentSlotType.CHEST));
+    public static final RegistryObject<Item> BUDDYSTEEL_LEGGINGS = ITEMS.register("buddysteel_leggings", () -> new BuddysteelArmorItem(new BuddysteelArmorMaterial(0), EquipmentSlotType.LEGS));
+    public static final RegistryObject<Item> BUDDYSTEEL_BOOTS = ITEMS.register("buddysteel_boots", () -> new BuddysteelArmorItem(new BuddysteelArmorMaterial(0), EquipmentSlotType.FEET));
+
 }
