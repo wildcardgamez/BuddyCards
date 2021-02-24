@@ -1,6 +1,5 @@
 package com.wildcard.buddycards;
 
-import com.wildcard.buddycards.datagen.DataGen;
 import com.wildcard.buddycards.integration.AquacultureIntegration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.util.*;

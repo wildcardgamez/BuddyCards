@@ -1,0 +1,22 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "0": "buddycards:blocks/card_stand",
+    "particle": "buddycards:blocks/card_stand"
+  },
+  "elements": [
+    {
+      "from": [5, 0, 5],
+      "to": [11, 1, 11],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0.5, 8]},
+      "faces": {
+        "north": {"uv": [0, 0, 6, 1], "rotation": 180, "texture": "#0"},
+        "east": {"uv": [5, 0, 6, 6], "rotation": 90, "texture": "#0"},
+        "south": {"uv": [0, 5, 6, 6], "texture": "#0"},
+        "west": {"uv": [0, 0, 1, 6], "rotation": 270, "texture": "#0"},
+        "up": {"uv": [0, 0, 6, 6], "texture": "#0"},
+        "down": {"uv": [0, 0, 6, 6], "texture": "#0"}
+      }
+    }
+  ]
+}
