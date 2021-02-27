@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_block"
+    },
+    {
+      "item": "minecraft:lapis_block"
+    },
+    {
+      "item": "minecraft:lapis_block"
+    },
+    {
+      "item": "buddycards:shredded_buddycard"
+    },
+    {
+      "item": "buddycards:shredded_buddycard"
+    },
+    {
+      "item": "buddycards:shredded_buddycard"
+    }
+  ],
+  "result":
+  {
+    "item": "buddycards:buddysteel_blend",
+    "count": 1
+  }
+}

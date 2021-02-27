@@ -1,8 +1,8 @@
 package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
-import com.wildcard.buddycards.items.BinderItem;
-import com.wildcard.buddycards.items.MedalItem;
+import com.wildcard.buddycards.integration.aquaculture.BuddysteelFishingRodItem;
+import com.wildcard.buddycards.items.*;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.entity.item.ItemEntity;
@@ -22,7 +22,7 @@ import java.util.stream.StreamSupport;
 public class EnchantmentHandler {
     private Map<String, NonNullList<ItemStack>> items = new HashMap<String, NonNullList<ItemStack>>();
 
-    public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", i -> (i instanceof MedalItem || i instanceof BinderItem));
+    public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", i -> (i instanceof MedalItem || i instanceof BinderItem || i instanceof BuddysteelArmorItem || i instanceof BuddysteelAxeItem || i instanceof BuddysteelHoeItem || i instanceof BuddysteelPickaxeItem || i instanceof BuddysteelShovelItem || i instanceof BuddysteelSwordItem || i instanceof BuddysteelFishingRodItem));
     public static final EnchantmentType BUDDY_MEDAL = EnchantmentType.create("BUDDY_MEDAL", i -> (i instanceof MedalItem));
     public static final EnchantmentType BUDDY_BINDER = EnchantmentType.create("BUDDY_BINDER", i -> (i instanceof BinderItem));
 

@@ -1,0 +1,14 @@
+{
+  "parent": "item/handheld_rod",
+  "textures": {
+    "layer0": "buddycards:items/aquaculture_set/rod_uncast"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "cast": 1
+      },
+      "model": "buddycards:item/buddysteel_fishing_rod_cast"
+    }
+  ]
+}

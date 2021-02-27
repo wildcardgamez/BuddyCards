@@ -13,7 +13,13 @@
     {
       "type": "crafting",
       "recipe": "buddycards:aquaculture/buddycard_hook",
-      "text": "In order to get aquaculture set packs, you must first make a buddycard hook. $(br2)This hook can than be applied to a fishing rod using a tackle box, and gives a chance to fish up cards or packs while fishing.",
+      "text": "In order to get aquaculture set packs, you must first make a buddycard hook or rod. $(br2)This hook can than be applied to a fishing rod using a tackle box, and gives a chance to fish up cards or packs while fishing.",
+      "link_recipe": true
+    },
+    {
+      "type": "crafting",
+      "recipe": "buddycards:aquaculture/buddysteel_fishing_rod",
+      "text": "The other way to get aquaculture set packs, would be using the buddysteel fishing rod. $(br2)This rod will give you better odds the more cards you collect, just like other buddysteel gear.",
       "link_recipe": true
     },
     {

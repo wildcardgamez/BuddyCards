@@ -85,12 +85,12 @@
         },
         {
           "type": "item",
-          "weight": 3,
+          "weight": 1,
           "name": "buddycards:card.6.17"
         },
         {
           "type": "item",
-          "weight": 3,
+          "weight": 1,
           "name": "buddycards:card.6.18"
         }
       ]
@@ -180,12 +180,12 @@
         },
         {
           "type": "item",
-          "weight": 3,
+          "weight": 1,
           "name": "buddycards:card.6.17s"
         },
         {
           "type": "item",
-          "weight": 3,
+          "weight": 1,
           "name": "buddycards:card.6.18s"
         }
       ]

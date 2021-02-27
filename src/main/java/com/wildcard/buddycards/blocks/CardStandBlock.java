@@ -27,6 +27,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.ModList;
 
@@ -36,12 +37,12 @@ public class CardStandBlock extends Block{
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 1.0D, 11.0D);
 
     public CardStandBlock() {
-        super(Block.Properties.from(Blocks.OAK_PLANKS));
+        super(Block.Properties.from(Blocks.STONE_BUTTON));
         NEEDED_MOD = "";
     }
 
     public CardStandBlock(String neededMod) {
-        super(Block.Properties.from(Blocks.OAK_PLANKS));
+        super(Block.Properties.from(Blocks.STONE_BUTTON));
         NEEDED_MOD = neededMod;
     }
 
@@ -136,5 +137,16 @@ public class CardStandBlock extends Block{
         }
         else
             return 0;
+    }
+
+    @Override
+    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        BlockPos blockpos = pos.down();
+        return hasSolidSideOnTop(worldIn, blockpos) || hasEnoughSolidSide(worldIn, blockpos, Direction.UP);
+    }
+
+    @Override
+    public boolean canSpawnInBlock() {
+        return true;
     }
 }

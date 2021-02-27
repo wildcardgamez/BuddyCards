@@ -1,6 +1,6 @@
 {
   "landing_text": "Welcome to the world of Buddycards! Buddycards are collectables you can find and collect all over your world! Happy collecting!",
-  "version": 2,
+  "version": 3,
   "creative_tab": "buddycards",
   "advancements_tab": "buddycards",
   "book_texture": "patchouli:textures/gui/book_blue.png",

@@ -85,18 +85,23 @@
       },
       {
         "type": "item",
-        "weight": 3,
+        "weight": 1,
         "name": "buddycards:card.6.17"
       },
       {
         "type": "item",
-        "weight": 3,
+        "weight": 1,
         "name": "buddycards:card.6.18"
       },
       {
         "type": "item",
         "weight": 45,
         "name": "buddycards:pack.6"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:buddysteel_nugget"
       }
     ]
   }]

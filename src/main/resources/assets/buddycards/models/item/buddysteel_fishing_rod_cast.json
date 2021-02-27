@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld_rod",
+  "textures": {
+    "layer0": "buddycards:items/aquaculture_set/rod_cast"
+  }
+}

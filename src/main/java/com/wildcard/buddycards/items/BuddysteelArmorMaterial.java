@@ -8,24 +8,20 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
-public class BuddysteelArmorMaterial implements IArmorMaterial {
+public enum BuddysteelArmorMaterial implements IArmorMaterial {
+    BUDDYSTEEL;
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] {11, 16, 15, 13};
-    private final int[][] DAMAGE_REDUCTION_ARRAY = new int[][] {{1, 4, 5, 2}, {2, 5, 6, 2}, {3, 6, 8, 3}, {4, 7, 9, 4}};
-    private final float collectionRatio;
-
-    public BuddysteelArmorMaterial(float ratio) {
-        collectionRatio = ratio;
-    }
+    private final int[] DAMAGE_REDUCTION_ARRAY = new int[] {1, 4, 5, 2};
 
     @Override
     public int getDurability(EquipmentSlotType slotIn) {
-        return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * (int) (20 * this.collectionRatio + 15);
+        return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * 40;
     }
 
     @Override
     public int getDamageReductionAmount(EquipmentSlotType slotIn) {
-        return DAMAGE_REDUCTION_ARRAY[(int) (3 * this.collectionRatio)][slotIn.getIndex()];
+        return DAMAGE_REDUCTION_ARRAY[slotIn.getIndex()];
     }
 
     @Override
@@ -50,7 +46,7 @@ public class BuddysteelArmorMaterial implements IArmorMaterial {
 
     @Override
     public float getToughness() {
-        return (int) (3 * this.collectionRatio);
+        return 1;
     }
 
     @Override

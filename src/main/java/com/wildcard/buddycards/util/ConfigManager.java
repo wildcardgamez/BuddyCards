@@ -95,7 +95,7 @@ public class ConfigManager {
                 .define("misc.doMedalEffects", true);
 
         aquacultureFishingChance = builder.comment("\nOdds of fishing up an Aquaculture set card or pack while using a buddycard hook, 0-1, default is .075")
-                .defineInRange("integration.aquacultureFishingChance", .075, 0, 1);
+                .defineInRange("integration.aquacultureFishingChance", .05, 0, 1);
 
         challengeMode = builder.comment("\nEnable Challenge mode, assigning cards point values, and giving each player a challenge binder, default is false")
                 .define("challenge.doChallengeMode", false);

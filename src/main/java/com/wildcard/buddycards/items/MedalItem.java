@@ -39,7 +39,6 @@ public class MedalItem extends Item {
             CompoundNBT nbt = new CompoundNBT();
             nbt.putString("Collector", playerIn.getName().getString());
             playerIn.getHeldItem(handIn).setTag(nbt);
-            return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
