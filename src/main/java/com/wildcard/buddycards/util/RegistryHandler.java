@@ -5,6 +5,7 @@ import com.wildcard.buddycards.blocks.*;
 import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardStandTileRenderer;
 import com.wildcard.buddycards.container.BinderContainer;
+import com.wildcard.buddycards.effects.GradingLuckEffect;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBoost;
 import com.wildcard.buddycards.enchantment.EnchantmentExtraPage;
@@ -15,12 +16,14 @@ import com.wildcard.buddycards.screen.BinderScreen;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.*;
+import net.minecraft.potion.*;
+import net.minecraft.tileentity.BannerPattern;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
@@ -37,6 +40,8 @@ public class RegistryHandler {
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, BuddyCards.MOD_ID);
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, BuddyCards.MOD_ID);
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, BuddyCards.MOD_ID);
+    public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, BuddyCards.MOD_ID);
+    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, BuddyCards.MOD_ID);
 
     public static void init() {
         if (ModList.get().isLoaded("aquaculture"))
@@ -47,6 +52,8 @@ public class RegistryHandler {
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        POTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         if (ModList.get().isLoaded("curios"))
             CuriosIntegration.Imc();
@@ -59,6 +66,14 @@ public class RegistryHandler {
                 if(stack.getTag() != null)
                     return stack.getTag().getInt("grade");
                 return 0;
+            }));
+        }
+        if (ModList.get().isLoaded("aquaculture")) {
+            event.enqueueWork(() -> ItemModelsProperties.registerProperty(AquacultureIntegration.BUDDYSTEEL_FISHING_ROD.get(), new ResourceLocation("cast"), (stack, world, entity) -> {
+                if(entity instanceof PlayerEntity && (((PlayerEntity) entity).getHeldItem(Hand.MAIN_HAND) == stack || ((PlayerEntity) entity).getHeldItem(Hand.OFF_HAND) == stack) && ((PlayerEntity) entity).fishingBobber != null)
+                    return 1;
+                else
+                    return 0;
             }));
         }
         ClientRegistry.bindTileEntityRenderer(CARD_DISPLAY_TILE.get(), CardDisplayTileRenderer::new);
@@ -88,6 +103,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> BINDER_CREATE = ITEMS.register("binder.5", () -> new BinderItem(5));
     public static final RegistryObject<Item> BINDER_AQUACULTURE = ITEMS.register("binder.6", () -> new BinderItem(6));
     public static final RegistryObject<Item> CHALLENGE_BINDER = ITEMS.register("challenge_binder", ChallengeBinder::new);
+    public static final RegistryObject<Item> ENDER_BINDER = ITEMS.register("ender_binder", EnderBinderItem::new);
 
     //Medals
     public static final RegistryObject<Item> MEDAL_BASE = ITEMS.register("medal.1", () -> new MedalItem(1));
@@ -103,6 +119,7 @@ public class RegistryHandler {
             new ModSpecificItem(new Item.Properties().group(BuddyCards.TAB), "create"));
     public static final RegistryObject<Item> MEDAL_TOKEN = ITEMS.register("medal_token", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<Item> GRADING_SLEEVE = ITEMS.register("grading_sleeve", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<Item> BUDDYSTEEL_KEY = ITEMS.register("buddysteel_key", () -> new Item(new Item.Properties().group(BuddyCards.TAB).maxStackSize(1)));
 
     //Card Display Blocks
     public static final RegistryObject<Block> OAK_CARD_DISPLAY = BLOCKS.register("oak_card_display", CardDisplayBlock::new);
@@ -221,5 +238,15 @@ public class RegistryHandler {
     public static final RegistryObject<Item> BUDDYSTEEL_AXE = ITEMS.register("buddysteel_axe", BuddysteelAxeItem::new);
     public static final RegistryObject<Item> BUDDYSTEEL_HOE = ITEMS.register("buddysteel_hoe", BuddysteelHoeItem::new);
 
+    public static final RegistryObject<Effect> GRADING_LUCK = EFFECTS.register("grading_luck", GradingLuckEffect::new);
 
+    public static final RegistryObject<Potion> GRADING_LUCK_NORMAL = POTIONS.register("grading_luck", () -> new Potion(new EffectInstance(GRADING_LUCK.get(), 3600)));
+    public static final RegistryObject<Potion> GRADING_LUCK_STRONG = POTIONS.register("grading_luck_strong", () -> new Potion(new EffectInstance(GRADING_LUCK.get(), 1800, 1)));
+    public static final RegistryObject<Potion> GRADING_LUCK_LONG = POTIONS.register("grading_luck_long", () -> new Potion(new EffectInstance(GRADING_LUCK.get(), 9600)));
+
+    public static void brewingSetup() {
+        PotionBrewing.addMix(Potions.AWKWARD, BUDDYSTEEL_BLEND.get(), GRADING_LUCK_NORMAL.get());
+        PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.GLOWSTONE_DUST, GRADING_LUCK_STRONG.get());
+        PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.REDSTONE, GRADING_LUCK_LONG.get());
+    }
 }

@@ -1,4 +1,5 @@
 {
+  "parent": "block/block",
   "textures": {
     "0": "buddycards:blocks/buddysteel_block",
     "particle": "buddycards:blocks/buddysteel_block"

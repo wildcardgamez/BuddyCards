@@ -19,7 +19,7 @@
     {
       "type": "crafting",
       "recipe": "buddycards:aquaculture/buddysteel_fishing_rod",
-      "text": "The other way to get aquaculture set packs, would be using the buddysteel fishing rod. $(br2)This rod will give you better odds the more cards you collect, just like other buddysteel gear.",
+      "text": "The other way to get aquaculture set packs, would be using the buddysteel fishing rod. This rod will give you better odds the more cards you collect, just like other buddysteel gear.",
       "link_recipe": true
     },
     {

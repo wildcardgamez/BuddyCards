@@ -9,9 +9,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 
+import java.util.UUID;
+
 public class CardStandTile extends TileEntity implements IClearable {
     private ItemStack card = ItemStack.EMPTY;
     private int dir = 0;
+    private boolean locked = false;
+    private String player = "";
 
     public CardStandTile() {
         super(RegistryHandler.CARD_STAND_TILE.get());
@@ -37,6 +41,27 @@ public class CardStandTile extends TileEntity implements IClearable {
         }
     }
 
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public boolean toggleLock(UUID playerUUID) {
+        if(this.locked) {
+            if(this.player.equals(playerUUID.toString())) {
+                this.locked = false;
+            }
+            else
+                return false;
+        }
+        else {
+            this.player = playerUUID.toString();
+            this.locked = true;
+        }
+        this.markDirty();
+        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
+        return true;
+    }
+
     public int getDir() {
         return dir;
     }
@@ -46,6 +71,8 @@ public class CardStandTile extends TileEntity implements IClearable {
         super.write(compound);
         compound.put("card", this.card.write(new CompoundNBT()));
         compound.putInt("dir", this.dir);
+        compound.putBoolean("locked", this.locked);
+        compound.putString("player", this.player);
         return compound;
     }
 
@@ -54,6 +81,8 @@ public class CardStandTile extends TileEntity implements IClearable {
         super.read(state, nbt);
         this.card = ItemStack.read((CompoundNBT) nbt.get("card"));
         this.dir = nbt.getInt("dir");
+        this.locked = nbt.getBoolean("locked");
+        this.player = nbt.getString("player");
     }
 
     @Override

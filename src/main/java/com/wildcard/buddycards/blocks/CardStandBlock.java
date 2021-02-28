@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.blocks;
 
 import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -25,6 +26,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -81,27 +83,42 @@ public class CardStandBlock extends Block{
     @Override
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if (world.getTileEntity(pos) instanceof CardStandTile) {
-            CardStandTile displayTile = (CardStandTile) world.getTileEntity(pos);
+            CardStandTile standTile = (CardStandTile) world.getTileEntity(pos);
             ItemStack stack = player.getHeldItem(hand);
-            displayTile.setDir((int)((player.getRotationYawHead() * 16.0F / 360.0F) + 0.5D) & 15);
-            if(displayTile.getCard().getItem() instanceof CardItem) {
-                ItemStack oldCard = displayTile.getCard();
+            if(stack.getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
+                if (standTile.isLocked()) {
+                    if (standTile.toggleLock(player.getUniqueID()))
+                        player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_stand.unlock"), true);
+                    else
+                        player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_stand.fail_unlock"), true);
+                }
+                else {
+                    standTile.toggleLock(player.getUniqueID());
+                    player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_stand.lock"), true);
+                }
+            }
+            else if (standTile.isLocked())
+                player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_stand.lock"), true);
+            else if(standTile.getCard().getItem() instanceof CardItem) {
+                ItemStack oldCard = standTile.getCard();
                 if (stack.getItem() instanceof CardItem) {
                     ItemStack card = new ItemStack(stack.getItem(), 1);
                     card.setTag(stack.getTag());
-                    displayTile.setCard(card);
+                    standTile.setCard(card);
                     stack.shrink(1);
                 }
                 else {
-                    displayTile.setCard(ItemStack.EMPTY);
+                    standTile.setCard(ItemStack.EMPTY);
                 }
                 player.addItemStackToInventory(oldCard);
+                standTile.setDir((int)((player.getRotationYawHead() * 16.0F / 360.0F) + 0.5D) & 15);
             }
             else if(stack.getItem() instanceof CardItem) {
                 ItemStack card = new ItemStack(stack.getItem(), 1);
                 card.setTag(stack.getTag());
-                displayTile.setCard(card);
+                standTile.setCard(card);
                 stack.shrink(1);
+                standTile.setDir((int)((player.getRotationYawHead() * 16.0F / 360.0F) + 0.5D) & 15);
             }
         }
         world.updateComparatorOutputLevel(pos, this);

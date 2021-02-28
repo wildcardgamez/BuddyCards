@@ -48,6 +48,7 @@ public class BuddyCards
         MinecraftForge.EVENT_BUS.register(new EnchantmentHandler());
         if (ModList.get().isLoaded("aquaculture"))
             MinecraftForge.EVENT_BUS.register(new AquacultureIntegration());
+        event.enqueueWork(() -> RegistryHandler.brewingSetup());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

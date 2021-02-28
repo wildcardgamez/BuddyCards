@@ -40,9 +40,9 @@ Packs can only be obtained by crushing down old packs or cards into shredded
 buddycards, which then must be combined with a brass sheet using a heated mixer.
 
 Aquaculture Set
-Packs can only be caught by using a buddycard hook on a fishing rod, and you can
-also get non shiny cards this way. You can apply the hook to a rod using a tackle
-box.
+Packs can only be caught by using a buddycard hook on a fishing rod, or by using a
+buddysteel fishing rod. You can also get non shiny cards this way. You can apply
+the hook to a rod using a tackle box.
 
 Medals
 Medals can be obtained when you collect all 54 cards of a set. Once you get one,
@@ -79,11 +79,15 @@ No EP - 54 slots
 EP I - 72 slots
 EP II - 96 slots
 EP III - 120 slots
+Additionally, there is also the ender binder, which can be made with 3 cards and an
+eye of ender. Just like an enderchest, each player will have their own inventory in
+every ender binder, so it doesn't matter if you lose it.
 
 Card Displays
 Made with 1 wood plank and 6 sticks, a card display can be placed to hold 6 cards
 on a wall. They come in all vanilla wood varieties. If you have Byg installed, they
-also come in all byg varieties.
+also come in all byg varieties. There is also the cardstand, made with 2 buddysteel
+nuggets and an iron nugget.
 
 Mystery Packs
 Mystery packs can be made with one of any pack, combined with 2 emerald blocks, 2
@@ -110,7 +114,15 @@ cities, shipwrecks, and buried treasures. Hold a grading sleeve in you offhand
 and a card in your right hand, and then use the grading sleeve in order to grade
 a card.
 
+Buddysteel
+Buddysteel is a material made from smelting Buddysteel blend, made by combining
+2 Lapis Blocks, an Iron Block, and three cards. The smelting process must be done
+in a blast furnace and takes some time. Buddysteel can make pickaxes, axes, swords,
+shovels, hoes, and armor that will become more powerful as you collect more sets.
+If you have aquaculture installed, you can also make a fishing rod and fillet knife
+out of buddysteel. With three buddysteel nuggets, you can make a key that lets
+you lock your buddycard displays and stands.
+
 Config
-The config file of the mod allows adjusting of the odds of packs dropping when the
-player kills specific mobs. Type in a decimal value of what percentage of kills
-drop packs.
+The config file of the mod lets you change all sorts of thing. Each value goes
+over what it will alter.

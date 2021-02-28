@@ -12,8 +12,12 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 
+import java.util.UUID;
+
 public class CardDisplayTile extends TileEntity implements IClearable {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(6, ItemStack.EMPTY);
+    private boolean locked = false;
+    private String player = "";
 
     public CardDisplayTile() {
         super(RegistryHandler.CARD_DISPLAY_TILE.get());
@@ -31,10 +35,33 @@ public class CardDisplayTile extends TileEntity implements IClearable {
         return this.inventory.get(pos - 1);
     }
 
+    public boolean isLocked() {
+        return this.locked;
+    }
+
+    public boolean toggleLock(UUID playerUUID) {
+        if(this.locked) {
+            if(this.player.equals(playerUUID.toString())) {
+                this.locked = false;
+            }
+            else
+                return false;
+        }
+        else {
+            this.player = playerUUID.toString();
+            this.locked = true;
+        }
+        this.markDirty();
+        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
+        return true;
+    }
+
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
         ItemStackHelper.saveAllItems(compound, this.inventory, true);
+        compound.putBoolean("locked", this.locked);
+        compound.putString("player", this.player);
         return compound;
     }
 
@@ -43,6 +70,8 @@ public class CardDisplayTile extends TileEntity implements IClearable {
         super.read(state, nbt);
         this.inventory.clear();
         ItemStackHelper.loadAllItems(nbt, this.inventory);
+        this.locked = nbt.getBoolean("locked");
+        this.player = nbt.getString("player");
     }
 
     @Override
@@ -61,13 +90,13 @@ public class CardDisplayTile extends TileEntity implements IClearable {
     }
 
     public NonNullList<ItemStack> getInventory() {
-        return inventory;
+        return this.inventory;
     }
 
     public int getCardsAmt() {
         int amt = 0;
         for (int i = 0; i < 6; i++) {
-            if (inventory.get(i).getItem() instanceof CardItem)
+            if (this.inventory.get(i).getItem() instanceof CardItem)
                 amt++;
         }
         return amt;

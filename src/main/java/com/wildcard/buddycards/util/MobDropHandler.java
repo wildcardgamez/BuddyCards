@@ -32,14 +32,14 @@ public class MobDropHandler {
             else if (entity instanceof VillagerEntity && entity.isChild() && Math.random() < ConfigManager.villagerChance.get()) {
                 drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_BASE.get(), 1)));
             }
-            else if (entity instanceof ZombieVillagerEntity && entity.isChild() && Math.random() < ConfigManager.zombieVillagerChance.get()) {
-                drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_BASE.get(), 1)));
-            }
             else if (entity instanceof PiglinEntity && entity.isChild() && Math.random() < ConfigManager.piglinChance.get()) {
                 drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_NETHER.get(), 1)));
             }
             else if (entity instanceof ZombifiedPiglinEntity && entity.isChild() && Math.random() < ConfigManager.zombiePiglinChance.get()) {
                 drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_NETHER.get(), 1)));
+            }
+            else if (entity instanceof ZombieVillagerEntity && entity.isChild() && Math.random() < ConfigManager.zombieVillagerChance.get()) {
+                drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_BASE.get(), 1)));
             }
             else if (entity instanceof ShulkerEntity && Math.random() < ConfigManager.shulkerChance.get()) {
                 drops.add(new ItemEntity(world , entity.getPosX(), entity.getPosY(), entity.getPosZ(), new ItemStack(RegistryHandler.PACK_END.get(), 1)));

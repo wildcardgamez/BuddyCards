@@ -16,7 +16,13 @@ public class BinderInventory extends Inventory {
         binder = binderIn;
     }
 
+    public BinderInventory(int slots, boolean isEnder) {
+        super(slots);
+        ender = isEnder;
+    }
+
     public ItemStack binder;
+    public boolean ender;
 
     @Override
     public void openInventory(PlayerEntity player)

@@ -100,7 +100,8 @@ public class BinderContainer extends Container {
             }
         }
 
-        binderInv.openInventory(playerInv.player);
+        if(!binderInv.ender)
+            binderInv.openInventory(playerInv.player);
     }
 
     @Override
@@ -139,7 +140,8 @@ public class BinderContainer extends Container {
     @Override
     public void onContainerClosed(PlayerEntity playerIn) {
         //Run the code to check the inventory and convert to nbt
-        binderInv.closeInventory(playerIn);
+        if(!binderInv.ender)
+            binderInv.closeInventory(playerIn);
         super.onContainerClosed(playerIn);
     }
 

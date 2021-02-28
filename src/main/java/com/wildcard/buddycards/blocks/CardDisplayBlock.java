@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.blocks;
 
 import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,6 +22,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -142,7 +144,21 @@ public class CardDisplayBlock extends Block {
         if (world.getTileEntity(pos) instanceof CardDisplayTile) {
             CardDisplayTile displayTile = (CardDisplayTile) world.getTileEntity(pos);
             ItemStack stack = player.getHeldItem(hand);
-            if(displayTile.getCardInSlot(slot).getItem() instanceof CardItem) {
+            if(stack.getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
+                if (displayTile.isLocked()) {
+                    if (displayTile.toggleLock(player.getUniqueID()))
+                        player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.unlock"), true);
+                    else
+                        player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.fail_unlock"), true);
+                }
+                else {
+                    displayTile.toggleLock(player.getUniqueID());
+                    player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
+                }
+            }
+            else if (displayTile.isLocked())
+                player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
+            else if(displayTile.getCardInSlot(slot).getItem() instanceof CardItem) {
                 ItemStack oldCard = displayTile.getCardInSlot(slot);
                 if (stack.getItem() instanceof CardItem) {
                     ItemStack card = new ItemStack(stack.getItem(), 1);
