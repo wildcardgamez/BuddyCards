@@ -5,6 +5,7 @@ import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -139,6 +140,30 @@ public class CardStandBlock extends Block{
         super.fillItemGroup(group, items);
     }
 
+    @Override
+    public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity)
+    {
+    	CardStandTile displayTile = (CardStandTile) world.getTileEntity(pos);
+    	if ( displayTile.isLocked() )
+    	{
+    		return false;
+    	}
+    	
+    	return super.canEntityDestroy(state, world, pos, entity);
+    }
+
+    @Override
+    public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player)
+    {
+    	CardStandTile displayTile = (CardStandTile) world.getTileEntity(pos);
+    	if ( displayTile.isLocked() )
+    	{
+    		return false;
+    	}
+    	
+    	return super.canHarvestBlock(state, world, pos, player);
+    }
+    
     @SuppressWarnings("deprecation")
     @Override
     public boolean hasComparatorInputOverride(BlockState state) {
