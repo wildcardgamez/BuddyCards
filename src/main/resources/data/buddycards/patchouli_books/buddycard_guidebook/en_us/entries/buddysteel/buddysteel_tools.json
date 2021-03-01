@@ -20,7 +20,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "buddycards:buddysteel_hoe",
+      "recipe": "buddycards:buddysteel_hoe"
     },
     {
       "type": "relations",
