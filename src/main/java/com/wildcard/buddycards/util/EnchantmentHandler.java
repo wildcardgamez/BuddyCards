@@ -1,18 +1,18 @@
 package com.wildcard.buddycards.util;
 
-import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
 import com.wildcard.buddycards.integration.aquaculture.BuddysteelFishingRodItem;
 import com.wildcard.buddycards.items.*;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ import java.util.stream.StreamSupport;
 public class EnchantmentHandler {
     private Map<String, NonNullList<ItemStack>> items = new HashMap<String, NonNullList<ItemStack>>();
 
-    public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", i -> (i instanceof MedalItem || i instanceof BinderItem || i instanceof BuddysteelArmorItem || i instanceof BuddysteelAxeItem || i instanceof BuddysteelHoeItem || i instanceof BuddysteelPickaxeItem || i instanceof BuddysteelShovelItem || i instanceof BuddysteelSwordItem || i instanceof BuddysteelFishingRodItem));
+    public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", i -> canBuddyBind(i));
     public static final EnchantmentType BUDDY_MEDAL = EnchantmentType.create("BUDDY_MEDAL", i -> (i instanceof MedalItem));
     public static final EnchantmentType BUDDY_BINDER = EnchantmentType.create("BUDDY_BINDER", i -> (i instanceof BinderItem));
 
@@ -65,5 +65,13 @@ public class EnchantmentHandler {
             }
             items.remove(player.getUniqueID().toString());
         }
+    }
+
+    public static boolean canBuddyBind(Item item) {
+        if (item instanceof BinderItem || item instanceof MedalItem || item instanceof BuddysteelArmorItem || item instanceof BuddysteelAxeItem || item instanceof BuddysteelHoeItem || item instanceof BuddysteelPickaxeItem || item instanceof BuddysteelShovelItem || item instanceof BuddysteelPickaxeItem)
+            return true;
+        if (ModList.get().isLoaded("aquaculture") && item instanceof BuddysteelFishingRodItem)
+            return true;
+        return false;
     }
 }
