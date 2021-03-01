@@ -345,6 +345,9 @@
   "item.minecraft.lingering_potion.effect.grading_luck": "Lingering Potion of Grading Luck",
   "item.minecraft.lingering_potion.effect.grading_luck_strong": "Lingering Potion of Grading Luck",
   "item.minecraft.lingering_potion.effect.grading_luck_long": "Lingering Potion of Grading Luck",
+  "item.minecraft.tipped_arrow.effect.grading_luck": "Arrow of Grading Luck",
+  "item.minecraft.tipped_arrow.effect.grading_luck_strong": "Arrow of Grading Luck",
+  "item.minecraft.tipped_arrow.effect.grading_luck_long": "Arrow of Grading Luck",
   "curios.identifier.medal": "Medal",
   "bountiful.decree.collector.name": "Collecting",
 
