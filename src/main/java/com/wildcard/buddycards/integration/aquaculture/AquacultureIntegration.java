@@ -3,11 +3,8 @@ package com.wildcard.buddycards.integration.aquaculture;
 import com.teammetallurgy.aquaculture.api.fishing.Hook;
 import com.teammetallurgy.aquaculture.item.AquaFishingRodItem;
 import com.wildcard.buddycards.BuddyCards;
-import com.wildcard.buddycards.items.BuddysteelSwordItem;
 import com.wildcard.buddycards.util.ConfigManager;
 import com.wildcard.buddycards.util.RegistryHandler;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.Item;
@@ -20,7 +17,6 @@ import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class AquacultureIntegration {

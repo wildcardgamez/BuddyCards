@@ -1,4 +1,4 @@
-package com.wildcard.buddycards.items;
+package com.wildcard.buddycards.items.buddysteel;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;

@@ -1,4 +1,4 @@
-package com.wildcard.buddycards.items;
+package com.wildcard.buddycards.items.buddysteel;
 
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.item.IItemTier;

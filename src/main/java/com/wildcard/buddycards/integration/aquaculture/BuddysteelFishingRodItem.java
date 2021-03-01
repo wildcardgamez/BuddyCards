@@ -3,7 +3,7 @@ package com.wildcard.buddycards.integration.aquaculture;
 import com.teammetallurgy.aquaculture.item.AquaFishingRodItem;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
-import com.wildcard.buddycards.items.BuddysteelItemTier;
+import com.wildcard.buddycards.items.buddysteel.BuddysteelItemTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

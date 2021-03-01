@@ -19,7 +19,8 @@ import net.minecraftforge.fml.ModList;
 
 import java.util.List;
 
-public class MedalItem extends Item {
+public class
+MedalItem extends Item {
     public MedalItem(int setNumber) {
         super(new Item.Properties().group(BuddyCards.TAB).maxStackSize(1).isImmuneToFire());
         SET_NUMBER = setNumber;

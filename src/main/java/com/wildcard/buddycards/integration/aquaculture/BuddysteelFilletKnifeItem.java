@@ -2,8 +2,8 @@ package com.wildcard.buddycards.integration.aquaculture;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.wildcard.buddycards.items.BuddysteelItemTier;
-import com.wildcard.buddycards.items.BuddysteelSwordItem;
+import com.wildcard.buddycards.items.buddysteel.BuddysteelItemTier;
+import com.wildcard.buddycards.items.buddysteel.BuddysteelSwordItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.ai.attributes.Attribute;

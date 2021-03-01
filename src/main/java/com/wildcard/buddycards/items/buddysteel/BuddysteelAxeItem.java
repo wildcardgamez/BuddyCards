@@ -1,11 +1,17 @@
-package com.wildcard.buddycards.items;
+package com.wildcard.buddycards.items.buddysteel;
 
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.HoeItem;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
@@ -16,9 +22,9 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.List;
 
-public class BuddysteelHoeItem extends HoeItem {
-    public BuddysteelHoeItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, -2, -1.0f, new Properties().group(BuddyCards.TAB));
+public class BuddysteelAxeItem extends AxeItem {
+    public BuddysteelAxeItem() {
+        super(BuddysteelItemTier.BUDDYSTEEL, 6, -3.1f, new Properties().group(BuddyCards.TAB));
     }
 
     @Override
@@ -52,5 +58,17 @@ public class BuddysteelHoeItem extends HoeItem {
             return super.getHarvestLevel(stack, tool, player, state);
         else
             return super.getHarvestLevel(stack, tool, player, state) + (int) (2 * stack.getTag().getFloat("completion"));
+    }
+
+    @Override
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
+        Multimap<Attribute, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
+        if (stack.hasTag() && slot == EquipmentSlotType.MAINHAND) {
+            multimap = LinkedHashMultimap.create();
+            float ratio = stack.getTag().getFloat("completion");
+            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getAttackDamage() + 2 + (ratio * 4), AttributeModifier.Operation.ADDITION));
+            multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.1, AttributeModifier.Operation.ADDITION));
+        }
+        return multimap;
     }
 }
