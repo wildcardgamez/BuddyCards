@@ -22,8 +22,10 @@ public class CardModelGen extends ItemModelProvider {
                 genCardModels(i, j);
             }
         }
-        for (int j = 1; j <= 18; j++) {
-            genCardModels(6, j);
+        for (int i = 6; i <= 7; i++) {
+            for (int j = 1; j <= 18; j++) {
+                genCardModels(i, j);
+            }
         }
     }
 
@@ -69,6 +71,7 @@ public class CardModelGen extends ItemModelProvider {
             case 4: return "items/byg_set/";
             case 5: return "items/create_set/";
             case 6: return "items/aquaculture_set/";
+            case 7: return "items/fd_set/";
             default: return "error";
         }
     }

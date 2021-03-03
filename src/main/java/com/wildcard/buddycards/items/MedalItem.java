@@ -60,6 +60,8 @@ MedalItem extends Item {
             return;
         else if(SET_NUMBER == 6 && !ModList.get().isLoaded("aquaculture"))
             return;
+        //else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
+        //    return;
         super.fillItemGroup(group, items);
     }
 
