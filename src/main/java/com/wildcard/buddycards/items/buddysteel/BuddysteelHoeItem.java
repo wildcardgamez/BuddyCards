@@ -18,7 +18,7 @@ import java.util.List;
 
 public class BuddysteelHoeItem extends HoeItem {
     public BuddysteelHoeItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, -2, -1.0f, new Properties().group(BuddyCards.TAB));
+        super(BuddysteelItemTier.BUDDYSTEEL, 0, -1.0f, new Properties().group(BuddyCards.TAB));
     }
 
     @Override
