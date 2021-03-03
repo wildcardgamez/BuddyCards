@@ -20,7 +20,10 @@
         ],
         "result":
         {
-          "item": "buddycards:buddycard_guidebook"
+          "item": "patchouli:guide_book",
+          "nbt": {
+            "patchouli:book": "buddycards:buddycard_guidebook"
+          }
         }
       }
     }

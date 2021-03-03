@@ -114,7 +114,6 @@ public class RegistryHandler {
     public static final RegistryObject<Item> MEDAL_AQUACULTURE = ITEMS.register("medal.6", () -> new MedalItem(6));
 
     //Misc
-    public static final RegistryObject<Item> GUIDEBOOK = ITEMS.register("buddycard_guidebook", PatchouliGuidebookItem::new);
     public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () ->
             new ModSpecificItem(new Item.Properties().group(BuddyCards.TAB), "create"));
     public static final RegistryObject<Item> MEDAL_TOKEN = ITEMS.register("medal_token", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
@@ -238,8 +237,10 @@ public class RegistryHandler {
     public static final RegistryObject<Item> BUDDYSTEEL_AXE = ITEMS.register("buddysteel_axe", BuddysteelAxeItem::new);
     public static final RegistryObject<Item> BUDDYSTEEL_HOE = ITEMS.register("buddysteel_hoe", BuddysteelHoeItem::new);
 
+    //Effects
     public static final RegistryObject<Effect> GRADING_LUCK = EFFECTS.register("grading_luck", GradingLuckEffect::new);
 
+    //Potions
     public static final RegistryObject<Potion> GRADING_LUCK_NORMAL = POTIONS.register("grading_luck", () -> new Potion(new EffectInstance(GRADING_LUCK.get(), 3600)));
     public static final RegistryObject<Potion> GRADING_LUCK_STRONG = POTIONS.register("grading_luck_strong", () -> new Potion(new EffectInstance(GRADING_LUCK.get(), 1800, 1)));
     public static final RegistryObject<Potion> GRADING_LUCK_LONG = POTIONS.register("grading_luck_long", () -> new Potion(new EffectInstance(GRADING_LUCK.get(), 9600)));
