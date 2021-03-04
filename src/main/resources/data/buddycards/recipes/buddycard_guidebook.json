@@ -20,6 +20,7 @@
         ],
         "result":
         {
+          "type": "forge:nbt",
           "item": "patchouli:guide_book",
           "nbt": {
             "patchouli:book": "buddycards:buddycard_guidebook"

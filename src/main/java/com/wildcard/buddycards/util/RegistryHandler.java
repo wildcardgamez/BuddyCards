@@ -117,8 +117,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> MEDAL_FD = ITEMS.register("medal.7", () -> new MedalItem(7));
 
     //Misc
-    public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () ->
-            new ModSpecificItem(new Item.Properties().group(BuddyCards.TAB), "create"));
+    public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<Item> MEDAL_TOKEN = ITEMS.register("medal_token", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<Item> GRADING_SLEEVE = ITEMS.register("grading_sleeve", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<Item> BUDDYSTEEL_KEY = ITEMS.register("buddysteel_key", () -> new Item(new Item.Properties().group(BuddyCards.TAB).maxStackSize(1)));
