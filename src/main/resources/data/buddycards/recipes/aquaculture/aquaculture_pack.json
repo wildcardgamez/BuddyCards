@@ -4,7 +4,7 @@
     {
       "conditions": [
         {
-          "modid": "byg",
+          "modid": "aquaculture",
           "type": "forge:mod_loaded"
         }
       ],
@@ -12,28 +12,25 @@
         "type": "minecraft:crafting_shaped",
         "pattern": [
           " A ",
-          "B#C",
-          " D "
+          "B#B",
+          " C "
         ],
         "key": {
           "#": {
             "tag": "buddycards:packs"
           },
           "A": {
-            "tag": "byg:rainbow_eucalyptus_logs"
+            "item": "aquaculture:neptunium_nugget"
           },
           "B": {
-            "item": "byg:therium_crystal"
+            "tag": "forge:raw_fishes"
           },
           "C": {
-            "item": "byg:embur_gel_ball"
-          },
-          "D": {
             "item": "buddycards:buddysteel_nugget"
           }
         },
         "result": {
-          "item": "buddycards:pack.4"
+          "item": "buddycards:pack.6"
         }
       }
     }

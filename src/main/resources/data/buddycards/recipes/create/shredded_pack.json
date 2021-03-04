@@ -18,8 +18,8 @@
     },
     {
       "item": "buddycards:shredded_buddycard",
-      "chance": 0.25
+      "chance": 0.5
     }
   ],
-  "processingTime": 300
+  "processingTime": 600
 }

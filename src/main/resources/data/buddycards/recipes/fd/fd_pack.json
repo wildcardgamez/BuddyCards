@@ -1,0 +1,33 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    }
+  ],
+  "type": "farmersdelight:cooking",
+  "ingredients": [
+    {
+      "item": "farmersdelight:"
+    },
+    {
+      "item": "buddycards:buddysteel_nugget"
+    },
+    {
+      "item": "buddycards:shredded_card"
+    },
+    {
+      "item": "buddycards:shredded_card"
+    },
+    {
+      "item": "buddycards:shredded_card"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "buddycards:pack.7"
+  },
+  "cookingtime": 800
+}

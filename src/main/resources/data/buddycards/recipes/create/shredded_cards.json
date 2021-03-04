@@ -14,12 +14,12 @@
   "results": [
     {
       "item": "buddycards:shredded_buddycard",
-      "chance": 0.75
+      "chance": 1
     },
     {
       "item": "buddycards:shredded_buddycard",
-      "chance": 0.25
+      "chance": 0.2
     }
   ],
-  "processingTime": 300
+  "processingTime": 400
 }

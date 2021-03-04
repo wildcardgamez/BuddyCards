@@ -17,22 +17,19 @@
       "item": "buddycards:shredded_buddycard"
     },
     {
-      "item": "buddycards:shredded_buddycard"
+      "item": "minecraft:iron_block"
     },
     {
-      "item": "buddycards:shredded_buddycard"
+      "item": "minecraft:lapis_block"
     },
     {
-      "item": "create:brass_sheet"
-    },
-    {
-      "item": "buddycards:buddysteel_nugget"
+      "item": "minecraft:lapis_block"
     }
   ],
   "results": [
     {
-      "item": "buddycards:pack.5"
+      "item": "buddycards:buddysteel_ingot"
     }
   ],
-  "heatRequirement": "heated"
+  "heatRequirement": "superheated"
 }
