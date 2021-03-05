@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.items.GummyCardItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -51,6 +52,11 @@ public class CardRegistry {
             final int num = i;
             CARDS.add(RegistryHandler.ITEMS.register("card.7." + num, () -> new CardItem(7, num, false, new int[]{7, 13, 16})));
             CARDS.add(RegistryHandler.ITEMS.register("card.7." + num + "s", () -> new CardItem(7, num, true, new int[]{7, 13, 16})));
+        }
+        //Create fd gummy cards
+        for(int i = 1; i <= 6; i++) {
+            final int num = i;
+            CARDS.add(RegistryHandler.ITEMS.register("card.7.gummy" + num, () -> new GummyCardItem(num)));
         }
     }
 }

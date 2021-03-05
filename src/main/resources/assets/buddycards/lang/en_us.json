@@ -670,5 +670,17 @@
   "item.buddycards.card.7.12": "Mc Borgar",
   "item.buddycards.card.7.12s": "Mc Borgar",
   "item.buddycards.card.7.12.tooltip": "The Mc stands for minecraft.",
+  "item.buddycards.card.7.gummy1": "Buddygummy",
+  "item.buddycards.card.7.gummy1.tooltip": "Smells like green apple!",
+  "item.buddycards.card.7.gummy2": "Buddygummy",
+  "item.buddycards.card.7.gummy2.tooltip": "Smells like strawberry!",
+  "item.buddycards.card.7.gummy3": "Buddygummy",
+  "item.buddycards.card.7.gummy3.tooltip": "Smells like blueberry!",
+  "item.buddycards.card.7.gummy4": "Buddygummy",
+  "item.buddycards.card.7.gummy4.tooltip": "Smells like watermelon!",
+  "item.buddycards.card.7.gummy5": "Buddygummy",
+  "item.buddycards.card.7.gummy5.tooltip": "Smells sour!",
+  "item.buddycards.card.7.gummy6": "Buddygummy",
+  "item.buddycards.card.7.gummy6.tooltip": "Smells like cotton candy!",
   "item.buddycards.contains.7": "Contains 3 Buddycards"
 }

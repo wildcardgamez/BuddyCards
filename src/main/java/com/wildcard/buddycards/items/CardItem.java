@@ -61,6 +61,21 @@ public class CardItem extends Item {
         else
             rarity = Rarity.EPIC;
     }
+
+    public CardItem(int setNumber, int cardNumber, boolean isShiny, Item.Properties properties) {
+        super(properties);
+        SET_NUMBER = setNumber;
+        CARD_NUMBER = cardNumber;
+        SHINY = isShiny;
+        if(CARD_NUMBER <= 12)
+            rarity = Rarity.COMMON;
+        else if(CARD_NUMBER <= 21)
+            rarity = Rarity.UNCOMMON;
+        else if(CARD_NUMBER <= 25)
+            rarity = Rarity.RARE;
+        else
+            rarity = Rarity.EPIC;
+    }
     public final int SET_NUMBER;
     public final int CARD_NUMBER;
     public final boolean SHINY;
@@ -112,41 +127,45 @@ public class CardItem extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if (handIn == Hand.MAIN_HAND) {
-            if (playerIn.getHeldItem(Hand.OFF_HAND).getItem() == RegistryHandler.GRADING_SLEEVE.get()) {
-                CompoundNBT nbt = playerIn.getHeldItem(handIn).getTag();
-                if (nbt == null)
-                    nbt = new CompoundNBT();
-                if (nbt.getInt("grade") == 0) {
-                    //Take the grading sleeve
-                    playerIn.getHeldItem(Hand.OFF_HAND).shrink(1);
-                    //Get a grade using maths for rarity
-                    int i = (int) (Math.random() * 500) + 1;
-                    int grade;
-                    //If they have grading luck, reroll until the roll is over 100
-                    if(playerIn.isPotionActive(RegistryHandler.GRADING_LUCK.get())) {
-                        for (int j = -1; j <= playerIn.getActivePotionEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier() && i < 100; i++)
-                            i = (int) (Math.random() * 500) + 1;
-                    }
-                    if (i < 200)
-                        grade = 1;
-                    else if (i < 360)
-                        grade = 2;
-                    else if (i < 450)
-                        grade = 3;
-                    else if (i < 500)
-                        grade = 4;
-                    else
-                        grade = 5;
-                    //Make new graded card and give it to the player, remove old card
-                    nbt.putInt("grade", grade);
-                    ItemStack card = new ItemStack(playerIn.getHeldItem(handIn).getItem(), 1);
-                    card.setTag(nbt);
-                    playerIn.getHeldItem(handIn).shrink(1);
-                    ItemHandlerHelper.giveItemToPlayer(playerIn, card);
+        if (handIn == Hand.MAIN_HAND)
+            tryGrade(RegistryHandler.GRADING_SLEEVE.get(), worldIn, playerIn, handIn);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
 
-                    return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+    public ActionResult<ItemStack> tryGrade(Item gradingSleeve, World worldIn, PlayerEntity playerIn, Hand handIn) {
+        if (playerIn.getHeldItem(Hand.OFF_HAND).getItem().equals(gradingSleeve)) {
+            CompoundNBT nbt = playerIn.getHeldItem(handIn).getTag();
+            if (nbt == null)
+                nbt = new CompoundNBT();
+            if (nbt.getInt("grade") == 0) {
+                //Take the grading sleeve
+                playerIn.getHeldItem(Hand.OFF_HAND).shrink(1);
+                //Get a grade using maths for rarity
+                int i = (int) (Math.random() * 500) + 1;
+                int grade;
+                //If they have grading luck, reroll until the roll is over 100
+                if (playerIn.isPotionActive(RegistryHandler.GRADING_LUCK.get())) {
+                    for (int j = -1; j <= playerIn.getActivePotionEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier() && i < 100; i++)
+                        i = (int) (Math.random() * 500) + 1;
                 }
+                if (i < 200)
+                    grade = 1;
+                else if (i < 360)
+                    grade = 2;
+                else if (i < 450)
+                    grade = 3;
+                else if (i < 500)
+                    grade = 4;
+                else
+                    grade = 5;
+                //Make new graded card and give it to the player, remove old card
+                nbt.putInt("grade", grade);
+                ItemStack card = new ItemStack(playerIn.getHeldItem(handIn).getItem(), 1);
+                card.setTag(nbt);
+                playerIn.getHeldItem(handIn).shrink(1);
+                ItemHandlerHelper.giveItemToPlayer(playerIn, card);
+
+                return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
             }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
@@ -154,11 +173,11 @@ public class CardItem extends Item {
 
     public int getPointValue(ItemStack card) {
         double points = 0;
-        if(CARD_NUMBER <= 12)
+        if(card.getRarity() == rarity.COMMON)
             points = ConfigManager.challengePointsCommon.get();
-        else if(CARD_NUMBER <= 21)
+        else if(card.getRarity() == rarity.UNCOMMON)
             points = ConfigManager.challengePointsUncommon.get();
-        else if(CARD_NUMBER <= 25)
+        else if(card.getRarity() == rarity.RARE)
             points = ConfigManager.challengePointsRare.get();
         else
             points = ConfigManager.challengePointsEpic.get();
@@ -172,6 +191,10 @@ public class CardItem extends Item {
             points *= ConfigManager.challengeSet4Mult.get();
         else if(SET_NUMBER == 5)
             points *= ConfigManager.challengeSet5Mult.get();
+        else if(SET_NUMBER == 6)
+            points *= ConfigManager.challengeSet6Mult.get();
+        else if(SET_NUMBER == 7)
+            points *= ConfigManager.challengeSet7Mult.get();
         if(card.getTag() != null) {
             int grade = card.getTag().getInt("grade");
             if(grade == 1)

@@ -8,7 +8,7 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "tag": "buddycards:cards"
+      "tag": "buddycards:gummy_cards"
     }
   ],
   "tool": {
@@ -16,7 +16,7 @@
   },
   "result": [
     {
-      "item": "buddycards:shredded_buddycard",
+      "item": "buddycards:assorted_gummies",
       "count": 1
     }
   ]

@@ -189,6 +189,41 @@
           "name": "buddycards:card.7.18s"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "buddycards:card.7.gummy1"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "buddycards:card.7.gummy2"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "buddycards:card.7.gummy3"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "buddycards:card.7.gummy4"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "buddycards:card.7.gummy5"
+        },
+        {
+          "type": "item",
+          "weight": 1,
+          "name": "buddycards:card.7.gummy6"
+        }
+      ]
     }
   ]
 }

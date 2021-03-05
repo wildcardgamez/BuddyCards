@@ -52,6 +52,7 @@ public class ConfigManager {
     public static ForgeConfigSpec.DoubleValue challengeSet4Mult;
     public static ForgeConfigSpec.DoubleValue challengeSet5Mult;
     public static ForgeConfigSpec.DoubleValue challengeSet6Mult;
+    public static ForgeConfigSpec.DoubleValue challengeSet7Mult;
     public static ForgeConfigSpec.DoubleValue challengeGrade1Mult;
     public static ForgeConfigSpec.DoubleValue challengeGrade2Mult;
     public static ForgeConfigSpec.DoubleValue challengeGrade3Mult;
@@ -109,17 +110,19 @@ public class ConfigManager {
                 .defineInRange("challenge.pointsEpic", 5, 1, 100);
         challengeShinyMult = builder.comment("\nMultiplier for challenge points on shiny cards, 0-10, default is 1.25")
                 .defineInRange("challenge.shinyMultiplier", 1.25, 0, 10);
-        challengeSet1Mult = builder.comment("\nMultiplier for challenge points from base set, 0-10, default is .8")
-                .defineInRange("challenge.set1Multiplier", .8, 0, 10);
-        challengeSet2Mult = builder.comment("\nMultiplier for challenge points from nether set, 0-10, default is 1")
-                .defineInRange("challenge.set2Multiplier", 1f, 0, 10);
+        challengeSet1Mult = builder.comment("\nMultiplier for challenge points from base set, 0-10, default is 1")
+                .defineInRange("challenge.set1Multiplier", 1f, 0, 10);
+        challengeSet2Mult = builder.comment("\nMultiplier for challenge points from nether set, 0-10, default is 1.2")
+                .defineInRange("challenge.set2Multiplier", 1.2f, 0, 10);
         challengeSet3Mult = builder.comment("\nMultiplier for challenge points from end set, 0-10, default is 2")
                 .defineInRange("challenge.set3Multiplier", 2f, 0, 10);
         challengeSet4Mult = builder.comment("\nMultiplier for challenge points from byg set, 0-10, default is 2")
                 .defineInRange("challenge.set4Multiplier", 2f, 0, 10);
-        challengeSet5Mult = builder.comment("\nMultiplier for challenge points from create set, 0-10, default is 1.4")
-                .defineInRange("challenge.set5Multiplier", 1.4f, 0, 10);
+        challengeSet5Mult = builder.comment("\nMultiplier for challenge points from create set, 0-10, default is 1")
+                .defineInRange("challenge.set5Multiplier", 1f, 0, 10);
         challengeSet6Mult = builder.comment("\nMultiplier for challenge points from aquaculture set, 0-10, default is 1")
+                .defineInRange("challenge.set6Multiplier", 1f, 0, 10);
+        challengeSet6Mult = builder.comment("\nMultiplier for challenge points from fd set, 0-10, default is 1")
                 .defineInRange("challenge.set6Multiplier", 1f, 0, 10);
         challengeGrade1Mult = builder.comment("\nMultiplier for challenge points with grade D, 0-10, default is 1")
                 .defineInRange("challenge.grade1Multiplier", 1f, 0, 10);

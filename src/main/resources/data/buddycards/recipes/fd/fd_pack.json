@@ -8,26 +8,29 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "item": "farmersdelight:"
-    },
-    {
-      "item": "buddycards:buddysteel_nugget"
-    },
-    {
-      "item": "buddycards:shredded_card"
-    },
-    {
-      "item": "buddycards:shredded_card"
-    },
-    {
-      "item": "buddycards:shredded_card"
+      "item": "farmersdelight:bacon"
     },
     {
       "item": "minecraft:sugar"
+    },
+    {
+      "item": "buddycards:shredded_card"
+    },
+    {
+      "item": "buddycards:shredded_card"
+    },
+    {
+      "item": "buddycards:shredded_card"
+    },
+    {
+      "item": "buddycards:shredded_card"
     }
   ],
   "result": {
     "item": "buddycards:pack.7"
+  },
+  "container": {
+    "item": "farmersdelight:canvas"
   },
   "cookingtime": 800
 }

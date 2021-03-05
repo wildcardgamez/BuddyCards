@@ -1,0 +1,48 @@
+package com.wildcard.buddycards.items;
+
+import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.util.ConfigManager;
+import com.wildcard.buddycards.util.RegistryHandler;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Food;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
+
+import java.util.List;
+
+public class GummyCardItem extends CardItem {
+    public GummyCardItem(int cardNumber) {
+        super(7, cardNumber, false, new Item.Properties().group(BuddyCards.CARDS_TAB).food(new Food.Builder().hunger(2).saturation(0.3F).fastToEat().build()));
+    }
+
+    @Override
+    public Rarity getRarity(ItemStack stack) {
+        return Rarity.COMMON;
+    }
+
+
+    @Override
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        //Add the card description
+        tooltip.add(new TranslationTextComponent("item.buddycards.card.7.gummy"+ CARD_NUMBER +".tooltip"));
+        TranslationTextComponent cn = new TranslationTextComponent("item.buddycards.number_separator");
+        cn.appendString("Gummy " + CARD_NUMBER);
+        //Add the card info (SetName - Gummy Card#)
+        tooltip.add(new TranslationTextComponent("item.buddycards.set." + SET_NUMBER).append(cn));
+        if (ConfigManager.challengeMode.get())
+            tooltip.add(new TranslationTextComponent("item.buddycards.points_info").appendString(
+                    "" + ((CardItem)stack.getItem()).getPointValue(stack)));
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
+}
