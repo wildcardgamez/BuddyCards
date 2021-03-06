@@ -1,0 +1,159 @@
+{
+  "pools": [{
+    "name": "buddycards",
+    "rolls": 1,
+    "conditions": [
+      {
+        "condition": "minecraft:alternative",
+        "terms": [
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "minecraft:wheat",
+            "properties": {
+              "age": "7"
+            }
+          },
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "minecraft:carrots",
+            "properties": {
+              "age": "7"
+            }
+          },
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "minecraft:potatoes",
+            "properties": {
+              "age": "7"
+            }
+          },
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "minecraft:beetroots",
+            "properties": {
+              "age": "3"
+            }
+          },
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "farmersdelight:cabbages",
+            "properties": {
+              "age": "7"
+            }
+          },
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "farmersdelight:onions",
+            "properties": {
+              "age": "7"
+            }
+          },
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "farmersdelight:tomatoes",
+            "properties": {
+              "age": "7"
+            }
+          }
+        ]
+      }
+    ],
+    "entries": [
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.7.1"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.7.2"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.7.3"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.7.4"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.7.5"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.7.6"
+      },
+      {
+        "type": "item",
+        "weight": 5,
+        "name": "buddycards:card.7.7"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.7.8"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.7.9"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.7.10"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.7.11"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.7.12"
+      },
+      {
+        "type": "item",
+        "weight": 4,
+        "name": "buddycards:card.7.13"
+      },
+      {
+        "type": "item",
+        "weight": 2,
+        "name": "buddycards:card.7.14"
+      },
+      {
+        "type": "item",
+        "weight": 2,
+        "name": "buddycards:card.7.15"
+      },
+      {
+        "type": "item",
+        "weight": 2,
+        "name": "buddycards:card.7.16"
+      },
+      {
+        "type": "item",
+        "weight": 1,
+        "name": "buddycards:card.7.17"
+      },
+      {
+        "type": "item",
+        "weight": 1,
+        "name": "buddycards:card.7.18"
+      },
+      {
+        "type": "item",
+        "weight": 50,
+        "name": "buddycards:buddybeans"
+      }
+    ]
+  }]
+}

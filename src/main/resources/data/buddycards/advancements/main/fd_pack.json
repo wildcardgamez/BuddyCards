@@ -1,0 +1,32 @@
+{
+  "conditions": [
+    {
+      "modid": "farmersdelight",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.fd_pack"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.fd_pack.desc"
+    },
+    "icon": {
+      "item": "buddycards:buddybeans"
+    }
+  },
+  "parent": "buddycards:main/root",
+  "criteria": {
+    "pack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item":"buddycards:buddybeans"
+          }
+        ]
+      }
+    }
+  }
+}

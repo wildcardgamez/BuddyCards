@@ -5,12 +5,21 @@ import net.minecraft.loot.TableLootEntry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 
 public class LootInjectionHandler {
 
     @SubscribeEvent
     public static void lootLoad(LootTableLoadEvent event) {
         //Inject respective loottables into existing ones to add a chance to get packs
+        if (ModList.get().isLoaded("farmersdelight") && (event.getName().toString().equals("minecraft:blocks/wheat")
+                || event.getName().toString().equals("minecraft:blocks/carrots")
+                || event.getName().toString().equals("minecraft:blocks/potatoes")
+                || event.getName().toString().equals("minecraft:blocks/beetroots")
+                || event.getName().toString().equals("farmersdelight:blocks/cabbages")
+                || event.getName().toString().equals("farmersdelight:blocks/onions")
+                || event.getName().toString().equals("farmersdelight:blocks/tomatoes")))
+                event.getTable().addPool(makePool("buddycards:inject/fd_buddybeans"));
         if (ConfigManager.lootChestPacks.get()) {
             if (event.getName().toString().startsWith("minecraft:chests/village/village_"))
                 event.getTable().addPool(makePool("buddycards:inject/village_house"));

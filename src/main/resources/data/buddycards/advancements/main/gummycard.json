@@ -1,0 +1,32 @@
+{
+  "conditions": [
+    {
+      "modid": "farmersdelight",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.gummycard"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.gummycard.desc"
+    },
+    "icon": {
+      "item": "buddycards:assorted_gummies"
+    }
+  },
+  "parent": "buddycards:main/root",
+  "criteria": {
+    "pack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item":"buddycards:assorted_gummies"
+          }
+        ]
+      }
+    }
+  }
+}
