@@ -2,62 +2,6 @@
   "pools": [{
     "name": "buddycards",
     "rolls": 1,
-    "conditions": [
-      {
-        "condition": "minecraft:alternative",
-        "terms": [
-          {
-            "condition": "minecraft:block_state_property",
-            "block": "minecraft:wheat",
-            "properties": {
-              "age": "7"
-            }
-          },
-          {
-            "condition": "minecraft:block_state_property",
-            "block": "minecraft:carrots",
-            "properties": {
-              "age": "7"
-            }
-          },
-          {
-            "condition": "minecraft:block_state_property",
-            "block": "minecraft:potatoes",
-            "properties": {
-              "age": "7"
-            }
-          },
-          {
-            "condition": "minecraft:block_state_property",
-            "block": "minecraft:beetroots",
-            "properties": {
-              "age": "3"
-            }
-          },
-          {
-            "condition": "minecraft:block_state_property",
-            "block": "farmersdelight:cabbages",
-            "properties": {
-              "age": "7"
-            }
-          },
-          {
-            "condition": "minecraft:block_state_property",
-            "block": "farmersdelight:onions",
-            "properties": {
-              "age": "7"
-            }
-          },
-          {
-            "condition": "minecraft:block_state_property",
-            "block": "farmersdelight:tomatoes",
-            "properties": {
-              "age": "7"
-            }
-          }
-        ]
-      }
-    ],
     "entries": [
       {
         "type": "item",

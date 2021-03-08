@@ -13,6 +13,7 @@ import com.wildcard.buddycards.integration.aquaculture.AquacultureIntegration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
+import com.wildcard.buddycards.loot.LootInjection;
 import com.wildcard.buddycards.screen.BinderScreen;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
@@ -25,6 +26,7 @@ import net.minecraft.potion.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -42,6 +44,7 @@ public class RegistryHandler {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, BuddyCards.MOD_ID);
     public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, BuddyCards.MOD_ID);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, BuddyCards.MOD_ID);
+    public static final DeferredRegister<GlobalLootModifierSerializer<?>> GLMS = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, BuddyCards.MOD_ID);
 
     public static void init() {
         if (ModList.get().isLoaded("aquaculture"))
@@ -54,6 +57,7 @@ public class RegistryHandler {
         ENCHANTMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         POTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        GLMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         if (ModList.get().isLoaded("curios"))
             CuriosIntegration.Imc();
@@ -61,7 +65,7 @@ public class RegistryHandler {
 
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> ScreenManager.registerFactory(BINDER_CONTAINER.get(), BinderScreen::new));
-        for (RegistryObject<Item> card:CARDS.CARDS) {
+        for (RegistryObject<Item> card: CardRegistry.CARDS) {
             event.enqueueWork(() -> ItemModelsProperties.registerProperty(card.get(), new ResourceLocation("grade"), (stack, world, entity) -> {
                 if(stack.getTag() != null)
                     return stack.getTag().getInt("grade");
@@ -79,8 +83,6 @@ public class RegistryHandler {
         ClientRegistry.bindTileEntityRenderer(CARD_DISPLAY_TILE.get(), CardDisplayTileRenderer::new);
         ClientRegistry.bindTileEntityRenderer(CARD_STAND_TILE.get(), CardStandTileRenderer::new);
     }
-
-    public static CardRegistry CARDS = new CardRegistry();
 
     //Packs
     public static final RegistryObject<Item> PACK_BASE = ITEMS.register("pack.1", () -> new PackItem(1));
@@ -254,4 +256,7 @@ public class RegistryHandler {
         PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.GLOWSTONE_DUST, GRADING_LUCK_STRONG.get());
         PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.REDSTONE, GRADING_LUCK_LONG.get());
     }
+
+    //GLMs
+    public static RegistryObject<GlobalLootModifierSerializer<LootInjection.LootInjectionModifier>> LOOT_INJECTION = GLMS.register("loot_injection", LootInjection.LootInjectionSerializer::new);
 }

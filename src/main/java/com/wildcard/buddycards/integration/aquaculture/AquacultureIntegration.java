@@ -32,7 +32,7 @@ public class AquacultureIntegration {
 
     @SubscribeEvent
     public void onItemFished(ItemFishedEvent event) {
-        float oddsOfGettingBuddyLoot = 0;
+        float oddsOfGettingBuddyLoot = 0f;
         ItemStack rod = event.getPlayer().getHeldItemMainhand();
         //If the rod has a buddysteel hook, give it the chance to get a pack
         if(AquaFishingRodItem.getHookType(rod).equals(BUDDY_HOOK))
@@ -44,7 +44,7 @@ public class AquacultureIntegration {
         if(oddsOfGettingBuddyLoot != 0 && Math.random() < oddsOfGettingBuddyLoot) {
             //Roll the special loot
             List<ItemStack> list = event.getPlayer().getServer().getLootTableManager().getLootTableFromLocation(
-                    new ResourceLocation(BuddyCards.MOD_ID, "inject/aquaculture_buddyhook")).generate(
+                    new ResourceLocation(BuddyCards.MOD_ID, "item/aquaculture_buddyhook")).generate(
                     new LootContext.Builder(event.getPlayer().getServer().getWorld(event.getPlayer().getEntityWorld().getDimensionKey()))
                             .withRandom(event.getPlayer().getEntityWorld().rand).build(LootParameterSets.EMPTY));
             //Throw the loot at the player from the same position as the fish

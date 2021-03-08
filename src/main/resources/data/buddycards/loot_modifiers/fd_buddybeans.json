@@ -1,0 +1,68 @@
+{
+  "type": "buddycards:loot_injection",
+  "injection": "buddycards:inject/fd_buddybeans",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.005
+    },
+    {
+      "condition": "minecraft:alternative",
+      "terms": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:wheat",
+          "properties": {
+            "age": "7"
+          }
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:carrots",
+          "properties": {
+            "age": "7"
+          }
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:potatoes",
+          "properties": {
+            "age": "7"
+          }
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "minecraft:beetroots",
+          "properties": {
+            "age": "3"
+          }
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "farmersdelight:cabbages",
+          "properties": {
+            "age": "7"
+          }
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "farmersdelight:onions",
+          "properties": {
+            "age": "7"
+          }
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "farmersdelight:tomatoes",
+          "properties": {
+            "age": "7"
+          }
+        }
+      ]
+    }
+  ]
+}

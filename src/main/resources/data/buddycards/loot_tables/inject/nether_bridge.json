@@ -1,6 +1,6 @@
 {
   "pools": [{
-    "name": "main",
+    "name": "buddycards",
     "rolls": 1,
     "entries": [
       {

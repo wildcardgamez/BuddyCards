@@ -5,6 +5,7 @@ import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.util.*;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -36,7 +37,6 @@ public class BuddyCards
         RegistryHandler.init();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.addListener(LootInjectionHandler::lootLoad);
 
         if (ModList.get().isLoaded("curios"))
             FMLJavaModLoadingContext.get().getModEventBus().register(CuriosIntegration.class);
@@ -44,7 +44,6 @@ public class BuddyCards
 
     private void setup(final FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new MobDropHandler());
-        MinecraftForge.EVENT_BUS.register(new LootInjectionHandler());
         MinecraftForge.EVENT_BUS.register(new EnchantmentHandler());
         MinecraftForge.EVENT_BUS.register(new BlockBreakHandler());
         MinecraftForge.EVENT_BUS.register(new BlockExplodeHandler());
@@ -67,7 +66,7 @@ public class BuddyCards
     public static final ItemGroup CARDS_TAB = new ItemGroup("buddycards_cards") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(CardRegistry.CARDS.get((int)(Math.random() * CardRegistry.CARDS.size())).get());
+            return new ItemStack(CardRegistry.CARDS.get((int)(Math.random() * (CardRegistry.CARDS.size()))).get());
         }
     };
 }
