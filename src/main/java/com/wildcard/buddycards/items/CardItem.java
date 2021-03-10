@@ -145,7 +145,7 @@ public class CardItem extends Item {
                 int grade;
                 //If they have grading luck, reroll until the roll is over 100
                 if (playerIn.isPotionActive(RegistryHandler.GRADING_LUCK.get())) {
-                    for (int j = -1; j <= playerIn.getActivePotionEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier() && i < 100; i++)
+                    for (int j = -1; j <= playerIn.getActivePotionEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier() && i < 400; i++)
                         i = (int) (Math.random() * 500) + 1;
                 }
                 if (i < 200)
