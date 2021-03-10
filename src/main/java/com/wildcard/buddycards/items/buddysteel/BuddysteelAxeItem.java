@@ -46,10 +46,11 @@ public class BuddysteelAxeItem extends AxeItem {
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
-        if (!stack.hasTag())
-            return super.getDestroySpeed(stack, state);
+        float eff = super.getDestroySpeed(stack, state);
+        if (stack.hasTag() && eff == efficiency)
+            return eff + (int) (4 * stack.getTag().getFloat("completion"));
         else
-            return super.getDestroySpeed(stack, state) + (int) (4 * stack.getTag().getFloat("completion"));
+            return eff;
     }
 
     @Override
