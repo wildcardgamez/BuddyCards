@@ -74,7 +74,7 @@ public class RegistryHandler {
         }
         if (ModList.get().isLoaded("aquaculture")) {
             event.enqueueWork(() -> ItemModelsProperties.registerProperty(AquacultureIntegration.BUDDYSTEEL_FISHING_ROD.get(), new ResourceLocation("cast"), (stack, world, entity) -> {
-                if(entity instanceof PlayerEntity && (((PlayerEntity) entity).getHeldItem(Hand.MAIN_HAND) == stack || ((PlayerEntity) entity).getHeldItem(Hand.OFF_HAND) == stack) && ((PlayerEntity) entity).fishingBobber != null)
+                if(entity instanceof PlayerEntity && (entity.getHeldItem(Hand.MAIN_HAND) == stack || entity.getHeldItem(Hand.OFF_HAND) == stack) && ((PlayerEntity) entity).fishingBobber != null)
                     return 1;
                 else
                     return 0;

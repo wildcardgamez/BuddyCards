@@ -17,6 +17,7 @@ public class LootInjection {
 
         protected LootInjectionModifier(ILootCondition[] conditionsIn, ResourceLocation tableIn) {
             super(conditionsIn);
+            System.out.println("blblbl="+table);
             table = tableIn;
         }
 
@@ -30,6 +31,9 @@ public class LootInjection {
     }
 
     public static class LootInjectionSerializer extends GlobalLootModifierSerializer<LootInjectionModifier> {
+        public LootInjectionSerializer() {
+            System.out.println("blblbl");
+        }
 
         @Override
         public LootInjectionModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
