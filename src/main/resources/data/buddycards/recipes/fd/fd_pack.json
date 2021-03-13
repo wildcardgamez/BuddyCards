@@ -8,16 +8,16 @@
   "type": "farmersdelight:cooking",
   "ingredients": [
     {
-      "item": "farmersdelight:bacon"
+      "tag": "forge:raw_pork"
     },
     {
       "item": "minecraft:sugar"
     },
     {
-      "item": "buddycards:shredded_card"
+      "item": "buddycards:shredded_buddycard"
     },
     {
-      "item": "buddycards:shredded_card"
+      "item": "buddycards:shredded_buddycard"
     },
     {
       "item": "buddycards:buddybeans"
