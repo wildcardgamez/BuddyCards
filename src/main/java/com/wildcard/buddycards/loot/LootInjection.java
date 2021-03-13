@@ -3,6 +3,8 @@ package com.wildcard.buddycards.loot;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootTable;
 import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
@@ -17,24 +19,19 @@ public class LootInjection {
 
         protected LootInjectionModifier(ILootCondition[] conditionsIn, ResourceLocation tableIn) {
             super(conditionsIn);
-            System.out.println("blblbl="+table);
             table = tableIn;
         }
 
         @Override
         protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-            System.out.println(table);
-            List<ItemStack> loot = context.getWorld().getServer().getLootTableManager().getLootTableFromLocation(table).generate(context);
-            generatedLoot.addAll(loot);
+            LootContext.Builder builder = (new LootContext.Builder(context.getWorld()).withRandom(context.getRandom()));
+            LootTable loottable = context.getWorld().getServer().getLootTableManager().getLootTableFromLocation(table);
+            generatedLoot.addAll(loottable.generate(builder.build(LootParameterSets.EMPTY)));
             return generatedLoot;
         }
     }
 
     public static class LootInjectionSerializer extends GlobalLootModifierSerializer<LootInjectionModifier> {
-        public LootInjectionSerializer() {
-            System.out.println("blblbl");
-        }
-
         @Override
         public LootInjectionModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
             return new LootInjectionModifier(ailootcondition, new ResourceLocation(JSONUtils.getString(object, "injection")));
