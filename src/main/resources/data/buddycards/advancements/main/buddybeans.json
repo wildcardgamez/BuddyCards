@@ -7,13 +7,13 @@
   ],
   "display": {
     "title": {
-      "translate": "advancements.buddycards.main.gummycard"
+      "translate": "advancements.buddycards.main.buddybeans"
     },
     "description": {
-      "translate": "advancements.buddycards.main.gummycard.desc"
+      "translate": "advancements.buddycards.main.buddybeans.desc"
     },
     "icon": {
-      "item": "buddycards:assorted_gummies"
+      "item": "buddycards:buddybeans"
     }
   },
   "parent": "buddycards:main/root",
@@ -23,7 +23,7 @@
       "conditions": {
         "items": [
           {
-            "item":"buddycards:assorted_gummies"
+            "item":"buddycards:buddybeans"
           }
         ]
       }

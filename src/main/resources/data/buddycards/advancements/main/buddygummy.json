@@ -7,23 +7,23 @@
   ],
   "display": {
     "title": {
-      "translate": "advancements.buddycards.main.fd_pack"
+      "translate": "advancements.buddycards.main.buddygummy"
     },
     "description": {
-      "translate": "advancements.buddycards.main.fd_pack.desc"
+      "translate": "advancements.buddycards.main.buddygummy.desc"
     },
     "icon": {
-      "item": "buddycards:buddybeans"
+      "item": "buddycards:assorted_gummies"
     }
   },
-  "parent": "buddycards:main/root",
+  "parent": "buddycards:main/buddybeans",
   "criteria": {
     "pack": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item":"buddycards:buddybeans"
+            "item":"buddycards:assorted_gummies"
           }
         ]
       }

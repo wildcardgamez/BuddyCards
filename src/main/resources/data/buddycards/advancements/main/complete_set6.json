@@ -12,7 +12,7 @@
     "frame": "goal",
     "hidden": false
   },
-  "parent": "buddycards:main/aquaculture_pack",
+  "parent": "buddycards:main/buddyhook",
   "requirements": [
     ["card1"],
     ["card2"],

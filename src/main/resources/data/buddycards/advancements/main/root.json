@@ -9,7 +9,7 @@
         "icon": {
             "item": "buddycards:pack.1"
         },
-        "background": "minecraft:textures/block/smooth_stone.png"
+        "background": "buddycards:textures/blocks/buddysteel_block.png"
     },
     "criteria": {
         "pack": {

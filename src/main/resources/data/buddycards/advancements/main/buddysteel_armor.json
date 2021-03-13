@@ -1,0 +1,37 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.buddysteel_armor"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.buddysteel_armor.desc"
+    },
+    "icon": {
+      "item": "buddycards:buddysteel_chestplate"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "parent": "buddycards:main/buddysteel",
+  "criteria": {
+    "armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:buddysteel_helmet"
+          },
+          {
+            "item": "minecraft:buddysteel_chestplate"
+          },
+          {
+            "item": "minecraft:buddysteel_leggings"
+          },
+          {
+            "item": "minecraft:buddysteel_boots"
+          }
+        ]
+      }
+    }
+  }
+}
