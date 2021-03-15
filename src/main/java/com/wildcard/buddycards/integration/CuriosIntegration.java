@@ -23,6 +23,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.type.capability.ICurio;
+import vectorwing.farmersdelight.registry.ModEffects;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -81,6 +82,14 @@ public class CuriosIntegration {
                         player.addPotionEffect(new EffectInstance(Effects.LUCK, 300, boostVal / 2, true, false));
                         if (boostVal > 0)
                             player.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 300, 0, true, false));
+                    }
+                    else if(setNumber == 7) {
+                        player.addPotionEffect(new EffectInstance(ModEffects.NOURISHED.get(), 300, 0, true, false));
+                        if (boostVal > 0 && player.getFoodStats().getFoodLevel() > 19) {
+                            player.addPotionEffect(new EffectInstance(ModEffects.COMFORT.get(), 300, 0, true, false));
+                            if (boostVal > 1)
+                                player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, 0, true, false));
+                        }
                     }
                 }
             }

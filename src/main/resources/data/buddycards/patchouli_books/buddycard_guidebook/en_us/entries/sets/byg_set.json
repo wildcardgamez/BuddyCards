@@ -14,7 +14,7 @@
       "type": "crafting",
       "title": "Byg Set Packs",
       "recipe": "buddycards:byg/byg_pack",
-      "text": "You must find these four items hidden around your minecraft world. Three of these come from trees, and are renewable. The hardest one to find would be therium, which can be found in a crystalized form around your world."
+      "text": "You must find these three items hidden around your minecraft world, and combine them with some Buddysteel and another pack. Each item comes from a byg biome in each dimension."
     },
     {
       "type": "spotlight",

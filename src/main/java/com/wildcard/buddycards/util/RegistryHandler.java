@@ -11,6 +11,7 @@ import com.wildcard.buddycards.enchantment.EnchantmentBuddyBoost;
 import com.wildcard.buddycards.enchantment.EnchantmentExtraPage;
 import com.wildcard.buddycards.integration.aquaculture.AquacultureIntegration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
+import com.wildcard.buddycards.integration.fd.FarmersDelightIntegration;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
 import com.wildcard.buddycards.loot.LootInjection;
@@ -49,6 +50,8 @@ public class RegistryHandler {
     public static void init() {
         if (ModList.get().isLoaded("aquaculture"))
             AquacultureIntegration.init();
+        if (ModList.get().isLoaded("farmersdelight"))
+            FarmersDelightIntegration.init();
 
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());

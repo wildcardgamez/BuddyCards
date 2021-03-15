@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.integration.aquaculture.BuddysteelFishingRodItem;
+import com.wildcard.buddycards.integration.fd.BuddysteelFoodKnifeItem;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -14,6 +15,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -72,6 +74,8 @@ public class EnchantmentHandler {
         if (item instanceof BinderItem || item instanceof MedalItem || item instanceof BuddysteelArmorItem || item instanceof BuddysteelAxeItem || item instanceof BuddysteelHoeItem || item instanceof BuddysteelPickaxeItem || item instanceof BuddysteelShovelItem || item instanceof BuddysteelPickaxeItem)
             return true;
         if (ModList.get().isLoaded("aquaculture") && item instanceof BuddysteelFishingRodItem)
+            return true;
+        if (ModList.get().isLoaded("farmersdelight") && item instanceof BuddysteelFoodKnifeItem)
             return true;
         return false;
     }

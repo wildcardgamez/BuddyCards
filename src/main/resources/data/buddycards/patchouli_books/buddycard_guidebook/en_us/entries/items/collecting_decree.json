@@ -13,7 +13,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "bountiful:decree",
+      "recipe": "bountiful:crafting/decree",
       "text": "While you can find them in villages, you can also craft them. When you put it in a Bounty Board, you have a chance to get any decree type equally."
     }
   ]

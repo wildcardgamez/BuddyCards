@@ -120,15 +120,15 @@ public class CardItem extends Item {
             return;
         else if(SET_NUMBER == 6 && !ModList.get().isLoaded("aquaculture"))
             return;
-        //else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
-        //    return;
+        else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
+            return;
         super.fillItemGroup(group, items);
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         if (handIn == Hand.MAIN_HAND)
-            tryGrade(RegistryHandler.GRADING_SLEEVE.get(), worldIn, playerIn, handIn);
+            return tryGrade(RegistryHandler.GRADING_SLEEVE.get(), worldIn, playerIn, handIn);
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
