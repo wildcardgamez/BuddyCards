@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "minecraft:acacia_planks"
+      "item": "minecraft:dark_oak_planks"
     }
   },
   "result": {
-    "item": "buddycards:acacia_card_display"
+    "item": "buddycards:dark_oak_card_display"
   }
 }
