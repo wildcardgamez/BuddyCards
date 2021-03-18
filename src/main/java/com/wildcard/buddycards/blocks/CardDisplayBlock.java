@@ -39,13 +39,13 @@ public class CardDisplayBlock extends Block {
     protected static final VoxelShape WSHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 3.0D, 16.0D, 16.0D);
 
     public CardDisplayBlock() {
-        super(Block.Properties.from(Blocks.OAK_PLANKS));
+        super(Properties.from(Blocks.OAK_PLANKS));
         this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
         NEEDED_MOD = "";
     }
 
     public CardDisplayBlock(String neededMod) {
-        super(Block.Properties.from(Blocks.OAK_PLANKS));
+        super(Properties.from(Blocks.OAK_PLANKS));
         this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
         NEEDED_MOD = neededMod;
     }

@@ -40,18 +40,17 @@ public class CardStandBlock extends Block{
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 1.0D, 11.0D);
 
     public CardStandBlock() {
-        super(Block.Properties.from(Blocks.STONE_BUTTON));
+        super(Properties.from(Blocks.STONE_BUTTON));
         NEEDED_MOD = "";
     }
 
     public CardStandBlock(String neededMod) {
-        super(Block.Properties.from(Blocks.STONE_BUTTON));
+        super(Properties.from(Blocks.STONE_BUTTON));
         NEEDED_MOD = neededMod;
     }
 
     final String NEEDED_MOD;
 
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return SHAPE;

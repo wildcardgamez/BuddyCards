@@ -2,6 +2,7 @@ package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.blocks.*;
+import com.wildcard.buddycards.client.renderer.BuddysteelVaultTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardStandTileRenderer;
 import com.wildcard.buddycards.container.BinderContainer;
@@ -16,7 +17,11 @@ import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
 import com.wildcard.buddycards.loot.LootInjection;
 import com.wildcard.buddycards.screen.BinderScreen;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
@@ -85,6 +90,7 @@ public class RegistryHandler {
         }
         ClientRegistry.bindTileEntityRenderer(CARD_DISPLAY_TILE.get(), CardDisplayTileRenderer::new);
         ClientRegistry.bindTileEntityRenderer(CARD_STAND_TILE.get(), CardStandTileRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(BUDDYSTEEL_VAULT_TILE.get(), BuddysteelVaultTileRenderer::new);
     }
 
     //Packs
@@ -169,6 +175,8 @@ public class RegistryHandler {
     public static final RegistryObject<Block> WILLOW_CARD_DISPLAY = BLOCKS.register("willow_card_display", () -> new CardDisplayBlock("byg"));
     public static final RegistryObject<Block> WITCH_HAZEL_CARD_DISPLAY = BLOCKS.register("witch_hazel_card_display", () -> new CardDisplayBlock("byg"));
     public static final RegistryObject<Block> ZELKOVA_CARD_DISPLAY = BLOCKS.register("zelkova_card_display", () -> new CardDisplayBlock("byg"));
+    //Buddysteel Card Vault Blocks
+    public static final RegistryObject<Block> BUDDYSTEEL_VAULT = BLOCKS.register("buddysteel_vault.1", BuddysteelVaultBlock::new);
 
     //Card Display Items
     public static final RegistryObject<BlockItem> OAK_CARD_DISPLAY_ITEM = ITEMS.register("oak_card_display", () -> new BlockItem(OAK_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
@@ -210,6 +218,9 @@ public class RegistryHandler {
     public static final RegistryObject<BlockItem> WILLOW_CARD_DISPLAY_ITEM = ITEMS.register("willow_card_display", () -> new BlockItem(WILLOW_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> WITCH_HAZEL_CARD_DISPLAY_ITEM = ITEMS.register("witch_hazel_card_display", () -> new BlockItem(WITCH_HAZEL_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> ZELKOVA_CARD_DISPLAY_ITEM = ITEMS.register("zelkova_card_display", () -> new BlockItem(ZELKOVA_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    //Buddysteel Card Vault Items
+    public static final RegistryObject<BlockItem> BUDDYSTEEL_VAULT_ITEM = ITEMS.register("buddysteel_vault.1", () -> new BlockItem(BUDDYSTEEL_VAULT.get(), new Item.Properties().group(BuddyCards.TAB)));
+
 
     public static final RegistryObject<TileEntityType<CardDisplayTile>> CARD_DISPLAY_TILE = TILE_ENTITIES.register("card_display",
             () -> TileEntityType.Builder.create(CardDisplayTile::new, OAK_CARD_DISPLAY.get(), SPRUCE_CARD_DISPLAY.get(),
@@ -225,6 +236,9 @@ public class RegistryHandler {
 
     public static final RegistryObject<TileEntityType<CardStandTile>> CARD_STAND_TILE = TILE_ENTITIES.register("card_stand",
             () -> TileEntityType.Builder.create(CardStandTile::new, CARD_STAND.get()).build(null));
+
+    public static final RegistryObject<TileEntityType<BuddysteelVaultTile>> BUDDYSTEEL_VAULT_TILE = TILE_ENTITIES.register("buddysteel_vault",
+            () -> TileEntityType.Builder.create(BuddysteelVaultTile::new, BUDDYSTEEL_VAULT.get()).build(null));
 
     public static final RegistryObject<Enchantment> BUDDY_BINDING = ENCHANTMENTS.register("buddy_binding", EnchantmentBuddyBinding::new);
     public static final RegistryObject<Enchantment> BUDDY_BOOST = ENCHANTMENTS.register("buddy_boost", EnchantmentBuddyBoost::new);
