@@ -36,10 +36,12 @@ MedalItem extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        //If the medal isn't signed, let the player sign it
         if(!playerIn.getHeldItem(handIn).hasTag()) {
             CompoundNBT nbt = new CompoundNBT();
             nbt.putString("Collector", playerIn.getName().getString());
             playerIn.getHeldItem(handIn).setTag(nbt);
+            return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
