@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 public class BuddysteelVaultBlock extends Block {
     public static final DirectionProperty DIR = HorizontalBlock.HORIZONTAL_FACING;
 
-    protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 15.0D, 15.0D);
+    protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 
     public BuddysteelVaultBlock() {
         super(Properties.from(Blocks.IRON_BLOCK));
