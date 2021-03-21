@@ -23,10 +23,8 @@ public class VaultContainer extends Container {
         super(RegistryHandler.VAULT_CONTAINER.get(), id);
         tile = tileIn;
         inv = new Inventory(120);
-        if (!tile.isEmpty()) {
-            for (int i = 0; i < 120; i++) {
-                inv.setInventorySlotContents(i, inv.getStackInSlot(i));
-            }
+        for (int i = 0; i < 120; i++) {
+            inv.setInventorySlotContents(i, tile.inventory.getStackInSlot(i));
         }
         //Set up vault card slots
         for (int y = 0; y < 9; y++) {
@@ -52,7 +50,7 @@ public class VaultContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return this.inv.isUsableByPlayer(playerIn);
+        return true;
     }
 
     public class CardSlot extends Slot {

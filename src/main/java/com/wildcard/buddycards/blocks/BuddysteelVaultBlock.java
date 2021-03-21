@@ -4,6 +4,7 @@ import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
@@ -66,6 +67,8 @@ public class BuddysteelVaultBlock extends ContainerBlock {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (tileentity instanceof BuddysteelVaultTile) {
             tileentity.validate();
+            if(stack.hasDisplayName())
+                ((BuddysteelVaultTile) tileentity).setDisplayName(stack.getDisplayName());
             worldIn.setTileEntity(pos, tileentity);
         }
     }
@@ -74,7 +77,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand handIn, BlockRayTraceResult hit) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if(playerIn instanceof ServerPlayerEntity && tileentity instanceof BuddysteelVaultTile) {
-            playerIn.openContainer((BuddysteelVaultTile)tileentity);
+            playerIn.openContainer((INamedContainerProvider) tileentity);
         }
         return super.onBlockActivated(state, worldIn, pos, playerIn, handIn, hit);
     }
