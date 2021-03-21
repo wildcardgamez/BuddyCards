@@ -1,14 +1,12 @@
 package com.wildcard.buddycards.container;
 
 import com.wildcard.buddycards.inventory.BinderInventory;
-import com.wildcard.buddycards.items.BinderItem;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;

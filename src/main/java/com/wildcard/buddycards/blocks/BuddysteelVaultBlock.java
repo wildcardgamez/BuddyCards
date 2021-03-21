@@ -2,13 +2,19 @@ package com.wildcard.buddycards.blocks;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.BarrelTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -16,7 +22,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BuddysteelVaultBlock extends Block {
+public class BuddysteelVaultBlock extends ContainerBlock {
     public static final DirectionProperty DIR = HorizontalBlock.HORIZONTAL_FACING;
 
     protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
@@ -41,6 +47,16 @@ public class BuddysteelVaultBlock extends Block {
     }
 
     @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return new BuddysteelVaultTile();
+    }
+
+    @Override
+    public boolean  hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(DIR);
     }
@@ -52,5 +68,19 @@ public class BuddysteelVaultBlock extends Block {
             tileentity.validate();
             worldIn.setTileEntity(pos, tileentity);
         }
+    }
+
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand handIn, BlockRayTraceResult hit) {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if(playerIn instanceof ServerPlayerEntity && tileentity instanceof BuddysteelVaultTile) {
+            playerIn.openContainer((BuddysteelVaultTile)tileentity);
+        }
+        return super.onBlockActivated(state, worldIn, pos, playerIn, handIn, hit);
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+        return new BuddysteelVaultTile();
     }
 }

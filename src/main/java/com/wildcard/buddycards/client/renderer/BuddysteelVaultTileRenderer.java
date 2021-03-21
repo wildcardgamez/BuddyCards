@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 
@@ -27,17 +26,11 @@ public class BuddysteelVaultTileRenderer extends TileEntityRenderer<BuddysteelVa
     public BuddysteelVaultTileRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
         this.bottom = new ModelRenderer(64, 64, 0, 20);
-        this.bottom.addBox(1.0F, 0.0F, 1.0F, 14.0F, 8.0F, 14.0F, 0.0F);
+        this.bottom.addBox(1.0F, 1.0F, 1.0F, 14.0F, 8.0F, 14.0F, 0.0F);
         this.lid = new ModelRenderer(64, 64, 0, 0);
-        this.lid.addBox(1.0F, 0.0F, 0.0F, 14.0F, 7.0F, 14.0F, 0.0F);
+        this.lid.addBox(1.0F, 0.0F, 0.0F, 14.0F, 6.0F, 14.0F, 0.0F);
         this.lid.rotationPointY = 9.0F;
         this.lid.rotationPointZ = 1.0F;
-    }
-
-    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
     }
 
     @Override
@@ -52,8 +45,8 @@ public class BuddysteelVaultTileRenderer extends TileEntityRenderer<BuddysteelVa
             matrixStackIn.translate(0.5D, 0.5D, 0.5D);
             matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-angle));
             matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
-            RenderMaterial material = new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, new ResourceLocation("buddycards:textures/entity/vault/1"));
-            IVertexBuilder buffer = material.getBuffer(bufferIn, RenderType::getEntityCutout);
+            RenderMaterial material = new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, BuddysteelVaultTextures.getVaultTexture(1));
+            IVertexBuilder buffer = material.getBuffer(bufferIn, RenderType::getEntityCutoutNoCull);
             lid.render(matrixStackIn, buffer, combinedLightIn, combinedOverlayIn);
             bottom.render(matrixStackIn, buffer, combinedLightIn, combinedOverlayIn);
             matrixStackIn.pop();

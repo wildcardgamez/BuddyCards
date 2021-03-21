@@ -6,6 +6,7 @@ import com.wildcard.buddycards.client.renderer.BuddysteelVaultTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardStandTileRenderer;
 import com.wildcard.buddycards.container.BinderContainer;
+import com.wildcard.buddycards.container.VaultContainer;
 import com.wildcard.buddycards.effects.GradingLuckEffect;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBoost;
@@ -17,6 +18,7 @@ import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
 import com.wildcard.buddycards.loot.LootInjection;
 import com.wildcard.buddycards.screen.BinderScreen;
+import com.wildcard.buddycards.screen.VaultScreen;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -73,6 +75,7 @@ public class RegistryHandler {
 
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> ScreenManager.registerFactory(BINDER_CONTAINER.get(), BinderScreen::new));
+        event.enqueueWork(() -> ScreenManager.registerFactory(VAULT_CONTAINER.get(), VaultScreen::new));
         for (RegistryObject<Item> card: CardRegistry.CARDS) {
             event.enqueueWork(() -> ItemModelsProperties.registerProperty(card.get(), new ResourceLocation("grade"), (stack, world, entity) -> {
                 if(stack.getTag() != null)
@@ -103,9 +106,11 @@ public class RegistryHandler {
     public static final RegistryObject<Item> PACK_FD = ITEMS.register("pack.7", () -> new PackItem(7));
     public static final RegistryObject<Item> PACK_MYSTERY = ITEMS.register("mystery_pack", () -> new PackItem(0));
 
-    //Binder Container
+    //Containers
     public static final RegistryObject<ContainerType<BinderContainer>> BINDER_CONTAINER = CONTAINERS.register("binder",
             () -> new ContainerType<>((BinderContainer::new)));
+    public static final RegistryObject<ContainerType<VaultContainer>> VAULT_CONTAINER = CONTAINERS.register("vault",
+            () -> new ContainerType<>((VaultContainer::new)));
 
     //Binders
     public static final RegistryObject<Item> BINDER_BASE = ITEMS.register("binder.1", () -> new BinderItem(1));
