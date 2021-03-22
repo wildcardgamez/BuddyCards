@@ -50,4 +50,7 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
         return null;
     }
 
+    public int getSetNumber() {
+        return ((BuddysteelVaultBlock)this.getBlockState().getBlock()).getSetNumber();
+    }
 }

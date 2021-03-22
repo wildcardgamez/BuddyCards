@@ -17,7 +17,9 @@ public class BuddysteelVaultTextures {
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event) {
         if(event.getMap().getTextureLocation().equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
-            event.addSprite(getVaultTexture(1));
+            for(int i = 1; i <= 3; i++) {
+                event.addSprite(getVaultTexture(i));
+            }
         }
     }
 }

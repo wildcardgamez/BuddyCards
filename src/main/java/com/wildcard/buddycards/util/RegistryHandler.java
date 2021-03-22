@@ -181,7 +181,9 @@ public class RegistryHandler {
     public static final RegistryObject<Block> WITCH_HAZEL_CARD_DISPLAY = BLOCKS.register("witch_hazel_card_display", () -> new CardDisplayBlock("byg"));
     public static final RegistryObject<Block> ZELKOVA_CARD_DISPLAY = BLOCKS.register("zelkova_card_display", () -> new CardDisplayBlock("byg"));
     //Buddysteel Card Vault Blocks
-    public static final RegistryObject<Block> BUDDYSTEEL_VAULT = BLOCKS.register("buddysteel_vault.1", BuddysteelVaultBlock::new);
+    public static final RegistryObject<Block> BUDDYSTEEL_VAULT = BLOCKS.register("buddysteel_vault.1", () -> new BuddysteelVaultBlock(1));
+    public static final RegistryObject<Block> BUDDYSTEEL_VAULT_NETHER = BLOCKS.register("buddysteel_vault.2", () -> new BuddysteelVaultBlock(2));
+    public static final RegistryObject<Block> BUDDYSTEEL_VAULT_END = BLOCKS.register("buddysteel_vault.3", () -> new BuddysteelVaultBlock(3));
 
     //Card Display Items
     public static final RegistryObject<BlockItem> OAK_CARD_DISPLAY_ITEM = ITEMS.register("oak_card_display", () -> new BlockItem(OAK_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
@@ -225,7 +227,8 @@ public class RegistryHandler {
     public static final RegistryObject<BlockItem> ZELKOVA_CARD_DISPLAY_ITEM = ITEMS.register("zelkova_card_display", () -> new BlockItem(ZELKOVA_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
     //Buddysteel Card Vault Items
     public static final RegistryObject<BlockItem> BUDDYSTEEL_VAULT_ITEM = ITEMS.register("buddysteel_vault.1", () -> new BlockItem(BUDDYSTEEL_VAULT.get(), new Item.Properties().group(BuddyCards.TAB)));
-
+    public static final RegistryObject<BlockItem> BUDDYSTEEL_VAULT_NETHER_ITEM = ITEMS.register("buddysteel_vault.2", () -> new BlockItem(BUDDYSTEEL_VAULT_NETHER.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> BUDDYSTEEL_VAULT_END_ITEM = ITEMS.register("buddysteel_vault.3", () -> new BlockItem(BUDDYSTEEL_VAULT_END.get(), new Item.Properties().group(BuddyCards.TAB)));
 
     public static final RegistryObject<TileEntityType<CardDisplayTile>> CARD_DISPLAY_TILE = TILE_ENTITIES.register("card_display",
             () -> TileEntityType.Builder.create(CardDisplayTile::new, OAK_CARD_DISPLAY.get(), SPRUCE_CARD_DISPLAY.get(),
@@ -243,7 +246,7 @@ public class RegistryHandler {
             () -> TileEntityType.Builder.create(CardStandTile::new, CARD_STAND.get()).build(null));
 
     public static final RegistryObject<TileEntityType<BuddysteelVaultTile>> BUDDYSTEEL_VAULT_TILE = TILE_ENTITIES.register("buddysteel_vault",
-            () -> TileEntityType.Builder.create(BuddysteelVaultTile::new, BUDDYSTEEL_VAULT.get()).build(null));
+            () -> TileEntityType.Builder.create(BuddysteelVaultTile::new, BUDDYSTEEL_VAULT.get(), BUDDYSTEEL_VAULT_NETHER.get()).build(null));
 
     public static final RegistryObject<Enchantment> BUDDY_BINDING = ENCHANTMENTS.register("buddy_binding", EnchantmentBuddyBinding::new);
     public static final RegistryObject<Enchantment> BUDDY_BOOST = ENCHANTMENTS.register("buddy_boost", EnchantmentBuddyBoost::new);

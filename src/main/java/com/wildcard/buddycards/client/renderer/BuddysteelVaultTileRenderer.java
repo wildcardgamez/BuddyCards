@@ -22,15 +22,21 @@ public class BuddysteelVaultTileRenderer extends TileEntityRenderer<BuddysteelVa
 
     private final ModelRenderer lid;
     private final ModelRenderer bottom;
+    private final ModelRenderer bottomCorners;
 
     public BuddysteelVaultTileRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
         this.bottom = new ModelRenderer(64, 64, 0, 20);
-        this.bottom.addBox(1.0F, 1.0F, 1.0F, 14.0F, 8.0F, 14.0F, 0.0F);
+        this.bottom.addBox(1.0f, 1.0f, 1.0f, 14.0f, 8.0f, 14.0f, 0.0F);
         this.lid = new ModelRenderer(64, 64, 0, 0);
-        this.lid.addBox(1.0F, 0.0F, 0.0F, 14.0F, 6.0F, 14.0F, 0.0F);
+        this.lid.addBox(1.0f, 0.0f, 0.0f, 14.0f, 6.0f, 14.0f, 0.0F);
         this.lid.rotationPointY = 9.0F;
         this.lid.rotationPointZ = 1.0F;
+        this.bottomCorners = new ModelRenderer(64, 64, 0, 42);
+        this.bottomCorners.addBox(0f, 0f, 0f, 4f, 4f, 4f, 0f);
+        this.bottomCorners.addBox(12f, 0f, 0f, 4f, 4f, 4f, 0f);
+        this.bottomCorners.addBox(0f, 0f, 12f, 4f, 4f, 4f, 0f);
+        this.bottomCorners.addBox(12f, 0f, 12f, 4f, 4f, 4f, 0f);
     }
 
     @Override
@@ -45,13 +51,12 @@ public class BuddysteelVaultTileRenderer extends TileEntityRenderer<BuddysteelVa
             matrixStackIn.translate(0.5D, 0.5D, 0.5D);
             matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-angle));
             matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
-            RenderMaterial material = new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, BuddysteelVaultTextures.getVaultTexture(1));
+            RenderMaterial material = new RenderMaterial(AtlasTexture.LOCATION_BLOCKS_TEXTURE, BuddysteelVaultTextures.getVaultTexture(tileEntityIn.getSetNumber()));
             IVertexBuilder buffer = material.getBuffer(bufferIn, RenderType::getEntityCutoutNoCull);
             lid.render(matrixStackIn, buffer, combinedLightIn, combinedOverlayIn);
             bottom.render(matrixStackIn, buffer, combinedLightIn, combinedOverlayIn);
+            bottomCorners.render(matrixStackIn, buffer, combinedLightIn, combinedOverlayIn);
             matrixStackIn.pop();
         }
     }
-
-
 }

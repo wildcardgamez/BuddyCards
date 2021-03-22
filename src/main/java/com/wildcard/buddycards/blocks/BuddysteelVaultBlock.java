@@ -9,7 +9,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.BarrelTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -28,9 +27,12 @@ public class BuddysteelVaultBlock extends ContainerBlock {
 
     protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 
-    public BuddysteelVaultBlock() {
+    private final int SET_NUMBER;
+
+    public BuddysteelVaultBlock(int setNum) {
         super(Properties.from(Blocks.IRON_BLOCK));
         this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
+        SET_NUMBER = setNum;
     }
 
     @Override
@@ -85,5 +87,9 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     @Override
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
         return new BuddysteelVaultTile();
+    }
+
+    public int getSetNumber() {
+        return SET_NUMBER;
     }
 }
