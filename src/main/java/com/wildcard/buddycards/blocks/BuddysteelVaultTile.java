@@ -4,19 +4,17 @@ import com.teammetallurgy.aquaculture.block.tileentity.IItemHandlerTEBase;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.VaultContainer;
 import com.wildcard.buddycards.util.RegistryHandler;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class BuddysteelVaultTile extends IItemHandlerTEBase implements INamedContainerProvider {
-    public ItemStackHandler inventory = new ItemStackHandler(120);
     private ITextComponent displayName;
 
     public BuddysteelVaultTile() {
@@ -24,20 +22,8 @@ public class BuddysteelVaultTile extends IItemHandlerTEBase implements INamedCon
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        compound.put("inventory", inventory.serializeNBT());
-        return super.write(compound);
-    }
-
-    @Override
     protected IItemHandler createItemHandler() {
-        return inventory;
-    }
-
-    @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
-        inventory.deserializeNBT(nbt.getCompound("inventory"));
+        return new ItemStackHandler(120);
     }
 
     public void setDisplayName(ITextComponent displayNameIn) {

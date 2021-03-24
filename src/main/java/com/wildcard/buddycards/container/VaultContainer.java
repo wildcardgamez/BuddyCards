@@ -10,6 +10,8 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 public class VaultContainer extends Container {
     Inventory inv;
@@ -23,8 +25,12 @@ public class VaultContainer extends Container {
         super(RegistryHandler.VAULT_CONTAINER.get(), id);
         tile = tileIn;
         inv = new Inventory(120);
-        for (int i = 0; i < 120; i++) {
-            inv.setInventorySlotContents(i, tile.inventory.getStackInSlot(i));
+        IItemHandler items = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
+        System.out.println(items.getStackInSlot(0));
+        if(items != null) {
+            for (int i = 0; i < 120; i++) {
+                inv.setInventorySlotContents(i, items.getStackInSlot(i));
+            }
         }
         //Set up vault card slots
         for (int y = 0; y < 9; y++) {
