@@ -4,11 +4,12 @@ import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -19,20 +20,21 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BuddysteelVaultBlock extends ContainerBlock {
     public static final DirectionProperty DIR = HorizontalBlock.HORIZONTAL_FACING;
+    public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
 
     protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 
-    private final int SET_NUMBER;
-
-    public BuddysteelVaultBlock(int setNum) {
+    public BuddysteelVaultBlock() {
         super(Properties.from(Blocks.IRON_BLOCK));
-        this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
-        SET_NUMBER = setNum;
+        this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH).with(OPEN, false));
     }
 
     @Override
@@ -40,13 +42,9 @@ public class BuddysteelVaultBlock extends ContainerBlock {
         return VAULT_SHAPE;
     }
 
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.ENTITYBLOCK_ANIMATED;
-    }
-
     @Override
     public BlockState getStateForPlacement (BlockItemUseContext context) {
-        return this.getDefaultState().with(DIR, context.getPlacementHorizontalFacing());
+        return this.getDefaultState().with(DIR, context.getPlacementHorizontalFacing()).with(OPEN, false);
     }
 
     @Override
@@ -61,7 +59,12 @@ public class BuddysteelVaultBlock extends ContainerBlock {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(DIR);
+        builder.add(DIR).add(OPEN);
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 
     @Override
@@ -79,7 +82,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand handIn, BlockRayTraceResult hit) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if(playerIn instanceof ServerPlayerEntity && tileentity instanceof BuddysteelVaultTile) {
-            playerIn.openContainer((INamedContainerProvider) tileentity);
+            NetworkHooks.openGui((ServerPlayerEntity) playerIn, (BuddysteelVaultTile)tileentity, pos);
         }
         return super.onBlockActivated(state, worldIn, pos, playerIn, handIn, hit);
     }
@@ -89,7 +92,21 @@ public class BuddysteelVaultBlock extends ContainerBlock {
         return new BuddysteelVaultTile();
     }
 
-    public int getSetNumber() {
-        return SET_NUMBER;
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        if (!worldIn.isRemote) {
+            if (state.get(OPEN) != worldIn.isBlockPowered(pos)) {
+                if (state.get(OPEN)) {
+                    worldIn.getPendingBlockTicks().scheduleTick(pos, this, 4);
+                } else {
+                    worldIn.setBlockState(pos, state.func_235896_a_(OPEN), 2);
+                }
+            }
+        }
+    }
+
+    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+        if (state.get(OPEN) && !worldIn.isBlockPowered(pos)) {
+            worldIn.setBlockState(pos, state.func_235896_a_(OPEN), 2);
+        }
     }
 }
