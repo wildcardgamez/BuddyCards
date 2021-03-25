@@ -297,14 +297,12 @@ public class CardDisplayBlock extends Block {
     	
     	return super.canHarvestBlock(state, world, pos, player);
     }
-    
-    @SuppressWarnings("deprecation")
+
     @Override
     public boolean hasComparatorInputOverride(BlockState state) {
         return true;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public int getComparatorInputOverride(BlockState blockState, World world, BlockPos pos) {
         TileEntity tileentity = world.getTileEntity(pos);

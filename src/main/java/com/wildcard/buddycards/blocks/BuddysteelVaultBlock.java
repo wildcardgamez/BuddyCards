@@ -1,5 +1,7 @@
 package com.wildcard.buddycards.blocks;
 
+import com.teammetallurgy.aquaculture.block.tileentity.IItemHandlerTEBase;
+import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,10 +20,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -33,7 +38,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 
     public BuddysteelVaultBlock() {
-        super(Properties.from(Blocks.IRON_BLOCK));
+        super(Properties.from(Blocks.IRON_BLOCK).hardnessAndResistance(5, 1200));
         this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH).with(OPEN, false));
     }
 
@@ -82,6 +87,18 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand handIn, BlockRayTraceResult hit) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if(playerIn instanceof ServerPlayerEntity && tileentity instanceof BuddysteelVaultTile) {
+            if(playerIn.getHeldItem(handIn).getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
+                if (((BuddysteelVaultTile)tileentity).isLocked()) {
+                    if (((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUniqueID()))
+                        playerIn.sendStatusMessage(new TranslationTextComponent("block.buddycards.vault.unlock"), true);
+                    else
+                        playerIn.sendStatusMessage(new TranslationTextComponent("block.buddycards.vault.fail_unlock"), true);
+                }
+                else {
+                    ((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUniqueID());
+                    playerIn.sendStatusMessage(new TranslationTextComponent("block.buddycards.vault.lock"), true);
+                }
+            }
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, (BuddysteelVaultTile)tileentity, pos);
         }
         return super.onBlockActivated(state, worldIn, pos, playerIn, handIn, hit);

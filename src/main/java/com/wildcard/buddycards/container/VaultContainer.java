@@ -12,35 +12,30 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class VaultContainer extends Container {
-    Inventory inv;
+    IItemHandler handler;
     BuddysteelVaultTile tile;
 
     public VaultContainer(int id, PlayerInventory playerInv) {
-        this(id, playerInv, new BuddysteelVaultTile());
+        this(id, playerInv, new ItemStackHandler(120), new BuddysteelVaultTile());
     }
     
-    public VaultContainer(int id, PlayerInventory playerInv, BuddysteelVaultTile tileIn) {
+    public VaultContainer(int id, PlayerInventory playerInv, IItemHandler handlerIn, BuddysteelVaultTile tileIn) {
         super(RegistryHandler.VAULT_CONTAINER.get(), id);
         tile = tileIn;
-        inv = new Inventory(120);
-        IItemHandler items = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
-        System.out.println(items.getStackInSlot(0));
-        if(items != null) {
-            for (int i = 0; i < 120; i++) {
-                inv.setInventorySlotContents(i, items.getStackInSlot(i));
-            }
-        }
+        handler = handlerIn;
         //Set up vault card slots
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 12; x++) {
-                this.addSlot(new VaultContainer.CardSlot(inv, x + (y * 12), 8 + x * 18, 18 + y * 18));
+                this.addSlot(new CardSlot(handler, x + (y * 12), 8 + x * 18, 18 + y * 18));
             }
         }
         //Set up vault item slots
         for (int x = 0; x < 12; x++) {
-            this.addSlot(new Slot(inv, x + 108, 8 + x * 18, 180));
+            this.addSlot(new SlotItemHandler(handler, x + 108, 8 + x * 18, 180));
         }
         //Set up slots for inventory
         for (int y = 0; y < 3; y++) {
@@ -59,15 +54,19 @@ public class VaultContainer extends Container {
         return true;
     }
 
-    public class CardSlot extends Slot {
-        public CardSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+    public class CardSlot extends SlotItemHandler {
+        public CardSlot(IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
             super(inventoryIn, index, xPosition, yPosition);
         }
-
         //Only let cards go into card slots
         @Override
         public boolean isItemValid(ItemStack stack) {
-            return stack.getItem() instanceof CardItem;
+            return stack.getItem() instanceof CardItem && !tile.isLocked();
+        }
+
+        @Override
+        public boolean canTakeStack(PlayerEntity playerIn) {
+            return !tile.isLocked() && super.canTakeStack(playerIn);
         }
     }
 
@@ -80,10 +79,11 @@ public class VaultContainer extends Container {
             stack = slot.getStack().copy();
             if (index < 120)
             {
-                if(!this.mergeItemStack(slot.getStack(), 120, inventorySlots.size(), true))
+                if(!this.mergeItemStack(slot.getStack(), 120, inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
+                }
             }
-            else if(!this.mergeItemStack(slot.getStack(), 0, 36, false))
+            else if(!this.mergeItemStack(slot.getStack(), 0, 120, false))
                 return ItemStack.EMPTY;
             if(slot.getStack().isEmpty())
                 slot.putStack(ItemStack.EMPTY);
@@ -96,6 +96,5 @@ public class VaultContainer extends Container {
     @Override
     public void onContainerClosed(PlayerEntity playerIn) {
         super.onContainerClosed(playerIn);
-        this.inv.closeInventory(playerIn);
     }
 }
