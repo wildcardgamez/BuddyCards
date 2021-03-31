@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -31,7 +30,6 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
             return (slot > 108 || stack.getItem() instanceof CardItem) && super.isItemValid(slot, stack);
         }
     });
-    private NonNullList<ItemStack> displayCards = NonNullList.withSize(8, ItemStack.EMPTY);;
     private ITextComponent name;
     private boolean locked = false;
     private String player = "";
@@ -96,7 +94,7 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
     public ITextComponent getDisplayName() {
         if (name != null)
             return name;
-        return new TranslationTextComponent("block." + BuddyCards.MOD_ID + ".vault");
+        return new TranslationTextComponent("block." + BuddyCards.MOD_ID + ".buddysteel_vault");
     }
 
     public void setDisplayName(ITextComponent nameIn) {

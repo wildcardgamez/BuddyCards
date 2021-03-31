@@ -5,12 +5,12 @@ import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -22,35 +22,31 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class BuddysteelVaultBlock extends ContainerBlock {
     public static final DirectionProperty DIR = HorizontalBlock.HORIZONTAL_FACING;
-    public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
-
     protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
-    protected static final VoxelShape OPEN_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 9.0D, 15.0D);
 
     public BuddysteelVaultBlock() {
         super(Properties.from(Blocks.IRON_BLOCK).hardnessAndResistance(5, 1200));
-        this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH).with(OPEN, false));
+        this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        if (state.get(OPEN))
-            return OPEN_SHAPE;
-        else
-            return VAULT_SHAPE;
+        return VAULT_SHAPE;
     }
 
     @Override
     public BlockState getStateForPlacement (BlockItemUseContext context) {
-        return this.getDefaultState().with(DIR, context.getPlacementHorizontalFacing()).with(OPEN, false);
+        return this.getDefaultState().with(DIR, context.getPlacementHorizontalFacing());
     }
 
     @Override
@@ -65,7 +61,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(DIR).add(OPEN);
+        builder.add(DIR);
     }
 
     @Override
@@ -110,21 +106,14 @@ public class BuddysteelVaultBlock extends ContainerBlock {
         return new BuddysteelVaultTile();
     }
 
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        if (!worldIn.isRemote) {
-            if (state.get(OPEN) != worldIn.isBlockPowered(pos)) {
-                if (state.get(OPEN)) {
-                    worldIn.getPendingBlockTicks().scheduleTick(pos, this, 4);
-                } else {
-                    worldIn.setBlockState(pos, state.func_235896_a_(OPEN), 2);
-                }
+    @Override
+    public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
+        if (world.getTileEntity(pos) instanceof BuddysteelVaultTile) {
+            IItemHandler handler = ((BuddysteelVaultTile)world.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(new ItemStackHandler());
+            for (int i = 0; i < handler.getSlots(); i++) {
+                InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), handler.getStackInSlot(i));
             }
         }
-    }
-
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        if (state.get(OPEN) && !worldIn.isBlockPowered(pos)) {
-            worldIn.setBlockState(pos, state.func_235896_a_(OPEN), 2);
-        }
+        return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 }

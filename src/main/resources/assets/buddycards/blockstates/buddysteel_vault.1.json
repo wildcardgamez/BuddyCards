@@ -1,33 +1,18 @@
 {
   "variants": {
-    "facing=east,open=false": {
+    "facing=east": {
       "model": "buddycards:block/buddysteel_vault.1"
     },
-    "facing=east,open=true": {
-      "model": "buddycards:block/buddysteel_vault.1_open"
-    },
-    "facing=north,open=false": {
+    "facing=north": {
       "model": "buddycards:block/buddysteel_vault.1",
       "y": 270
     },
-    "facing=north,open=true": {
-      "model": "buddycards:block/buddysteel_vault.1_open",
-      "y": 270
-    },
-    "facing=south,open=false": {
+    "facing=south": {
       "model": "buddycards:block/buddysteel_vault.1",
       "y": 90
     },
-    "facing=south,open=true": {
-      "model": "buddycards:block/buddysteel_vault.1_open",
-      "y": 90
-    },
-    "facing=west,open=false": {
+    "facing=west": {
       "model": "buddycards:block/buddysteel_vault.1",
-      "y": 180
-    },
-    "facing=west,open=true": {
-      "model": "buddycards:block/buddysteel_vault.1_open",
       "y": 180
     }
   }

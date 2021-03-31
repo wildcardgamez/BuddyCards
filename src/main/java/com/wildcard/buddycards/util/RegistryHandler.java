@@ -2,7 +2,6 @@ package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.blocks.*;
-import com.wildcard.buddycards.client.renderer.BuddysteelVaultTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardStandTileRenderer;
 import com.wildcard.buddycards.container.BinderContainer;
@@ -89,7 +88,6 @@ public class RegistryHandler {
         }
         ClientRegistry.bindTileEntityRenderer(CARD_DISPLAY_TILE.get(), CardDisplayTileRenderer::new);
         ClientRegistry.bindTileEntityRenderer(CARD_STAND_TILE.get(), CardStandTileRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(BUDDYSTEEL_VAULT_TILE.get(), BuddysteelVaultTileRenderer::new);
     }
 
     //Packs

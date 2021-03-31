@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "buddycards:block/buddysteel_vault.3"
+    },
+    "facing=north": {
+      "model": "buddycards:block/buddysteel_vault.3",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "buddycards:block/buddysteel_vault.3",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "buddycards:block/buddysteel_vault.3",
+      "y": 180
+    }
+  }
+}

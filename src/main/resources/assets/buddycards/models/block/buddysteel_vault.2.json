@@ -1,9 +1,9 @@
 {
 	"parent": "block/block",
 	"textures": {
-		"1": "buddycards:blocks/vault/vault1_side",
-		"2": "buddycards:blocks/vault/vault1_top",
-		"particle": "buddycards:blocks/vault/vault1_top"
+		"1": "buddycards:blocks/vault/vault2_side",
+		"2": "buddycards:blocks/vault/vault2_top",
+		"particle": "buddycards:blocks/vault/vault2_top"
 	},
 	"elements": [
 		{
