@@ -64,6 +64,7 @@ public class VaultContainer extends Container {
             return stack.getItem() instanceof CardItem && !tile.isLocked();
         }
 
+        //Only let unlocked vaults be manipulated
         @Override
         public boolean canTakeStack(PlayerEntity playerIn) {
             return !tile.isLocked() && super.canTakeStack(playerIn);
@@ -91,10 +92,5 @@ public class VaultContainer extends Container {
                 slot.onSlotChanged();
         }
         return stack;
-    }
-
-    @Override
-    public void onContainerClosed(PlayerEntity playerIn) {
-        super.onContainerClosed(playerIn);
     }
 }

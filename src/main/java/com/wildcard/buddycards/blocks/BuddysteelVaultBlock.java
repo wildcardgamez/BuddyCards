@@ -1,6 +1,5 @@
 package com.wildcard.buddycards.blocks;
 
-import com.teammetallurgy.aquaculture.block.tileentity.IItemHandlerTEBase;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
@@ -25,8 +24,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -36,6 +33,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
 
     protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
+    protected static final VoxelShape OPEN_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 9.0D, 15.0D);
 
     public BuddysteelVaultBlock() {
         super(Properties.from(Blocks.IRON_BLOCK).hardnessAndResistance(5, 1200));
@@ -44,7 +42,10 @@ public class BuddysteelVaultBlock extends ContainerBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return VAULT_SHAPE;
+        if (state.get(OPEN))
+            return OPEN_SHAPE;
+        else
+            return VAULT_SHAPE;
     }
 
     @Override
@@ -101,7 +102,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
             }
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, (BuddysteelVaultTile)tileentity, pos);
         }
-        return super.onBlockActivated(state, worldIn, pos, playerIn, handIn, hit);
+        return ActionResultType.PASS;
     }
 
     @Override

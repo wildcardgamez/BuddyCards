@@ -12,6 +12,9 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.vector.Vector3f;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class BuddysteelVaultTileRenderer extends TileEntityRenderer<BuddysteelVaultTile> {
 
@@ -22,11 +25,11 @@ public class BuddysteelVaultTileRenderer extends TileEntityRenderer<BuddysteelVa
     @Override
     public void render(BuddysteelVaultTile tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if(tileEntityIn.getBlockState().get(BuddysteelVaultBlock.OPEN)) {
-            ItemStack itemstack = tileEntityIn.stackInDisplaySlot(1).getStack();
-            System.out.println(itemstack);
+            IItemHandler handler = tileEntityIn.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(new ItemStackHandler());
+            ItemStack itemstack = handler.getStackInSlot(119);
             if(itemstack.getItem() instanceof CardItem) {
                 matrixStackIn.push();
-                matrixStackIn.translate(0.28125, 0.6, 0.375);
+                matrixStackIn.translate(0.3125, 0.675, 0.28125);
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180));
                 IBakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelWithOverrides(itemstack, tileEntityIn.getWorld(), null);

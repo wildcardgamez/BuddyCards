@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -30,6 +31,7 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
             return (slot > 108 || stack.getItem() instanceof CardItem) && super.isItemValid(slot, stack);
         }
     });
+    private NonNullList<ItemStack> displayCards = NonNullList.withSize(8, ItemStack.EMPTY);;
     private ITextComponent name;
     private boolean locked = false;
     private String player = "";
@@ -88,7 +90,6 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
         this.handler.ifPresent((stack) -> {
             ((INBTSerializable)stack).deserializeNBT(invTag);
         });
-
     }
 
     @Override
@@ -107,13 +108,5 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
         if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
             return handler.cast();
         return super.getCapability(cap, side);
-    }
-
-    public ItemStack stackInDisplaySlot(int i) {
-        if(handler.isPresent()) {
-            return handler.orElse(new ItemStackHandler()).getStackInSlot((i) * 12 + 1);
-        }
-        else
-            return null;
     }
 }
