@@ -24,6 +24,10 @@
       "recipe2": "buddycards:aquaculture/binder.6"
     },
     {
+      "type": "crafting",
+      "recipe": "buddycards:fd/binder.7"
+    },
+    {
       "type": "relations",
       "title": "Binder Enchantments",
       "entries": [
