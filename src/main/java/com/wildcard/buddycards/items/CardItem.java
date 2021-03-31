@@ -114,6 +114,7 @@ public class CardItem extends Item {
 
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        //Only show cards in the creative menu when the respective mod is loaded
         if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
             return;
         else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
@@ -145,8 +146,9 @@ public class CardItem extends Item {
                 int grade;
                 //If they have grading luck, reroll until the roll is over 100
                 if (playerIn.isPotionActive(RegistryHandler.GRADING_LUCK.get())) {
-                    for (int j = -1; j <= playerIn.getActivePotionEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier() && i < 400; i++)
+                    for (int j = 0; j <= playerIn.getActivePotionEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier() && i < 400; j++) {
                         i = (int) (Math.random() * 500) + 1;
+                    }
                 }
                 if (i < 200)
                     grade = 1;
