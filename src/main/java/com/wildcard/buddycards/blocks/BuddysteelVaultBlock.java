@@ -8,6 +8,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -15,6 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -22,6 +24,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -34,10 +37,13 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     public static final DirectionProperty DIR = HorizontalBlock.HORIZONTAL_FACING;
     protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 
-    public BuddysteelVaultBlock() {
+    public BuddysteelVaultBlock(int setNumber) {
         super(Properties.from(Blocks.IRON_BLOCK).hardnessAndResistance(5, 1200));
         this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
+        SET_NUMBER = setNumber;
     }
+
+    final int SET_NUMBER;
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -115,5 +121,18 @@ public class BuddysteelVaultBlock extends ContainerBlock {
             }
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
+            return;
+        else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
+            return;
+        else if(SET_NUMBER == 6 && !ModList.get().isLoaded("aquaculture"))
+            return;
+        else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
+            return;
+        super.fillItemGroup(group, items);
     }
 }

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#X#",
+    "XVX",
+    "#X#"
+  ],
+  "key": {
+    "X": {
+      "item": "buddycards:buddysteel_ingot"
+    },
+    "#": {
+      "item": "buddycards:buddysteel_nugget"
+    },
+    "V": {
+      "item": "buddycards:binder.7"
+    }
+  },
+  "result": {
+    "item": "buddycards:buddysteel_vault.7"
+  }
+}

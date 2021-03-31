@@ -35,7 +35,7 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
     private String player = "";
 
     public BuddysteelVaultTile() {
-        super(RegistryHandler.BUDDYSTEEL_VAULT_TILE.get());
+        super(RegistryHandler.VAULT_TILE.get());
     }
 
     @Override
