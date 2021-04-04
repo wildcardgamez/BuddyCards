@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.blocks;
 
+import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
@@ -29,7 +30,6 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nullable;
 

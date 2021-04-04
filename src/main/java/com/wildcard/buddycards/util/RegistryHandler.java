@@ -2,6 +2,9 @@ package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.blocks.*;
+import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
+import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
+import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardStandTileRenderer;
 import com.wildcard.buddycards.container.BinderContainer;

@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.wildcard.buddycards.blocks.CardDisplayBlock;
-import com.wildcard.buddycards.blocks.CardDisplayTile;
+import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
 import com.wildcard.buddycards.blocks.CardStandBlock;
-import com.wildcard.buddycards.blocks.CardStandTile;
+import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.blocks;
 
+import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.Block;

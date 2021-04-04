@@ -1,7 +1,7 @@
 package com.wildcard.buddycards.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.wildcard.buddycards.blocks.CardStandTile;
+import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 import com.wildcard.buddycards.items.CardItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
