@@ -1,4 +1,4 @@
-package com.wildcard.buddycards.blocks;
+package com.wildcard.buddycards.blocks.tiles;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.VaultContainer;
@@ -27,7 +27,7 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
     private LazyOptional<ItemStackHandler> handler = LazyOptional.of(() -> new ItemStackHandler(120) {
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
-            return (slot > 108 || stack.getItem() instanceof CardItem) && super.isItemValid(slot, stack);
+            return (slot >= 108 || stack.getItem() instanceof CardItem) && super.isItemValid(slot, stack);
         }
     });
     private ITextComponent name;
