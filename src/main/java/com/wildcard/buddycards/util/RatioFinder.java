@@ -30,6 +30,11 @@ public class RatioFinder {
             if (player.getAdvancements().getProgress(player.server.getAdvancementManager().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set6s"))).isDone())
                 sets++;
         }
+        if (ModList.get().isLoaded("farmersdelight")) {
+            max++;
+            if (player.getAdvancements().getProgress(player.server.getAdvancementManager().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set7s"))).isDone())
+                sets++;
+        }
         if (sets > max)
             sets = max;
         return (float) sets / max;
