@@ -120,10 +120,10 @@ public class ConfigManager {
                 .defineInRange("challenge.set4Multiplier", 2f, 0, 10);
         challengeSet5Mult = builder.comment("\nMultiplier for challenge points from create set, 0-10, default is 1")
                 .defineInRange("challenge.set5Multiplier", 1f, 0, 10);
-        challengeSet6Mult = builder.comment("\nMultiplier for challenge points from aquaculture set, 0-10, default is 1")
-                .defineInRange("challenge.set6Multiplier", 1f, 0, 10);
-        challengeSet6Mult = builder.comment("\nMultiplier for challenge points from fd set, 0-10, default is 1")
-                .defineInRange("challenge.set6Multiplier", 1f, 0, 10);
+        challengeSet6Mult = builder.comment("\nMultiplier for challenge points from aquaculture set, 0-10, default is 0.9")
+                .defineInRange("challenge.set6Multiplier", 0.9f, 0, 10);
+        challengeSet7Mult = builder.comment("\nMultiplier for challenge points from fd set, 0-10, default is 1")
+                .defineInRange("challenge.set7Multiplier", 1f, 0, 10);
         challengeGrade1Mult = builder.comment("\nMultiplier for challenge points with grade D, 0-10, default is 1")
                 .defineInRange("challenge.grade1Multiplier", 1f, 0, 10);
         challengeGrade2Mult = builder.comment("\nMultiplier for challenge points with grade C, 0-10, default is 1.4")

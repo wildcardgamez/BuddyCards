@@ -186,7 +186,6 @@ public class RegistryHandler {
     public static final RegistryObject<Block> VAULT_AQUACULTURE = BLOCKS.register("buddysteel_vault.6", () -> new BuddysteelVaultBlock(6));
     public static final RegistryObject<Block> VAULT_FD = BLOCKS.register("buddysteel_vault.7", () -> new BuddysteelVaultBlock(7));
 
-
     //Card Display Items
     public static final RegistryObject<BlockItem> OAK_CARD_DISPLAY_ITEM = ITEMS.register("oak_card_display", () -> new BlockItem(OAK_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> SPRUCE_CARD_DISPLAY_ITEM = ITEMS.register("spruce_card_display", () -> new BlockItem(SPRUCE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
