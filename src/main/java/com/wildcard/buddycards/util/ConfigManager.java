@@ -36,7 +36,6 @@ public class ConfigManager {
     public static ForgeConfigSpec.IntValue witherMaxPacks;
 
     public static ForgeConfigSpec.BooleanValue piglinBartering;
-    public static ForgeConfigSpec.BooleanValue lootChestPacks;
 
     public static ForgeConfigSpec.BooleanValue doMedalEffects;
 
@@ -89,8 +88,6 @@ public class ConfigManager {
 
         piglinBartering = builder.comment("\nAllow packs to be obtained through Piglin bartering, default is true")
                 .define("lootTables.piglinBartering", true);
-        lootChestPacks = builder.comment("\nAllow natural generation of packs in loot chests, default is true")
-                .define("lootTables.lootChestPacks", true);
 
         doMedalEffects = builder.comment("\nEnables medal effects, default is true")
                 .define("misc.doMedalEffects", true);
