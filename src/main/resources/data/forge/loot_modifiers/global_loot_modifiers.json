@@ -1,18 +1,20 @@
 {
   "replace": false,
   "entries": [
-    "buddycards:abandoned_mineshaft",
-    "buddycards:bastion_bridge",
-    "buddycards:bastion_other",
-    "buddycards:bastion_treasure",
-    "buddycards:buried_treasure",
-    "buddycards:desert_pyramid",
-    "buddycards:end_city_treasure",
-    "buddycards:fd_buddybeans",
-    "buddycards:nether_bridge",
-    "buddycards:piglin_bartering",
-    "buddycards:simple_dungeon",
-    "buddycards:spawn_bonus_chest",
-    "buddycards:village_house"
+    "buddycards:vanilla/abandoned_mineshaft",
+    "buddycards:vanilla/bastion_bridge",
+    "buddycards:vanilla/bastion_other",
+    "buddycards:vanilla/bastion_treasure",
+    "buddycards:vanilla/buried_treasure",
+    "buddycards:vanilla/desert_pyramid",
+    "buddycards:vanilla/end_city_treasure",
+    "buddycards:vanilla/nether_bridge",
+    "buddycards:vanilla/piglin_bartering",
+    "buddycards:vanilla/simple_dungeon",
+    "buddycards:vanilla/spawn_bonus_chest",
+    "buddycards:vanilla/village_house",
+    "buddycards:dungeons_plus/overworld",
+    "buddycards:dungeons_plus/nether",
+    "buddycards:fd_buddybeans"
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "type": "buddycards:loot_injection",
+  "injection": "buddycards:inject/nether_generic",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "dungeons_plus"
+    },
+    {
+      "condition": "minecraft:alternative",
+      "terms": [
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "dungeons_plus:chests/warped_garden/common"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "dungeons_plus:chests/soul_prison/common"
+        }
+      ]
+    }
+  ]
+}
