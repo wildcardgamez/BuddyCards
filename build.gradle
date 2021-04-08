@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.5-2.2.1'
+version = '1.16.5-2.2.2'
 group = 'com.wildcard.buddycards' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'buddycards'
 
@@ -26,7 +26,7 @@ minecraft {
     // stable_#            Stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'snapshot', version: '20201028-1.16.3'
+    mappings channel: 'official', version: '1.16.5'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
      accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -100,7 +100,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.0.14'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5")
@@ -108,10 +108,13 @@ dependencies {
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
 
-    compile fg.deobf("com.teammetallurgy.aquaculture:aquaculture2_1.16.4:1.16.4-2.1.10")
+    compileOnly fg.deobf("com.teammetallurgy.aquaculture:aquaculture2_1.16.4:1.16.4-2.1.10")
 
-    implementation fg.deobf("curse.maven:farmers_delight-398521:3188508")
+    compileOnly fg.deobf("curse.maven:farmers_delight-398521:3249879")
     implementation fg.deobf("curse.maven:jei-238222:3189632")
+
+    implementation fg.deobf("curse.maven:dungeons_plus-398521:3188508")
+    implementation fg.deobf("curse.maven:structure_gel-378802:3268432")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

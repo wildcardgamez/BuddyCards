@@ -72,18 +72,18 @@ public class RegistryHandler {
     }
 
     public static void clientSetup(FMLClientSetupEvent event) {
-        event.enqueueWork(() -> ScreenManager.registerFactory(BINDER_CONTAINER.get(), BinderScreen::new));
-        event.enqueueWork(() -> ScreenManager.registerFactory(VAULT_CONTAINER.get(), VaultScreen::new));
+        event.enqueueWork(() -> ScreenManager.register(BINDER_CONTAINER.get(), BinderScreen::new));
+        event.enqueueWork(() -> ScreenManager.register(VAULT_CONTAINER.get(), VaultScreen::new));
         for (RegistryObject<Item> card: CardRegistry.CARDS) {
-            event.enqueueWork(() -> ItemModelsProperties.registerProperty(card.get(), new ResourceLocation("grade"), (stack, world, entity) -> {
+            event.enqueueWork(() -> ItemModelsProperties.register(card.get(), new ResourceLocation("grade"), (stack, world, entity) -> {
                 if(stack.getTag() != null)
                     return stack.getTag().getInt("grade");
                 return 0;
             }));
         }
         if (ModList.get().isLoaded("aquaculture")) {
-            event.enqueueWork(() -> ItemModelsProperties.registerProperty(AquacultureIntegration.BUDDYSTEEL_FISHING_ROD.get(), new ResourceLocation("cast"), (stack, world, entity) -> {
-                if(entity instanceof PlayerEntity && (entity.getHeldItem(Hand.MAIN_HAND) == stack || entity.getHeldItem(Hand.OFF_HAND) == stack) && ((PlayerEntity) entity).fishingBobber != null)
+            event.enqueueWork(() -> ItemModelsProperties.register(AquacultureIntegration.BUDDYSTEEL_FISHING_ROD.get(), new ResourceLocation("cast"), (stack, world, entity) -> {
+                if(entity instanceof PlayerEntity && (entity.getItemInHand(Hand.MAIN_HAND) == stack || entity.getItemInHand(Hand.OFF_HAND) == stack) && ((PlayerEntity) entity).fishing != null)
                     return 1;
                 else
                     return 0;
@@ -130,12 +130,12 @@ public class RegistryHandler {
     public static final RegistryObject<Item> MEDAL_FD = ITEMS.register("medal.7", () -> new MedalItem(7));
 
     //Misc
-    public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<Item> ASSORTED_GUMMIES = ITEMS.register("assorted_gummies", () -> new Item(new Item.Properties().group(BuddyCards.TAB).food(new Food.Builder().hunger(2).saturation(0.3F).fastToEat().build())));
-    public static final RegistryObject<Item> MEDAL_TOKEN = ITEMS.register("medal_token", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<Item> GRADING_SLEEVE = ITEMS.register("grading_sleeve", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<Item> BUDDYSTEEL_KEY = ITEMS.register("buddysteel_key", () -> new Item(new Item.Properties().group(BuddyCards.TAB).maxStackSize(1)));
-    public static final RegistryObject<Item> BUDDYBEANS = ITEMS.register("buddybeans", () -> new Item(new Item.Properties().group(BuddyCards.TAB).food(new Food.Builder().hunger(3).saturation(0.3F).build())));
+    public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> ASSORTED_GUMMIES = ITEMS.register("assorted_gummies", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).food(new Food.Builder().nutrition(2).saturationMod(0.3F).fast().build())));
+    public static final RegistryObject<Item> MEDAL_TOKEN = ITEMS.register("medal_token", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> GRADING_SLEEVE = ITEMS.register("grading_sleeve", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> BUDDYSTEEL_KEY = ITEMS.register("buddysteel_key", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1)));
+    public static final RegistryObject<Item> BUDDYBEANS = ITEMS.register("buddybeans", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).food(new Food.Builder().nutrition(3).saturationMod(0.3F).build())));
 
     //Card Display Blocks
     public static final RegistryObject<Block> OAK_CARD_DISPLAY = BLOCKS.register("oak_card_display", CardDisplayBlock::new);
@@ -187,56 +187,56 @@ public class RegistryHandler {
     public static final RegistryObject<Block> VAULT_FD = BLOCKS.register("buddysteel_vault.7", () -> new BuddysteelVaultBlock(7));
 
     //Card Display Items
-    public static final RegistryObject<BlockItem> OAK_CARD_DISPLAY_ITEM = ITEMS.register("oak_card_display", () -> new BlockItem(OAK_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> SPRUCE_CARD_DISPLAY_ITEM = ITEMS.register("spruce_card_display", () -> new BlockItem(SPRUCE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> BIRCH_CARD_DISPLAY_ITEM = ITEMS.register("birch_card_display", () -> new BlockItem(BIRCH_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> JUNGLE_CARD_DISPLAY_ITEM = ITEMS.register("jungle_card_display", () -> new BlockItem(JUNGLE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> ACACIA_CARD_DISPLAY_ITEM = ITEMS.register("acacia_card_display", () -> new BlockItem(ACACIA_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> DARK_OAK_CARD_DISPLAY_ITEM = ITEMS.register("dark_oak_card_display", () -> new BlockItem(DARK_OAK_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> CRIMSON_CARD_DISPLAY_ITEM = ITEMS.register("crimson_card_display", () -> new BlockItem(CRIMSON_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> WARPED_CARD_DISPLAY_ITEM = ITEMS.register("warped_card_display", () -> new BlockItem(WARPED_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> CARD_STAND_ITEM = ITEMS.register("card_stand", () -> new BlockItem(CARD_STAND.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> OAK_CARD_DISPLAY_ITEM = ITEMS.register("oak_card_display", () -> new BlockItem(OAK_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> SPRUCE_CARD_DISPLAY_ITEM = ITEMS.register("spruce_card_display", () -> new BlockItem(SPRUCE_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> BIRCH_CARD_DISPLAY_ITEM = ITEMS.register("birch_card_display", () -> new BlockItem(BIRCH_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> JUNGLE_CARD_DISPLAY_ITEM = ITEMS.register("jungle_card_display", () -> new BlockItem(JUNGLE_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> ACACIA_CARD_DISPLAY_ITEM = ITEMS.register("acacia_card_display", () -> new BlockItem(ACACIA_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> DARK_OAK_CARD_DISPLAY_ITEM = ITEMS.register("dark_oak_card_display", () -> new BlockItem(DARK_OAK_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> CRIMSON_CARD_DISPLAY_ITEM = ITEMS.register("crimson_card_display", () -> new BlockItem(CRIMSON_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> WARPED_CARD_DISPLAY_ITEM = ITEMS.register("warped_card_display", () -> new BlockItem(WARPED_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> CARD_STAND_ITEM = ITEMS.register("card_stand", () -> new BlockItem(CARD_STAND.get(), new Item.Properties().tab(BuddyCards.TAB)));
     //Byg Card Display Items
-    public static final RegistryObject<BlockItem> ASPEN_CARD_DISPLAY_ITEM = ITEMS.register("aspen_card_display", () -> new BlockItem(ASPEN_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> BAOBAB_CARD_DISPLAY_ITEM = ITEMS.register("baobab_card_display", () -> new BlockItem(BAOBAB_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> BLUE_ENCHANTED_CARD_DISPLAY_ITEM = ITEMS.register("blue_enchanted_card_display", () -> new BlockItem(BLUE_ENCHANTED_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> BULBIS_CARD_DISPLAY_ITEM = ITEMS.register("bulbis_card_display", () -> new BlockItem(BULBIS_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> CHERRY_CARD_DISPLAY_ITEM = ITEMS.register("cherry_card_display", () -> new BlockItem(CHERRY_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> CIKA_CARD_DISPLAY_ITEM = ITEMS.register("cika_card_display", () -> new BlockItem(CIKA_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> CYPRESS_CARD_DISPLAY_ITEM = ITEMS.register("cypress_card_display", () -> new BlockItem(CYPRESS_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> EBONY_CARD_DISPLAY_ITEM = ITEMS.register("ebony_card_display", () -> new BlockItem(EBONY_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> EMBUR_CARD_DISPLAY_ITEM = ITEMS.register("embur_card_display", () -> new BlockItem(EMBUR_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> ETHER_CARD_DISPLAY_ITEM = ITEMS.register("ether_card_display", () -> new BlockItem(ETHER_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> FIR_CARD_DISPLAY_ITEM = ITEMS.register("fir_card_display", () -> new BlockItem(FIR_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> GLACIAL_OAK_CARD_DISPLAY_ITEM = ITEMS.register("glacial_oak_card_display", () -> new BlockItem(GLACIAL_OAK_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> GREEN_ENCHANTED_CARD_DISPLAY_ITEM = ITEMS.register("green_enchanted_card_display", () -> new BlockItem(GREEN_ENCHANTED_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> HOLLY_CARD_DISPLAY_ITEM = ITEMS.register("holly_card_display", () -> new BlockItem(HOLLY_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> JACARANDA_CARD_DISPLAY_ITEM = ITEMS.register("jacaranda_card_display", () -> new BlockItem(JACARANDA_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> LAMENT_CARD_DISPLAY_ITEM = ITEMS.register("lament_card_display", () -> new BlockItem(LAMENT_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> MAHOGANY_CARD_DISPLAY_ITEM = ITEMS.register("mahogany_card_display", () -> new BlockItem(MAHOGANY_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> MANGROVE_CARD_DISPLAY_ITEM = ITEMS.register("mangrove_card_display", () -> new BlockItem(MANGROVE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> MAPLE_CARD_DISPLAY_ITEM = ITEMS.register("maple_card_display", () -> new BlockItem(MAPLE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> NIGHTSHADE_CARD_DISPLAY_ITEM = ITEMS.register("nightshade_card_display", () -> new BlockItem(NIGHTSHADE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> PALM_CARD_DISPLAY_ITEM = ITEMS.register("palm_card_display", () -> new BlockItem(PALM_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> PINE_CARD_DISPLAY_ITEM = ITEMS.register("pine_card_display", () -> new BlockItem(PINE_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> RAINBOW_EUCALYPTUS_CARD_DISPLAY_ITEM = ITEMS.register("rainbow_eucalyptus_card_display", () -> new BlockItem(RAINBOW_EUCALYPTUS_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> REDWOOD_CARD_DISPLAY_ITEM = ITEMS.register("redwood_card_display", () -> new BlockItem(REDWOOD_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> SKYRIS_CARD_DISPLAY_ITEM = ITEMS.register("skyris_card_display", () -> new BlockItem(SKYRIS_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> SYTHIAN_CARD_DISPLAY_ITEM = ITEMS.register("sythian_card_display", () -> new BlockItem(SYTHIAN_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> WILLOW_CARD_DISPLAY_ITEM = ITEMS.register("willow_card_display", () -> new BlockItem(WILLOW_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> WITCH_HAZEL_CARD_DISPLAY_ITEM = ITEMS.register("witch_hazel_card_display", () -> new BlockItem(WITCH_HAZEL_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> ZELKOVA_CARD_DISPLAY_ITEM = ITEMS.register("zelkova_card_display", () -> new BlockItem(ZELKOVA_CARD_DISPLAY.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> ASPEN_CARD_DISPLAY_ITEM = ITEMS.register("aspen_card_display", () -> new BlockItem(ASPEN_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> BAOBAB_CARD_DISPLAY_ITEM = ITEMS.register("baobab_card_display", () -> new BlockItem(BAOBAB_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> BLUE_ENCHANTED_CARD_DISPLAY_ITEM = ITEMS.register("blue_enchanted_card_display", () -> new BlockItem(BLUE_ENCHANTED_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> BULBIS_CARD_DISPLAY_ITEM = ITEMS.register("bulbis_card_display", () -> new BlockItem(BULBIS_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> CHERRY_CARD_DISPLAY_ITEM = ITEMS.register("cherry_card_display", () -> new BlockItem(CHERRY_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> CIKA_CARD_DISPLAY_ITEM = ITEMS.register("cika_card_display", () -> new BlockItem(CIKA_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> CYPRESS_CARD_DISPLAY_ITEM = ITEMS.register("cypress_card_display", () -> new BlockItem(CYPRESS_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> EBONY_CARD_DISPLAY_ITEM = ITEMS.register("ebony_card_display", () -> new BlockItem(EBONY_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> EMBUR_CARD_DISPLAY_ITEM = ITEMS.register("embur_card_display", () -> new BlockItem(EMBUR_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> ETHER_CARD_DISPLAY_ITEM = ITEMS.register("ether_card_display", () -> new BlockItem(ETHER_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> FIR_CARD_DISPLAY_ITEM = ITEMS.register("fir_card_display", () -> new BlockItem(FIR_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> GLACIAL_OAK_CARD_DISPLAY_ITEM = ITEMS.register("glacial_oak_card_display", () -> new BlockItem(GLACIAL_OAK_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> GREEN_ENCHANTED_CARD_DISPLAY_ITEM = ITEMS.register("green_enchanted_card_display", () -> new BlockItem(GREEN_ENCHANTED_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> HOLLY_CARD_DISPLAY_ITEM = ITEMS.register("holly_card_display", () -> new BlockItem(HOLLY_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> JACARANDA_CARD_DISPLAY_ITEM = ITEMS.register("jacaranda_card_display", () -> new BlockItem(JACARANDA_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> LAMENT_CARD_DISPLAY_ITEM = ITEMS.register("lament_card_display", () -> new BlockItem(LAMENT_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> MAHOGANY_CARD_DISPLAY_ITEM = ITEMS.register("mahogany_card_display", () -> new BlockItem(MAHOGANY_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> MANGROVE_CARD_DISPLAY_ITEM = ITEMS.register("mangrove_card_display", () -> new BlockItem(MANGROVE_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> MAPLE_CARD_DISPLAY_ITEM = ITEMS.register("maple_card_display", () -> new BlockItem(MAPLE_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> NIGHTSHADE_CARD_DISPLAY_ITEM = ITEMS.register("nightshade_card_display", () -> new BlockItem(NIGHTSHADE_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> PALM_CARD_DISPLAY_ITEM = ITEMS.register("palm_card_display", () -> new BlockItem(PALM_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> PINE_CARD_DISPLAY_ITEM = ITEMS.register("pine_card_display", () -> new BlockItem(PINE_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> RAINBOW_EUCALYPTUS_CARD_DISPLAY_ITEM = ITEMS.register("rainbow_eucalyptus_card_display", () -> new BlockItem(RAINBOW_EUCALYPTUS_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> REDWOOD_CARD_DISPLAY_ITEM = ITEMS.register("redwood_card_display", () -> new BlockItem(REDWOOD_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> SKYRIS_CARD_DISPLAY_ITEM = ITEMS.register("skyris_card_display", () -> new BlockItem(SKYRIS_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> SYTHIAN_CARD_DISPLAY_ITEM = ITEMS.register("sythian_card_display", () -> new BlockItem(SYTHIAN_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> WILLOW_CARD_DISPLAY_ITEM = ITEMS.register("willow_card_display", () -> new BlockItem(WILLOW_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> WITCH_HAZEL_CARD_DISPLAY_ITEM = ITEMS.register("witch_hazel_card_display", () -> new BlockItem(WITCH_HAZEL_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> ZELKOVA_CARD_DISPLAY_ITEM = ITEMS.register("zelkova_card_display", () -> new BlockItem(ZELKOVA_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
     //Buddysteel Card Vault Items
-    public static final RegistryObject<BlockItem> VAULT_ITEM = ITEMS.register("buddysteel_vault.1", () -> new BlockItem(VAULT.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> VAULT_NETHER_ITEM = ITEMS.register("buddysteel_vault.2", () -> new BlockItem(VAULT_NETHER.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> VAULT_END_ITEM = ITEMS.register("buddysteel_vault.3", () -> new BlockItem(VAULT_END.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> VAULT_BYG_ITEM = ITEMS.register("buddysteel_vault.4", () -> new BlockItem(VAULT_BYG.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> VAULT_CREATE_ITEM = ITEMS.register("buddysteel_vault.5", () -> new BlockItem(VAULT_CREATE.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> VAULT_AQUACULTURE_ITEM = ITEMS.register("buddysteel_vault.6", () -> new BlockItem(VAULT_AQUACULTURE.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> VAULT_FD_ITEM = ITEMS.register("buddysteel_vault.7", () -> new BlockItem(VAULT_FD.get(), new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> VAULT_ITEM = ITEMS.register("buddysteel_vault.1", () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> VAULT_NETHER_ITEM = ITEMS.register("buddysteel_vault.2", () -> new BlockItem(VAULT_NETHER.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> VAULT_END_ITEM = ITEMS.register("buddysteel_vault.3", () -> new BlockItem(VAULT_END.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> VAULT_BYG_ITEM = ITEMS.register("buddysteel_vault.4", () -> new BlockItem(VAULT_BYG.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> VAULT_CREATE_ITEM = ITEMS.register("buddysteel_vault.5", () -> new BlockItem(VAULT_CREATE.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> VAULT_AQUACULTURE_ITEM = ITEMS.register("buddysteel_vault.6", () -> new BlockItem(VAULT_AQUACULTURE.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> VAULT_FD_ITEM = ITEMS.register("buddysteel_vault.7", () -> new BlockItem(VAULT_FD.get(), new Item.Properties().tab(BuddyCards.TAB)));
 
     public static final RegistryObject<TileEntityType<CardDisplayTile>> CARD_DISPLAY_TILE = TILE_ENTITIES.register("card_display",
-            () -> TileEntityType.Builder.create(CardDisplayTile::new, OAK_CARD_DISPLAY.get(), SPRUCE_CARD_DISPLAY.get(),
+            () -> TileEntityType.Builder.of(CardDisplayTile::new, OAK_CARD_DISPLAY.get(), SPRUCE_CARD_DISPLAY.get(),
                     BIRCH_CARD_DISPLAY.get(), JUNGLE_CARD_DISPLAY.get(), ACACIA_CARD_DISPLAY.get(), DARK_OAK_CARD_DISPLAY.get(),
                     CRIMSON_CARD_DISPLAY.get(), WARPED_CARD_DISPLAY.get(), ASPEN_CARD_DISPLAY.get(), BAOBAB_CARD_DISPLAY.get(),
                     BLUE_ENCHANTED_CARD_DISPLAY.get(), BULBIS_CARD_DISPLAY.get(), CHERRY_CARD_DISPLAY.get(), CIKA_CARD_DISPLAY.get(),
@@ -248,10 +248,10 @@ public class RegistryHandler {
                     WILLOW_CARD_DISPLAY.get(), WITCH_HAZEL_CARD_DISPLAY.get(), ZELKOVA_CARD_DISPLAY.get()).build(null));
 
     public static final RegistryObject<TileEntityType<CardStandTile>> CARD_STAND_TILE = TILE_ENTITIES.register("card_stand",
-            () -> TileEntityType.Builder.create(CardStandTile::new, CARD_STAND.get()).build(null));
+            () -> TileEntityType.Builder.of(CardStandTile::new, CARD_STAND.get()).build(null));
 
     public static final RegistryObject<TileEntityType<BuddysteelVaultTile>> VAULT_TILE = TILE_ENTITIES.register("buddysteel_vault",
-            () -> TileEntityType.Builder.create(BuddysteelVaultTile::new, VAULT.get(), VAULT_NETHER.get(), VAULT_END.get(), VAULT_BYG.get(),
+            () -> TileEntityType.Builder.of(BuddysteelVaultTile::new, VAULT.get(), VAULT_NETHER.get(), VAULT_END.get(), VAULT_BYG.get(),
                     VAULT_CREATE.get(), VAULT_AQUACULTURE.get(), VAULT_FD.get()).build(null));
 
     public static final RegistryObject<Enchantment> BUDDY_BINDING = ENCHANTMENTS.register("buddy_binding", EnchantmentBuddyBinding::new);
@@ -260,10 +260,10 @@ public class RegistryHandler {
 
     //Buddysteel
     public static final RegistryObject<Block> BUDDYSTEEL_BLOCK = BLOCKS.register("buddysteel_block", BuddysteelBlock::new);
-    public static final RegistryObject<BlockItem> BUDDYSTEEL_BLOCK_ITEM = ITEMS.register("buddysteel_block", () -> new BlockItem(BUDDYSTEEL_BLOCK.get(), new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<Item> BUDDYSTEEL_INGOT = ITEMS.register("buddysteel_ingot", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<Item> BUDDYSTEEL_BLEND = ITEMS.register("buddysteel_blend", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
-    public static final RegistryObject<Item> BUDDYSTEEL_NUGGET = ITEMS.register("buddysteel_nugget", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> BUDDYSTEEL_BLOCK_ITEM = ITEMS.register("buddysteel_block", () -> new BlockItem(BUDDYSTEEL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> BUDDYSTEEL_INGOT = ITEMS.register("buddysteel_ingot", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> BUDDYSTEEL_BLEND = ITEMS.register("buddysteel_blend", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> BUDDYSTEEL_NUGGET = ITEMS.register("buddysteel_nugget", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> BUDDYSTEEL_HELMET = ITEMS.register("buddysteel_helmet", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.BUDDYSTEEL, EquipmentSlotType.HEAD));
     public static final RegistryObject<Item> BUDDYSTEEL_CHESTPLATE = ITEMS.register("buddysteel_chestplate", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.BUDDYSTEEL, EquipmentSlotType.CHEST));
     public static final RegistryObject<Item> BUDDYSTEEL_LEGGINGS = ITEMS.register("buddysteel_leggings", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.BUDDYSTEEL, EquipmentSlotType.LEGS));

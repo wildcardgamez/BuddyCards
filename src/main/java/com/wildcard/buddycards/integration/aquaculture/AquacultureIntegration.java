@@ -33,7 +33,7 @@ public class AquacultureIntegration {
     @SubscribeEvent
     public void onItemFished(ItemFishedEvent event) {
         float oddsOfGettingBuddyLoot = 0f;
-        ItemStack rod = event.getPlayer().getHeldItemMainhand();
+        ItemStack rod = event.getPlayer().getMainHandItem();
         //If the rod has a buddysteel hook, give it the chance to get a pack
         if(AquaFishingRodItem.getHookType(rod).equals(BUDDY_HOOK))
             oddsOfGettingBuddyLoot += ConfigManager.aquacultureFishingChance.get();
@@ -43,19 +43,19 @@ public class AquacultureIntegration {
         //With the odds added up, pray to RNGesus
         if(oddsOfGettingBuddyLoot != 0 && Math.random() < oddsOfGettingBuddyLoot) {
             //Roll the special loot
-            List<ItemStack> list = event.getPlayer().getServer().getLootTableManager().getLootTableFromLocation(
-                    new ResourceLocation(BuddyCards.MOD_ID, "item/aquaculture_buddyhook")).generate(
-                    new LootContext.Builder(event.getPlayer().getServer().getWorld(event.getPlayer().getEntityWorld().getDimensionKey()))
-                            .withRandom(event.getPlayer().getEntityWorld().rand).build(LootParameterSets.EMPTY));
+            List<ItemStack> list = event.getPlayer().getServer().getLootTables().get(
+                    new ResourceLocation(BuddyCards.MOD_ID, "item/aquaculture_buddyhook")).getRandomItems(
+                    new LootContext.Builder(event.getPlayer().getServer().getLevel(event.getPlayer().getCommandSenderWorld().dimension()))
+                            .withRandom(event.getPlayer().getCommandSenderWorld().random).create(LootParameterSets.EMPTY));
             //Throw the loot at the player from the same position as the fish
             for(ItemStack itemstack : list) {
-                ItemEntity itementity = new ItemEntity(event.getHookEntity().world, event.getHookEntity().getPosX(), event.getHookEntity().getPosY(), event.getHookEntity().getPosZ(), itemstack);
-                double d0 = event.getPlayer().getPosX() - event.getHookEntity().getPosX();
-                double d1 = event.getPlayer().getPosY() - event.getHookEntity().getPosY();
-                double d2 = event.getPlayer().getPosZ() - event.getHookEntity().getPosZ();
-                itementity.setMotion(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
-                event.getHookEntity().world.addEntity(itementity);
-                event.getPlayer().world.addEntity(new ExperienceOrbEntity(event.getPlayer().world, event.getPlayer().getPosX(), event.getPlayer().getPosY() + 0.5D, event.getPlayer().getPosZ() + 0.5D, event.getPlayer().getEntityWorld().rand.nextInt(6) + 1));
+                ItemEntity itementity = new ItemEntity(event.getHookEntity().level, event.getHookEntity().getX(), event.getHookEntity().getY(), event.getHookEntity().getZ(), itemstack);
+                double d0 = event.getPlayer().getX() - event.getHookEntity().getX();
+                double d1 = event.getPlayer().getY() - event.getHookEntity().getY();
+                double d2 = event.getPlayer().getZ() - event.getHookEntity().getZ();
+                itementity.setDeltaMovement(d0 * 0.1D, d1 * 0.1D + Math.sqrt(Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2)) * 0.08D, d2 * 0.1D);
+                event.getHookEntity().level.addFreshEntity(itementity);
+                event.getPlayer().level.addFreshEntity(new ExperienceOrbEntity(event.getPlayer().level, event.getPlayer().getX(), event.getPlayer().getY() + 0.5D, event.getPlayer().getZ() + 0.5D, event.getPlayer().getCommandSenderWorld().random.nextInt(6) + 1));
             }
         }
     }

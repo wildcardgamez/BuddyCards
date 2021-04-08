@@ -22,22 +22,22 @@ public class EnderBinderItem extends Item{
     private final static HashMap<UUID,BinderInventory> INVENTORIES = new HashMap<UUID,BinderInventory>();
 
     public EnderBinderItem() {
-        super(new Item.Properties().group(BuddyCards.TAB).maxStackSize(1));
+        super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1));
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
         if(playerIn instanceof ServerPlayerEntity) {
             //If map doesnt have an inventory for the player,
-            if(!INVENTORIES.containsKey(playerIn.getUniqueID())) {
-                INVENTORIES.put(playerIn.getUniqueID(), new BinderInventory(54, true));
+            if(!INVENTORIES.containsKey(playerIn.getUUID())) {
+                INVENTORIES.put(playerIn.getUUID(), new BinderInventory(54, true));
             }
             //Open the GUI on server side
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, new SimpleNamedContainerProvider(
-                    (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, INVENTORIES.get(playerIn.getUniqueID()))
-                    , playerIn.getHeldItem(handIn).getDisplayName()));
+                    (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, INVENTORIES.get(playerIn.getUUID()))
+                    , playerIn.getItemInHand(handIn).getDisplayName()));
         }
-        return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+        return ActionResult.success(playerIn.getItemInHand(handIn));
     }
 }

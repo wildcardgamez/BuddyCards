@@ -9,30 +9,30 @@ public class RatioFinder {
     public static float getRatio(ServerPlayerEntity player) {
         int max = 3;
         int sets = 0;
-        if (player.getAdvancements().getProgress(player.server.getAdvancementManager().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set1s"))).isDone())
+        if (player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set1s"))).isDone())
             sets++;
-        if (player.getAdvancements().getProgress(player.server.getAdvancementManager().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set2s"))).isDone())
+        if (player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set2s"))).isDone())
             sets++;
-        if (player.getAdvancements().getProgress(player.server.getAdvancementManager().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set3s"))).isDone())
+        if (player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set3s"))).isDone())
             sets++;
         if (ModList.get().isLoaded("byg")) {
             max++;
-            if (player.getAdvancements().getProgress(player.server.getAdvancementManager().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set4s"))).isDone())
+            if (player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set4s"))).isDone())
                 sets++;
         }
         if (ModList.get().isLoaded("create")) {
             max++;
-            if (player.getAdvancements().getProgress(player.server.getAdvancementManager().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set5s"))).isDone())
+            if (player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set5s"))).isDone())
                 sets++;
         }
         if (ModList.get().isLoaded("aquaculture")) {
             max++;
-            if (player.getAdvancements().getProgress(player.server.getAdvancementManager().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set6s"))).isDone())
+            if (player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set6s"))).isDone())
                 sets++;
         }
         if (ModList.get().isLoaded("farmersdelight")) {
             max++;
-            if (player.getAdvancements().getProgress(player.server.getAdvancementManager().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set7s"))).isDone())
+            if (player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set7s"))).isDone())
                 sets++;
         }
         if (sets > max)

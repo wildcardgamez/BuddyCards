@@ -34,20 +34,20 @@ import javax.annotation.Nullable;
 
 public class CardDisplayBlock extends Block {
     public static final DirectionProperty DIR = BlockStateProperties.HORIZONTAL_FACING;
-    protected static final VoxelShape NSHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 3.0D);
-    protected static final VoxelShape ESHAPE = Block.makeCuboidShape(13.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape SSHAPE = Block.makeCuboidShape(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape WSHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 3.0D, 16.0D, 16.0D);
+    protected static final VoxelShape NSHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 3.0D);
+    protected static final VoxelShape ESHAPE = Block.box(13.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape SSHAPE = Block.box(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape WSHAPE = Block.box(0.0D, 0.0D, 0.0D, 3.0D, 16.0D, 16.0D);
 
     public CardDisplayBlock() {
-        super(Properties.from(Blocks.OAK_PLANKS));
-        this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
+        super(Properties.copy(Blocks.OAK_PLANKS));
+        this.registerDefaultState(this.defaultBlockState().setValue(DIR, Direction.NORTH));
         NEEDED_MOD = "";
     }
 
     public CardDisplayBlock(String neededMod) {
-        super(Properties.from(Blocks.OAK_PLANKS));
-        this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
+        super(Properties.copy(Blocks.OAK_PLANKS));
+        this.registerDefaultState(this.defaultBlockState().setValue(DIR, Direction.NORTH));
         NEEDED_MOD = neededMod;
     }
 
@@ -56,7 +56,7 @@ public class CardDisplayBlock extends Block {
     @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        Direction direction = state.get(DIR);
+        Direction direction = state.getValue(DIR);
         switch(direction) {
             case NORTH:
             default:
@@ -74,37 +74,37 @@ public class CardDisplayBlock extends Block {
     public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
         switch(direction) {
             case CLOCKWISE_90:
-                switch(state.get(DIR)) {
+                switch(state.getValue(DIR)) {
                     case NORTH:
-                        return state.with(DIR, Direction.EAST);
+                        return state.setValue(DIR, Direction.EAST);
                     case EAST:
-                        return state.with(DIR, Direction.SOUTH);
+                        return state.setValue(DIR, Direction.SOUTH);
                     case SOUTH:
-                        return state.with(DIR, Direction.WEST);
+                        return state.setValue(DIR, Direction.WEST);
                     case WEST:
-                        return state.with(DIR, Direction.NORTH);
+                        return state.setValue(DIR, Direction.NORTH);
                 }
             case CLOCKWISE_180:
-                switch(state.get(DIR)) {
+                switch(state.getValue(DIR)) {
                     case NORTH:
-                        return state.with(DIR, Direction.SOUTH);
+                        return state.setValue(DIR, Direction.SOUTH);
                     case EAST:
-                        return state.with(DIR, Direction.WEST);
+                        return state.setValue(DIR, Direction.WEST);
                     case SOUTH:
-                        return state.with(DIR, Direction.NORTH);
+                        return state.setValue(DIR, Direction.NORTH);
                     case WEST:
-                        return state.with(DIR, Direction.EAST);
+                        return state.setValue(DIR, Direction.EAST);
                 }
             case COUNTERCLOCKWISE_90:
-                switch(state.get(DIR)) {
+                switch(state.getValue(DIR)) {
                     case NORTH:
-                        return state.with(DIR, Direction.WEST);
+                        return state.setValue(DIR, Direction.WEST);
                     case EAST:
-                        return state.with(DIR, Direction.NORTH);
+                        return state.setValue(DIR, Direction.NORTH);
                     case SOUTH:
-                        return state.with(DIR, Direction.EAST);
+                        return state.setValue(DIR, Direction.EAST);
                     case WEST:
-                        return state.with(DIR, Direction.SOUTH);
+                        return state.setValue(DIR, Direction.SOUTH);
                 }
         }
         return state;
@@ -112,20 +112,19 @@ public class CardDisplayBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement (BlockItemUseContext context) {
-        return this.getDefaultState().with(DIR, context.getPlacementHorizontalFacing());
+        return this.defaultBlockState().setValue(DIR, context.getClickedFace());
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(DIR);
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
         if (tileentity instanceof CardDisplayTile) {
-            tileentity.validate();
-            worldIn.setTileEntity(pos, tileentity);
+            worldIn.setBlockEntity(pos, tileentity);
         }
     }
 
@@ -139,27 +138,26 @@ public class CardDisplayBlock extends Block {
         return true;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        int slot = getSlot(state.get(DIR), hit.getHitVec());
-        if (world.getTileEntity(pos) instanceof CardDisplayTile) {
-            CardDisplayTile displayTile = (CardDisplayTile) world.getTileEntity(pos);
-            ItemStack stack = player.getHeldItem(hand);
+    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+        int slot = getSlot(state.getValue(DIR), hit.getLocation());
+        if (world.getBlockEntity(pos) instanceof CardDisplayTile) {
+            CardDisplayTile displayTile = (CardDisplayTile) world.getBlockEntity(pos);
+            ItemStack stack = player.getItemInHand(hand);
             if(stack.getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
                 if (displayTile.isLocked()) {
-                    if (displayTile.toggleLock(player.getUniqueID()))
-                        player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.unlock"), true);
+                    if (displayTile.toggleLock(player.getUUID()))
+                        player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_display.unlock"), true);
                     else
-                        player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.fail_unlock"), true);
+                        player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_display.fail_unlock"), true);
                 }
                 else {
-                    displayTile.toggleLock(player.getUniqueID());
-                    player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
+                    displayTile.toggleLock(player.getUUID());
+                    player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
                 }
             }
             else if (displayTile.isLocked())
-                player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
+                player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
             else if(displayTile.getCardInSlot(slot).getItem() instanceof CardItem) {
                 ItemStack oldCard = displayTile.getCardInSlot(slot);
                 if (stack.getItem() instanceof CardItem) {
@@ -171,7 +169,7 @@ public class CardDisplayBlock extends Block {
                 else {
                     displayTile.putCardInSlot(ItemStack.EMPTY, slot);
                 }
-                player.addItemStackToInventory(oldCard);
+                player.addItem(oldCard);
             }
             else if(stack.getItem() instanceof CardItem) {
                 ItemStack card = new ItemStack(stack.getItem(), 1);
@@ -180,7 +178,6 @@ public class CardDisplayBlock extends Block {
                 stack.shrink(1);
             }
         }
-        world.updateComparatorOutputLevel(pos, this);
         return ActionResultType.SUCCESS;
     }
 
@@ -263,22 +260,22 @@ public class CardDisplayBlock extends Block {
 
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
-        if (world.getTileEntity(pos) instanceof CardDisplayTile)
-            InventoryHelper.dropItems(world, pos, ((CardDisplayTile) (world.getTileEntity(pos))).getInventory());
+        if (world.getBlockEntity(pos) instanceof CardDisplayTile)
+            InventoryHelper.dropContents(world, pos, ((CardDisplayTile) (world.getBlockEntity(pos))).getInventory());
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
         if(NEEDED_MOD != "" && !ModList.get().isLoaded(NEEDED_MOD))
             return;
-        super.fillItemGroup(group, items);
+        super.fillItemCategory(group, items);
     }
     
     @Override
     public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity)
     {
-    	CardDisplayTile displayTile = (CardDisplayTile) world.getTileEntity(pos);
+    	CardDisplayTile displayTile = (CardDisplayTile) world.getBlockEntity(pos);
     	if ( displayTile.isLocked() )
     	{
     		return false;
@@ -290,27 +287,12 @@ public class CardDisplayBlock extends Block {
     @Override
     public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player)
     {
-    	CardDisplayTile displayTile = (CardDisplayTile) world.getTileEntity(pos);
+    	CardDisplayTile displayTile = (CardDisplayTile) world.getBlockEntity(pos);
     	if ( displayTile.isLocked() )
     	{
     		return false;
     	}
     	
     	return super.canHarvestBlock(state, world, pos, player);
-    }
-
-    @Override
-    public boolean hasComparatorInputOverride(BlockState state) {
-        return true;
-    }
-
-    @Override
-    public int getComparatorInputOverride(BlockState blockState, World world, BlockPos pos) {
-        TileEntity tileentity = world.getTileEntity(pos);
-        if (tileentity instanceof CardDisplayTile) {
-            return ((CardDisplayTile) tileentity).getCardsAmt();
-        }
-        else
-            return 0;
     }
 }

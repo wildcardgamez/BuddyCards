@@ -36,7 +36,7 @@ public class EnchantmentHandler {
             boolean empty = true;
             NonNullList<ItemStack> itemsToSave = NonNullList.create();
             for (ItemEntity i: event.getDrops()) {
-                switch(EnchantmentHelper.getEnchantmentLevel(RegistryHandler.BUDDY_BINDING.get(), i.getItem())) {
+                switch(EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.BUDDY_BINDING.get(), i.getItem())) {
                     case 1:
                         if (Math.random() < .3)
                             break;
@@ -49,9 +49,9 @@ public class EnchantmentHandler {
                 }
             }
             if (!empty)
-                items.put(player.getUniqueID().toString(), itemsToSave);
-            if(items.containsKey(player.getUniqueID().toString())) {
-                final List<ItemStack> list = items.get(player.getUniqueID().toString()).subList(0, items.get(player.getUniqueID().toString()).size());
+                items.put(player.getUUID().toString(), itemsToSave);
+            if(items.containsKey(player.getUUID().toString())) {
+                final List<ItemStack> list = items.get(player.getUUID().toString()).subList(0, items.get(player.getUUID().toString()).size());
                 Stream<ItemEntity> stream = StreamSupport.stream(event.getDrops().spliterator(), false);
                 Set<ItemEntity> remove = stream.filter(itemToFilter -> list.contains(itemToFilter.getItem())).collect(Collectors.toSet());
                 event.getDrops().removeAll(remove);
@@ -62,11 +62,11 @@ public class EnchantmentHandler {
     @SubscribeEvent
     public void respawn(PlayerEvent.Clone event) {
         PlayerEntity player = event.getPlayer();
-        if (event.isWasDeath() && items.containsKey(player.getUniqueID().toString())) {
-            for (ItemStack i : items.get(player.getUniqueID().toString())) {
-                player.addItemStackToInventory(i);
+        if (event.isWasDeath() && items.containsKey(player.getUUID().toString())) {
+            for (ItemStack i : items.get(player.getUUID().toString())) {
+                player.addItem(i);
             }
-            items.remove(player.getUniqueID().toString());
+            items.remove(player.getUUID().toString());
         }
     }
 

@@ -8,32 +8,32 @@ public enum BuddysteelItemTier implements IItemTier {
     BUDDYSTEEL();
 
     @Override
-    public int getMaxUses() {
+    public int getUses() {
         return 2048;
     }
 
     @Override
-    public float getEfficiency() {
+    public float getSpeed() {
         return 6;
     }
 
     @Override
-    public float getAttackDamage() {
+    public float getAttackDamageBonus() {
         return 0;
     }
 
     @Override
-    public int getHarvestLevel() {
+    public int getLevel() {
         return 2;
     }
 
     @Override
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return 10;
     }
 
     @Override
-    public Ingredient getRepairMaterial() {
-        return Ingredient.fromItems(RegistryHandler.BUDDYSTEEL_INGOT.get());
+    public Ingredient getRepairIngredient() {
+        return Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get());
     }
 }

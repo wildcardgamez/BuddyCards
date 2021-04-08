@@ -24,26 +24,26 @@ public class BlockBreakHandler
 		}
 		// this makes a locked card display absolutely indestructable 
     	if (targetBlock.getBlock() instanceof CardDisplayBlock) {
-			CardDisplayTile tile = (CardDisplayTile) event.getWorld().getTileEntity(event.getPos());
+			CardDisplayTile tile = (CardDisplayTile) event.getWorld().getBlockEntity(event.getPos());
 
 			if (tile.isLocked() && !player.isCreative()) {
-				player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
+				player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
 				event.setCanceled(true);
 			}
 		}
 		// this makes a locked card stand absolutely indestructable 
     	if (targetBlock.getBlock() instanceof CardStandBlock) {
-			CardStandTile tile = (CardStandTile) event.getWorld().getTileEntity(event.getPos());
+			CardStandTile tile = (CardStandTile) event.getWorld().getBlockEntity(event.getPos());
 			if (tile.isLocked() && !player.isCreative()) {
-				player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
+				player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
 				event.setCanceled(true);
 			}
 		}
 		// this makes a locked card stand absolutely indestructable
 		if (targetBlock.getBlock() instanceof BuddysteelVaultBlock) {
-			BuddysteelVaultTile tile = (BuddysteelVaultTile) event.getWorld().getTileEntity(event.getPos());
+			BuddysteelVaultTile tile = (BuddysteelVaultTile) event.getWorld().getBlockEntity(event.getPos());
 			if (tile.isLocked() && !player.isCreative()) {
-				player.sendStatusMessage(new TranslationTextComponent("block.buddycards.vault.lock"), true);
+				player.displayClientMessage(new TranslationTextComponent("block.buddycards.vault.lock"), true);
 				event.setCanceled(true);
 			}
 		}

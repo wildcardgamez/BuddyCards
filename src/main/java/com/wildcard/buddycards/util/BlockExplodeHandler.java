@@ -26,14 +26,14 @@ public class BlockExplodeHandler
 
 			// exclude this block from the explosion if it is a locked CardDisplayBlock
 			if (targetBlock.getBlock() instanceof CardDisplayBlock) {
-				CardDisplayTile tile = (CardDisplayTile) event.getWorld().getTileEntity(event.getAffectedBlocks().get(i));
+				CardDisplayTile tile = (CardDisplayTile) event.getWorld().getBlockEntity(event.getAffectedBlocks().get(i));
 				if (!tile.isLocked()) {
 					replacedExplosion.add(event.getAffectedBlocks().get(i));
 				}
 			}
 			// exclude this block from the explosion if it is a locked CardStandBlock
 			else if (targetBlock.getBlock() instanceof CardStandBlock) {
-				CardStandTile tile = (CardStandTile) event.getWorld().getTileEntity(event.getAffectedBlocks().get(i));
+				CardStandTile tile = (CardStandTile) event.getWorld().getBlockEntity(event.getAffectedBlocks().get(i));
 				if (!tile.isLocked()) {
 					replacedExplosion.add(event.getAffectedBlocks().get(i));
 				}
@@ -43,7 +43,7 @@ public class BlockExplodeHandler
 			}
 		}
 		// replace the explosion with the same explosion, but without the blocks I excluded
-		event.getExplosion().clearAffectedBlockPositions();
+		event.getExplosion().clearToBlow();
 		event.getAffectedBlocks().addAll(replacedExplosion);
 	}
 }
