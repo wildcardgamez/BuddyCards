@@ -104,7 +104,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
             }
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, (BuddysteelVaultTile)tileentity, pos);
         }
-        return ActionResultType.PASS;
+        return ActionResultType.SUCCESS;
     }
 
     @Override
