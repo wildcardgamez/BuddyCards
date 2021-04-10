@@ -112,7 +112,7 @@ public class CardDisplayBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement (BlockItemUseContext context) {
-        return this.defaultBlockState().setValue(DIR, context.getClickedFace());
+        return this.defaultBlockState().setValue(DIR, context.getHorizontalDirection());
     }
 
     @Override
