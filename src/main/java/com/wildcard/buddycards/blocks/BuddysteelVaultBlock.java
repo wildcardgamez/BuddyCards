@@ -52,7 +52,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
 
     @Override
     public BlockState getStateForPlacement (BlockItemUseContext context) {
-        return this.defaultBlockState().setValue(DIR, context.getHorizontalDirection());
+        return this.defaultBlockState().setValue(DIR, context.getClickedFace());
     }
 
     @Override
