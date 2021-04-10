@@ -4,6 +4,6 @@ import net.minecraft.block.*;
 
 public class BuddysteelBlock extends Block {
     public BuddysteelBlock() {
-        super(Properties.copy(Blocks.IRON_BLOCK));
+        super(Properties.from(Blocks.IRON_BLOCK));
     }
 }

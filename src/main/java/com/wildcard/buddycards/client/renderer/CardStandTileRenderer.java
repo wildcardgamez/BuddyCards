@@ -23,14 +23,14 @@ public class CardStandTileRenderer extends TileEntityRenderer<CardStandTile> {
     @Override
     public void render(CardStandTile tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if(tileEntityIn.getCard().getItem() instanceof CardItem) {
-            matrixStackIn.pushPose();
+            matrixStackIn.push();
             matrixStackIn.translate(0.5, 0.25, 0.5);
             matrixStackIn.scale(0.5f, 0.5f, 0.5f);
-            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(tileEntityIn.getDir() * -22.5f));
+            matrixStackIn.rotate(Vector3f.YP.rotationDegrees(tileEntityIn.getDir() * -22.5f));
             ItemStack itemstack = tileEntityIn.getCard();
-            IBakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-            Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
-            matrixStackIn.popPose();
+            IBakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getItemModelWithOverrides(itemstack, tileEntityIn.getWorld(), null);
+            Minecraft.getInstance().getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+            matrixStackIn.pop();
         }
     }
 }

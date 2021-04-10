@@ -29,15 +29,15 @@ import net.minecraftforge.fml.ModList;
 import javax.annotation.Nullable;
 
 public class CardStandBlock extends Block{
-    protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 1.0D, 11.0D);
+    protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 1.0D, 11.0D);
 
     public CardStandBlock() {
-        super(Properties.copy(Blocks.STONE_BUTTON));
+        super(Properties.from(Blocks.STONE_BUTTON));
         NEEDED_MOD = "";
     }
 
     public CardStandBlock(String neededMod) {
-        super(Properties.copy(Blocks.STONE_BUTTON));
+        super(Properties.from(Blocks.STONE_BUTTON));
         NEEDED_MOD = neededMod;
     }
 
@@ -53,10 +53,11 @@ public class CardStandBlock extends Block{
     }
 
     @Override
-    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        TileEntity tileentity = worldIn.getBlockEntity(pos);
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
         if (tileentity instanceof CardStandTile) {
-            worldIn.setBlockEntity(pos, tileentity);
+            tileentity.validate();
+            worldIn.setTileEntity(pos, tileentity);
         }
     }
 
@@ -72,24 +73,24 @@ public class CardStandBlock extends Block{
 
     @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        if (world.getBlockEntity(pos) instanceof CardStandTile) {
-            CardStandTile standTile = (CardStandTile) world.getBlockEntity(pos);
-            ItemStack stack = player.getItemInHand(hand);
+    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+        if (world.getTileEntity(pos) instanceof CardStandTile) {
+            CardStandTile standTile = (CardStandTile) world.getTileEntity(pos);
+            ItemStack stack = player.getHeldItem(hand);
             if(stack.getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
                 if (standTile.isLocked()) {
-                    if (standTile.toggleLock(player.getUUID()))
-                        player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_stand.unlock"), true);
+                    if (standTile.toggleLock(player.getUniqueID()))
+                        player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_stand.unlock"), true);
                     else
-                        player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_stand.fail_unlock"), true);
+                        player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_stand.fail_unlock"), true);
                 }
                 else {
-                    standTile.toggleLock(player.getUUID());
-                    player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_stand.lock"), true);
+                    standTile.toggleLock(player.getUniqueID());
+                    player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_stand.lock"), true);
                 }
             }
             else if (standTile.isLocked())
-                player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_stand.lock"), true);
+                player.sendStatusMessage(new TranslationTextComponent("block.buddycards.card_stand.lock"), true);
             else if(standTile.getCard().getItem() instanceof CardItem) {
                 ItemStack oldCard = standTile.getCard();
                 if (stack.getItem() instanceof CardItem) {
@@ -101,38 +102,39 @@ public class CardStandBlock extends Block{
                 else {
                     standTile.setCard(ItemStack.EMPTY);
                 }
-                player.addItem(oldCard);
-                standTile.setDir((int)((player.getYHeadRot() * 16.0F / 360.0F) + 0.5D) & 15);
+                player.addItemStackToInventory(oldCard);
+                standTile.setDir((int)((player.getRotationYawHead() * 16.0F / 360.0F) + 0.5D) & 15);
             }
             else if(stack.getItem() instanceof CardItem) {
                 ItemStack card = new ItemStack(stack.getItem(), 1);
                 card.setTag(stack.getTag());
                 standTile.setCard(card);
                 stack.shrink(1);
-                standTile.setDir((int)((player.getYHeadRot() * 16.0F / 360.0F) + 0.5D) & 15);
+                standTile.setDir((int)((player.getRotationYawHead() * 16.0F / 360.0F) + 0.5D) & 15);
             }
         }
+        world.updateComparatorOutputLevel(pos, this);
         return ActionResultType.SUCCESS;
     }
 
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
-        if (world.getBlockEntity(pos) instanceof CardStandTile)
-            InventoryHelper.dropContents(world, pos, NonNullList.withSize(1, ((CardStandTile) (world.getBlockEntity(pos))).getCard()));
+        if (world.getTileEntity(pos) instanceof CardStandTile)
+            InventoryHelper.dropItems(world, pos, NonNullList.withSize(1, ((CardStandTile) (world.getTileEntity(pos))).getCard()));
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if(NEEDED_MOD != "" && !ModList.get().isLoaded(NEEDED_MOD))
             return;
-        super.fillItemCategory(group, items);
+        super.fillItemGroup(group, items);
     }
 
     @Override
     public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity)
     {
-    	CardStandTile displayTile = (CardStandTile) world.getBlockEntity(pos);
+    	CardStandTile displayTile = (CardStandTile) world.getTileEntity(pos);
     	if ( displayTile.isLocked() )
     	{
     		return false;
@@ -144,12 +146,40 @@ public class CardStandBlock extends Block{
     @Override
     public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player)
     {
-    	CardStandTile displayTile = (CardStandTile) world.getBlockEntity(pos);
+    	CardStandTile displayTile = (CardStandTile) world.getTileEntity(pos);
     	if ( displayTile.isLocked() )
     	{
     		return false;
     	}
     	
     	return super.canHarvestBlock(state, world, pos, player);
+    }
+    
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean hasComparatorInputOverride(BlockState state) {
+        return true;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public int getComparatorInputOverride(BlockState blockState, World world, BlockPos pos) {
+        TileEntity tileentity = world.getTileEntity(pos);
+        if (tileentity instanceof CardStandTile && ((CardStandTile) tileentity).getCard().isEmpty()) {
+            return 10;
+        }
+        else
+            return 0;
+    }
+
+    @Override
+    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        BlockPos blockpos = pos.down();
+        return hasSolidSideOnTop(worldIn, blockpos) || hasEnoughSolidSide(worldIn, blockpos, Direction.UP);
+    }
+
+    @Override
+    public boolean canSpawnInBlock() {
+        return true;
     }
 }

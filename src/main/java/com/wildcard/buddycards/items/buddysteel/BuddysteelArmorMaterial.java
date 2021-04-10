@@ -15,28 +15,28 @@ public enum BuddysteelArmorMaterial implements IArmorMaterial {
     private final int[] DAMAGE_REDUCTION_ARRAY = new int[] {1, 4, 5, 2};
 
     @Override
-    public int getDurabilityForSlot(EquipmentSlotType slotIn) {
+    public int getDurability(EquipmentSlotType slotIn) {
         return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * 40;
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlotType slotIn) {
+    public int getDamageReductionAmount(EquipmentSlotType slotIn) {
         return DAMAGE_REDUCTION_ARRAY[slotIn.getIndex()];
     }
 
     @Override
-    public int getEnchantmentValue() {
+    public int getEnchantability() {
         return 10;
     }
 
     @Override
-    public SoundEvent getEquipSound() {
-        return SoundEvents.ARMOR_EQUIP_DIAMOND;
+    public SoundEvent getSoundEvent() {
+        return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
     }
 
     @Override
-    public Ingredient getRepairIngredient() {
-        return Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get());
+    public Ingredient getRepairMaterial() {
+        return Ingredient.fromItems(RegistryHandler.BUDDYSTEEL_INGOT.get());
     }
 
     @Override

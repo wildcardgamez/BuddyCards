@@ -47,7 +47,7 @@ public class VaultContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
+    public boolean canInteractWith(PlayerEntity playerIn) {
         return true;
     }
 
@@ -57,36 +57,36 @@ public class VaultContainer extends Container {
         }
         //Only let cards go into card slots
         @Override
-        public boolean mayPlace(ItemStack stack) {
+        public boolean isItemValid(ItemStack stack) {
             return stack.getItem() instanceof CardItem && !tile.isLocked();
         }
 
         //Only let unlocked vaults be manipulated
         @Override
-        public boolean mayPickup(PlayerEntity playerIn) {
-            return !tile.isLocked() && super.mayPickup(playerIn);
+        public boolean canTakeStack(PlayerEntity playerIn) {
+            return !tile.isLocked() && super.canTakeStack(playerIn);
         }
     }
 
     @Override
-    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
-        Slot slot = slots.get(index);
-        if(slot != null && slot.hasItem())
+        Slot slot = inventorySlots.get(index);
+        if(slot != null && slot.getHasStack())
         {
-            stack = slot.getItem().copy();
+            stack = slot.getStack().copy();
             if (index < 120)
             {
-                if(!this.moveItemStackTo(slot.getItem(), 120, slots.size(), true)) {
+                if(!this.mergeItemStack(slot.getStack(), 120, inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if(!this.moveItemStackTo(slot.getItem(), 0, 120, false))
+            else if(!this.mergeItemStack(slot.getStack(), 0, 120, false))
                 return ItemStack.EMPTY;
-            if(slot.getItem().isEmpty())
-                slot.set(ItemStack.EMPTY);
+            if(slot.getStack().isEmpty())
+                slot.putStack(ItemStack.EMPTY);
             else
-                slot.setChanged();
+                slot.onSlotChanged();
         }
         return stack;
     }

@@ -18,75 +18,83 @@ public class BinderScreen extends ContainerScreen<BinderContainer> {
     public BinderScreen(BinderContainer container, PlayerInventory playerInventory, ITextComponent title) {
         super(container, playerInventory, title);
         //set up sizes for the gui
-        int size = container.getItems().size();
-        this.leftPos = 0;
-        this.topPos = 0;
+        int size = container.getInventory().size();
         if (size == 90) {
-            this.width = 176;
-            this.height = 222;
+            this.guiLeft = 0;
+            this.guiTop = 0;
+            this.xSize = 176;
+            this.ySize = 222;
             return;
         }
         else if (size == 108) {
-            this.width = 230;
-            this.height = 222;
+            this.guiLeft = 0;
+            this.guiTop = 0;
+            this.xSize = 230;
+            this.ySize = 222;
             return;
         }
         else if (size == 132) {
-            this.width = 230;
-            this.height = 258;
+            this.guiLeft = 0;
+            this.guiTop = 0;
+            this.xSize = 230;
+            this.ySize = 258;
             return;
         }
         else if (size == 156) {
-            this.width = 230;
-            this.height = 294;
+            this.guiLeft = 0;
+            this.guiTop = 0;
+            this.xSize = 230;
+            this.ySize = 294;
             return;
         }
-        this.width = 176;
-        this.height = 222;
+        this.guiLeft = 0;
+        this.guiTop = 0;
+        this.xSize = 176;
+        this.ySize = 222;
     }
 
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderTooltip(matrixStack, mouseX, mouseY);
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void renderLabels(MatrixStack matrixStack, int x, int y) {
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
         //Draw the name of the binder and the inventory titles
-        this.font.draw(matrixStack, title, 8.0f, 6.0f, 4210752);
-        int size = menu.getItems().size();
+        this.font.func_243248_b(matrixStack, title, 8.0f, 6.0f, 4210752);
+        int size = container.getInventory().size();
         if (size == 90)
-            this.font.draw(matrixStack, inventory.getDisplayName(),8.0f, 128.0f, 4210752);
+            this.font.func_243248_b(matrixStack, playerInventory.getDisplayName(),8.0f, 128.0f, 4210752);
         else if (size == 108)
-            this.font.draw(matrixStack, inventory.getDisplayName(),35.0f, 128.0f, 4210752);
+            this.font.func_243248_b(matrixStack, playerInventory.getDisplayName(),35.0f, 128.0f, 4210752);
         else if (size == 132)
-            this.font.draw(matrixStack, inventory.getDisplayName(),35.0f, 164.0f, 4210752);
+            this.font.func_243248_b(matrixStack, playerInventory.getDisplayName(),35.0f, 164.0f, 4210752);
         else if (size == 156)
-            this.font.draw(matrixStack, inventory.getDisplayName(),35.0f, 200.0f, 4210752);
+            this.font.func_243248_b(matrixStack, playerInventory.getDisplayName(),35.0f, 200.0f, 4210752);
     }
 
     @Override
-    protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         //Place the texture for the binder gui
-        int size = menu.getItems().size();
+        int size = container.getInventory().size();
         assert this.minecraft != null;
         if (size == 90) {
-            this.minecraft.getTextureManager().bind(TEXTURE1);
-            blit(matrixStack, leftPos, topPos, 0, 0, width, height, 256, 256);
+            this.minecraft.getTextureManager().bindTexture(TEXTURE1);
+            blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize, 256, 256);
         }
         else if (size == 108) {
-            this.minecraft.getTextureManager().bind(TEXTURE2);
-            blit(matrixStack, leftPos, topPos, 0, 0, width, height, 256, 256);
+            this.minecraft.getTextureManager().bindTexture(TEXTURE2);
+            blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize, 256, 256);
         }
         else if (size == 132) {
-            this.minecraft.getTextureManager().bind(TEXTURE3);
-            blit(matrixStack, leftPos, topPos, 0, 0, width, height, 512, 512);
+            this.minecraft.getTextureManager().bindTexture(TEXTURE3);
+            blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize, 512, 512);
         }
         else if (size == 156) {
-            this.minecraft.getTextureManager().bind(TEXTURE4);
-            blit(matrixStack, leftPos, topPos, 0, 0, width, height, 512, 512);
+            this.minecraft.getTextureManager().bindTexture(TEXTURE4);
+            blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize, 512, 512);
         }
     }
 }

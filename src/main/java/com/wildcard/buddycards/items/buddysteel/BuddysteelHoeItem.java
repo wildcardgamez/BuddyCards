@@ -18,13 +18,13 @@ import java.util.List;
 
 public class BuddysteelHoeItem extends HoeItem {
     public BuddysteelHoeItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, 0, -1.0f, new Properties().tab(BuddyCards.TAB));
+        super(BuddysteelItemTier.BUDDYSTEEL, 0, -1.0f, new Properties().group(BuddyCards.TAB));
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         BuddysteelGearHelper.addInformation(stack, tooltip);
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     @Override
@@ -33,15 +33,15 @@ public class BuddysteelHoeItem extends HoeItem {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         BuddysteelGearHelper.setTag(playerIn, handIn);
-        return super.use(worldIn, playerIn, handIn);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         float eff = super.getDestroySpeed(stack, state);
-        if (stack.hasTag() && eff == speed)
+        if (stack.hasTag() && eff == efficiency)
             return eff + (int) (4 * stack.getTag().getFloat("completion"));
         else
             return eff;

@@ -18,13 +18,13 @@ import java.util.List;
 
 public class BuddysteelFishingRodItem extends AquaFishingRodItem {
     public BuddysteelFishingRodItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, new Item.Properties().tab(BuddyCards.TAB).defaultDurability(512));
+        super(BuddysteelItemTier.BUDDYSTEEL, new Item.Properties().group(BuddyCards.TAB).defaultMaxDamage(512));
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         BuddysteelGearHelper.addInformation(stack, tooltip);
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     @Override
@@ -33,8 +33,8 @@ public class BuddysteelFishingRodItem extends AquaFishingRodItem {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         BuddysteelGearHelper.setTag(playerIn, handIn);
-        return super.use(worldIn, playerIn, handIn);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

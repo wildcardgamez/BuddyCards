@@ -13,10 +13,10 @@ public class VaultScreen extends ContainerScreen<VaultContainer> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(BuddyCards.MOD_ID, "textures/gui/buddysteel_vault.png");
     public VaultScreen(VaultContainer container, PlayerInventory playerInventory, ITextComponent title) {
         super(container, playerInventory, title);
-        this.leftPos = 0;
-        this.topPos = 0;
-        this.width = 230;
-        this.height = 294;
+        this.guiLeft = 0;
+        this.guiTop = 0;
+        this.xSize = 230;
+        this.ySize = 294;
         return;
     }
 
@@ -24,21 +24,23 @@ public class VaultScreen extends ContainerScreen<VaultContainer> {
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderTooltip(matrixStack, mouseX, mouseY);
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void renderLabels(MatrixStack matrixStack, int x, int y) {
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
         //Draw the name of the vault and the inventory titles
-        this.font.draw(matrixStack, title, 8.0f, 6.0f, 4210752);
-        this.font.draw(matrixStack, inventory.getDisplayName(),35.0f, 200.0f, 4210752);
+        this.font.func_243248_b(matrixStack, title, 8.0f, 6.0f, 4210752);
+        int size = container.getInventory().size();
+        this.font.func_243248_b(matrixStack, playerInventory.getDisplayName(),35.0f, 200.0f, 4210752);
     }
 
     @Override
-    protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         //Place the texture for the vault gui
+        int size = container.getInventory().size();
         assert this.minecraft != null;
-        this.minecraft.getTextureManager().bind(TEXTURE);
-        blit(matrixStack, leftPos, topPos, 0, 0, width, height, 512, 512);
+        this.minecraft.getTextureManager().bindTexture(TEXTURE);
+        blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize, 512, 512);
     }
 }

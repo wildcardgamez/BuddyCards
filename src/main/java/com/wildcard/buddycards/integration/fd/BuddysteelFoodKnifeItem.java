@@ -24,13 +24,13 @@ import java.util.List;
 
 public class BuddysteelFoodKnifeItem extends KnifeItem {
     public BuddysteelFoodKnifeItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, 1, -1.8f, new Item.Properties().tab(BuddyCards.TAB));
+        super(BuddysteelItemTier.BUDDYSTEEL, 1, -1.8f, new Item.Properties().group(BuddyCards.TAB));
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         BuddysteelGearHelper.addInformation(stack, tooltip);
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     @Override
@@ -39,9 +39,9 @@ public class BuddysteelFoodKnifeItem extends KnifeItem {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         BuddysteelGearHelper.setTag(playerIn, handIn);
-        return super.use(worldIn, playerIn, handIn);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     @Override
@@ -50,8 +50,8 @@ public class BuddysteelFoodKnifeItem extends KnifeItem {
         if (stack.hasTag() && slot == EquipmentSlotType.MAINHAND) {
             multimap = LinkedHashMultimap.create();
             float ratio = stack.getTag().getFloat("completion");
-            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.getAttackDamage() + 2 + (ratio * 3), AttributeModifier.Operation.ADDITION));
-            multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -1.8, AttributeModifier.Operation.ADDITION));
+            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getAttackDamage() + 2 + (ratio * 3), AttributeModifier.Operation.ADDITION));
+            multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -1.8, AttributeModifier.Operation.ADDITION));
         }
         return multimap;
     }

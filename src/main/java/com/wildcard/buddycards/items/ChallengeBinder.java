@@ -17,14 +17,14 @@ public class ChallengeBinder extends BinderItem{
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if(stack.hasTag())
-            tooltip.add(new TranslationTextComponent("item.buddycards.points_info").append("" + stack.getTag().getInt("points")));
+            tooltip.add(new TranslationTextComponent("item.buddycards.points_info").appendString("" + stack.getTag().getInt("points")));
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if(ConfigManager.challengeMode.get())
-            super.fillItemCategory(group, items);
+            super.fillItemGroup(group, items);
     }
 }

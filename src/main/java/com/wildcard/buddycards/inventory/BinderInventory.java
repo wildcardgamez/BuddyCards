@@ -25,11 +25,11 @@ public class BinderInventory extends Inventory {
     public boolean ender;
 
     @Override
-    public void startOpen(PlayerEntity player)
+    public void openInventory(PlayerEntity player)
     {
         //Set all slots in the binder as empty by default
-        for(int i = 0; i < this.getContainerSize(); i++) {
-            setItem(i, ItemStack.EMPTY);
+        for(int i = 0; i < this.getSizeInventory(); i++) {
+            setInventorySlotContents(i, ItemStack.EMPTY);
         }
 
         if(binder.hasTag())
@@ -40,15 +40,15 @@ public class BinderInventory extends Inventory {
             for(int i = 0; i < list.size(); i++) {
                 CompoundNBT compoundnbt = list.getCompound(i);
                 int k = compoundnbt.getByte("Slot") & 255;
-                if (k >= 0 && k < this.getContainerSize()) {
-                    this.setItem(k, ItemStack.of(compoundnbt));
+                if (k >= 0 && k < this.getSizeInventory()) {
+                    this.setInventorySlotContents(k, ItemStack.read(compoundnbt));
                 }
             }
         }
     }
 
     @Override
-    public void stopOpen(PlayerEntity player)
+    public void closeInventory(PlayerEntity player)
     {
         boolean calcPoints = ConfigManager.challengeMode.get();
         int points = 0;
@@ -62,14 +62,14 @@ public class BinderInventory extends Inventory {
             else
                 nbt = new CompoundNBT();
             ListNBT list = new ListNBT();
-            for(int i = 0; i < this.getContainerSize(); i++) {
-                ItemStack itemstack = this.getItem(i);
+            for(int i = 0; i < this.getSizeInventory(); i++) {
+                ItemStack itemstack = this.getStackInSlot(i);
                 if (!itemstack.isEmpty()) {
                     CompoundNBT compoundnbt = new CompoundNBT();
                     if (calcPoints)
                         points += ((CardItem)itemstack.getItem()).getPointValue(itemstack) * itemstack.getCount();
                     compoundnbt.putByte("Slot", (byte)i);
-                    itemstack.deserializeNBT(compoundnbt);
+                    itemstack.write(compoundnbt);
                     list.add(compoundnbt);
                 }
             }

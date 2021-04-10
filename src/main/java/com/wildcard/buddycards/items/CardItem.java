@@ -26,7 +26,7 @@ public class CardItem extends Item {
      * @param isShiny is it a shiny card
      */
     public CardItem(int setNumber, int cardNumber, boolean isShiny) {
-        super(new Item.Properties().tab(BuddyCards.CARDS_TAB));
+        super(new Item.Properties().group(BuddyCards.CARDS_TAB));
         SET_NUMBER = setNumber;
         CARD_NUMBER = cardNumber;
         SHINY = isShiny;
@@ -48,7 +48,7 @@ public class CardItem extends Item {
      * @param raritySeperators the final common uncommon and rare card numbers to setup the rarities based on card number
      */
     public CardItem(int setNumber, int cardNumber, boolean isShiny, int[] raritySeperators) {
-        super(new Item.Properties().tab(BuddyCards.CARDS_TAB));
+        super(new Item.Properties().group(BuddyCards.CARDS_TAB));
         SET_NUMBER = setNumber;
         CARD_NUMBER = cardNumber;
         SHINY = isShiny;
@@ -82,11 +82,11 @@ public class CardItem extends Item {
     private final Rarity rarity;
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         //Add the card description
         tooltip.add(new TranslationTextComponent("item.buddycards.card." + SET_NUMBER + "." + CARD_NUMBER + ".tooltip"));
         TranslationTextComponent cn = new TranslationTextComponent("item.buddycards.number_separator");
-        cn.append("" + CARD_NUMBER);
+        cn.appendString("" + CARD_NUMBER);
         //Add the star to the prefix when it's a shiny variant
         if (SHINY)
             cn.append(new TranslationTextComponent("item.buddycards.shiny_symbol"));
@@ -97,12 +97,12 @@ public class CardItem extends Item {
             tooltip.add(new TranslationTextComponent("item.buddycards.grade_info").append(
                     new TranslationTextComponent("item.buddycards.grade_" + stack.getTag().getInt("grade"))));
         if (ConfigManager.challengeMode.get())
-            tooltip.add(new TranslationTextComponent("item.buddycards.points_info").append(
+            tooltip.add(new TranslationTextComponent("item.buddycards.points_info").appendString(
                     "" + ((CardItem)stack.getItem()).getPointValue(stack)));
     }
 
     @Override
-    public boolean isFoil(ItemStack stack) {
+    public boolean hasEffect(ItemStack stack) {
         //Make shiny cards have enchant glow, and non-shiny ones not
         return SHINY;
     }
@@ -113,7 +113,7 @@ public class CardItem extends Item {
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         //Only show cards in the creative menu when the respective mod is loaded
         if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
             return;
@@ -123,30 +123,30 @@ public class CardItem extends Item {
             return;
         else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
             return;
-        super.fillItemCategory(group, items);
+        super.fillItemGroup(group, items);
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         if (handIn == Hand.MAIN_HAND)
             return tryGrade(RegistryHandler.GRADING_SLEEVE.get(), worldIn, playerIn, handIn);
-        return super.use(worldIn, playerIn, handIn);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     public ActionResult<ItemStack> tryGrade(Item gradingSleeve, World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if (playerIn.getItemInHand(Hand.OFF_HAND).getItem().equals(gradingSleeve)) {
-            CompoundNBT nbt = playerIn.getItemInHand(handIn).getTag();
+        if (playerIn.getHeldItem(Hand.OFF_HAND).getItem().equals(gradingSleeve)) {
+            CompoundNBT nbt = playerIn.getHeldItem(handIn).getTag();
             if (nbt == null)
                 nbt = new CompoundNBT();
             if (nbt.getInt("grade") == 0) {
                 //Take the grading sleeve
-                playerIn.getItemInHand(Hand.OFF_HAND).shrink(1);
+                playerIn.getHeldItem(Hand.OFF_HAND).shrink(1);
                 //Get a grade using maths for rarity
                 int i = (int) (Math.random() * 500) + 1;
                 int grade;
                 //If they have grading luck, reroll until the roll is over 100
-                if (playerIn.hasEffect(RegistryHandler.GRADING_LUCK.get())) {
-                    for (int j = 0; j <= playerIn.getEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier() && i < 400; j++) {
+                if (playerIn.isPotionActive(RegistryHandler.GRADING_LUCK.get())) {
+                    for (int j = 0; j <= playerIn.getActivePotionEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier() && i < 400; j++) {
                         i = (int) (Math.random() * 500) + 1;
                     }
                 }
@@ -162,15 +162,15 @@ public class CardItem extends Item {
                     grade = 5;
                 //Make new graded card and give it to the player, remove old card
                 nbt.putInt("grade", grade);
-                ItemStack card = new ItemStack(playerIn.getItemInHand(handIn).getItem(), 1);
+                ItemStack card = new ItemStack(playerIn.getHeldItem(handIn).getItem(), 1);
                 card.setTag(nbt);
-                playerIn.getItemInHand(handIn).shrink(1);
+                playerIn.getHeldItem(handIn).shrink(1);
                 ItemHandlerHelper.giveItemToPlayer(playerIn, card);
 
-                return ActionResult.success(playerIn.getItemInHand(handIn));
+                return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
             }
         }
-        return super.use(worldIn, playerIn, handIn);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     public int getPointValue(ItemStack card) {

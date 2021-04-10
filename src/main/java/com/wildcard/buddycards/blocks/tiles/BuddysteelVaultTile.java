@@ -59,13 +59,13 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
             this.player = playerUUID.toString();
             this.locked = true;
         }
-        this.setChanged();
-        this.level.blockUpdated(this.getBlockPos(), this.getBlockState().getBlock());
+        this.markDirty();
+        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
         return true;
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT tag) {
+    public CompoundNBT write(CompoundNBT tag) {
         tag.putBoolean("locked", this.locked);
         tag.putString("player", this.player);
         if(name != null)
@@ -74,16 +74,16 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
             CompoundNBT compound = (CompoundNBT)((INBTSerializable)stack).serializeNBT();
             tag.put("inv", compound);
         });
-        return super.save(tag);
+        return super.write(tag);
     }
 
     @Override
-    public void deserializeNBT(BlockState state, CompoundNBT tag) {
-        super.deserializeNBT(state, tag);
+    public void read(BlockState state, CompoundNBT tag) {
+        super.read(state, tag);
         this.locked = tag.getBoolean("locked");
         this.player = tag.getString("player");
         if(tag.contains("name"))
-            this.name = ITextComponent.Serializer.fromJson(tag.getString("name"));
+            this.name = ITextComponent.Serializer.getComponentFromJson(tag.getString("name"));
         CompoundNBT invTag = tag.getCompound("inv");
         this.handler.ifPresent((stack) -> {
             ((INBTSerializable)stack).deserializeNBT(invTag);

@@ -24,12 +24,12 @@ public class BuddysteelFilletKnifeItem extends BuddysteelSwordItem {
     }
 
     private boolean canApplyEnchantment(Enchantment enchantment) {
-        return enchantment != Enchantments.MOB_LOOTING && enchantment != Enchantments.SWEEPING_EDGE;
+        return enchantment != Enchantments.LOOTING && enchantment != Enchantments.SWEEPING;
     }
 
     @Override
-    public float getDamage() {
-        return BuddysteelItemTier.BUDDYSTEEL.getAttackDamageBonus() / 2;
+    public float getAttackDamage() {
+        return BuddysteelItemTier.BUDDYSTEEL.getAttackDamage() / 2;
     }
 
     @Override
@@ -38,8 +38,8 @@ public class BuddysteelFilletKnifeItem extends BuddysteelSwordItem {
         if (stack.hasTag() && slot == EquipmentSlotType.MAINHAND) {
             multimap = LinkedHashMultimap.create();
             float ratio = stack.getTag().getFloat("completion");
-            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.getDamage() + 1 + (ratio * 1.5), AttributeModifier.Operation.ADDITION));
-            multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.2, AttributeModifier.Operation.ADDITION));
+            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getAttackDamage() + 1 + (ratio * 1.5), AttributeModifier.Operation.ADDITION));
+            multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.2, AttributeModifier.Operation.ADDITION));
         }
         return multimap;
     }

@@ -24,9 +24,9 @@ public class LootInjection {
 
         @Override
         protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-            LootContext.Builder builder = (new LootContext.Builder(context.getLevel()).withRandom(context.getRandom()));
-            LootTable loottable = context.getLevel().getServer().getLootTables().get(table);
-            generatedLoot.addAll(loottable.getRandomItems(builder.create(LootParameterSets.EMPTY)));
+            LootContext.Builder builder = (new LootContext.Builder(context.getWorld()).withRandom(context.getRandom()));
+            LootTable loottable = context.getWorld().getServer().getLootTableManager().getLootTableFromLocation(table);
+            generatedLoot.addAll(loottable.generate(builder.build(LootParameterSets.EMPTY)));
             return generatedLoot;
         }
     }
@@ -34,7 +34,7 @@ public class LootInjection {
     public static class LootInjectionSerializer extends GlobalLootModifierSerializer<LootInjectionModifier> {
         @Override
         public LootInjectionModifier read(ResourceLocation location, JsonObject object, ILootCondition[] ailootcondition) {
-            return new LootInjectionModifier(ailootcondition, new ResourceLocation(JSONUtils.getAsString(object, "injection")));
+            return new LootInjectionModifier(ailootcondition, new ResourceLocation(JSONUtils.getString(object, "injection")));
         }
 
         @Override

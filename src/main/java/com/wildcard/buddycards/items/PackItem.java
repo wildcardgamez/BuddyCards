@@ -25,14 +25,14 @@ import java.util.List;
 
 public class PackItem extends Item {
     public PackItem(int setNumber) {
-        super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(16));
+        super(new Item.Properties().group(BuddyCards.TAB).maxStackSize(16));
         SET_NUMBER = setNumber;
     }
 
     final int SET_NUMBER;
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         //Set name and explanation of what the pack is
         tooltip.add(new TranslationTextComponent("item.buddycards.set." + SET_NUMBER));
         tooltip.add(new TranslationTextComponent("item.buddycards.contains." + SET_NUMBER));
@@ -45,28 +45,28 @@ public class PackItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         //Prematurely delete the pack item so the card items can go in the same slot
-        playerIn.getItemInHand(handIn).shrink(1);
+        playerIn.getHeldItem(handIn).shrink(1);
         if(worldIn instanceof ServerWorld) {
             //Generate the associated loot table with the pack and give the cards to the player on server side
             ServerWorld server = (ServerWorld) worldIn;
-            LootContext.Builder builder = (new LootContext.Builder(server).withRandom(worldIn.random));
+            LootContext.Builder builder = (new LootContext.Builder(server).withRandom(worldIn.rand));
             ResourceLocation resourcelocation;
             if(SET_NUMBER == 0)
                 resourcelocation = new ResourceLocation(BuddyCards.MOD_ID, "item/packs/mystery");
             else
                 resourcelocation = new ResourceLocation(BuddyCards.MOD_ID, "item/packs/" + SET_NUMBER);
-            LootTable loottable = server.getServer().getLootTables().get(resourcelocation);
-            List<ItemStack> cards = loottable.getRandomItems(builder.create(LootParameterSets.EMPTY));
+            LootTable loottable = server.getServer().getLootTableManager().getLootTableFromLocation(resourcelocation);
+            List<ItemStack> cards = loottable.generate(builder.build(LootParameterSets.EMPTY));
             cards.forEach((card) -> ItemHandlerHelper.giveItemToPlayer(playerIn, card));
-            return ActionResult.consume(playerIn.getItemInHand(handIn));
+            return ActionResult.resultConsume(playerIn.getHeldItem(handIn));
         }
-        return ActionResult.success(playerIn.getItemInHand(handIn));
+        return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
             return;
         else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
@@ -75,7 +75,7 @@ public class PackItem extends Item {
             return;
         else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
             return;
-        super.fillItemCategory(group, items);
+        super.fillItemGroup(group, items);
     }
 
 }

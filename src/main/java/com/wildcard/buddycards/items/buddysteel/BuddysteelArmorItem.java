@@ -23,13 +23,13 @@ public class BuddysteelArmorItem extends ArmorItem {
     private static final int[][] DAMAGE_REDUCTION_ARRAY = new int[][] {{1, 4, 5, 2}, {2, 5, 6, 2}, {3, 6, 8, 3}, {4, 7, 9, 4}};
 
     public BuddysteelArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot) {
-        super(materialIn, slot, new Item.Properties().tab(BuddyCards.TAB));
+        super(materialIn, slot, new Item.Properties().group(BuddyCards.TAB));
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         BuddysteelGearHelper.addInformation(stack, tooltip);
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     @Override
@@ -38,15 +38,15 @@ public class BuddysteelArmorItem extends ArmorItem {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         BuddysteelGearHelper.setTag(playerIn, handIn);
-        return super.use(worldIn, playerIn, handIn);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
-        if (slot == this.getEquipmentSlot(stack) && stack.hasTag()) {
+        if (slot == this.getEquipmentSlot() && stack.hasTag()) {
             multimap = LinkedHashMultimap.create();
             UUID uuid = ARMOR_MODIFIERS[slot.getIndex()];
             float ratio = stack.getTag().getFloat("completion");

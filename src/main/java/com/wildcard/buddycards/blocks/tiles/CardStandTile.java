@@ -22,10 +22,10 @@ public class CardStandTile extends TileEntity implements IClearable {
     }
 
     public void setCard(ItemStack stack) {
-        if(this.level != null) {
+        if(this.world != null) {
             this.card = stack;
-            this.setChanged();
-            this.level.blockUpdated(this.getBlockPos(), this.getBlockState().getBlock());
+            this.markDirty();
+            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
         }
     }
 
@@ -34,10 +34,10 @@ public class CardStandTile extends TileEntity implements IClearable {
     }
 
     public void setDir(int dirIn){
-        if(this.level != null) {
+        if(this.world != null) {
             this.dir = dirIn;
-            this.setChanged();
-            this.level.blockUpdated(this.getBlockPos(), this.getBlockState().getBlock());
+            this.markDirty();
+            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
         }
     }
 
@@ -57,8 +57,8 @@ public class CardStandTile extends TileEntity implements IClearable {
             this.player = playerUUID.toString();
             this.locked = true;
         }
-        setChanged();
-        this.level.blockUpdated(this.getBlockPos(), this.getBlockState().getBlock());
+        this.markDirty();
+        this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
         return true;
     }
 
@@ -67,9 +67,9 @@ public class CardStandTile extends TileEntity implements IClearable {
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT compound) {
-        super.save(compound);
-        compound.put("card", this.card.serializeNBT());
+    public CompoundNBT write(CompoundNBT compound) {
+        super.write(compound);
+        compound.put("card", this.card.write(new CompoundNBT()));
         compound.putInt("dir", this.dir);
         compound.putBoolean("locked", this.locked);
         compound.putString("player", this.player);
@@ -77,9 +77,9 @@ public class CardStandTile extends TileEntity implements IClearable {
     }
 
     @Override
-    public void deserializeNBT(BlockState state, CompoundNBT nbt) {
-        super.deserializeNBT(state, nbt);
-        this.card = ItemStack.of((CompoundNBT) nbt.get("card"));
+    public void read(BlockState state, CompoundNBT nbt) {
+        super.read(state, nbt);
+        this.card = ItemStack.read((CompoundNBT) nbt.get("card"));
         this.dir = nbt.getInt("dir");
         this.locked = nbt.getBoolean("locked");
         this.player = nbt.getString("player");
@@ -87,21 +87,21 @@ public class CardStandTile extends TileEntity implements IClearable {
 
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.worldPosition, 0, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.save(new CompoundNBT());
+        return this.write(new CompoundNBT());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        this.deserializeNBT(this.getBlockState(), pkt.getTag());
+        this.read(this.getBlockState(), pkt.getNbtCompound());
     }
 
     @Override
-    public void clearContent() {
+    public void clear() {
         this.card = ItemStack.EMPTY;
     }
 }

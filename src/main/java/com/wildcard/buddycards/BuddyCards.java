@@ -59,14 +59,14 @@ public class BuddyCards
 
     public static final ItemGroup TAB = new ItemGroup("buddycards") {
         @Override
-        public ItemStack makeIcon() {
+        public ItemStack createIcon() {
             return new ItemStack(RegistryHandler.PACK_BASE.get());
         }
     };
 
     public static final ItemGroup CARDS_TAB = new ItemGroup("buddycards_cards") {
         @Override
-        public ItemStack makeIcon() {
+        public ItemStack createIcon() {
             return new ItemStack(CardRegistry.CARDS.get((int)(Math.random() * (CardRegistry.CARDS.size()))).get());
         }
     };

@@ -50,45 +50,45 @@ public class CuriosIntegration {
                 if (livingEntity instanceof PlayerEntity && ConfigManager.doMedalEffects.get()) {
                     PlayerEntity player = (PlayerEntity)livingEntity;
                     //At certain times, refresh the enchant based on the medals set number
-                    if(player.level.getGameTime() % 80L != 0L)
+                    if(player.world.getGameTime() % 80L != 0L)
                         return;
                     //Get the level of Buddy Boost to use when calculating what effects to give
-                    int boostVal = EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.BUDDY_BOOST.get(), itemStack);
+                    int boostVal = EnchantmentHelper.getEnchantmentLevel(RegistryHandler.BUDDY_BOOST.get(), itemStack);
                     if(setNumber == 1) {
-                        player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 300, boostVal, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, boostVal, true, false));
                     }
                     else if(setNumber == 2) {
-                        player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 300, 0, true, false));
-                        if(boostVal > 0 && player.isOnFire()) {
-                            player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 1800, 0, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 300, 0, true, false));
+                        if(boostVal > 0 && player.isBurning()) {
+                            player.addPotionEffect(new EffectInstance(Effects.SPEED, 1800, 0, true, false));
                             if (boostVal > 1)
-                                player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 300, 0, true, false));
+                                player.addPotionEffect(new EffectInstance(Effects.STRENGTH, 300, 0, true, false));
                         }
                     }
                     else if(setNumber == 3) {
-                        player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 300, boostVal / 2, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 300, boostVal / 2, true, false));
                         //Cancel out any levitation
-                        if (player.hasEffect(Effects.LEVITATION) && boostVal > 0)
-                            player.removeEffect(Effects.LEVITATION);
+                        if (player.isPotionActive(Effects.LEVITATION) && boostVal > 0)
+                            player.removePotionEffect(Effects.LEVITATION);
                     }
                     else if(setNumber == 4) {
-                        player.addEffect(new EffectInstance(Effects.JUMP, 300, boostVal / 2, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 300, boostVal / 2, true, false));
                         if (boostVal > 0)
-                            player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 300, 0, true, false));
+                            player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, 0, true, false));
                     }
                     else if(setNumber == 5)
-                        player.addEffect(new EffectInstance(Effects.DIG_SPEED, 300, boostVal, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.HASTE, 300, boostVal, true, false));
                     else if(setNumber == 6) {
-                        player.addEffect(new EffectInstance(Effects.LUCK, 300, boostVal / 2, true, false));
+                        player.addPotionEffect(new EffectInstance(Effects.LUCK, 300, boostVal / 2, true, false));
                         if (boostVal > 0)
-                            player.addEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 300, 0, true, false));
+                            player.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 300, 0, true, false));
                     }
                     else if(setNumber == 7) {
-                        player.addEffect(new EffectInstance(ModEffects.NOURISHED.get(), 300, 0, true, false));
-                        if (boostVal > 0 && player.getFoodData().getFoodLevel() > 19) {
-                            player.addEffect(new EffectInstance(ModEffects.COMFORT.get(), 300, 0, true, false));
+                        player.addPotionEffect(new EffectInstance(ModEffects.NOURISHED.get(), 300, 0, true, false));
+                        if (boostVal > 0 && player.getFoodStats().getFoodLevel() > 19) {
+                            player.addPotionEffect(new EffectInstance(ModEffects.COMFORT.get(), 300, 0, true, false));
                             if (boostVal > 1)
-                                player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 300, 0, true, false));
+                                player.addPotionEffect(new EffectInstance(Effects.SPEED, 300, 0, true, false));
                         }
                     }
                 }

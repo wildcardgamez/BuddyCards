@@ -22,29 +22,28 @@ import java.util.List;
 public class
 MedalItem extends Item {
     public MedalItem(int setNumber) {
-        super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant());
+        super(new Item.Properties().group(BuddyCards.TAB).maxStackSize(1).isImmuneToFire());
         SET_NUMBER = setNumber;
     }
 
     final int SET_NUMBER;
 
-    @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         //Show name of who claimed the medal
         if (stack.hasTag())
-            tooltip.add(new TranslationTextComponent("item.buddycards.medal.desc").append(stack.getTag().getString("Collector")));
+            tooltip.add(new TranslationTextComponent("item.buddycards.medal.desc").appendString(stack.getTag().getString("Collector")));
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         //If the medal isn't signed, let the player sign it
-        if(!playerIn.getItemInHand(handIn).hasTag()) {
+        if(!playerIn.getHeldItem(handIn).hasTag()) {
             CompoundNBT nbt = new CompoundNBT();
             nbt.putString("Collector", playerIn.getName().getString());
-            playerIn.getItemInHand(handIn).setTag(nbt);
-            return ActionResult.success(playerIn.getItemInHand(handIn));
+            playerIn.getHeldItem(handIn).setTag(nbt);
+            return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
         }
-        return super.use(worldIn, playerIn, handIn);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     @Override
@@ -56,7 +55,7 @@ MedalItem extends Item {
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
             return;
         else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
@@ -65,7 +64,7 @@ MedalItem extends Item {
             return;
         else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
             return;
-        super.fillItemCategory(group, items);
+        super.fillItemGroup(group, items);
     }
 
     public boolean isEnchantable(ItemStack stack) {
@@ -84,5 +83,13 @@ MedalItem extends Item {
     @Override
     public ItemStack getContainerItem(ItemStack itemStack) {
         return itemStack.copy();
+    }
+
+    @Override
+    public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putString("Collector", playerIn.getName().getString());
+        stack.setTag(nbt);
+        super.onCreated(stack, worldIn, playerIn);
     }
 }
