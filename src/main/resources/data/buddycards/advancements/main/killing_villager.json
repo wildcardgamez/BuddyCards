@@ -22,7 +22,7 @@
             "predicate": {
               "type": "minecraft:villager",
               "flags": {
-                "isBaby": true
+                "is_baby": true
               }
             },
             "entity": "this"
