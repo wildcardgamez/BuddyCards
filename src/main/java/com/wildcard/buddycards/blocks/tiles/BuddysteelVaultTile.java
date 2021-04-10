@@ -21,13 +21,22 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
 import java.util.UUID;
 
 public class BuddysteelVaultTile extends TileEntity implements INamedContainerProvider {
     private LazyOptional<ItemStackHandler> handler = LazyOptional.of(() -> new ItemStackHandler(120) {
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
-            return (slot >= 108 || stack.getItem() instanceof CardItem) && super.isItemValid(slot, stack);
+            return !locked && (slot >= 108 || stack.getItem() instanceof CardItem) && super.isItemValid(slot, stack);
+        }
+
+        @Nonnull
+        @Override
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+            if(locked)
+                return ItemStack.EMPTY;
+            return super.extractItem(slot, amount, simulate);
         }
     });
     private ITextComponent name;

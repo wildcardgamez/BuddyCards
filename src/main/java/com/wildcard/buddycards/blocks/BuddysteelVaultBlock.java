@@ -101,6 +101,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
                     ((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUniqueID());
                     playerIn.sendStatusMessage(new TranslationTextComponent("block.buddycards.vault.lock"), true);
                 }
+                return ActionResultType.SUCCESS;
             }
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, (BuddysteelVaultTile)tileentity, pos);
         }

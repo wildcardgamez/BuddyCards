@@ -32,7 +32,7 @@ public class VaultContainer extends Container {
         }
         //Set up vault item slots
         for (int x = 0; x < 12; x++) {
-            this.addSlot(new SlotItemHandler(handler, x + 108, 8 + x * 18, 180));
+            this.addSlot(new ItemSlot(handler, x + 108, 8 + x * 18, 180));
         }
         //Set up slots for inventory
         for (int y = 0; y < 3; y++) {
@@ -59,6 +59,23 @@ public class VaultContainer extends Container {
         @Override
         public boolean isItemValid(ItemStack stack) {
             return stack.getItem() instanceof CardItem && !tile.isLocked();
+        }
+
+        //Only let unlocked vaults be manipulated
+        @Override
+        public boolean canTakeStack(PlayerEntity playerIn) {
+            return !tile.isLocked() && super.canTakeStack(playerIn);
+        }
+    }
+
+    public class ItemSlot extends SlotItemHandler {
+        public ItemSlot(IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
+            super(inventoryIn, index, xPosition, yPosition);
+        }
+        //Only let cards go into card slots
+        @Override
+        public boolean isItemValid(ItemStack stack) {
+            return !tile.isLocked();
         }
 
         //Only let unlocked vaults be manipulated
