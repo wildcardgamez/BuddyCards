@@ -2,6 +2,7 @@ package com.wildcard.buddycards.container;
 
 import com.wildcard.buddycards.inventory.BinderInventory;
 import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.util.EnderBinderSaveData;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
@@ -140,6 +141,8 @@ public class BinderContainer extends Container {
         //Run the code to check the inventory and convert to nbt
         if(!binderInv.ender)
             binderInv.closeInventory(playerIn);
+        else
+            EnderBinderSaveData.get(playerIn.getCommandSource().getWorld()).markDirty();
         super.onContainerClosed(playerIn);
     }
 
