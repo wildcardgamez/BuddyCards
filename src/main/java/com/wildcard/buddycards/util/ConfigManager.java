@@ -35,8 +35,6 @@ public class ConfigManager {
     public static ForgeConfigSpec.DoubleValue witherChance;
     public static ForgeConfigSpec.IntValue witherMaxPacks;
 
-    public static ForgeConfigSpec.BooleanValue piglinBartering;
-
     public static ForgeConfigSpec.BooleanValue doMedalEffects;
 
     public static ForgeConfigSpec.BooleanValue challengeMode;
@@ -85,9 +83,6 @@ public class ConfigManager {
                 .defineInRange("mobDrops.witherChance", .5f, 0, 1);
         witherMaxPacks = builder.comment("\nMaximum amount of packs dropped when a wither drops packs, default is 3")
                 .defineInRange("mobDrops.witherMaxPacks", 3, 1, 16);
-
-        piglinBartering = builder.comment("\nAllow packs to be obtained through Piglin bartering, default is true")
-                .define("lootTables.piglinBartering", true);
 
         doMedalEffects = builder.comment("\nEnables medal effects, default is true")
                 .define("misc.doMedalEffects", true);
