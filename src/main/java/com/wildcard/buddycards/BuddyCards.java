@@ -1,12 +1,15 @@
 package com.wildcard.buddycards;
 
+import com.wildcard.buddycards.entities.EnderlingEntity;
 import com.wildcard.buddycards.integration.aquaculture.AquacultureIntegration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.util.*;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -51,6 +54,9 @@ public class BuddyCards
         if (ModList.get().isLoaded("aquaculture"))
             MinecraftForge.EVENT_BUS.register(new AquacultureIntegration());
         event.enqueueWork(() -> RegistryHandler.brewingSetup());
+        DeferredWorkQueue.runLater(() -> {
+            GlobalEntityTypeAttributes.put(RegistryHandler.ENDERLING.get(), EnderlingEntity.setupAttributes().create());
+        });
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

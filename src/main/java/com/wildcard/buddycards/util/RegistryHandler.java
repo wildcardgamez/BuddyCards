@@ -7,12 +7,14 @@ import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
 import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardStandTileRenderer;
+import com.wildcard.buddycards.client.renderer.EnderlingRenderer;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.container.VaultContainer;
 import com.wildcard.buddycards.effects.GradingLuckEffect;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBoost;
 import com.wildcard.buddycards.enchantment.EnchantmentExtraPage;
+import com.wildcard.buddycards.entities.EnderlingEntity;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.integration.aquaculture.AquacultureIntegration;
 import com.wildcard.buddycards.integration.fd.FarmersDelightIntegration;
@@ -24,6 +26,8 @@ import com.wildcard.buddycards.screen.VaultScreen;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.ContainerType;
@@ -31,11 +35,13 @@ import net.minecraft.item.*;
 import net.minecraft.potion.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -51,6 +57,7 @@ public class RegistryHandler {
     public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, BuddyCards.MOD_ID);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, BuddyCards.MOD_ID);
     public static final DeferredRegister<GlobalLootModifierSerializer<?>> GLMS = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, BuddyCards.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, BuddyCards.MOD_ID);
 
     public static void init() {
         if (ModList.get().isLoaded("aquaculture"))
@@ -66,6 +73,7 @@ public class RegistryHandler {
         EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         POTIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
         GLMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         if (ModList.get().isLoaded("curios"))
             CuriosIntegration.Imc();
@@ -91,6 +99,7 @@ public class RegistryHandler {
         }
         ClientRegistry.bindTileEntityRenderer(CARD_DISPLAY_TILE.get(), CardDisplayTileRenderer::new);
         ClientRegistry.bindTileEntityRenderer(CARD_STAND_TILE.get(), CardStandTileRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ENDERLING.get(), EnderlingRenderer::new);
     }
 
     //Packs
@@ -290,4 +299,11 @@ public class RegistryHandler {
 
     //GLMs
     public static RegistryObject<GlobalLootModifierSerializer<LootInjection.LootInjectionModifier>> LOOT_INJECTION = GLMS.register("loot_injection", LootInjection.LootInjectionSerializer::new);
+
+    //Entities
+    public static RegistryObject<EntityType<EnderlingEntity>> ENDERLING = ENTITIES.register("enderling",
+            () -> EntityType.Builder.create(EnderlingEntity::new, EntityClassification.CREATURE).size(.6f, 1.8f).build(new ResourceLocation(BuddyCards.MOD_ID, "enderling").toString()));
+
+    //Eggs
+    //public static final RegistryObject<Item> ENDERLING_SPAWN_EGG = ITEMS.register("enderling", () -> new SpawnEggItem(ENDERLING.get(), 0x2E2744, 0x9A72CC, new Item.Properties().group(ItemGroup.MISC)));
 }
