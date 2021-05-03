@@ -96,12 +96,12 @@ public class ConfigManager {
                 .defineInRange("challenge.pointsCommon", 1, 1, 100);
         challengePointsUncommon = builder.comment("\nBase challenge points for uncommon cards, 1-100, default is 2")
                 .defineInRange("challenge.pointsUncommon", 2, 1, 100);
-        challengePointsRare = builder.comment("\nBase challenge points for rare cards, 1-100, default is 3")
-                .defineInRange("challenge.pointsRare", 3, 1, 100);
-        challengePointsEpic = builder.comment("\nBase challenge points for epic cards, 1-100, default is 5")
-                .defineInRange("challenge.pointsEpic", 5, 1, 100);
-        challengeShinyMult = builder.comment("\nMultiplier for challenge points on shiny cards, 0-10, default is 1.25")
-                .defineInRange("challenge.shinyMultiplier", 1.25, 0, 10);
+        challengePointsRare = builder.comment("\nBase challenge points for rare cards, 1-100, default is 4")
+                .defineInRange("challenge.pointsRare", 4, 1, 100);
+        challengePointsEpic = builder.comment("\nBase challenge points for epic cards, 1-100, default is 8")
+                .defineInRange("challenge.pointsEpic", 8, 1, 100);
+        challengeShinyMult = builder.comment("\nMultiplier for challenge points on shiny cards, 0-10, default is 1.5")
+                .defineInRange("challenge.shinyMultiplier", 1.5, 0, 10);
         challengeSet1Mult = builder.comment("\nMultiplier for challenge points from base set, 0-10, default is 1")
                 .defineInRange("challenge.set1Multiplier", 1f, 0, 10);
         challengeSet2Mult = builder.comment("\nMultiplier for challenge points from nether set, 0-10, default is 1.2")

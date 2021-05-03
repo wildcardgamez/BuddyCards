@@ -145,6 +145,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> GRADING_SLEEVE = ITEMS.register("grading_sleeve", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
     public static final RegistryObject<Item> BUDDYSTEEL_KEY = ITEMS.register("buddysteel_key", () -> new Item(new Item.Properties().group(BuddyCards.TAB).maxStackSize(1)));
     public static final RegistryObject<Item> BUDDYBEANS = ITEMS.register("buddybeans", () -> new Item(new Item.Properties().group(BuddyCards.TAB).food(new Food.Builder().hunger(3).saturation(0.3F).build())));
+    public static final RegistryObject<Item> ZYLEX = ITEMS.register("zylex", () -> new Item(new Item.Properties().group(BuddyCards.TAB)));
 
     //Card Display Blocks
     public static final RegistryObject<Block> OAK_CARD_DISPLAY = BLOCKS.register("oak_card_display", CardDisplayBlock::new);
