@@ -90,7 +90,7 @@ public class EnderlingOfferMaker {
     public static MerchantOffer createGenericOffer() {
         int amount = (int) (Math.random() * 12) + 1;
         if(Math.random() > .92)
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + (int) (Math.random()/2*amount)), new ItemStack(RegistryHandler.CARD_STAND.get(), amount/4), 3, amount, 1);
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + 1+ (int) (Math.random()/2*amount)), new ItemStack(RegistryHandler.CARD_STAND.get(), amount/4), 3, amount, 1);
         if(Math.random() > .86)
             return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + (int) (Math.random()/2*amount)), new ItemStack(RegistryHandler.GRADING_SLEEVE.get(), amount/4), 3, amount, 1);
         if(Math.random() > .8)

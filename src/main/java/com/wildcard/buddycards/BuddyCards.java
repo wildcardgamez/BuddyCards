@@ -4,10 +4,10 @@ import com.wildcard.buddycards.entities.EnderlingEntity;
 import com.wildcard.buddycards.integration.aquaculture.AquacultureIntegration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.util.*;
+import com.wildcard.buddycards.util.EntitySpawning;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModList;
@@ -51,6 +51,7 @@ public class BuddyCards
         MinecraftForge.EVENT_BUS.register(new EnchantmentHandler());
         MinecraftForge.EVENT_BUS.register(new BlockBreakHandler());
         MinecraftForge.EVENT_BUS.register(new BlockExplodeHandler());
+        MinecraftForge.EVENT_BUS.register(new EntitySpawning());
         if (ModList.get().isLoaded("aquaculture"))
             MinecraftForge.EVENT_BUS.register(new AquacultureIntegration());
         event.enqueueWork(() -> RegistryHandler.brewingSetup());
