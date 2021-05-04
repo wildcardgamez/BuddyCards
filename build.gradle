@@ -35,7 +35,9 @@ minecraft {
     // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
-            properties 'mixin.env.disableRefMap': 'true'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
@@ -100,7 +102,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.0.14'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5")
@@ -108,9 +110,9 @@ dependencies {
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
 
-    compile fg.deobf("com.teammetallurgy.aquaculture:aquaculture2_1.16.4:1.16.4-2.1.10")
+    compileOnly fg.deobf("com.teammetallurgy.aquaculture:aquaculture2_1.16.4:1.16.4-2.1.10")
 
-    implementation fg.deobf("curse.maven:farmers_delight-398521:3188508")
+    compileOnly fg.deobf("curse.maven:farmers_delight-398521:3295974")
     implementation fg.deobf("curse.maven:jei-238222:3189632")
 }
 
