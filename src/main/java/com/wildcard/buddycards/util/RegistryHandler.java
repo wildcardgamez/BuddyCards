@@ -306,5 +306,6 @@ public class RegistryHandler {
             () -> EntityType.Builder.of(EnderlingEntity::new, EntityClassification.CREATURE).sized(.6f, 1.8f).build(new ResourceLocation(BuddyCards.MOD_ID, "enderling").toString()));
 
     //Eggs
-    //public static final RegistryObject<Item> ENDERLING_SPAWN_EGG = ITEMS.register("enderling", () -> new SpawnEggItem(ENDERLING.get(), 0x2E2744, 0x9A72CC, new Item.Properties().group(ItemGroup.MISC)));
+    public static final RegistryObject<ModdedSpawnEggItem> ENDERLING_SPAWN_EGG = ITEMS.register("spawn_egg_enderling", () ->
+            new ModdedSpawnEggItem(ENDERLING, 0x2E2744, 0x9A72CC, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 }

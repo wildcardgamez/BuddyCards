@@ -54,7 +54,7 @@ public class BuddyCards
         MinecraftForge.EVENT_BUS.register(new EntitySpawning());
         if (ModList.get().isLoaded("aquaculture"))
             MinecraftForge.EVENT_BUS.register(new AquacultureIntegration());
-        event.enqueueWork(() -> RegistryHandler.brewingSetup());
+        event.enqueueWork(RegistryHandler::brewingSetup);
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(RegistryHandler.ENDERLING.get(), EnderlingEntity.setupAttributes().build());
         });
