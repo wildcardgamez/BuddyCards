@@ -37,6 +37,10 @@ public class ConfigManager {
 
     public static ForgeConfigSpec.BooleanValue doMedalEffects;
 
+    public static ForgeConfigSpec.DoubleValue enderlingChanceEnd;
+    public static ForgeConfigSpec.DoubleValue enderlingChanceNether;
+    public static ForgeConfigSpec.DoubleValue enderlingChanceOver;
+
     public static ForgeConfigSpec.BooleanValue challengeMode;
     public static ForgeConfigSpec.IntValue challengePointsCommon;
     public static ForgeConfigSpec.IntValue challengePointsUncommon;
@@ -83,6 +87,13 @@ public class ConfigManager {
                 .defineInRange("mobDrops.witherChance", .5f, 0, 1);
         witherMaxPacks = builder.comment("\nMaximum amount of packs dropped when a wither drops packs, default is 3")
                 .defineInRange("mobDrops.witherMaxPacks", 3, 1, 16);
+
+        enderlingChanceEnd = builder.comment("\nOdds for an Enderling to spawn with an Enderman in the End, 0-1, default is 0.5%")
+                .defineInRange("enderling.endOdds", .005, 0, 1);
+        enderlingChanceNether = builder.comment("\nOdds for an Enderling to spawn with an Enderman in the Nether, 0-1, default is 0.5%")
+                .defineInRange("enderling.netherOdds", .005, 0, 1);
+        enderlingChanceOver = builder.comment("\nOdds for an Enderling to spawn with an Enderman in the Overworld, 0-1, default is 1.5%")
+                .defineInRange("enderling.overOdds", .015, 0, 1);
 
         doMedalEffects = builder.comment("\nEnables medal effects, default is true")
                 .define("misc.doMedalEffects", true);

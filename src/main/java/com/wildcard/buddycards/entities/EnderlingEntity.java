@@ -86,23 +86,22 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
                 this.teleportRandomly();
             }
         }
-
         super.customServerAiStep();
     }
 
-    protected void teleportRandomly() {
+    private void teleportRandomly() {
         if (!this.level.isClientSide() && this.isAlive()) {
             double d0 = this.getX() + (this.random.nextDouble() - 0.5D) * 64.0D;
             double d1 = this.getY() + (double)(this.random.nextInt(64) - 32);
             double d2 = this.getZ() + (this.random.nextDouble() - 0.5D) * 64.0D;
-            this.teleportTo(d0, d1, d2);
+            teleportTo(d0, d1, d2);
         }
     }
 
-    private void teleportTo(double x, double y, double z) {
+    @Override
+    public void teleportTo(double x, double y, double z) {
         BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(x, y, z);
-
-        while(blockpos$mutable.getY() > 0 && !this.level.getBlockState(blockpos$mutable).getMaterial().blocksMotion()) {
+        while (blockpos$mutable.getY() > 0 && !this.level.getBlockState(blockpos$mutable).getMaterial().blocksMotion()) {
             blockpos$mutable.move(Direction.DOWN);
         }
 
@@ -117,7 +116,6 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
                 this.level.playSound(null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
                 this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
             }
-
         }
     }
 
