@@ -6,16 +6,18 @@ import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 
+import net.minecraft.enchantment.Enchantment.Rarity;
+
 public class EnchantmentBuddyBinding extends Enchantment {
     public EnchantmentBuddyBinding() {
         super(Rarity.UNCOMMON, EnchantmentHandler.BUDDY_BINDABLE, EquipmentSlotType.values());
     }
 
-    public int getMinEnchantability(int par1) {
+    public int getMinCost(int par1) {
         return par1 * 15 - 15;
     }
 
-    public int getMaxEnchantability(int par1) {
+    public int getMaxCost(int par1) {
         return par1 * 20;
     }
 

@@ -22,19 +22,19 @@ import java.util.UUID;
 public class EnderBinderItem extends Item{
 
     public EnderBinderItem() {
-        super(new Item.Properties().group(BuddyCards.TAB).maxStackSize(1));
+        super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1));
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
         if(playerIn instanceof ServerPlayerEntity) {
             //Open the GUI on server side
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, new SimpleNamedContainerProvider(
                     (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory,
-                            EnderBinderSaveData.get(((ServerPlayerEntity) playerIn).getServerWorld()).getOrMakeEnderBinder(playerIn.getUniqueID()))
-                    , playerIn.getHeldItem(handIn).getDisplayName()));
+                            EnderBinderSaveData.get(((ServerPlayerEntity) playerIn).getLevel()).getOrMakeEnderBinder(playerIn.getUUID()))
+                    , playerIn.getItemInHand(handIn).getHoverName()));
         }
-        return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+        return ActionResult.success(playerIn.getItemInHand(handIn));
     }
 }

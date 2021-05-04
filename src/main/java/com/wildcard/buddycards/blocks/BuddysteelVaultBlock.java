@@ -33,13 +33,15 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class BuddysteelVaultBlock extends ContainerBlock {
-    public static final DirectionProperty DIR = HorizontalBlock.HORIZONTAL_FACING;
-    protected static final VoxelShape VAULT_SHAPE = Block.makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
+    public static final DirectionProperty DIR = HorizontalBlock.FACING;
+    protected static final VoxelShape VAULT_SHAPE = Block.box(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 
     public BuddysteelVaultBlock(int setNumber) {
-        super(Properties.from(Blocks.IRON_BLOCK).hardnessAndResistance(5, 1200));
-        this.setDefaultState(this.stateContainer.getBaseState().with(DIR, Direction.NORTH));
+        super(Properties.copy(Blocks.IRON_BLOCK).strength(5, 1200));
+        this.registerDefaultState(this.stateDefinition.any().setValue(DIR, Direction.NORTH));
         SET_NUMBER = setNumber;
     }
 
@@ -52,7 +54,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
 
     @Override
     public BlockState getStateForPlacement (BlockItemUseContext context) {
-        return this.getDefaultState().with(DIR, context.getPlacementHorizontalFacing());
+        return this.defaultBlockState().setValue(DIR, context.getHorizontalDirection());
     }
 
     @Override
@@ -66,40 +68,40 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(DIR);
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
+    public BlockRenderType getRenderShape(BlockState state) {
         return BlockRenderType.MODEL;
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
         if (tileentity instanceof BuddysteelVaultTile) {
-            tileentity.validate();
-            if(stack.hasDisplayName())
-                ((BuddysteelVaultTile) tileentity).setDisplayName(stack.getDisplayName());
-            worldIn.setTileEntity(pos, tileentity);
+            tileentity.clearRemoved();
+            if(stack.hasCustomHoverName())
+                ((BuddysteelVaultTile) tileentity).setDisplayName(stack.getHoverName());
+            worldIn.setBlockEntity(pos, tileentity);
         }
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand handIn, BlockRayTraceResult hit) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand handIn, BlockRayTraceResult hit) {
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
         if(playerIn instanceof ServerPlayerEntity && tileentity instanceof BuddysteelVaultTile) {
-            if(playerIn.getHeldItem(handIn).getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
+            if(playerIn.getItemInHand(handIn).getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
                 if (((BuddysteelVaultTile)tileentity).isLocked()) {
-                    if (((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUniqueID()))
-                        playerIn.sendStatusMessage(new TranslationTextComponent("block.buddycards.vault.unlock"), true);
+                    if (((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUUID()))
+                        playerIn.displayClientMessage(new TranslationTextComponent("block.buddycards.vault.unlock"), true);
                     else
-                        playerIn.sendStatusMessage(new TranslationTextComponent("block.buddycards.vault.fail_unlock"), true);
+                        playerIn.displayClientMessage(new TranslationTextComponent("block.buddycards.vault.fail_unlock"), true);
                 }
                 else {
-                    ((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUniqueID());
-                    playerIn.sendStatusMessage(new TranslationTextComponent("block.buddycards.vault.lock"), true);
+                    ((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUUID());
+                    playerIn.displayClientMessage(new TranslationTextComponent("block.buddycards.vault.lock"), true);
                 }
                 return ActionResultType.SUCCESS;
             }
@@ -109,23 +111,23 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     }
 
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity newBlockEntity(IBlockReader worldIn) {
         return new BuddysteelVaultTile();
     }
 
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
-        if (world.getTileEntity(pos) instanceof BuddysteelVaultTile) {
-            IItemHandler handler = ((BuddysteelVaultTile)world.getTileEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(new ItemStackHandler());
+        if (world.getBlockEntity(pos) instanceof BuddysteelVaultTile) {
+            IItemHandler handler = ((BuddysteelVaultTile)world.getBlockEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(new ItemStackHandler());
             for (int i = 0; i < handler.getSlots(); i++) {
-                InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), handler.getStackInSlot(i));
+                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), handler.getStackInSlot(i));
             }
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
         if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
             return;
         else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
@@ -134,6 +136,6 @@ public class BuddysteelVaultBlock extends ContainerBlock {
             return;
         else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
             return;
-        super.fillItemGroup(group, items);
+        super.fillItemCategory(group, items);
     }
 }

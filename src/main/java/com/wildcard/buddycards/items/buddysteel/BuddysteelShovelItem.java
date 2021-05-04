@@ -16,15 +16,17 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public class BuddysteelShovelItem extends ShovelItem {
     public BuddysteelShovelItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, 1.5f, -3.0f, new Properties().group(BuddyCards.TAB));
+        super(BuddysteelItemTier.BUDDYSTEEL, 1.5f, -3.0f, new Properties().tab(BuddyCards.TAB));
     }
 
     @Override
-    public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         BuddysteelGearHelper.addInformation(stack, tooltip);
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
     @Override
@@ -33,15 +35,15 @@ public class BuddysteelShovelItem extends ShovelItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         BuddysteelGearHelper.setTag(playerIn, handIn);
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return super.use(worldIn, playerIn, handIn);
     }
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         float eff = super.getDestroySpeed(stack, state);
-        if (stack.hasTag() && eff == efficiency)
+        if (stack.hasTag() && eff == speed)
             return eff + (int) (4 * stack.getTag().getFloat("completion"));
         else
             return eff;

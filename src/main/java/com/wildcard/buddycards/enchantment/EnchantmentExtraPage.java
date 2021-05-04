@@ -4,16 +4,18 @@ import com.wildcard.buddycards.util.EnchantmentHandler;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
 
+import net.minecraft.enchantment.Enchantment.Rarity;
+
 public class EnchantmentExtraPage extends Enchantment {
     public EnchantmentExtraPage() {
         super(Rarity.RARE, EnchantmentHandler.BUDDY_BINDER, EquipmentSlotType.values());
     }
 
-    public int getMinEnchantability(int par1) {
+    public int getMinCost(int par1) {
         return 10 * par1;
     }
 
-    public int getMaxEnchantability(int par1) {
+    public int getMaxCost(int par1) {
         return 25 + (par1 * 10);
     }
 

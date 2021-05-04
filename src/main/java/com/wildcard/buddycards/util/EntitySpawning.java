@@ -10,8 +10,8 @@ public class EntitySpawning {
     @SubscribeEvent
     public static void spawnIn(LivingSpawnEvent event) {
         if (event.getEntityLiving() instanceof EndermanEntity) {
-            EnderlingEntity entity = RegistryHandler.ENDERLING.get().create(event.getEntityLiving().world);
-            event.getEntityLiving().world.addEntity(entity);
+            EnderlingEntity entity = RegistryHandler.ENDERLING.get().create(event.getEntityLiving().level);
+            event.getEntityLiving().level.addFreshEntity(entity);
         }
     }
 }

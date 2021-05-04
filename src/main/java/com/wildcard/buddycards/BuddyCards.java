@@ -56,7 +56,7 @@ public class BuddyCards
             MinecraftForge.EVENT_BUS.register(new AquacultureIntegration());
         event.enqueueWork(() -> RegistryHandler.brewingSetup());
         DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(RegistryHandler.ENDERLING.get(), EnderlingEntity.setupAttributes().create());
+            GlobalEntityTypeAttributes.put(RegistryHandler.ENDERLING.get(), EnderlingEntity.setupAttributes().build());
         });
     }
 
@@ -66,14 +66,14 @@ public class BuddyCards
 
     public static final ItemGroup TAB = new ItemGroup("buddycards") {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(RegistryHandler.PACK_BASE.get());
         }
     };
 
     public static final ItemGroup CARDS_TAB = new ItemGroup("buddycards_cards") {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(CardRegistry.CARDS.get((int)(Math.random() * (CardRegistry.CARDS.size()))).get());
         }
     };

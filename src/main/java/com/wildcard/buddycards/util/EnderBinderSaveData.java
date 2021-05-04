@@ -20,27 +20,27 @@ public class EnderBinderSaveData extends WorldSavedData {
     }
 
     public static EnderBinderSaveData get(ServerWorld world) {
-        return world.getSavedData().getOrCreate(EnderBinderSaveData::new, BuddyCards.MOD_ID + "_ebdata");
+        return world.getDataStorage().computeIfAbsent(EnderBinderSaveData::new, BuddyCards.MOD_ID + "_ebdata");
     }
 
     @Override
-    public void read(CompoundNBT nbt) {
+    public void load(CompoundNBT nbt) {
         ListNBT list = nbt.getList("ebdata", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < list.size(); i++) {
             CompoundNBT compound = list.getCompound(i);
             BinderInventory inv = new BinderInventory(54, true);
-            inv.read(compound.getList("inv", Constants.NBT.TAG_COMPOUND));
+            inv.fromTag(compound.getList("inv", Constants.NBT.TAG_COMPOUND));
             INVENTORIES.put(UUID.fromString(compound.getString("uuid")), inv);
         }
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT nbt) {
+    public CompoundNBT save(CompoundNBT nbt) {
         ListNBT list = new ListNBT();
         for (Map.Entry<UUID, BinderInventory> i: INVENTORIES.entrySet()) {
             CompoundNBT compound = new CompoundNBT();
             compound.putString("uuid", i.getKey().toString());
-            compound.put("inv", i.getValue().write());
+            compound.put("inv", i.getValue().createTag());
             list.add(compound);
         }
         nbt.put("ebdata", list);
@@ -50,7 +50,7 @@ public class EnderBinderSaveData extends WorldSavedData {
     public BinderInventory getOrMakeEnderBinder(UUID uuid) {
         if(!INVENTORIES.containsKey(uuid))
             INVENTORIES.put(uuid, new BinderInventory(54, true));
-        markDirty();
+        setDirty();
         return(INVENTORIES.get(uuid));
     }
 }

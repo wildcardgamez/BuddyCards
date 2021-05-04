@@ -19,19 +19,19 @@ public class EnderlingRenderer extends MobRenderer<EnderlingEntity, EnderlingMod
     }
 
     @Override
-    public ResourceLocation getEntityTexture(EnderlingEntity entity) {
+    public ResourceLocation getTextureLocation(EnderlingEntity entity) {
         return new ResourceLocation(BuddyCards.MOD_ID, "textures/entity/enderling.png");
     }
 
     @OnlyIn(Dist.CLIENT)
     public class EnderlingEyesLayer extends AbstractEyesLayer<EnderlingEntity, EnderlingModel> {
-        private final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation("textures/entity/enderman/enderman_eyes.png"));
+        private final RenderType RENDER_TYPE = RenderType.eyes(new ResourceLocation("textures/entity/enderman/enderman_eyes.png"));
 
         public EnderlingEyesLayer(IEntityRenderer<EnderlingEntity, EnderlingModel> rendererIn) {
             super(rendererIn);
         }
 
-        public RenderType getRenderType() {
+        public RenderType renderType() {
             return RENDER_TYPE;
         }
     }
