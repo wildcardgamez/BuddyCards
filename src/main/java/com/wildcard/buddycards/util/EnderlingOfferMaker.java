@@ -8,7 +8,7 @@ import net.minecraft.nbt.CompoundNBT;
 public class EnderlingOfferMaker {
     public static MerchantOffer createCardBuyOffer() {
         ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), ((CardItem)card.getItem()).getPointValue(card)/4+1);
+        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), ((CardItem)card.getItem()).getPointValue(card)/3+1);
         return new MerchantOffer(card, zylex, 1, 2, 1);
     }
 
@@ -89,15 +89,16 @@ public class EnderlingOfferMaker {
 
     public static MerchantOffer createGenericOffer() {
         int amount = (int) (Math.random() * 12) + 1;
-        if(Math.random() > .92)
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + 1+ (int) (Math.random()/2*amount)), new ItemStack(RegistryHandler.CARD_STAND.get(), amount/4), 3, amount, 1);
-        if(Math.random() > .86)
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + (int) (Math.random()/2*amount)), new ItemStack(RegistryHandler.GRADING_SLEEVE.get(), amount/4), 3, amount, 1);
-        if(Math.random() > .8)
+        double random = Math.random();
+        if(random > .92)
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + 1 + (int) (Math.random()/2*amount)), new ItemStack(RegistryHandler.CARD_STAND.get(), amount/3 + 1), 3, amount, 1);
+        if(random > .86)
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + (int) (Math.random()/2*amount)), new ItemStack(RegistryHandler.GRADING_SLEEVE.get(), amount/3 + 1), 3, amount, 1);
+        if(random > .8)
             return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + (int) (Math.random()*2*amount)), new ItemStack(RegistryHandler.BUDDYSTEEL_NUGGET.get(), amount), 3, amount*2, 1);
-        if(Math.random() > .75)
+        if(random > .75)
             return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), 6 + (int) (Math.random()*4)), new ItemStack(RegistryHandler.ENDER_BINDER.get()), 1, 6, 1);
-        if(Math.random() > .3)
+        if(random > .3)
             return createBulkCardBuyOffer();
         else
             return createCardTradeOffer();
