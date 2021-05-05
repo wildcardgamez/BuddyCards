@@ -1,8 +1,11 @@
 package com.wildcard.buddycards.util;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MerchantOffer;
 import net.minecraft.nbt.CompoundNBT;
+
+import java.util.Random;
 
 public class EnderlingOfferMaker {
     public static MerchantOffer createCardBuyOffer() {
@@ -32,7 +35,11 @@ public class EnderlingOfferMaker {
             grade = 4;
         nbt.putInt("grade", grade);
         card.setTag(nbt);
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), getZylexValueOfCard(card));
+        int val = getZylexValueOfCard(card);
+        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), val);
+        if(val > 64) {
+            zylex = new ItemStack(RegistryHandler.ZYLEX_BLOCK.get(), (int) (val / 9 + .5));
+        }
         return new MerchantOffer(card, zylex, 3, grade * 2, 1);
     }
 
@@ -53,7 +60,11 @@ public class EnderlingOfferMaker {
             grade = 5;
         nbt.putInt("grade", grade);
         card.setTag(nbt);
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), getZylexValueOfCard(card));
+        int val = getZylexValueOfCard(card);
+        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), val);
+        if(val > 64) {
+            zylex = new ItemStack(RegistryHandler.ZYLEX_BLOCK.get(), (int) (val / 9 + .5));
+        }
         return new MerchantOffer(zylex, card, 1, grade, 1);
     }
 
@@ -108,6 +119,13 @@ public class EnderlingOfferMaker {
             return createCardTradeOffer();
     }
 
+    public static MerchantOffer createSpecialtyOffer(Random random) {
+        double rand = Math.random();
+            ItemStack boots = new ItemStack(RegistryHandler.ZYLEX_BOOTS.get());
+            EnchantmentHelper.enchantItem(random, boots, 15, true);
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) (Math.random() + .5)), boots, 1, 32, 1);
+    }
+
     private static int getZylexValueOfCard(ItemStack card) {
         double value = .5;
         switch(card.getRarity()) {
@@ -127,7 +145,7 @@ public class EnderlingOfferMaker {
                 break;
                 case 4: value *= 5.1;
                 break;
-                case 5: value *= 24.2;
+                case 5: value *= 28.8;
             }
         }
         int fval = (int) value;

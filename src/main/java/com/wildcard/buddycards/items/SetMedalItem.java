@@ -20,9 +20,9 @@ import net.minecraftforge.fml.ModList;
 import java.util.List;
 
 public class
-SetMedalItem extends Item {
-    public SetMedalItem(int setNumber) {
-        super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant());
+SetMedalItem extends MedalItem {
+    public SetMedalItem(int setNumber, MedalTypes type) {
+        super(type);
         SET_NUMBER = setNumber;
     }
 
@@ -47,14 +47,6 @@ SetMedalItem extends Item {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(final ItemStack stack, CompoundNBT unused) {
-        if (ModList.get().isLoaded("curios")) {
-            return CuriosIntegration.initCapabilities(SET_NUMBER, stack);
-        }
-        return super.initCapabilities(stack, unused);
-    }
-
-    @Override
     public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
         if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
             return;
@@ -67,14 +59,6 @@ SetMedalItem extends Item {
         super.fillItemCategory(group, items);
     }
 
-    public boolean isEnchantable(ItemStack stack) {
-        return stack.getCount() == 1;
-    }
-
-    public int getEnchantmentValue() {
-        return 1;
-    }
-
     @Override
     public boolean hasContainerItem(ItemStack stack) {
         return true;
@@ -83,13 +67,5 @@ SetMedalItem extends Item {
     @Override
     public ItemStack getContainerItem(ItemStack itemStack) {
         return itemStack.copy();
-    }
-
-    @Override
-    public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-        CompoundNBT nbt = new CompoundNBT();
-        nbt.putString("Collector", playerIn.getName().getString());
-        stack.setTag(nbt);
-        super.onCraftedBy(stack, worldIn, playerIn);
     }
 }

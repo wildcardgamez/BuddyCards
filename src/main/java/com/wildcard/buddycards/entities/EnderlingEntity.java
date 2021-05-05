@@ -29,6 +29,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     public static final Ingredient TEMPTATION_ITEMS = Ingredient.of(RegistryHandler.PACK_MYSTERY.get(), RegistryHandler.PACK_END.get(), RegistryHandler.ZYLEX.get());
     private PlayerEntity customer;
     private MerchantOffers offers;
+    private int resets;
 
     public EnderlingEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
@@ -151,6 +152,15 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
             offers = new MerchantOffers();
             populateTradeDate();
         }
+        if(offers.size() == 7 && resets >= 4 && resets % 4 == 0){
+            boolean flag = true;
+            for (int i = 0; i < 7 && flag; i++) {
+                if(!offers.get(i).isOutOfStock())
+                    flag = false;
+            }
+            if(flag)
+                offers.add(EnderlingOfferMaker.createSpecialtyOffer(getRandom()));
+        }
         return offers;
     }
 
@@ -184,6 +194,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
         if (compound.contains("Offers", 10)) {
             offers = new MerchantOffers(compound.getCompound("Offers"));
         }
+        resets = compound.getInt("resets");
     }
 
     public void addAdditionalSaveData(CompoundNBT compound) {
@@ -191,6 +202,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
         if (offers != null) {
             compound.put("Offers", offers.createTag());
         }
+        compound.putInt("resets", resets);
     }
 
     @Override
@@ -226,6 +238,19 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     @Override
     protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
+        if(heldItem.getItem() == RegistryHandler.ZYLEX_TOKEN.get() && !this.level.isClientSide) {
+            boolean flag = true;
+            for (int i = 0; i < offers.size() && flag; i++) {
+                if(!offers.get(i).isOutOfStock())
+                    flag = false;
+            }
+            if(flag) {
+                offers.clear();
+                populateTradeDate();
+                resets++;
+                heldItem.shrink(1);
+            }
+        }
         if(heldItem.getItem() == Items.NAME_TAG) {
             heldItem.interactLivingEntity(player, this, hand);
             return ActionResultType.SUCCESS;

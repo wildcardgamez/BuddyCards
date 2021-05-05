@@ -131,13 +131,13 @@ public class RegistryHandler {
     public static final RegistryObject<Item> ENDER_BINDER = ITEMS.register("ender_binder", EnderBinderItem::new);
 
     //Medals
-    public static final RegistryObject<Item> MEDAL_BASE = ITEMS.register("medal.1", () -> new SetMedalItem(1));
-    public static final RegistryObject<Item> MEDAL_NETHER = ITEMS.register("medal.2", () -> new SetMedalItem(2));
-    public static final RegistryObject<Item> MEDAL_END = ITEMS.register("medal.3", () -> new SetMedalItem(3));
-    public static final RegistryObject<Item> MEDAL_BYG = ITEMS.register("medal.4", () -> new SetMedalItem(4));
-    public static final RegistryObject<Item> MEDAL_CREATE = ITEMS.register("medal.5", () -> new SetMedalItem(5));
-    public static final RegistryObject<Item> MEDAL_AQUACULTURE = ITEMS.register("medal.6", () -> new SetMedalItem(6));
-    public static final RegistryObject<Item> MEDAL_FD = ITEMS.register("medal.7", () -> new SetMedalItem(7));
+    public static final RegistryObject<Item> MEDAL_BASE = ITEMS.register("medal.1", () -> new SetMedalItem(1, MedalTypes.BASE_SET));
+    public static final RegistryObject<Item> MEDAL_NETHER = ITEMS.register("medal.2", () -> new SetMedalItem(2, MedalTypes.NETHER_SET));
+    public static final RegistryObject<Item> MEDAL_END = ITEMS.register("medal.3", () -> new SetMedalItem(3, MedalTypes.END_SET));
+    public static final RegistryObject<Item> MEDAL_BYG = ITEMS.register("medal.4", () -> new SetMedalItem(4, MedalTypes.BYG_SET));
+    public static final RegistryObject<Item> MEDAL_CREATE = ITEMS.register("medal.5", () -> new SetMedalItem(5, MedalTypes.CREATE_SET));
+    public static final RegistryObject<Item> MEDAL_AQUACULTURE = ITEMS.register("medal.6", () -> new SetMedalItem(6, MedalTypes.AQUACULTURE_SET));
+    public static final RegistryObject<Item> MEDAL_FD = ITEMS.register("medal.7", () -> new SetMedalItem(7, MedalTypes.FD_SET));
 
     //Misc
     public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
@@ -289,6 +289,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> ZYLEX = ITEMS.register("zylex", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX_TOKEN = ITEMS.register("zylex_token", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX_BOOTS = ITEMS.register("zylex_boots", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.ZYLEX, EquipmentSlotType.FEET));
+    public static final RegistryObject<Item> ZYLEX_MEDAL = ITEMS.register("zylex_medal", () -> new MedalItem(MedalTypes.ZYLEX));
 
     //Effects
     public static final RegistryObject<Effect> GRADING_LUCK = EFFECTS.register("grading_luck", GradingLuckEffect::new);
