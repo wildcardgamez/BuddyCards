@@ -1,6 +1,5 @@
 package com.wildcard.buddycards.util;
 
-import com.wildcard.buddycards.items.CardItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MerchantOffer;
 import net.minecraft.nbt.CompoundNBT;
@@ -8,13 +7,13 @@ import net.minecraft.nbt.CompoundNBT;
 public class EnderlingOfferMaker {
     public static MerchantOffer createCardBuyOffer() {
         ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), ((CardItem)card.getItem()).getPointValue(card)/3+1);
+        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), getZylexValueOfCard(card));
         return new MerchantOffer(card, zylex, 1, 2, 1);
     }
 
     public static MerchantOffer createBulkCardBuyOffer() {
         ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get(), 8);
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), ((CardItem)card.getItem()).getPointValue(card) * 3);
+        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), getZylexValueOfCard(card) * 6);
         return new MerchantOffer(card, zylex, 1, 6, 1);
     }
 
@@ -33,7 +32,7 @@ public class EnderlingOfferMaker {
             grade = 4;
         nbt.putInt("grade", grade);
         card.setTag(nbt);
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), ((CardItem)card.getItem()).getPointValue(card)/3+2);
+        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), getZylexValueOfCard(card));
         return new MerchantOffer(card, zylex, 3, grade * 2, 1);
     }
 
@@ -54,7 +53,7 @@ public class EnderlingOfferMaker {
             grade = 5;
         nbt.putInt("grade", grade);
         card.setTag(nbt);
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), ((CardItem)card.getItem()).getPointValue(card)/2+2);
+        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), getZylexValueOfCard(card));
         return new MerchantOffer(zylex, card, 1, grade, 1);
     }
 
@@ -62,6 +61,10 @@ public class EnderlingOfferMaker {
         ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
         ItemStack card2 = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
         CompoundNBT nbt = new CompoundNBT();
+        while(Math.abs(getZylexValueOfCard(card) - getZylexValueOfCard(card2)) > 2) {
+            card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+            card2 = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+        }
         int i = (int) (Math.random() * 200) + 1;
         int grade;
         if (i < 100)
@@ -77,6 +80,7 @@ public class EnderlingOfferMaker {
         else
             grade = 5;
         nbt.putInt("grade", grade);
+        card.setTag(nbt);
         card2.setTag(nbt);
         return new MerchantOffer(card, card2, 1, grade * 2, 1);
     }
@@ -102,5 +106,31 @@ public class EnderlingOfferMaker {
             return createBulkCardBuyOffer();
         else
             return createCardTradeOffer();
+    }
+
+    private static int getZylexValueOfCard(ItemStack card) {
+        double value = .5;
+        switch(card.getRarity()) {
+            case EPIC: value += 3;
+            case RARE: value += 1;
+            case UNCOMMON: value += .5;
+        }
+        if(card.hasFoil())
+            value *= 2.1;
+        if(card.getTag() != null && card.getTag().contains("grade")) {
+            switch(card.getTag().getInt("grade")) {
+                case 1: value *=.75;
+                break;
+                case 2: value *=1.6;
+                break;
+                case 3: value *= 2.3;
+                break;
+                case 4: value *= 5.1;
+                break;
+                case 5: value *= 24.2;
+            }
+        }
+        int fval = (int) value;
+        return Math.max(fval, 1);
     }
 }
