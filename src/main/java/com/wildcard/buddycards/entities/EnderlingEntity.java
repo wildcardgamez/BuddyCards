@@ -255,7 +255,8 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
                 offers.clear();
                 populateTradeDate();
                 resets++;
-                heldItem.shrink(1);
+                if(heldItem.getItem() == RegistryHandler.ZYLEX_TOKEN.get())
+                    heldItem.shrink(1);
             }
         }
         if(heldItem.getItem() == Items.NAME_TAG) {

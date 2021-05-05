@@ -9,7 +9,7 @@
       "tag": "buddycards:set3_cards"
     },
     "Y": {
-      "tag": "buddycards:zylex_block"
+      "item": "buddycards:zylex_block"
     },
     "#": {
       "item": "buddycards:zylex"

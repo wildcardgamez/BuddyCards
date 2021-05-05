@@ -9,7 +9,7 @@
       "tag": "buddycards:epic_cards"
     },
     "Y": {
-      "tag": "buddycards:buddysteel_ingot"
+      "item": "buddycards:buddysteel_ingot"
     },
     "#": {
       "item": "minecraft:iron_ingot"
