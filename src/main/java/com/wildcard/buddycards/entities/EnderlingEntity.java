@@ -20,6 +20,7 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -82,40 +83,41 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     protected void customServerAiStep() {
         if (this.level.isDay() && this.tickCount >= 600) {
             float f = this.getBrightness();
-            if (f > 0.5F && this.level.canSeeSky(this.blockPosition()) && this.random.nextFloat() * 30.0F < (f - 0.4F) * 2.0F) {
-                this.teleportRandomly();
+            if (f > 0.5F && this.level.canSeeSky(this.blockPosition()) && this.random.nextFloat() * 60.0F < (f - 0.4F) * 2.0F) {
+                this.teleport();
             }
         }
         super.customServerAiStep();
     }
 
-    private void teleportRandomly() {
+    protected boolean teleport() {
         if (!this.level.isClientSide() && this.isAlive()) {
-            double d0 = this.getX() + (this.random.nextDouble() - 0.5D) * 64.0D;
-            double d1 = this.getY() + (double)(this.random.nextInt(64) - 32);
-            double d2 = this.getZ() + (this.random.nextDouble() - 0.5D) * 64.0D;
-            teleportTo(d0, d1, d2);
+            double d0 = this.getX() + (this.random.nextDouble() - 0.5D) * 32.0D;
+            double d1 = this.getY() + (double)(this.random.nextInt(32) - 32);
+            double d2 = this.getZ() + (this.random.nextDouble() - 0.5D) * 32.0D;
+            return this.teleport(d0, d1, d2);
+        } else {
+            return false;
         }
     }
 
-    @Override
-    public void teleportTo(double x, double y, double z) {
-        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(x, y, z);
-        while (blockpos$mutable.getY() > 0 && !this.level.getBlockState(blockpos$mutable).getMaterial().blocksMotion()) {
+    private boolean teleport(double p_70825_1_, double p_70825_3_, double p_70825_5_) {
+        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(p_70825_1_, p_70825_3_, p_70825_5_);
+        while(blockpos$mutable.getY() > 0 && !this.level.getBlockState(blockpos$mutable).getMaterial().blocksMotion()) {
             blockpos$mutable.move(Direction.DOWN);
         }
-
         BlockState blockstate = this.level.getBlockState(blockpos$mutable);
-        boolean flag = blockstate.getMaterial().blocksMotion();
-        boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
-        if (flag && !flag1) {
-            net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(this, x, y, z, 0);
-            if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return;
-            boolean flag2 = this.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
-            if (flag2 && !this.isSilent()) {
+        if (blockstate.getMaterial().blocksMotion() && !blockstate.getFluidState().is(FluidTags.WATER)) {
+            net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(this, p_70825_1_, p_70825_3_, p_70825_5_, 0);
+            if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return false;
+            boolean success = this.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
+            if (success && !this.isSilent()) {
                 this.level.playSound(null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
                 this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
             }
+            return success;
+        } else {
+            return false;
         }
     }
 
@@ -238,7 +240,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
         return super.mobInteract(player, hand);
     }
 
-    public class TradeWithPlayerGoal extends Goal {
+    public static class TradeWithPlayerGoal extends Goal {
         private final EnderlingEntity enderling;
 
         public TradeWithPlayerGoal(EnderlingEntity enderling) {
@@ -272,7 +274,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
         }
         
         public void stop() {
-            this.enderling.setTradingPlayer((PlayerEntity)null);
+            this.enderling.setTradingPlayer(null);
         }
     }
 }
