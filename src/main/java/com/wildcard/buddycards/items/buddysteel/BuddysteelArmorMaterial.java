@@ -9,14 +9,26 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
 public enum BuddysteelArmorMaterial implements IArmorMaterial {
-    BUDDYSTEEL;
+    BUDDYSTEEL(8, 40, Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get()), "buddysteel"),
+    ZYLEX(10, 35, Ingredient.of(RegistryHandler.ZYLEX_TOKEN.get()), "zylex");
+
+    BuddysteelArmorMaterial(int enchVal, int dura, Ingredient mat, String nameIn) {
+        ench = enchVal;
+        duraMult = dura;
+        material = mat;
+        name = nameIn;
+    }
+    int ench;
+    int duraMult;
+    Ingredient material;
+    String name;
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] {11, 16, 15, 13};
     private final int[] DAMAGE_REDUCTION_ARRAY = new int[] {1, 4, 5, 2};
 
     @Override
     public int getDurabilityForSlot(EquipmentSlotType slotIn) {
-        return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * 40;
+        return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * duraMult;
     }
 
     @Override
@@ -26,7 +38,7 @@ public enum BuddysteelArmorMaterial implements IArmorMaterial {
 
     @Override
     public int getEnchantmentValue() {
-        return 10;
+        return ench;
     }
 
     @Override
@@ -41,7 +53,7 @@ public enum BuddysteelArmorMaterial implements IArmorMaterial {
 
     @Override
     public String getName() {
-        return BuddyCards.MOD_ID + ":buddysteel";
+        return BuddyCards.MOD_ID + ":" + name;
     }
 
     @Override
