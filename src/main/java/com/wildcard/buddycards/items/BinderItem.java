@@ -11,9 +11,11 @@ import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -29,23 +31,45 @@ public class BinderItem extends Item {
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
+        ItemStack binder = playerIn.getItemInHand(handIn);
+        CompoundNBT nbt = binder.getTag();
         if(playerIn instanceof ServerPlayerEntity) {
-            //Open the GUI on server side
-            int slots = 54;
-            switch (EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.EXTRA_PAGE.get(), playerIn.getItemInHand(handIn))) {
-                case 3:
-                    slots += 24;
-                case 2:
-                    slots += 24;
-                case 1:
-                    slots += 18;
+            //If there is a key, go through and try to lock it
+            if (playerIn.getItemInHand(Hand.OFF_HAND).getItem().equals(RegistryHandler.BUDDYSTEEL_KEY.get())) {
+                if (nbt == null || !nbt.contains("locked") || !nbt.getBoolean("locked")) {
+                    nbt.putBoolean("locked", true);
+                    nbt.putString("player", playerIn.getStringUUID());
+                    binder.setTag(nbt);
+                    playerIn.displayClientMessage(new TranslationTextComponent("item.buddycards.binder.lock"), true);
+                } else if (nbt.getString("player").equals(playerIn.getStringUUID())) {
+                    nbt.putBoolean("locked", false);
+                    nbt.remove("player");
+                    binder.setTag(nbt);
+                    playerIn.displayClientMessage(new TranslationTextComponent("item.buddycards.binder.unlock"), true);
+                } else {
+                    playerIn.displayClientMessage(new TranslationTextComponent("item.buddycards.binder.fail_unlock"), true);
+                }
+                return ActionResult.success(playerIn.getItemInHand(handIn));
+            } else if (nbt == null || !nbt.contains("locked") || !nbt.getBoolean("locked")) {
+                //Find the amount of slots and then open the binder GUI
+                int slots = 54;
+                switch (EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.EXTRA_PAGE.get(), binder)) {
+                    case 3:
+                        slots += 24;
+                    case 2:
+                        slots += 24;
+                    case 1:
+                        slots += 18;
+                }
+                int finalSlots = slots;
+                NetworkHooks.openGui((ServerPlayerEntity) playerIn, new SimpleNamedContainerProvider(
+                        (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, new BinderInventory(finalSlots, binder))
+                        , playerIn.getItemInHand(handIn).getHoverName()));
+            } else {
+                playerIn.displayClientMessage(new TranslationTextComponent("item.buddycards.binder.lock"), true);
             }
-            int finalSlots = slots;
-            NetworkHooks.openGui((ServerPlayerEntity) playerIn, new SimpleNamedContainerProvider(
-                    (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, new BinderInventory(finalSlots, playerIn.getItemInHand(handIn)))
-                    , playerIn.getItemInHand(handIn).getHoverName()));
         }
-        return ActionResult.success(playerIn.getItemInHand(handIn));
+        return ActionResult.success(binder);
     }
 
     @Override
