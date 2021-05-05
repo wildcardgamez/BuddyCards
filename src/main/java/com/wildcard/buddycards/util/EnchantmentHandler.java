@@ -25,7 +25,7 @@ public class EnchantmentHandler {
     private Map<String, NonNullList<ItemStack>> items = new HashMap<String, NonNullList<ItemStack>>();
 
     public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", i -> canBuddyBind(i));
-    public static final EnchantmentType BUDDY_MEDAL = EnchantmentType.create("BUDDY_MEDAL", i -> (i instanceof SetMedalItem));
+    public static final EnchantmentType BUDDY_MEDAL = EnchantmentType.create("BUDDY_MEDAL", i -> (i instanceof MedalItem));
     public static final EnchantmentType BUDDY_BINDER = EnchantmentType.create("BUDDY_BINDER", i -> (i instanceof BinderItem));
 
     @SubscribeEvent
@@ -70,7 +70,7 @@ public class EnchantmentHandler {
     }
 
     public static boolean canBuddyBind(Item item) {
-        if (item instanceof BinderItem || item instanceof SetMedalItem || item instanceof BuddysteelArmorItem || item instanceof BuddysteelAxeItem || item instanceof BuddysteelHoeItem || item instanceof BuddysteelPickaxeItem || item instanceof BuddysteelShovelItem || item instanceof BuddysteelPickaxeItem)
+        if (item instanceof BinderItem || item instanceof MedalItem || item instanceof BuddysteelArmorItem || item instanceof BuddysteelAxeItem || item instanceof BuddysteelHoeItem || item instanceof BuddysteelPickaxeItem || item instanceof BuddysteelShovelItem || item instanceof BuddysteelPickaxeItem)
             return true;
         if (ModList.get().isLoaded("aquaculture") && item instanceof BuddysteelFishingRodItem)
             return true;

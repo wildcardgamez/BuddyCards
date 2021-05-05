@@ -11,6 +11,7 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -32,8 +33,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class BuddysteelVaultBlock extends ContainerBlock {
     public static final DirectionProperty DIR = HorizontalBlock.FACING;
@@ -118,9 +117,19 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
         if (world.getBlockEntity(pos) instanceof BuddysteelVaultTile) {
-            IItemHandler handler = ((BuddysteelVaultTile)world.getBlockEntity(pos)).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(new ItemStackHandler());
-            for (int i = 0; i < handler.getSlots(); i++) {
-                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), handler.getStackInSlot(i));
+            if (player.getItemInHand(Hand.MAIN_HAND).getItem() == RegistryHandler.ZYLEX_BAND.get() && player.getItemInHand(Hand.OFF_HAND).getItem() == RegistryHandler.ZYLEX_BAND.get()) {
+                ItemStack i = new ItemStack(state.getBlock().asItem());
+                CompoundNBT nbt = new CompoundNBT();
+                nbt.put("BlockEntityTag", world.getBlockEntity(pos).save(new CompoundNBT()));
+                i.setTag(nbt);
+                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), i);
+            }
+            else {
+                IItemHandler handler = world.getBlockEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(new ItemStackHandler());
+                for (int i = 0; i < handler.getSlots(); i++) {
+                    InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), handler.getStackInSlot(i));
+                }
+                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock().asItem()));
             }
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);

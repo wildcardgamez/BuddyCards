@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.entities;
 
+import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.util.EnderlingOfferMaker;
 import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.BlockState;
@@ -21,6 +22,10 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.ModList;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.CuriosCapability;
+import top.theillusivec4.curios.api.type.util.ICuriosHelper;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -238,7 +243,9 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     @Override
     protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
-        if(heldItem.getItem() == RegistryHandler.ZYLEX_TOKEN.get() && !this.level.isClientSide) {
+        if(!this.level.isClientSide && (heldItem.getItem() == RegistryHandler.ZYLEX_TOKEN.get() || (ModList.get().isLoaded("curios") &&
+                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_MEDAL.get(), player).isPresent() &&
+                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.ZYLEX_MEDAL.get())))) {
             boolean flag = true;
             for (int i = 0; i < offers.size() && flag; i++) {
                 if(!offers.get(i).isOutOfStock())

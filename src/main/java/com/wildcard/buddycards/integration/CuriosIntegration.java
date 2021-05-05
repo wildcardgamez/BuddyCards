@@ -35,10 +35,6 @@ public class CuriosIntegration {
                 .icon(new ResourceLocation(BuddyCards.MOD_ID, "misc/medal")).build());
     }
 
-    public static boolean isStackInCuriosSlot(LivingEntity entity, ItemStack stack) {
-        return CuriosApi.getCuriosHelper().findEquippedCurio(stack.getItem(), entity).isPresent();
-    }
-
     public static ICapabilityProvider initCapabilities(MedalTypes type, ItemStack itemStack) {
         ICurio curio = new ICurio() {
             @Override

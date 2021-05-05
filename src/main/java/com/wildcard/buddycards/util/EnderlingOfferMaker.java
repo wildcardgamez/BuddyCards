@@ -90,9 +90,11 @@ public class EnderlingOfferMaker {
             grade = 4;
         else
             grade = 5;
-        nbt.putInt("grade", grade);
-        card.setTag(nbt);
-        card2.setTag(nbt);
+        if(grade > 0) {
+            nbt.putInt("grade", grade);
+            card.setTag(nbt);
+            card2.setTag(nbt);
+        }
         return new MerchantOffer(card, card2, 1, grade * 2, 1);
     }
 
@@ -120,10 +122,22 @@ public class EnderlingOfferMaker {
     }
 
     public static MerchantOffer createSpecialtyOffer(Random random) {
-        double rand = Math.random();
+        double rand = Math.random() * 2;
+        if(rand%1 > .8) {
+            ItemStack boots = new ItemStack(RegistryHandler.ZYLEX_MEDAL.get());
+            if((int) rand != 0)
+                EnchantmentHelper.enchantItem(random, boots, 15, true);
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) (rand * 2)), boots, 1, 32, 1);
+        }
+        else if(rand%1 > .45) {
             ItemStack boots = new ItemStack(RegistryHandler.ZYLEX_BOOTS.get());
-            EnchantmentHelper.enchantItem(random, boots, 15, true);
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) (Math.random() + .5)), boots, 1, 32, 1);
+            if((int) rand != 0)
+                EnchantmentHelper.enchantItem(random, boots, 15, true);
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), boots, 1, 32, 1);
+        }
+        else {
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(RegistryHandler.ZYLEX_BAND.get()), 1, 32, 1);
+        }
     }
 
     private static int getZylexValueOfCard(ItemStack card) {
