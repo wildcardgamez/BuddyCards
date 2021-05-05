@@ -23,7 +23,9 @@ import com.wildcard.buddycards.items.buddysteel.*;
 import com.wildcard.buddycards.loot.LootInjection;
 import com.wildcard.buddycards.screen.BinderScreen;
 import com.wildcard.buddycards.screen.VaultScreen;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityClassification;
@@ -35,7 +37,6 @@ import net.minecraft.item.*;
 import net.minecraft.potion.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.fml.ModList;
@@ -130,13 +131,13 @@ public class RegistryHandler {
     public static final RegistryObject<Item> ENDER_BINDER = ITEMS.register("ender_binder", EnderBinderItem::new);
 
     //Medals
-    public static final RegistryObject<Item> MEDAL_BASE = ITEMS.register("medal.1", () -> new MedalItem(1));
-    public static final RegistryObject<Item> MEDAL_NETHER = ITEMS.register("medal.2", () -> new MedalItem(2));
-    public static final RegistryObject<Item> MEDAL_END = ITEMS.register("medal.3", () -> new MedalItem(3));
-    public static final RegistryObject<Item> MEDAL_BYG = ITEMS.register("medal.4", () -> new MedalItem(4));
-    public static final RegistryObject<Item> MEDAL_CREATE = ITEMS.register("medal.5", () -> new MedalItem(5));
-    public static final RegistryObject<Item> MEDAL_AQUACULTURE = ITEMS.register("medal.6", () -> new MedalItem(6));
-    public static final RegistryObject<Item> MEDAL_FD = ITEMS.register("medal.7", () -> new MedalItem(7));
+    public static final RegistryObject<Item> MEDAL_BASE = ITEMS.register("medal.1", () -> new SetMedalItem(1));
+    public static final RegistryObject<Item> MEDAL_NETHER = ITEMS.register("medal.2", () -> new SetMedalItem(2));
+    public static final RegistryObject<Item> MEDAL_END = ITEMS.register("medal.3", () -> new SetMedalItem(3));
+    public static final RegistryObject<Item> MEDAL_BYG = ITEMS.register("medal.4", () -> new SetMedalItem(4));
+    public static final RegistryObject<Item> MEDAL_CREATE = ITEMS.register("medal.5", () -> new SetMedalItem(5));
+    public static final RegistryObject<Item> MEDAL_AQUACULTURE = ITEMS.register("medal.6", () -> new SetMedalItem(6));
+    public static final RegistryObject<Item> MEDAL_FD = ITEMS.register("medal.7", () -> new SetMedalItem(7));
 
     //Misc
     public static final RegistryObject<Item> SHREDDED_BUDDYCARD = ITEMS.register("shredded_buddycard", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
@@ -268,7 +269,7 @@ public class RegistryHandler {
     public static final RegistryObject<Enchantment> EXTRA_PAGE = ENCHANTMENTS.register("extra_page", EnchantmentExtraPage::new);
 
     //Buddysteel & Zylex
-    public static final RegistryObject<Block> BUDDYSTEEL_BLOCK = BLOCKS.register("buddysteel_block", BuddysteelBlock::new);
+    public static final RegistryObject<Block> BUDDYSTEEL_BLOCK = BLOCKS.register("buddysteel_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<BlockItem> BUDDYSTEEL_BLOCK_ITEM = ITEMS.register("buddysteel_block", () -> new BlockItem(BUDDYSTEEL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> BUDDYSTEEL_INGOT = ITEMS.register("buddysteel_ingot", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> BUDDYSTEEL_BLEND = ITEMS.register("buddysteel_blend", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
@@ -283,8 +284,8 @@ public class RegistryHandler {
     public static final RegistryObject<Item> BUDDYSTEEL_AXE = ITEMS.register("buddysteel_axe", BuddysteelAxeItem::new);
     public static final RegistryObject<Item> BUDDYSTEEL_HOE = ITEMS.register("buddysteel_hoe", BuddysteelHoeItem::new);
 
-    public static final RegistryObject<Block> ZYLEX_BLOCK = BLOCKS.register("zylex_block", BuddysteelBlock::new);
-    public static final RegistryObject<BlockItem> ZYLEX_BLOCK_ITEM = ITEMS.register("zylex_block", () -> new BlockItem(BUDDYSTEEL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Block> ZYLEX_BLOCK = BLOCKS.register("zylex_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<BlockItem> ZYLEX_BLOCK_ITEM = ITEMS.register("zylex_block", () -> new BlockItem(ZYLEX_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX = ITEMS.register("zylex", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX_TOKEN = ITEMS.register("zylex_token", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX_BOOTS = ITEMS.register("zylex_boots", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.ZYLEX, EquipmentSlotType.FEET));

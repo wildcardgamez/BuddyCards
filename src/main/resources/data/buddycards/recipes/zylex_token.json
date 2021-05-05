@@ -6,16 +6,16 @@
   ],
   "key": {
     "X": {
-      "tag": "buddycards:epic_cards"
+      "tag": "buddycards:set3_cards"
     },
     "Y": {
-      "tag": "buddycards:buddysteel_ingot"
+      "tag": "buddycards:zylex_block"
     },
     "#": {
-      "item": "minecraft:iron_ingot"
+      "item": "buddycards:zylex"
     }
   },
   "result": {
-    "item": "buddycards:medal_token"
+    "item": "buddycards:zylex_token"
   }
 }

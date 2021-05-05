@@ -5,14 +5,15 @@ import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.LazyValue;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
 public enum BuddysteelArmorMaterial implements IArmorMaterial {
-    BUDDYSTEEL(8, 40, Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get()), "buddysteel"),
-    ZYLEX(10, 35, Ingredient.of(RegistryHandler.ZYLEX_TOKEN.get()), "zylex");
+    BUDDYSTEEL(8, 40, new LazyValue<>(() -> Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get())), "buddysteel"),
+    ZYLEX(10, 35, new LazyValue<>(() -> Ingredient.of(RegistryHandler.ZYLEX_TOKEN.get())), "zylex");
 
-    BuddysteelArmorMaterial(int enchVal, int dura, Ingredient mat, String nameIn) {
+    BuddysteelArmorMaterial(int enchVal, int dura, LazyValue<Ingredient> mat, String nameIn) {
         ench = enchVal;
         duraMult = dura;
         material = mat;
@@ -20,7 +21,7 @@ public enum BuddysteelArmorMaterial implements IArmorMaterial {
     }
     int ench;
     int duraMult;
-    Ingredient material;
+    LazyValue<Ingredient> material;
     String name;
 
     private final int[] MAX_DAMAGE_ARRAY = new int[] {11, 16, 15, 13};
@@ -48,7 +49,7 @@ public enum BuddysteelArmorMaterial implements IArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get());
+        return material.get();
     }
 
     @Override

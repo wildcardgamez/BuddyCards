@@ -20,8 +20,8 @@ import net.minecraftforge.fml.ModList;
 import java.util.List;
 
 public class
-MedalItem extends Item {
-    public MedalItem(int setNumber) {
+SetMedalItem extends Item {
+    public SetMedalItem(int setNumber) {
         super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant());
         SET_NUMBER = setNumber;
     }
