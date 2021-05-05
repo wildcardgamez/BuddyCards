@@ -199,7 +199,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
         if (compound.contains("Offers", 10)) {
             offers = new MerchantOffers(compound.getCompound("Offers"));
         }
-        resets = compound.getInt("resets");
+        resets = compound.getInt("Resets");
     }
 
     public void addAdditionalSaveData(CompoundNBT compound) {
@@ -207,7 +207,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
         if (offers != null) {
             compound.put("Offers", offers.createTag());
         }
-        compound.putInt("resets", resets);
+        compound.putInt("Resets", resets);
     }
 
     @Override
