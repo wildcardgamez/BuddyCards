@@ -12,7 +12,7 @@ Each set consists of 27 normal cards, and 27 shiny variant cards. Every pack
 has 3 normal cards and 1 shiny card. There are 4 rarities of cards, which each
 have lower odds of appearing. Common cards are cards #1-12 of a set. Uncommon
 cards are cards #13-21 of a set, and have 2 yellow corners. Rare cards are cards
-#22-25 of a set, and have 4 blue corners. Mythic cards are cards #26 and #27 of
+22-25 of a set, and have 4 blue corners. Mythic cards are cards #26 and #27 of
 a set, and they have 2 purple corners and 2 yellow corners. Upon completing a set
 you will recieve a medallion as a prize. Each set has a different medal, and at
 the moment each player can only get 1 of each.
@@ -44,6 +44,13 @@ Packs can only be caught by using a buddycard hook on a fishing rod, or by using
 buddysteel fishing rod. You can also get non shiny cards this way. You can apply
 the hook to a rod using a tackle box.
 
+### Farmers Delight Set
+Packs are made using Buddybeans, a rare byproduct in vanilla and farmer's delight
+crops alike. By mixing them with pork, sugar, shredded buddycards, and a canvas,
+you can make a Farmer's Delight pack. You can get shredded buddycards by chopping
+cards on a cutting board. You can also find non-shiny cards in crops similar to the
+Buddybeans.
+
 ## Medals
 Medals can be obtained when you collect all 54 cards of a set. Once you get one,
 you can duplicate them by making a medal token and combining it with two matching
@@ -68,6 +75,12 @@ Create Medal (BBII) - Haste III
 Aquaculture Medal - Luck I
 Aquaculture Medal (BBI) - Luck I & Dolphins Grace I
 Aquaculture Medal (BBII) - Luck II & Dolphins Grace I
+FD Medal - Nourished I
+FD Medal (BBI) - Nourished I & Comfort I
+FD Medal (BBII) - Nourished I & Comfort I & Speed I
+Zylex Medal - Free Enderling resets
+Zylex Medal (BBI) - Free Enderling resets & Grading Luck I
+Zylex Medal (BBII) - Free Enderling resets & Grading Luck II
 
 ## Binders
 Binders can be crafted similarly to books, except with buddycards instead of paper.
@@ -81,7 +94,8 @@ EP II - 96 slots
 EP III - 120 slots
 Additionally, there is also the ender binder, which can be made with 3 cards and an
 eye of ender. Just like an enderchest, each player will have their own inventory in
-every ender binder, so it doesn't matter if you lose it.
+every ender binder, so it doesn't matter if you lose it. You can also lock binders
+with keys by putting the key in your offhand.
 
 ## Card Displays
 Made with 1 wood plank and 6 sticks, a card display can be placed to hold 6 cards
@@ -116,12 +130,30 @@ a card.
 
 ## Buddysteel
 Buddysteel is a material made from smelting Buddysteel blend, made by combining
-2 Lapis Blocks, an Iron Block, and three cards. The smelting process must be done
-in a blast furnace and takes some time. Buddysteel can make pickaxes, axes, swords,
+an Iron Block, Zylex, Gold, and three cards. The smelting process is reccomended to
+do in a blast furnace as it takes some time. Buddysteel can make pickaxes, axes, swords,
 shovels, hoes, and armor that will become more powerful as you collect more sets.
-If you have aquaculture installed, you can also make a fishing rod and fillet knife
-out of buddysteel. With three buddysteel nuggets, you can make a key that lets
-you lock your buddycard displays and stands.
+If you have aquaculture installed, you can also make a fishing rod, hook, and fillet knife
+out of buddysteel. If you have Farmer's Delight installed, you can also make a Buddysteel
+knife. With three buddysteel nuggets, you can make a key that lets  you lock your 
+buddycard displays, binders, vaults, and stands.
+
+## Buddysteel Vaults
+Made with a binder, 4 buddysteel ingots, and 4 buddysteel nuggets, the vault is the
+best storage option for cards, fitting 108 cards and 12 items inside them. They are
+also lockable with keys, and are blast-proof.
+
+## Enderlings, Zylex, and Zylex gear
+Enderlings rarely spawn alongside endermen, and are much more friendly. They offer
+various trades with you for buddycards, using their currency, Zylex, a mysterious
+material only Endermen know how to find and work with. If you max out an enderlings
+trades, you can make a zylex token with 11 zylex and 3 end set cards, and reset their
+trades using it. Every third time you do this will unlock a specialty trade for Zylex
+gear. The Zylex boots: their fashonable boots that work similar to buddysteel. The
+Zylex bands: bands that let your fists break stuff faster, and will let you break
+vaults without dropping items by holding one in each hand. Lastly, the Zylex medal:
+A medal that can let you refresh their trades like tokens as many times as you want,
+as well as give grading luck when enchanted with Buddy Boost.
 
 ## Config
 The config file of the mod lets you change all sorts of thing. Each value goes
