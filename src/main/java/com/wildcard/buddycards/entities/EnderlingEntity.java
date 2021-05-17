@@ -243,7 +243,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     @Override
     protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
-        if(!this.level.isClientSide && (heldItem.getItem() == RegistryHandler.ZYLEX_TOKEN.get() || (ModList.get().isLoaded("curios") &&
+        if(offers != null && !this.level.isClientSide && (heldItem.getItem() == RegistryHandler.ZYLEX_TOKEN.get() || (ModList.get().isLoaded("curios") &&
                 CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_MEDAL.get(), player).isPresent() &&
                 CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.ZYLEX_MEDAL.get())))) {
             boolean flag = true;
