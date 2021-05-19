@@ -57,30 +57,31 @@ you can duplicate them by making a medal token and combining it with two matchin
 packs and the medal you want to duplicate. Medals can be enchanted with Buddy
 Binding (see Buddy Binding section) and Buddy Boost. Buddy Boost has two levels,
 and they increase the abilities of medals. These are the abilities of every medal:
-Base Medal - Speed I
-Base Medal (BBI) - Speed II
-Base Medal (BBII) - Speed III
-Nether Medal - Fire Res I
-Nether Medal (BBI) - Fire Res I & Absorbtion I
-Nether Medal (BBII) - Fire Res I & Absorbtion II
-End Medal - Resistance I
-End Medal (BBI) - Resistance I & Levitation Reversal
-End Medal (BBII) - Resistance II & Levitation Reversal
-Byg Medal - Jump Boost I
-Byg Medal (BBI) - Jump Boost I & Speed I
-Byg Medal (BBII) - Jump Boost II & Speed I
-Create Medal - Haste I
-Create Medal (BBI) - Haste II
-Create Medal (BBII) - Haste III
-Aquaculture Medal - Luck I
-Aquaculture Medal (BBI) - Luck I & Dolphins Grace I
-Aquaculture Medal (BBII) - Luck II & Dolphins Grace I
-FD Medal - Nourished I
-FD Medal (BBI) - Nourished I & Comfort I
-FD Medal (BBII) - Nourished I & Comfort I & Speed I
-Zylex Medal - Free Enderling resets
-Zylex Medal (BBI) - Free Enderling resets & Grading Luck I
-Zylex Medal (BBII) - Free Enderling resets & Grading Luck II
+
+* Base Medal - Speed I
+* Base Medal (BBI) - Speed II
+* Base Medal (BBII) - Speed III
+* Nether Medal - Fire Res I
+* Nether Medal (BBI) - Fire Res I & Absorbtion I
+* Nether Medal (BBII) - Fire Res I & Absorbtion II
+* End Medal - Resistance I
+* End Medal (BBI) - Resistance I & Levitation Reversal
+* End Medal (BBII) - Resistance II & Levitation Reversal
+* Byg Medal - Jump Boost I
+* Byg Medal (BBI) - Jump Boost I & Speed I
+* Byg Medal (BBII) - Jump Boost II & Speed I
+* Create Medal - Haste I
+* Create Medal (BBI) - Haste II
+* Create Medal (BBII) - Haste III
+* Aquaculture Medal - Luck I
+* Aquaculture Medal (BBI) - Luck I & Dolphins Grace I
+* Aquaculture Medal (BBII) - Luck II & Dolphins Grace I
+* FD Medal - Nourished I
+* FD Medal (BBI) - Nourished I & Comfort I
+* FD Medal (BBII) - Nourished I & Comfort I & Speed I
+* Zylex Medal - Free Enderling resets
+* Zylex Medal (BBI) - Free Enderling resets & Grading Luck I
+* Zylex Medal (BBII) - Free Enderling resets & Grading Luck II
 
 ## Binders
 Binders can be crafted similarly to books, except with buddycards instead of paper.
@@ -88,10 +89,10 @@ The color of the binder depends on the cards used to make it. Each binder can ho
 54 cards each, which means it can hold every card, including shiny variants, of a
 given set. Binders can be enchanted with Buddy Binding (see Buddy Binding section)
 and Extra Page. Extra Page has three levels, and each one has more card slots.
-No EP - 54 slots
-EP I - 72 slots
-EP II - 96 slots
-EP III - 120 slots
+* No EP - 54 slots
+* EP I - 72 slots
+* EP II - 96 slots
+* EP III - 120 slots
 Additionally, there is also the ender binder, which can be made with 3 cards and an
 eye of ender. Just like an enderchest, each player will have their own inventory in
 every ender binder, so it doesn't matter if you lose it. You can also lock binders
