@@ -377,8 +377,8 @@
   "item.minecraft.tipped_arrow.effect.grading_luck_long": "Flèche de chance de classement",
   "curios.identifier.medal": "Médaille",
   "bountiful.decree.collector.name": "Collectionner",
-  "item.buddycards.shredded_buddycard": "Buddycard râpé",
   
+  "item.buddycards.shredded_buddycard": "Buddycard mixé",
   "item.buddycards.pack.5": "Pack de Buddycards",
   "item.buddycards.binder.5": "Classeur de Buddycards",
   "item.buddycards.medal.5": "Médaille du set de Create",
@@ -427,7 +427,7 @@
   "item.buddycards.card.5.14.tooltip": "Plus résistante que le bois et le laiton.",
   "item.buddycards.card.5.15": "Pipo",
   "item.buddycards.card.5.15s": "Pipo",
-  "item.buddycards.card.5.15.tooltip": "S'il bourre, amenez le moustachu !",
+  "item.buddycards.card.5.15.tooltip": "S'il bourre, appelez le moustachu !",
   "item.buddycards.card.5.16": "Rose",
   "item.buddycards.card.5.16s": "Rose",
   "item.buddycards.card.5.16.tooltip": "On dirait une gemme !",
@@ -436,7 +436,7 @@
   "item.buddycards.card.5.17.tooltip": "Ce n'est pas ce que vous pensez..",
   "item.buddycards.card.5.18": "Cercuit",
   "item.buddycards.card.5.18s": "Cercuit",
-  "item.buddycards.card.5.18.tooltip": "C'est pas une i9 mais ça fait le taf'.",
+  "item.buddycards.card.5.18.tooltip": "Ce n'est pas une i9 mais ça fait le taf.",
   "item.buddycards.card.5.19": "Neo Blaise",
   "item.buddycards.card.5.19s": "Neo Blaise",
   "item.buddycards.card.5.19.tooltip": "Il est un peu.. spécial.",
@@ -471,4 +471,6 @@
   "advancements.buddycards.main.complete_set5.desc": "Obtenez toutes les cartes basiques du set de Create",
   "advancements.buddycards.main.complete_set5s": "Collectionneur de Create",
   "advancements.buddycards.main.complete_set5s.desc": "Obtenez toutes les cartes du set de Create",
+  
+  "item.buddycards.assorted_gummies": "Assortiment de Buddygummies"
 }
