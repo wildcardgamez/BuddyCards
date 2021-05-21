@@ -97,8 +97,5 @@
       "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.2.26s"}]}},
     "card27": {
       "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.2.27s"}]}}
-  },
-  "rewards" : {
-    "loot": ["buddycards:item/medals/2"]
   }
 }

@@ -70,5 +70,8 @@
       "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.17"}]}},
     "card18": {
       "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.18"}]}}
+  },
+  "rewards" : {
+    "loot": ["buddycards:item/medals/6"]
   }
 }
