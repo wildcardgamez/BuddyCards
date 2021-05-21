@@ -20,7 +20,7 @@ import java.util.*;
 
 public class BuddysteelArmorItem extends ArmorItem {
     private static final UUID[] ARMOR_MODIFIERS = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"), UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"), UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
-    private static final int[][] DAMAGE_REDUCTION_ARRAY = new int[][] {{1, 4, 5, 2}, {2, 5, 6, 2}, {3, 6, 8, 3}, {4, 7, 9, 4}};
+    private static final int[][] DAMAGE_REDUCTION_ARRAY = new int[][] {{1, 4, 5, 2}, {2, 5, 6, 2}, {3, 6, 8, 3}, {4, 7, 9, 4}, {5, 8, 10, 5}};
 
     public BuddysteelArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot) {
         super(materialIn, slot, new Item.Properties().tab(BuddyCards.TAB));
@@ -50,8 +50,9 @@ public class BuddysteelArmorItem extends ArmorItem {
             multimap = LinkedHashMultimap.create();
             UUID uuid = ARMOR_MODIFIERS[slot.getIndex()];
             float ratio = stack.getTag().getFloat("completion");
-            multimap.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier", DAMAGE_REDUCTION_ARRAY[(int) (3 * ratio)][slot.getIndex()], AttributeModifier.Operation.ADDITION));
-            multimap.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "Armor toughness", (int) (ratio * 3), AttributeModifier.Operation.ADDITION));
+            int perfect = !material.equals(BuddysteelArmorMaterial.BUDDYSTEEL) ? 0: 1;
+            multimap.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier", DAMAGE_REDUCTION_ARRAY[(int) (3 * ratio) + perfect][slot.getIndex()], AttributeModifier.Operation.ADDITION));
+            multimap.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "Armor toughness", (int) (ratio * 3) + perfect, AttributeModifier.Operation.ADDITION));
         }
         return multimap;
     }

@@ -18,8 +18,8 @@ import net.minecraftforge.common.ToolType;
 import java.util.List;
 
 public class BuddysteelPickaxeItem extends PickaxeItem {
-    public BuddysteelPickaxeItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, 1, -2.8f, new Item.Properties().tab(BuddyCards.TAB));
+    public BuddysteelPickaxeItem(BuddysteelItemTier tier) {
+        super(tier, 1, -2.8f, new Item.Properties().tab(BuddyCards.TAB));
     }
 
     @Override

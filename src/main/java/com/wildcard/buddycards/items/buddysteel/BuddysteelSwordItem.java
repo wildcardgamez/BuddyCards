@@ -22,8 +22,8 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class BuddysteelSwordItem extends SwordItem {
-    public BuddysteelSwordItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, 3, -2.4f, new Item.Properties().tab(BuddyCards.TAB));
+    public BuddysteelSwordItem(BuddysteelItemTier tier) {
+        super(tier, 3, -2.4f, new Item.Properties().tab(BuddyCards.TAB));
     }
 
     @Override

@@ -10,31 +10,33 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
 public enum BuddysteelArmorMaterial implements IArmorMaterial {
-    BUDDYSTEEL(8, 40, new LazyValue<>(() -> Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get())), "buddysteel"),
-    ZYLEX(10, 35, new LazyValue<>(() -> Ingredient.of(RegistryHandler.ZYLEX_TOKEN.get())), "zylex");
+    BUDDYSTEEL(8, 40, new int[]{1, 4, 5, 2}, new LazyValue<>(() -> Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get())), "buddysteel"),
+    ZYLEX(10, 42, new int[]{2, 5, 6, 2}, new LazyValue<>(() -> Ingredient.of(RegistryHandler.ZYLEX_TOKEN.get())), "zylex"),
+    PERFECT_BUDDYSTEEL(12, 45, new int[]{2, 5, 6, 2}, new LazyValue<>(() -> Ingredient.of(RegistryHandler.ZYLEX_TOKEN.get())), "perfect_buddysteel");
 
-    BuddysteelArmorMaterial(int enchVal, int dura, LazyValue<Ingredient> mat, String nameIn) {
+    BuddysteelArmorMaterial(int enchVal, int dura, int[] red, LazyValue<Ingredient> mat, String nameIn) {
         ench = enchVal;
         duraMult = dura;
         material = mat;
         name = nameIn;
+        dam_red = red;
     }
     int ench;
     int duraMult;
     LazyValue<Ingredient> material;
     String name;
+    int[] dam_red;
 
-    private final int[] MAX_DAMAGE_ARRAY = new int[] {11, 16, 15, 13};
-    private final int[] DAMAGE_REDUCTION_ARRAY = new int[] {1, 4, 5, 2};
+    private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
 
     @Override
     public int getDurabilityForSlot(EquipmentSlotType slotIn) {
-        return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * duraMult;
+        return HEALTH_PER_SLOT[slotIn.getIndex()] * duraMult;
     }
 
     @Override
     public int getDefenseForSlot(EquipmentSlotType slotIn) {
-        return DAMAGE_REDUCTION_ARRAY[slotIn.getIndex()];
+        return dam_red[slotIn.getIndex()];
     }
 
     @Override

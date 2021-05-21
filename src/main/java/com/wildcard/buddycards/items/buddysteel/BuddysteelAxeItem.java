@@ -25,8 +25,8 @@ import java.util.List;
 import net.minecraft.item.Item.Properties;
 
 public class BuddysteelAxeItem extends AxeItem {
-    public BuddysteelAxeItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, 6, -3.1f, new Properties().tab(BuddyCards.TAB));
+    public BuddysteelAxeItem(BuddysteelItemTier tier) {
+        super(tier, 6, -3.1f, new Properties().tab(BuddyCards.TAB));
     }
 
     @Override
