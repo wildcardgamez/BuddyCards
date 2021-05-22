@@ -7,7 +7,7 @@ import net.minecraft.util.LazyValue;
 
 public enum BuddysteelItemTier implements IItemTier {
     BUDDYSTEEL(2048, 6, 0, 2, 8, new LazyValue<>(() -> Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get()))),
-    PERFECT_BUDDYSTEEL(3072, 7.5f, 0, 3, 12, new LazyValue<>(() -> Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get())));
+    PERFECT_BUDDYSTEEL(3072, 7.5f, 0, 3, 12, new LazyValue<>(() -> Ingredient.of(RegistryHandler.PERFECT_BUDDYSTEEL_INGOT.get())));
 
     BuddysteelItemTier(int uses, float speed, float dmg, int level, int ench, LazyValue<Ingredient> mat) {
         this.uses = uses;
@@ -36,21 +36,21 @@ public enum BuddysteelItemTier implements IItemTier {
 
     @Override
     public float getAttackDamageBonus() {
-        return 0;
+        return dmg;
     }
 
     @Override
     public int getLevel() {
-        return 2;
+        return level;
     }
 
     @Override
     public int getEnchantmentValue() {
-        return 10;
+        return ench;
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get());
+        return mat.get();
     }
 }

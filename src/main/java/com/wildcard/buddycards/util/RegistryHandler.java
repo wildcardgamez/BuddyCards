@@ -26,6 +26,7 @@ import com.wildcard.buddycards.screen.VaultScreen;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityClassification;

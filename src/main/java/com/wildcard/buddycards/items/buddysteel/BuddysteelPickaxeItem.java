@@ -30,7 +30,7 @@ public class BuddysteelPickaxeItem extends PickaxeItem {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return Rarity.UNCOMMON;
+        return getTier().equals(BuddysteelItemTier.BUDDYSTEEL) ? Rarity.COMMON : Rarity.EPIC;
     }
 
     @Override

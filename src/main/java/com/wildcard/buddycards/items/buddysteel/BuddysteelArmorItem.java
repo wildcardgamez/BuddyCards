@@ -3,8 +3,13 @@ package com.wildcard.buddycards.items.buddysteel;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.client.models.PerfectBuddysteelArmorModel;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.renderer.model.Model;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -13,9 +18,11 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.LazyValue;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public class BuddysteelArmorItem extends ArmorItem {
@@ -34,7 +41,7 @@ public class BuddysteelArmorItem extends ArmorItem {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return Rarity.UNCOMMON;
+        return material.equals(BuddysteelArmorMaterial.BUDDYSTEEL) ? Rarity.COMMON : Rarity.EPIC;
     }
 
     @Override
@@ -50,10 +57,26 @@ public class BuddysteelArmorItem extends ArmorItem {
             multimap = LinkedHashMultimap.create();
             UUID uuid = ARMOR_MODIFIERS[slot.getIndex()];
             float ratio = stack.getTag().getFloat("completion");
-            int perfect = !material.equals(BuddysteelArmorMaterial.BUDDYSTEEL) ? 0: 1;
+            int perfect = material.equals(BuddysteelArmorMaterial.BUDDYSTEEL) ? 0 : 1;
             multimap.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier", DAMAGE_REDUCTION_ARRAY[(int) (3 * ratio) + perfect][slot.getIndex()], AttributeModifier.Operation.ADDITION));
-            multimap.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "Armor toughness", (int) (ratio * 3) + perfect, AttributeModifier.Operation.ADDITION));
+            multimap.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "Armor toughness", (int) (ratio * 2) + perfect, AttributeModifier.Operation.ADDITION));
         }
         return multimap;
+    }
+
+    @Nullable
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+        if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL))
+            return BuddyCards.MOD_ID + ":textures/models/armor/perfect_buddysteel.png";
+        return super.getArmorTexture(stack, entity, slot, type);
+    }
+
+    @Nullable
+    @Override
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
+        if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL))
+            return (A) new PerfectBuddysteelArmorModel(slot);
+        return super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
     }
 }
