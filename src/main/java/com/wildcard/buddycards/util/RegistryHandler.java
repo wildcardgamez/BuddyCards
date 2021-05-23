@@ -308,6 +308,14 @@ public class RegistryHandler {
     public static final RegistryObject<Item> ZYLEX_BAND = ITEMS.register("zylex_band", ZylexBandItem::new);
     public static final RegistryObject<Item> ZYLEX_MEDAL = ITEMS.register("zylex_medal", () -> new MedalItem(MedalTypes.ZYLEX));
 
+    public static final RegistryObject<Block> LUMINIS_BLOCK = BLOCKS.register("luminis_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.GOLD_BLOCK)));
+    public static final RegistryObject<BlockItem> LUMINIS_BLOCK_ITEM = ITEMS.register("luminis_block", () -> new BlockItem(LUMINIS_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Block> LUMINIS_PANEL = BLOCKS.register("luminis_panel", () -> new Block(AbstractBlock.Properties.copy(LUMINIS_BLOCK.get())));
+    public static final RegistryObject<BlockItem> LUMINIS_PANEL_ITEM = ITEMS.register("luminis_panel", () -> new BlockItem(LUMINIS_PANEL.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Block> LUMINIS_PILLAR = BLOCKS.register("luminis_pillar", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(LUMINIS_BLOCK.get())));
+    public static final RegistryObject<BlockItem> LUMINIS_PILLAR_ITEM = ITEMS.register("luminis_pillar", () -> new BlockItem(LUMINIS_PILLAR.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> LUMINIS = ITEMS.register("luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+
     //Effects
     public static final RegistryObject<Effect> GRADING_LUCK = EFFECTS.register("grading_luck", GradingLuckEffect::new);
 
