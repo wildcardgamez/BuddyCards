@@ -123,20 +123,23 @@ public class EnderlingOfferMaker {
 
     public static MerchantOffer createSpecialtyOffer(Random random) {
         double rand = Math.random() * 2;
-        if(rand%1 > .8) {
-            ItemStack boots = new ItemStack(RegistryHandler.ZYLEX_MEDAL.get());
+        if(rand%1 > .92) {
+            ItemStack medal = new ItemStack(RegistryHandler.ZYLEX_MEDAL.get());
             if((int) rand != 0)
-                EnchantmentHelper.enchantItem(random, boots, 15, true);
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) (rand * 2)), boots, 1, 32, 1);
+                EnchantmentHelper.enchantItem(random, medal, 15, true);
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) (rand * 2)), medal, 1, 32, 1);
         }
-        else if(rand%1 > .45) {
+        else if(rand%1 > .8) {
             ItemStack boots = new ItemStack(RegistryHandler.ZYLEX_BOOTS.get());
             if((int) rand != 0)
                 EnchantmentHelper.enchantItem(random, boots, 15, true);
             return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), boots, 1, 32, 1);
         }
-        else {
+        else if(rand%1 > .4) {
             return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(RegistryHandler.ZYLEX_BAND.get()), 1, 32, 1);
+        }
+        else {
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(RegistryHandler.PACK_MYSTERY.get()), 2 + (int) (rand*2), 32, 1);
         }
     }
 
