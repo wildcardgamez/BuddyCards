@@ -69,13 +69,15 @@ public class BuddysteelArmorItem extends ArmorItem {
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
         if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL))
             return BuddyCards.MOD_ID + ":textures/models/armor/perfect_buddysteel.png";
+        if (material.equals(BuddysteelArmorMaterial.ZYLEX))
+            return BuddyCards.MOD_ID + ":textures/models/armor/zylex.png";
         return super.getArmorTexture(stack, entity, slot, type);
     }
 
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL))
+        if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL) || material.equals(BuddysteelArmorMaterial.ZYLEX))
             return (A) new PerfectBuddysteelArmorModel(slot);
         return super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
     }
