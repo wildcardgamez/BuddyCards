@@ -18,7 +18,7 @@ public class OreGeneration {
     public static void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             LUMINIS_ORE = Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, RegistryHandler.LUMINIS_ORE.get()
-                    .defaultBlockState(), 12)).range(54).squared().count(4);
+                    .defaultBlockState(), 12)).range(24).squared().count(2);
             Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(BuddyCards.MOD_ID, "luminis_ore"), LUMINIS_ORE);
         });
     }

@@ -76,6 +76,8 @@ public class EnchantmentHandler {
             return true;
         if (ModList.get().isLoaded("farmersdelight") && item instanceof BuddysteelFoodKnifeItem)
             return true;
+        if (item.equals(RegistryHandler.ZYLEX_RING) || item.equals(RegistryHandler.LUMINIS_RING))
+            return true;
         return false;
     }
 }

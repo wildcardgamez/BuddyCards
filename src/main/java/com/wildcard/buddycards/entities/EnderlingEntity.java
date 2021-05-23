@@ -157,7 +157,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
             offers = new MerchantOffers();
             populateTradeDate();
         }
-        if(offers.size() == 7 && resets >= 4 && resets % 4 == 0){
+        if(offers.size() == 7 && resets >= 2 && resets % 2 == 0){
             boolean flag = true;
             for (int i = 0; i < 7 && flag; i++) {
                 if(!offers.get(i).isOutOfStock())

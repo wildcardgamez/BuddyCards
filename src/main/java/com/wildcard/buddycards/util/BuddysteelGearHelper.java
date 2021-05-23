@@ -24,6 +24,8 @@ public class BuddysteelGearHelper {
 
     public static void setTag(PlayerEntity playerIn, Hand handIn) {
         if(playerIn instanceof ServerPlayerEntity) {
+            if(!playerIn.getItemInHand(handIn).hasTag())
+                playerIn.getItemInHand(handIn).setTag(new CompoundNBT());
             CompoundNBT nbt = playerIn.getItemInHand(handIn).getTag();
             nbt.putFloat("completion", getRatio((ServerPlayerEntity) playerIn));
         }

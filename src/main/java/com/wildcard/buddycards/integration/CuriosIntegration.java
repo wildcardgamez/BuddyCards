@@ -33,6 +33,8 @@ public class CuriosIntegration {
     public static void Imc() {
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("medal")
                 .icon(new ResourceLocation(BuddyCards.MOD_ID, "misc/medal")).build());
+        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("ring")
+                .build());
     }
 
     public static ICapabilityProvider initCapabilities(MedalTypes type, ItemStack itemStack) {
@@ -45,7 +47,10 @@ public class CuriosIntegration {
             @Override
             public void curioTick(String identifier, int index, LivingEntity livingEntity) {
                 if (livingEntity instanceof PlayerEntity && ConfigManager.doMedalEffects.get()) {
-                    type.applyEffect((PlayerEntity) livingEntity, EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.BUDDY_BOOST.get(), itemStack));
+                    int mod = EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.BUDDY_BOOST.get(), itemStack);
+                    if(type.equals(MedalTypes.PERFECT) && itemStack.hasTag() && itemStack.getTag().contains("completion"))
+                        mod += (int) (itemStack.getTag().getDouble("completion") * 3);
+                    type.applyEffect((PlayerEntity) livingEntity, mod);
                 }
             }
         };

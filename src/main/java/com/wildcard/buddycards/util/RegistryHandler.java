@@ -282,21 +282,6 @@ public class RegistryHandler {
     public static final RegistryObject<Item> BUDDYSTEEL_AXE = ITEMS.register("buddysteel_axe", () -> new BuddysteelAxeItem(BuddysteelItemTier.BUDDYSTEEL));
     public static final RegistryObject<Item> BUDDYSTEEL_HOE = ITEMS.register("buddysteel_hoe", () -> new BuddysteelHoeItem(BuddysteelItemTier.BUDDYSTEEL));
 
-    public static final RegistryObject<Block> PERFECT_BUDDYSTEEL_BLOCK = BLOCKS.register("perfect_buddysteel_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryObject<BlockItem> PERFECT_BUDDYSTEEL_BLOCK_ITEM = ITEMS.register("perfect_buddysteel_block", () -> new BlockItem(PERFECT_BUDDYSTEEL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_INGOT = ITEMS.register("perfect_buddysteel_ingot", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_BLEND = ITEMS.register("perfect_buddysteel_blend", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_NUGGET = ITEMS.register("perfect_buddysteel_nugget", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_HELMET = ITEMS.register("perfect_buddysteel_helmet", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL, EquipmentSlotType.HEAD));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_CHESTPLATE = ITEMS.register("perfect_buddysteel_chestplate", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL, EquipmentSlotType.CHEST));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_LEGGINGS = ITEMS.register("perfect_buddysteel_leggings", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL, EquipmentSlotType.LEGS));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_BOOTS = ITEMS.register("perfect_buddysteel_boots", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL, EquipmentSlotType.FEET));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_SWORD = ITEMS.register("perfect_buddysteel_sword", () -> new BuddysteelSwordItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_PICKAXE = ITEMS.register("perfect_buddysteel_pickaxe", () -> new BuddysteelPickaxeItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_SHOVEL = ITEMS.register("perfect_buddysteel_shovel", () -> new BuddysteelShovelItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_AXE = ITEMS.register("perfect_buddysteel_axe", () -> new BuddysteelAxeItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_HOE = ITEMS.register("perfect_buddysteel_hoe", () -> new BuddysteelHoeItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
-
     public static final RegistryObject<Block> ZYLEX_BLOCK = BLOCKS.register("zylex_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<BlockItem> ZYLEX_BLOCK_ITEM = ITEMS.register("zylex_block", () -> new BlockItem(ZYLEX_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX = ITEMS.register("zylex", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
@@ -317,10 +302,28 @@ public class RegistryHandler {
     public static final RegistryObject<Item> LUMINIS = ITEMS.register("luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS_PANEL = ITEMS.register("luminis_panel", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Block> DEEP_LUMINIS_BLOCK = BLOCKS.register("deep_luminis_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.GOLD_BLOCK)));
+    public static final RegistryObject<BlockItem> DEEP_LUMINIS_BLOCK_ITEM = ITEMS.register("deep_luminis_block", () -> new BlockItem(DEEP_LUMINIS_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> DEEP_LUMINIS_CRYSTAL = ITEMS.register("deep_luminis_crystal", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> DEEP_LUMINIS = ITEMS.register("deep_luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> LUMINIS_PICKAXE = ITEMS.register("luminis_pickaxe", () -> new BuddysteelPickaxeItem(BuddysteelItemTier.LUMINIS));
     public static final RegistryObject<Item> LUMINIS_RING = ITEMS.register("luminis_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant()));
-    public static final RegistryObject<Item> LUMINIS_MEDAL = ITEMS.register("zylex_medal", () -> new MedalItem(MedalTypes.ZYLEX));
+    public static final RegistryObject<Item> LUMINIS_MEDAL = ITEMS.register("luminis_medal", () -> new MedalItem(MedalTypes.LUMNIS));
+
+    public static final RegistryObject<Block> PERFECT_BUDDYSTEEL_BLOCK = BLOCKS.register("perfect_buddysteel_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<BlockItem> PERFECT_BUDDYSTEEL_BLOCK_ITEM = ITEMS.register("perfect_buddysteel_block", () -> new BlockItem(PERFECT_BUDDYSTEEL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_INGOT = ITEMS.register("perfect_buddysteel_ingot", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_BLEND = ITEMS.register("perfect_buddysteel_blend", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_NUGGET = ITEMS.register("perfect_buddysteel_nugget", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_HELMET = ITEMS.register("perfect_buddysteel_helmet", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL, EquipmentSlotType.HEAD));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_CHESTPLATE = ITEMS.register("perfect_buddysteel_chestplate", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL, EquipmentSlotType.CHEST));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_LEGGINGS = ITEMS.register("perfect_buddysteel_leggings", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL, EquipmentSlotType.LEGS));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_BOOTS = ITEMS.register("perfect_buddysteel_boots", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL, EquipmentSlotType.FEET));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_SWORD = ITEMS.register("perfect_buddysteel_sword", () -> new BuddysteelSwordItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_PICKAXE = ITEMS.register("perfect_buddysteel_pickaxe", () -> new BuddysteelPickaxeItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_SHOVEL = ITEMS.register("perfect_buddysteel_shovel", () -> new BuddysteelShovelItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_AXE = ITEMS.register("perfect_buddysteel_axe", () -> new BuddysteelAxeItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_HOE = ITEMS.register("perfect_buddysteel_hoe", () -> new BuddysteelHoeItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_MEDAL_MEDAL = ITEMS.register("perfect_buddysteel_medal", () -> new BuddysteelMedalItem(MedalTypes.PERFECT));
 
     //Effects
     public static final RegistryObject<Effect> GRADING_LUCK = EFFECTS.register("grading_luck", GradingLuckEffect::new);
