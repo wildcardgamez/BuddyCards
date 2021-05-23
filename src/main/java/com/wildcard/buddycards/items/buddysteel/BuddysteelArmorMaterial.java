@@ -11,8 +11,8 @@ import net.minecraft.util.SoundEvents;
 
 public enum BuddysteelArmorMaterial implements IArmorMaterial {
     BUDDYSTEEL(8, 40, new int[]{1, 4, 5, 2}, new LazyValue<>(() -> Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get())), "buddysteel"),
-    ZYLEX(10, 42, new int[]{2, 5, 6, 2}, new LazyValue<>(() -> Ingredient.of(RegistryHandler.ZYLEX_TOKEN.get())), "zylex"),
-    PERFECT_BUDDYSTEEL(12, 45, new int[]{2, 5, 6, 2}, new LazyValue<>(() -> Ingredient.of(RegistryHandler.PERFECT_BUDDYSTEEL_INGOT.get())), "perfect_buddysteel");
+    PERFECT_BUDDYSTEEL(10, 45, new int[]{2, 5, 6, 2}, new LazyValue<>(() -> Ingredient.of(RegistryHandler.PERFECT_BUDDYSTEEL_INGOT.get())), "perfect_buddysteel"),
+    ZYLEX(12, 43, new int[]{2, 5, 6, 2}, new LazyValue<>(() -> Ingredient.of(RegistryHandler.ZYLEX_TOKEN.get())), "zylex");
 
     BuddysteelArmorMaterial(int enchVal, int dura, int[] red, LazyValue<Ingredient> mat, String nameIn) {
         ench = enchVal;

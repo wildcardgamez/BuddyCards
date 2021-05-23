@@ -23,10 +23,7 @@ import com.wildcard.buddycards.items.buddysteel.*;
 import com.wildcard.buddycards.loot.LootInjection;
 import com.wildcard.buddycards.screen.BinderScreen;
 import com.wildcard.buddycards.screen.VaultScreen;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RotatedPillarBlock;
+import net.minecraft.block.*;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityClassification;
@@ -305,16 +302,25 @@ public class RegistryHandler {
     public static final RegistryObject<Item> ZYLEX = ITEMS.register("zylex", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX_TOKEN = ITEMS.register("zylex_token", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX_BOOTS = ITEMS.register("zylex_boots", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.ZYLEX, EquipmentSlotType.FEET));
-    public static final RegistryObject<Item> ZYLEX_BAND = ITEMS.register("zylex_band", ZylexBandItem::new);
+    public static final RegistryObject<Item> ZYLEX_RING = ITEMS.register("zylex_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant()));
     public static final RegistryObject<Item> ZYLEX_MEDAL = ITEMS.register("zylex_medal", () -> new MedalItem(MedalTypes.ZYLEX));
 
-    public static final RegistryObject<Block> LUMINIS_BLOCK = BLOCKS.register("luminis_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.GOLD_BLOCK)));
+    public static final RegistryObject<Block> LUMINIS_BLOCK = BLOCKS.register("luminis_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.GOLD_BLOCK).lightLevel((state) -> 10)));
     public static final RegistryObject<BlockItem> LUMINIS_BLOCK_ITEM = ITEMS.register("luminis_block", () -> new BlockItem(LUMINIS_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
-    public static final RegistryObject<Block> LUMINIS_PANEL = BLOCKS.register("luminis_panel", () -> new Block(AbstractBlock.Properties.copy(LUMINIS_BLOCK.get())));
-    public static final RegistryObject<BlockItem> LUMINIS_PANEL_ITEM = ITEMS.register("luminis_panel", () -> new BlockItem(LUMINIS_PANEL.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Block> LUMINIS_PANELS = BLOCKS.register("luminis_panels", () -> new Block(AbstractBlock.Properties.copy(LUMINIS_BLOCK.get())));
+    public static final RegistryObject<BlockItem> LUMINIS_PANELS_ITEM = ITEMS.register("luminis_panels", () -> new BlockItem(LUMINIS_PANELS.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Block> LUMINIS_PILLAR = BLOCKS.register("luminis_pillar", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(LUMINIS_BLOCK.get())));
     public static final RegistryObject<BlockItem> LUMINIS_PILLAR_ITEM = ITEMS.register("luminis_pillar", () -> new BlockItem(LUMINIS_PILLAR.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Block> LUMINIS_ORE = BLOCKS.register("luminis_ore", LuminisOreBlock::new);
+    public static final RegistryObject<BlockItem> LUMINIS_ORE_ITEM = ITEMS.register("luminis_ore", () -> new BlockItem(LUMINIS_ORE.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> LUMINIS_CRYSTAL = ITEMS.register("luminis_crystal", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS = ITEMS.register("luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> LUMINIS_PANEL = ITEMS.register("luminis_panel", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Block> DEEP_LUMINIS_BLOCK = BLOCKS.register("deep_luminis_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.GOLD_BLOCK)));
+    public static final RegistryObject<Item> DEEP_LUMINIS_CRYSTAL = ITEMS.register("deep_luminis_crystal", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> DEEP_LUMINIS = ITEMS.register("deep_luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> LUMINIS_RING = ITEMS.register("luminis_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> LUMINIS_MEDAL = ITEMS.register("zylex_medal", () -> new MedalItem(MedalTypes.ZYLEX));
 
     //Effects
     public static final RegistryObject<Effect> GRADING_LUCK = EFFECTS.register("grading_luck", GradingLuckEffect::new);

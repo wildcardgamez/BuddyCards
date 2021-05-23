@@ -31,6 +31,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import javax.annotation.Nullable;
 
@@ -117,7 +118,10 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
         if (world.getBlockEntity(pos) instanceof BuddysteelVaultTile) {
-            if (player.getItemInHand(Hand.MAIN_HAND).getItem() == RegistryHandler.ZYLEX_BAND.get() && player.getItemInHand(Hand.OFF_HAND).getItem() == RegistryHandler.ZYLEX_BAND.get()) {
+            if (player.getItemInHand(Hand.MAIN_HAND).getItem() == RegistryHandler.ZYLEX_RING.get() ||
+                    (ModList.get().isLoaded("curios") &&
+                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), player).isPresent() &&
+                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), player).get().right.getItem().equals(RegistryHandler.ZYLEX_RING.get()))) {
                 ItemStack i = new ItemStack(state.getBlock().asItem());
                 CompoundNBT nbt = new CompoundNBT();
                 nbt.put("BlockEntityTag", world.getBlockEntity(pos).save(new CompoundNBT()));

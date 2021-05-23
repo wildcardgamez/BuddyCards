@@ -136,7 +136,7 @@ public class EnderlingOfferMaker {
             return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), boots, 1, 32, 1);
         }
         else if(rand%1 > .4) {
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(RegistryHandler.ZYLEX_BAND.get()), 1, 32, 1);
+            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(RegistryHandler.ZYLEX_RING.get()), 1, 32, 1);
         }
         else {
             return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(RegistryHandler.PACK_MYSTERY.get()), 2 + (int) (rand*2), 32, 1);

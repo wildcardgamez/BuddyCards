@@ -4,6 +4,7 @@ import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.ModList;
@@ -31,5 +32,10 @@ public class MedalItem extends Item {
     @Override
     public int getEnchantmentValue() {
         return 1;
+    }
+
+    @Override
+    public Rarity getRarity(ItemStack stack) {
+        return type.getRarity();
     }
 }

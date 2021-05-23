@@ -15,6 +15,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.items.ItemHandlerHelper;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
 
@@ -144,9 +145,17 @@ public class CardItem extends Item {
                 //Get a grade using maths for rarity
                 int i = (int) (Math.random() * 500) + 1;
                 int grade;
-                //If they have grading luck, reroll until the roll is over 100
-                if (playerIn.hasEffect(RegistryHandler.GRADING_LUCK.get())) {
-                    for (int j = 0; j <= playerIn.getEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier() && i < 400; j++) {
+                //Count how many extra rolls the player has based on effects and ring
+                int k = 0;
+                if (ModList.get().isLoaded("curios") &&
+                        CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), playerIn).isPresent() &&
+                        CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), playerIn).get().right.getItem().equals(RegistryHandler.ZYLEX_RING.get()))
+                    k++;
+                if (playerIn.hasEffect(RegistryHandler.GRADING_LUCK.get()))
+                    k += playerIn.getEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier();
+                //If they have extra rolls, reroll each roll under 400
+                if (k > 0) {
+                    for (int j = 0; j <= k && i < 400; j++) {
                         i = (int) (Math.random() * 500) + 1;
                     }
                 }
