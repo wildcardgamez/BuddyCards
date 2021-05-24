@@ -30,6 +30,7 @@ public class ConfigManager {
     public static ForgeConfigSpec.DoubleValue piglinChance;
     public static ForgeConfigSpec.DoubleValue zombiePiglinChance;
     public static ForgeConfigSpec.DoubleValue shulkerChance;
+    public static ForgeConfigSpec.DoubleValue enderlingChance;
     public static ForgeConfigSpec.DoubleValue dragonChance;
     public static ForgeConfigSpec.IntValue dragonMaxPacks;
     public static ForgeConfigSpec.DoubleValue witherChance;
@@ -40,6 +41,11 @@ public class ConfigManager {
     public static ForgeConfigSpec.DoubleValue enderlingChanceEnd;
     public static ForgeConfigSpec.DoubleValue enderlingChanceNether;
     public static ForgeConfigSpec.DoubleValue enderlingChanceOver;
+
+    public static ForgeConfigSpec.IntValue luminisMaxY;
+    public static ForgeConfigSpec.IntValue luminisPerChunk;
+    public static ForgeConfigSpec.IntValue luminisVeinSize;
+    public static ForgeConfigSpec.DoubleValue deepLuminisOdds;
 
     public static ForgeConfigSpec.BooleanValue challengeMode;
     public static ForgeConfigSpec.IntValue challengePointsCommon;
@@ -67,18 +73,20 @@ public class ConfigManager {
     public static void init()
     {
         builder.comment("Buddycards config");
-        zombieChance = builder.comment("\nOdds of baby zombie dropping base set packs, 0 for 0%, 1 for 100%, default is 20%")
+        zombieChance = builder.comment("\nOdds of baby zombie dropping base set packs, 0 for 0%, 1 for 100%, default is 5%")
                 .defineInRange("mobDrops.zombieChance", .05, 0, 1);
-        villagerChance = builder.comment("\nOdds of baby villager dropping base set packs, 0 for 0%, 1 for 100%, default is 20%")
+        villagerChance = builder.comment("\nOdds of baby villager dropping base set packs, 0 for 0%, 1 for 100%, default is 5%")
                 .defineInRange("mobDrops.villagerChance", .05, 0, 1);
-        zombieVillagerChance = builder.comment("\nOdds of baby zombie villager dropping base set packs, 0 for 0%, 1 for 100%, default is 40%")
+        zombieVillagerChance = builder.comment("\nOdds of baby zombie villager dropping base set packs, 0 for 0%, 1 for 100%, default is 10%")
                 .defineInRange("mobDrops.zombieVillagerChance", .1, 0, 1);
-        piglinChance = builder.comment("\nOdds of baby piglin dropping nether set packs, 0 for 0%, 1 for 100%, default is 20%")
+        piglinChance = builder.comment("\nOdds of baby piglin dropping nether set packs, 0 for 0%, 1 for 100%, default is 5%")
                 .defineInRange("mobDrops.piglinChance", .05, 0, 1);
-        zombiePiglinChance = builder.comment("\nOdds of baby zombie piglin dropping nether set , 0 for 0%, 1 for 100%, default is 20%")
+        zombiePiglinChance = builder.comment("\nOdds of baby zombie piglin dropping nether set , 0 for 0%, 1 for 100%, default is 5%")
                 .defineInRange("mobDrops.zombiePiglinChance", .05, 0, 1);
         shulkerChance = builder.comment("\nOdds of shulkers dropping end set packs, 0 for 0%, 1 for 100%, default is 5%")
                 .defineInRange("mobDrops.shulkerChance", .05, 0, 1);
+        enderlingChance = builder.comment("\nOdds of enderlings dropping end set packs, 0 for 0%, 1 for 100%, default is 10%")
+                .defineInRange("mobDrops.enderlingChance", .1, 0, 1);
         dragonChance = builder.comment("\nOdds of ender dragons dropping end set packs, 0 for 0%, 1 for 100%, default is 100%")
                 .defineInRange("mobDrops.dragonChance", 1f, 0, 1);
         dragonMaxPacks = builder.comment("\nMaximum amount of packs dropped when a dragon drops packs, default is 4")
@@ -94,6 +102,15 @@ public class ConfigManager {
                 .defineInRange("enderling.netherOdds", .005, 0, 1);
         enderlingChanceOver = builder.comment("\nOdds for an Enderling to spawn with an Enderman in the Overworld, 0-1, default is 1.5%")
                 .defineInRange("enderling.overOdds", .015, 0, 1);
+
+        luminisMaxY = builder.comment("\nMaximum Y value for Luminis to generate, 1-120, default is 24")
+                .defineInRange("luminis.maxY", 24, 1, 120);
+        luminisPerChunk = builder.comment("\nAmount of veins of Luminis generated per chunk, 1-24, default is 3")
+                .defineInRange("luminis.perChunk", 3, 0, 36);
+        luminisVeinSize = builder.comment("\nSize of Luminis veins, 1-36, default is 12")
+                .defineInRange("luminis.veinSize", 12, 1, 36);
+        deepLuminisOdds = builder.comment("\nOdds of deep Luminis crystals being dropped by Luminis ore, 0 for 0%, 1 for 100%, default is 3%")
+                .defineInRange("luminis.deepLuminisOdds", .03, 0, 1);
 
         doMedalEffects = builder.comment("\nEnables medal effects, default is true")
                 .define("misc.doMedalEffects", true);

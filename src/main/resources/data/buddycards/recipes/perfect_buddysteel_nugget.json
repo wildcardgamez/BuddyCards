@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "buddycards:perfect_buddysteel_ingot"
+    }
+  ],
+  "result":
+  {
+    "item": "buddycards:perfect_buddysteel_nugget",
+    "count": 9
+  }
+}

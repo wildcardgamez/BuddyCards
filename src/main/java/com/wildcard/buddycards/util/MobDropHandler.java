@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.util;
 
+import com.wildcard.buddycards.entities.EnderlingEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
@@ -53,6 +54,11 @@ public class MobDropHandler {
             }
             else if (entity instanceof ShulkerEntity) {
                 if (Math.random() < ConfigManager.shulkerChance.get()) {
+                    drops.add(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(RegistryHandler.PACK_END.get(), 1)));
+                }
+            }
+            else if (entity instanceof EnderlingEntity) {
+                if (Math.random() < ConfigManager.enderlingChance.get()) {
                     drops.add(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(RegistryHandler.PACK_END.get(), 1)));
                 }
             }

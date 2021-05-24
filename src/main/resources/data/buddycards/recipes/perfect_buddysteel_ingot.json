@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "buddycards:perfect_buddysteel_blend"
+  },
+  "result": "buddycards:perfect_buddysteel_ingot",
+  "experience": 12.0,
+  "cookingtime": 6400
+}

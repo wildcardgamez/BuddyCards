@@ -133,7 +133,8 @@ public class BuddysteelVaultBlock extends ContainerBlock {
                 for (int i = 0; i < handler.getSlots(); i++) {
                     InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), handler.getStackInSlot(i));
                 }
-                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock().asItem()));
+                if(!player.isCreative())
+                    InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock().asItem()));
             }
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);

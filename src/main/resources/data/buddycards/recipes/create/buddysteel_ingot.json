@@ -8,13 +8,10 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:lapis_block"
     },
     {
       "item": "minecraft:iron_block"
-    },
-    {
-      "item": "buddycards:zylex"
     },
     {
       "item": "buddycards:shredded_buddycard"

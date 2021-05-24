@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "buddycards:buddysteel_block"
+    },
+    {
+      "item": "buddycards:luminis_block"
+    },
+    {
+      "item": "buddycards:zylex_block"
+    },
+    {
+      "item": "buddycards:buddysteel_blend"
+    },
+    {
+      "item": "buddycards:deep_luminis"
+    },
+    {
+      "item": "buddycards:zylex"
+    }
+  ],
+  "result": {
+    "item": "buddycards:perfect_buddysteel_blend",
+    "count": 1
+  }
+}
