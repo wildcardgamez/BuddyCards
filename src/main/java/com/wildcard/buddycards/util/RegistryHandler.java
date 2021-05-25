@@ -287,7 +287,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> ZYLEX = ITEMS.register("zylex", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX_TOKEN = ITEMS.register("zylex_token", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> ZYLEX_BOOTS = ITEMS.register("zylex_boots", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.ZYLEX, EquipmentSlotType.FEET));
-    public static final RegistryObject<Item> ZYLEX_RING = ITEMS.register("zylex_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> ZYLEX_RING = ITEMS.register("zylex_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ZYLEX_MEDAL = ITEMS.register("zylex_medal", () -> new MedalItem(MedalTypes.ZYLEX));
 
     public static final RegistryObject<Block> LUMINIS_BLOCK = BLOCKS.register("luminis_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.GOLD_BLOCK).lightLevel((state) -> 10)));
@@ -306,7 +306,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> DEEP_LUMINIS_CRYSTAL = ITEMS.register("deep_luminis_crystal", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> DEEP_LUMINIS = ITEMS.register("deep_luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS_PICKAXE = ITEMS.register("luminis_pickaxe", () -> new BuddysteelPickaxeItem(BuddysteelItemTier.LUMINIS));
-    public static final RegistryObject<Item> LUMINIS_RING = ITEMS.register("luminis_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant()));
+    public static final RegistryObject<Item> LUMINIS_RING = ITEMS.register("luminis_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> LUMINIS_MEDAL = ITEMS.register("luminis_medal", () -> new MedalItem(MedalTypes.LUMNIS));
 
     public static final RegistryObject<Block> PERFECT_BUDDYSTEEL_BLOCK = BLOCKS.register("perfect_buddysteel_block", () -> new Block(AbstractBlock.Properties.copy(Blocks.IRON_BLOCK)));

@@ -31,7 +31,7 @@ public class BuddysteelHoeItem extends HoeItem {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return getTier().equals(BuddysteelItemTier.BUDDYSTEEL) ? Rarity.COMMON : Rarity.EPIC;
+        return getTier().equals(BuddysteelItemTier.BUDDYSTEEL) ? Rarity.UNCOMMON : Rarity.EPIC;
     }
 
     @Override

@@ -41,7 +41,7 @@ public class BuddysteelArmorItem extends ArmorItem {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return material.equals(BuddysteelArmorMaterial.BUDDYSTEEL) ? Rarity.COMMON : Rarity.EPIC;
+        return material.equals(BuddysteelArmorMaterial.BUDDYSTEEL) ? Rarity.UNCOMMON : Rarity.EPIC;
     }
 
     @Override

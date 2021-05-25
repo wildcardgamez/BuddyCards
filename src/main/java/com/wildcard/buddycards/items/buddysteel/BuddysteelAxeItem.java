@@ -37,7 +37,7 @@ public class BuddysteelAxeItem extends AxeItem {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return getTier().equals(BuddysteelItemTier.BUDDYSTEEL) ? Rarity.COMMON : Rarity.EPIC;
+        return getTier().equals(BuddysteelItemTier.BUDDYSTEEL) ? Rarity.UNCOMMON : Rarity.EPIC;
     }
 
     @Override
