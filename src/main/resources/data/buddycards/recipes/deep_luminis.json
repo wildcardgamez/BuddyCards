@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "buddycards:deep_luminis_crystal"
+  },
+  "result": "buddycards:deep_luminis",
+  "experience": 1.0
+}

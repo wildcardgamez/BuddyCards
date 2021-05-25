@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AYB",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "tag": "buddycards:epic_cards"
+    },
+    "Y": {
+      "item": "buddycards:perfect_buddysteel_ingot"
+    },
+    "A": {
+      "item": "buddycards:luminis_medal"
+    },
+    "B": {
+      "item": "buddycards:zylex_medal"
+    }
+  },
+  "result": {
+    "item": "buddycards:perfect_buddysteel_medal"
+  }
+}
