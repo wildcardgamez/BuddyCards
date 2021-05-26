@@ -323,7 +323,7 @@ public class RegistryHandler {
     public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_SHOVEL = ITEMS.register("perfect_buddysteel_shovel", () -> new BuddysteelShovelItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
     public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_AXE = ITEMS.register("perfect_buddysteel_axe", () -> new BuddysteelAxeItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
     public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_HOE = ITEMS.register("perfect_buddysteel_hoe", () -> new BuddysteelHoeItem(BuddysteelItemTier.PERFECT_BUDDYSTEEL));
-    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_MEDAL_MEDAL = ITEMS.register("perfect_buddysteel_medal", () -> new BuddysteelMedalItem(MedalTypes.PERFECT));
+    public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_MEDAL = ITEMS.register("perfect_buddysteel_medal", () -> new BuddysteelMedalItem(MedalTypes.PERFECT));
 
     //Effects
     public static final RegistryObject<Effect> GRADING_LUCK = EFFECTS.register("grading_luck", GradingLuckEffect::new);

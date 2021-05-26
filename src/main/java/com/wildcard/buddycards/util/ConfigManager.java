@@ -46,6 +46,7 @@ public class ConfigManager {
     public static ForgeConfigSpec.IntValue luminisPerChunk;
     public static ForgeConfigSpec.IntValue luminisVeinSize;
     public static ForgeConfigSpec.DoubleValue deepLuminisOdds;
+    public static ForgeConfigSpec.DoubleValue cardLuminisOdds;
 
     public static ForgeConfigSpec.BooleanValue challengeMode;
     public static ForgeConfigSpec.IntValue challengePointsCommon;
@@ -109,8 +110,10 @@ public class ConfigManager {
                 .defineInRange("luminis.perChunk", 3, 0, 36);
         luminisVeinSize = builder.comment("\nSize of Luminis veins, 1-36, default is 12")
                 .defineInRange("luminis.veinSize", 12, 1, 36);
-        deepLuminisOdds = builder.comment("\nOdds of deep Luminis crystals being dropped by Luminis ore, 0 for 0%, 1 for 100%, default is 3%")
+        deepLuminisOdds = builder.comment("\nOdds of deep Luminis crystals being dropped by Luminis ore, note this can be doubled with certain gear, 0 for 0%, 1 for 100%, default is 3%")
                 .defineInRange("luminis.deepLuminisOdds", .03, 0, 1);
+        cardLuminisOdds = builder.comment("\nOdds of a random shiny non-epic card being dropped by Luminis ore when using the Luminis Medal, 0 for 0%, 1 for 100%, default is 2%")
+                .defineInRange("luminis.cardLuminisOdds", .02, 0, 1);
 
         doMedalEffects = builder.comment("\nEnables medal effects, default is true")
                 .define("misc.doMedalEffects", true);

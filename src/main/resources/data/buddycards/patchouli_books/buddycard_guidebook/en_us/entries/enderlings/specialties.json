@@ -11,23 +11,23 @@
     {
       "type": "spotlight",
       "item": "buddycards:zylex_band",
-      "text": "The Zylex Bands are very useful for moving your collection around. Breaking vaults with Zylex Bands in both of your hands will break the vault while keeping the items inside of it, simmilar to a shulker box. They also can break blocks faster than your fists.",
+      "text": "The Zylex Rings are very useful for moving your collection around. Breaking vaults with a Zylex ring on will break the vault while keeping the items inside of it, simmilar to a shulker box.",
       "link_recipe": true
     },
     {
       "type": "spotlight",
       "item": "buddycards:zylex_boots",
-      "text": "The Zylex Boots are the same kinds of boots worn by Enderlings. They seem to work similarly to buddysteel armor and will upgrade with your collection, and will also work with the same enchantments.",
+      "text": "The Zylex Boots are the same kinds of boots worn by Enderlings. They seem to work similarly to perfect buddysteel armor and will upgrade with your collection, and will also work with the same enchantments.",
       "link_recipe": true
     },
     {
       "type": "relations",
       "title": "Related Pages",
       "entries": [
-        "buddycards:buddysteel/buddysteel_armor",
+        "buddycards:buddysteel/perfect_buddysteel_gear",
         "buddycards:enchantments/buddy_binding"
       ],
-      "text": "We don't quite know how the boots are made, but they work with Buddy Binding and are very similar to Buddysteel"
+      "text": "We don't quite know how the boots are made, but they work with Buddy Binding and are very similar to Perfect Buddysteel"
     },
     {
       "type": "spotlight",
