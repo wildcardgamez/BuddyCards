@@ -1,6 +1,5 @@
 package com.wildcard.buddycards.inventory;
 
-import com.wildcard.buddycards.items.BinderItem;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.entity.player.PlayerEntity;

@@ -4,8 +4,6 @@ import com.wildcard.buddycards.util.EnchantmentHandler;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.inventory.EquipmentSlotType;
 
-import net.minecraft.enchantment.Enchantment.Rarity;
-
 public class EnchantmentExtraPage extends Enchantment {
     public EnchantmentExtraPage() {
         super(Rarity.RARE, EnchantmentHandler.BUDDY_BINDER, EquipmentSlotType.values());

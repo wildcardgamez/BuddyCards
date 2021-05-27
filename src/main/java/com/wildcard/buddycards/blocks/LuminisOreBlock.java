@@ -1,6 +1,5 @@
 package com.wildcard.buddycards.blocks;
 
-import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.CardRegistry;
 import com.wildcard.buddycards.util.ConfigManager;
 import com.wildcard.buddycards.util.RegistryHandler;

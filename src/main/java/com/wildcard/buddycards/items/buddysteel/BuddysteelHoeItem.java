@@ -16,8 +16,6 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.List;
 
-import net.minecraft.item.Item.Properties;
-
 public class BuddysteelHoeItem extends HoeItem {
     public BuddysteelHoeItem(BuddysteelItemTier tier) {
         super(tier, 0, -1.0f, new Properties().tab(BuddyCards.TAB));
