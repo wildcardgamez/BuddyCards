@@ -7,6 +7,8 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.OreBlock;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.inventory.InventoryHelper;
@@ -32,28 +34,29 @@ public class LuminisOreBlock extends OreBlock {
 
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
-        double i = player.getMainHandItem().equals(RegistryHandler.LUMINIS_PICKAXE.get()) ? 1 : 1.4;
-        if(ModList.get().isLoaded("curios") &&
-                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_RING.get(), player).isPresent() &&
-                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_RING.get(), player).get().right.getItem().equals(RegistryHandler.LUMINIS_RING.get()))
-            i += .3;
-        if(ModList.get().isLoaded("curios") && ((
-                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_MEDAL.get(), player).isPresent() &&
-                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.LUMINIS_MEDAL.get())) || (
-                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get(), player).isPresent() &&
-                        CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get())))) {
-            i += .3;
-            if(Math.random() < ConfigManager.cardLuminisOdds.get())
-            {
-                ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
-                while (!card.getItem().isFoil(card) || card.getRarity() == Rarity.EPIC) {
-                    card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+        if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, player.getMainHandItem()) == 0) {
+            double i = player.getMainHandItem().equals(RegistryHandler.LUMINIS_PICKAXE.get()) ? 1 : 1.4;
+            if (ModList.get().isLoaded("curios") &&
+                    CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_RING.get(), player).isPresent() &&
+                    CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_RING.get(), player).get().right.getItem().equals(RegistryHandler.LUMINIS_RING.get()))
+                i += .3;
+            if (ModList.get().isLoaded("curios") && ((
+                    CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_MEDAL.get(), player).isPresent() &&
+                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.LUMINIS_MEDAL.get())) || (
+                    CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get(), player).isPresent() &&
+                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get())))) {
+                i += .3;
+                if (Math.random() < ConfigManager.cardLuminisOdds.get()) {
+                    ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int) (Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+                    while (!card.getItem().isFoil(card) || card.getRarity() == Rarity.EPIC) {
+                        card = new ItemStack(CardRegistry.LOADED_CARDS.get((int) (Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+                    }
+                    InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), card);
                 }
-                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), card);
             }
+            if (Math.random() < ConfigManager.deepLuminisOdds.get() * i)
+                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(RegistryHandler.DEEP_LUMINIS_CRYSTAL.get()));
         }
-        if(Math.random() < ConfigManager.deepLuminisOdds.get() * i)
-            InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(RegistryHandler.DEEP_LUMINIS_CRYSTAL.get()));
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 }
