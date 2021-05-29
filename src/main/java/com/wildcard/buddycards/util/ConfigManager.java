@@ -106,12 +106,12 @@ public class ConfigManager {
 
         luminisMaxY = builder.comment("\nMaximum Y value for Luminis to generate, 1-120, default is 24")
                 .defineInRange("luminis.maxY", 24, 1, 120);
-        luminisPerChunk = builder.comment("\nAmount of veins of Luminis generated per chunk, 1-24, default is 3")
-                .defineInRange("luminis.perChunk", 3, 0, 36);
-        luminisVeinSize = builder.comment("\nSize of Luminis veins, 1-36, default is 12")
-                .defineInRange("luminis.veinSize", 12, 1, 36);
-        deepLuminisOdds = builder.comment("\nOdds of deep Luminis crystals being dropped by Luminis ore, note this can be doubled with certain gear, 0 for 0%, 1 for 100%, default is 3%")
-                .defineInRange("luminis.deepLuminisOdds", .03, 0, 1);
+        luminisPerChunk = builder.comment("\nAmount of veins of Luminis generated per chunk, 1-24, default is 1")
+                .defineInRange("luminis.perChunk", 1, 0, 36);
+        luminisVeinSize = builder.comment("\nSize of Luminis veins, 1-36, default is 8")
+                .defineInRange("luminis.veinSize", 8, 1, 36);
+        deepLuminisOdds = builder.comment("\nOdds of deep Luminis crystals being dropped by Luminis ore, note this can be doubled with certain gear, 0 for 0%, 1 for 100%, default is 3.5%")
+                .defineInRange("luminis.deepLuminisOdds", .035, 0, 1);
         cardLuminisOdds = builder.comment("\nOdds of a random shiny non-epic card being dropped by Luminis ore when using the Luminis Medal, 0 for 0%, 1 for 100%, default is 2%")
                 .defineInRange("luminis.cardLuminisOdds", .02, 0, 1);
 
