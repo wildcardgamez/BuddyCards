@@ -16,11 +16,9 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.List;
 
-import net.minecraft.item.Item.Properties;
-
 public class BuddysteelShovelItem extends ShovelItem {
-    public BuddysteelShovelItem(BuddysteelItemTier tier) {
-        super(tier, 1.5f, -3.0f, new Properties().tab(BuddyCards.TAB));
+    public BuddysteelShovelItem(BuddysteelItemTier tier, float damage) {
+        super(tier, damage, -3.0f, new Properties().tab(BuddyCards.TAB));
     }
 
     @Override

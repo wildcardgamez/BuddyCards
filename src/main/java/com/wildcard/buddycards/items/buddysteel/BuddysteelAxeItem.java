@@ -25,8 +25,8 @@ import java.util.List;
 import net.minecraft.item.Item.Properties;
 
 public class BuddysteelAxeItem extends AxeItem {
-    public BuddysteelAxeItem(BuddysteelItemTier tier) {
-        super(tier, 6, -3.1f, new Properties().tab(BuddyCards.TAB));
+    public BuddysteelAxeItem(BuddysteelItemTier tier, float damage) {
+        super(tier, damage, -3.1f, new Properties().tab(BuddyCards.TAB));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class BuddysteelAxeItem extends AxeItem {
         if (stack.hasTag() && slot == EquipmentSlotType.MAINHAND) {
             multimap = LinkedHashMultimap.create();
             float ratio = stack.getTag().getFloat("completion");
-            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.getAttackDamage() + 2 + (ratio * 4), AttributeModifier.Operation.ADDITION));
+            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.getAttackDamage() + 2 + (int) (ratio*8)/2, AttributeModifier.Operation.ADDITION));
             multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -3.1, AttributeModifier.Operation.ADDITION));
         }
         return multimap;

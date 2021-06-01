@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 
 public class BuddysteelFilletKnifeItem extends BuddysteelSwordItem {
     public BuddysteelFilletKnifeItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL);
+        super(BuddysteelItemTier.BUDDYSTEEL, 3);
     }
 
     public boolean canApplyAtEnchantingTable(@Nonnull ItemStack stack, Enchantment enchantment) {

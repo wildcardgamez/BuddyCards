@@ -17,8 +17,8 @@ import net.minecraftforge.common.ToolType;
 import java.util.List;
 
 public class BuddysteelHoeItem extends HoeItem {
-    public BuddysteelHoeItem(BuddysteelItemTier tier) {
-        super(tier, 0, -1.0f, new Properties().tab(BuddyCards.TAB));
+    public BuddysteelHoeItem(BuddysteelItemTier tier, int damage) {
+        super(tier, damage, -1.0f, new Properties().tab(BuddyCards.TAB));
     }
 
     @Override
