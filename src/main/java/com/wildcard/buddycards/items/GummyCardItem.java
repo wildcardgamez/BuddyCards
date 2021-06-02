@@ -15,7 +15,7 @@ import java.util.List;
 
 public class GummyCardItem extends CardItem {
     public GummyCardItem(int cardNumber) {
-        super(7, cardNumber, false, new Item.Properties().tab(BuddyCards.CARDS_TAB).food(new Food.Builder().nutrition(2).saturationMod(0.3F).fast().build()), Rarity.COMMON);
+        super(7, cardNumber, Rarity.COMMON, "buddycards", new Item.Properties().tab(BuddyCards.CARDS_TAB).food(new Food.Builder().nutrition(2).saturationMod(0.3F).fast().build()));
     }
 
     @Override

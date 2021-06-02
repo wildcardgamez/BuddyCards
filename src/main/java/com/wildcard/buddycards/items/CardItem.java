@@ -2,6 +2,7 @@ package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsItems;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,23 +22,36 @@ import java.util.List;
 
 public class CardItem extends Item {
     /**
-     * Sets up a card number for a set
+     * Sets up a card for a set
      * @param setNumber set number for card
      * @param cardNumber card number for card
-     * @param isShiny is it a shiny card
+     * @param rarity is the cards rarity
+     * @param modId is the id of the mod required to add it in
      */
-    public CardItem(int setNumber, int cardNumber, boolean isShiny, Rarity rarity, String modId) {
+    public CardItem(int setNumber, int cardNumber, Rarity rarity, String modId) {
         super(new Item.Properties().tab(BuddyCards.CARDS_TAB));
         SET_NUMBER = setNumber;
         CARD_NUMBER = cardNumber;
-        SHINY = isShiny;
+        RARITY = rarity;
+        MOD_ID = modId;
+    }
+    /**
+     * Sets up a card with specific properties for a set
+     * @param setNumber set number for card
+     * @param cardNumber card number for card
+     * @param rarity is the cards rarity
+     * @param modId is the id of the mod required to add it in
+     */
+    public CardItem(int setNumber, int cardNumber, Rarity rarity, String modId, Item.Properties properties) {
+        super(properties);
+        SET_NUMBER = setNumber;
+        CARD_NUMBER = cardNumber;
         RARITY = rarity;
         MOD_ID = modId;
     }
 
     public final int SET_NUMBER;
     public final int CARD_NUMBER;
-    public final boolean SHINY;
     private final Rarity RARITY;
     private final String MOD_ID;
 
@@ -48,7 +62,7 @@ public class CardItem extends Item {
         TranslationTextComponent cn = new TranslationTextComponent("item.buddycards.number_separator");
         cn.append("" + CARD_NUMBER);
         //Add the star to the prefix when it's a shiny variant
-        if (SHINY)
+        if (isFoil(stack))
             cn.append(new TranslationTextComponent("item.buddycards.shiny_symbol"));
         //Add the card info (SetName - Card# Shiny symbol)
         tooltip.add(new TranslationTextComponent("item.buddycards.set." + SET_NUMBER).append(cn));
@@ -63,8 +77,8 @@ public class CardItem extends Item {
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        //Make shiny cards have enchant glow, and non-shiny ones not
-        return SHINY;
+        //Make shiny cards have enchant glow
+        return stack.hasTag() && stack.getTag().contains("foil") && stack.getTag().getBoolean("foil");
     }
 
     @Override
@@ -104,8 +118,8 @@ public class CardItem extends Item {
                         CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), playerIn).isPresent() &&
                         CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), playerIn).get().right.getItem().equals(BuddycardsItems.ZYLEX_RING.get()))
                     k++;
-                if (playerIn.hasEffect(RegistryHandler.GRADING_LUCK.get()))
-                    k += playerIn.getEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier();
+                if (playerIn.hasEffect(BuddycardsMisc.GRADING_LUCK.get()))
+                    k += playerIn.getEffect(BuddycardsMisc.GRADING_LUCK.get()).getAmplifier();
                 //If they have extra rolls, reroll each roll under 400
                 if (k > 0) {
                     for (int j = 0; j <= k && i < 400; j++) {
@@ -172,7 +186,7 @@ public class CardItem extends Item {
             else if(grade == 5)
                 points *= ConfigManager.challengeGrade5Mult.get();
         }
-        if(SHINY)
+        if(card.hasFoil())
             points *= ConfigManager.challengeShinyMult.get();
         return (int) (points + .5);
     }

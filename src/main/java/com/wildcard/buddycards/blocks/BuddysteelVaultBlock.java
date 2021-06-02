@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.blocks;
 
 import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -93,7 +94,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand handIn, BlockRayTraceResult hit) {
         TileEntity tileentity = worldIn.getBlockEntity(pos);
         if(playerIn instanceof ServerPlayerEntity && tileentity instanceof BuddysteelVaultTile) {
-            if(playerIn.getItemInHand(handIn).getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
+            if(playerIn.getItemInHand(handIn).getItem() == BuddycardsItems.BUDDYSTEEL_KEY.get()) {
                 if (((BuddysteelVaultTile)tileentity).isLocked()) {
                     if (((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUUID()))
                         playerIn.displayClientMessage(new TranslationTextComponent("block.buddycards.vault.unlock"), true);
@@ -119,10 +120,10 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
         if (world.getBlockEntity(pos) instanceof BuddysteelVaultTile) {
-            if (player.getItemInHand(Hand.MAIN_HAND).getItem() == RegistryHandler.ZYLEX_RING.get() ||
+            if (player.getItemInHand(Hand.MAIN_HAND).getItem() == BuddycardsItems.ZYLEX_RING.get() ||
                     (ModList.get().isLoaded("curios") &&
-                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), player).isPresent() &&
-                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), player).get().right.getItem().equals(RegistryHandler.ZYLEX_RING.get()))) {
+                            CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), player).isPresent() &&
+                            CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), player).get().right.getItem().equals(BuddycardsItems.ZYLEX_RING.get()))) {
                 ItemStack i = new ItemStack(state.getBlock().asItem());
                 CompoundNBT nbt = new CompoundNBT();
                 nbt.put("BlockEntityTag", world.getBlockEntity(pos).save(new CompoundNBT()));

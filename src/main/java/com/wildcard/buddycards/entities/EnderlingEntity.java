@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, INameable {
-    public static final Ingredient TEMPTATION_ITEMS = Ingredient.of(RegistryHandler.PACK_MYSTERY.get(), RegistryHandler.PACK_END.get(), BuddycardsItems.ZYLEX.get());
+    public static final Ingredient TEMPTATION_ITEMS = Ingredient.of(BuddycardsItems.MYSTERY_PACK.get(), BuddycardsItems.END_SET.PACK.get(), BuddycardsItems.ZYLEX.get());
     private PlayerEntity customer;
     private MerchantOffers offers;
     private int resets;

@@ -2,6 +2,7 @@ package com.wildcard.buddycards.blocks;
 
 import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -76,7 +77,7 @@ public class CardStandBlock extends Block{
         if (world.getBlockEntity(pos) instanceof CardStandTile) {
             CardStandTile standTile = (CardStandTile) world.getBlockEntity(pos);
             ItemStack stack = player.getItemInHand(hand);
-            if(stack.getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
+            if(stack.getItem() == BuddycardsItems.BUDDYSTEEL_KEY.get()) {
                 if (standTile.isLocked()) {
                     if (standTile.toggleLock(player.getUUID()))
                         player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_stand.unlock"), true);

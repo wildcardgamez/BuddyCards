@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.blocks;
 
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -33,27 +34,27 @@ public class LuminisOreBlock extends OreBlock {
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
         if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, player.getMainHandItem()) == 0) {
-            double i = player.getMainHandItem().equals(RegistryHandler.LUMINIS_PICKAXE.get()) ? 1 : 1.4;
+            double i = player.getMainHandItem().equals(BuddycardsItems.LUMINIS_PICKAXE.get()) ? 1 : 1.4;
             if (ModList.get().isLoaded("curios") &&
-                    CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_RING.get(), player).isPresent() &&
-                    CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_RING.get(), player).get().right.getItem().equals(RegistryHandler.LUMINIS_RING.get()))
+                    CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.LUMINIS_RING.get(), player).isPresent() &&
+                    CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.LUMINIS_RING.get(), player).get().right.getItem().equals(BuddycardsItems.LUMINIS_RING.get()))
                 i += .3;
             if (ModList.get().isLoaded("curios") && ((
-                    CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_MEDAL.get(), player).isPresent() &&
-                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.LUMINIS_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.LUMINIS_MEDAL.get())) || (
-                    CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get(), player).isPresent() &&
-                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get())))) {
+                    CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.LUMINIS_MEDAL.get(), player).isPresent() &&
+                            CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.LUMINIS_MEDAL.get(), player).get().right.getItem().equals(BuddycardsItems.LUMINIS_MEDAL.get())) || (
+                    CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.PERFECT_BUDDYSTEEL_MEDAL.get(), player).isPresent() &&
+                            CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.PERFECT_BUDDYSTEEL_MEDAL.get(), player).get().right.getItem().equals(BuddycardsItems.PERFECT_BUDDYSTEEL_MEDAL.get())))) {
                 i += .3;
                 if (Math.random() < ConfigManager.cardLuminisOdds.get()) {
-                    ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int) (Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+                    ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int) (Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
                     while (!card.getItem().isFoil(card) || card.getRarity() == Rarity.EPIC) {
-                        card = new ItemStack(CardRegistry.LOADED_CARDS.get((int) (Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+                        card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int) (Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
                     }
                     InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), card);
                 }
             }
             if (Math.random() < ConfigManager.deepLuminisOdds.get() * i)
-                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(RegistryHandler.DEEP_LUMINIS_CRYSTAL.get()));
+                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(BuddycardsItems.DEEP_LUMINIS_CRYSTAL.get()));
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }

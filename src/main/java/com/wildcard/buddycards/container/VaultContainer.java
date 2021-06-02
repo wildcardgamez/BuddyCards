@@ -2,6 +2,7 @@ package com.wildcard.buddycards.container;
 
 import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
 import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -20,7 +21,7 @@ public class VaultContainer extends Container {
     }
     
     public VaultContainer(int id, PlayerInventory playerInv, IItemHandler handlerIn, BuddysteelVaultTile tileIn) {
-        super(RegistryHandler.VAULT_CONTAINER.get(), id);
+        super(BuddycardsMisc.VAULT_CONTAINER.get(), id);
         tile = tileIn;
         handler = handlerIn;
         //Set up vault card slots

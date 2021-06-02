@@ -3,6 +3,8 @@ package com.wildcard.buddycards.items;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.inventory.BinderInventory;
+import com.wildcard.buddycards.registries.BuddycardsItems;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -36,7 +38,7 @@ public class BinderItem extends Item {
         CompoundNBT nbt = binder.getTag();
         if(playerIn instanceof ServerPlayerEntity) {
             //If there is a key, go through and try to lock it
-            if (playerIn.getItemInHand(Hand.OFF_HAND).getItem().equals(RegistryHandler.BUDDYSTEEL_KEY.get())) {
+            if (playerIn.getItemInHand(Hand.OFF_HAND).getItem().equals(BuddycardsItems.BUDDYSTEEL_KEY.get())) {
                 if (nbt == null || !nbt.contains("locked") || !nbt.getBoolean("locked")) {
                     nbt.putBoolean("locked", true);
                     nbt.putString("player", playerIn.getStringUUID());
@@ -54,7 +56,7 @@ public class BinderItem extends Item {
             } else if (nbt == null || !nbt.contains("locked") || !nbt.getBoolean("locked")) {
                 //Find the amount of slots and then open the binder GUI
                 int slots = 54;
-                switch (EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.EXTRA_PAGE.get(), binder)) {
+                switch (EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.EXTRA_PAGE.get(), binder)) {
                     case 3:
                         slots += 24;
                     case 2:

@@ -3,6 +3,7 @@ package com.wildcard.buddycards.integration.aquaculture;
 import com.teammetallurgy.aquaculture.api.fishing.Hook;
 import com.teammetallurgy.aquaculture.item.AquaFishingRodItem;
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.item.ItemEntity;
@@ -21,8 +22,8 @@ import java.util.List;
 public class AquacultureIntegration {
     public static void init() {
         BUDDY_HOOK = new Hook.HookBuilder("buddycard").setModID("buddycards").setColor(TextFormatting.AQUA).setDurabilityChance(0.20).build();
-        BUDDYSTEEL_FILET_KNIFE = RegistryHandler.ITEMS.register("buddysteel_fillet_knife", BuddysteelFilletKnifeItem::new);
-        BUDDYSTEEL_FISHING_ROD = RegistryHandler.ITEMS.register("buddysteel_fishing_rod", BuddysteelFishingRodItem::new);
+        BUDDYSTEEL_FILET_KNIFE = BuddycardsItems.ITEMS.register("buddysteel_fillet_knife", BuddysteelFilletKnifeItem::new);
+        BUDDYSTEEL_FISHING_ROD = BuddycardsItems.ITEMS.register("buddysteel_fishing_rod", BuddysteelFishingRodItem::new);
     }
 
     static Hook BUDDY_HOOK;

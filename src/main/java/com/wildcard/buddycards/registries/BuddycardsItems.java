@@ -68,54 +68,57 @@ public class BuddycardsItems {
 
         public BuddycardSet(int setNumber, String modId, MedalTypes medalType) {
             PACK = ITEMS.register("pack." + setNumber, () -> new PackItem(setNumber, modId));
-            BINDER = ITEMS.register("pack." + setNumber, () -> new BinderItem(setNumber, modId));
+            BINDER = ITEMS.register("binder." + setNumber, () -> new BinderItem(setNumber, modId));
             VAULT = BuddycardsBlocks.BLOCKS.register("vault." + setNumber, () -> new BuddysteelVaultBlock(setNumber, modId));
             VAULT_ITEM = ITEMS.register("vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
-            MEDAL = ITEMS.register("vault." + setNumber, () -> new MedalItem(medalType));
+            MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType));
             SET_NUMBER = setNumber;
             MOD_ID = modId;
         }
 
         public void addCards27() {
-            for(int i = 0; i <= 12; i++) {
+            for(int i = 1; i <= 12; i++) {
                 int finalI = i;
-                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, false, Rarity.COMMON, MOD_ID)));
+                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.COMMON, MOD_ID)));
             }
             for (int i = 13; i <= 21; i++) {
                 int finalI = i;
-                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, false, Rarity.UNCOMMON, MOD_ID)));
+                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.UNCOMMON, MOD_ID)));
             }
             for (int i = 22; i <= 25; i++) {
                 int finalI = i;
-                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, false, Rarity.RARE, MOD_ID)));
+                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.RARE, MOD_ID)));
             }
-            CARDS.put(26, ITEMS.register("card." + SET_NUMBER + ".26", () -> new CardItem(SET_NUMBER, 26, false, Rarity.EPIC, MOD_ID)));
-            CARDS.put(27, ITEMS.register("card." + SET_NUMBER + ".27", () -> new CardItem(SET_NUMBER, 27, false, Rarity.EPIC, MOD_ID)));
+            CARDS.put(26, ITEMS.register("card." + SET_NUMBER + ".26", () -> new CardItem(SET_NUMBER, 26, Rarity.EPIC, MOD_ID)));
+            CARDS.put(27, ITEMS.register("card." + SET_NUMBER + ".27", () -> new CardItem(SET_NUMBER, 27, Rarity.EPIC, MOD_ID)));
         }
 
         public void addCards18() {
-            for(int i = 0; i <= 7; i++) {
+            for(int i = 1; i <= 7; i++) {
                 int finalI = i;
-                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, false, Rarity.COMMON, MOD_ID)));
+                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.COMMON, MOD_ID)));
             }
             for (int i = 8; i <= 13; i++) {
                 int finalI = i;
-                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, false, Rarity.UNCOMMON, MOD_ID)));
+                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.UNCOMMON, MOD_ID)));
             }
             for (int i = 14; i <= 16; i++) {
                 int finalI = i;
-                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, false, Rarity.RARE, MOD_ID)));
+                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.RARE, MOD_ID)));
             }
-            CARDS.put(17, ITEMS.register("card." + SET_NUMBER + ".17", () -> new CardItem(SET_NUMBER, 17, false, Rarity.EPIC, MOD_ID)));
-            CARDS.put(18, ITEMS.register("card." + SET_NUMBER + ".18", () -> new CardItem(SET_NUMBER, 18, false, Rarity.EPIC, MOD_ID)));
+            CARDS.put(17, ITEMS.register("card." + SET_NUMBER + ".17", () -> new CardItem(SET_NUMBER, 17, Rarity.EPIC, MOD_ID)));
+            CARDS.put(18, ITEMS.register("card." + SET_NUMBER + ".18", () -> new CardItem(SET_NUMBER, 18, Rarity.EPIC, MOD_ID)));
         }
 
         public void addCard(int number, Rarity rarity) {
-            CARDS.put(number, ITEMS.register("card." + SET_NUMBER + "." + number, () -> new CardItem(SET_NUMBER, number, false, rarity, MOD_ID)));
+            CARDS.put(number, ITEMS.register("card." + SET_NUMBER + "." + number, () -> new CardItem(SET_NUMBER, number, rarity, MOD_ID)));
         }
 
         public void addGummyCards() {
-            //To be implemented
+            for(int i = 1; i <= 6; i++) {
+                int finalI = i;
+                CARDS.put(i, ITEMS.register("card." + SET_NUMBER + ".gummy" + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.COMMON, MOD_ID)));
+            }
         }
 
         public void finishCards() {
