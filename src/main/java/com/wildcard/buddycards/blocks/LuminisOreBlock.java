@@ -1,8 +1,6 @@
 package com.wildcard.buddycards.blocks;
 
-import com.wildcard.buddycards.util.CardRegistry;
 import com.wildcard.buddycards.util.ConfigManager;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

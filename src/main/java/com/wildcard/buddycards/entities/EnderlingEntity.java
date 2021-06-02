@@ -1,7 +1,7 @@
 package com.wildcard.buddycards.entities;
 
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.util.EnderlingOfferMaker;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, INameable {
-    public static final Ingredient TEMPTATION_ITEMS = Ingredient.of(RegistryHandler.PACK_MYSTERY.get(), RegistryHandler.PACK_END.get(), RegistryHandler.ZYLEX.get());
+    public static final Ingredient TEMPTATION_ITEMS = Ingredient.of(RegistryHandler.PACK_MYSTERY.get(), RegistryHandler.PACK_END.get(), BuddycardsItems.ZYLEX.get());
     private PlayerEntity customer;
     private MerchantOffers offers;
     private int resets;
@@ -240,11 +240,11 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     @Override
     protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
-        if(offers != null && !this.level.isClientSide && (heldItem.getItem() == RegistryHandler.ZYLEX_TOKEN.get() || (ModList.get().isLoaded("curios") && ((
-                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_MEDAL.get(), player).isPresent() &&
-                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.ZYLEX_MEDAL.get())) ||
-                (CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get(), player).isPresent() &&
-                CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get(), player).get().right.getItem().equals(RegistryHandler.PERFECT_BUDDYSTEEL_MEDAL.get()))
+        if(offers != null && !this.level.isClientSide && (heldItem.getItem() == BuddycardsItems.ZYLEX_TOKEN.get() || (ModList.get().isLoaded("curios") && ((
+                CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_MEDAL.get(), player).isPresent() &&
+                CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_MEDAL.get(), player).get().right.getItem().equals(BuddycardsItems.ZYLEX_MEDAL.get())) ||
+                (CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.PERFECT_BUDDYSTEEL_MEDAL.get(), player).isPresent() &&
+                CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.PERFECT_BUDDYSTEEL_MEDAL.get(), player).get().right.getItem().equals(BuddycardsItems.PERFECT_BUDDYSTEEL_MEDAL.get()))
                         )))) {
             boolean flag = true;
             for (int i = 0; i < offers.size() && flag; i++) {
@@ -255,7 +255,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
                 offers.clear();
                 populateTradeDate();
                 resets++;
-                if(heldItem.getItem() == RegistryHandler.ZYLEX_TOKEN.get())
+                if(heldItem.getItem() == BuddycardsItems.ZYLEX_TOKEN.get())
                     heldItem.shrink(1);
             }
         }

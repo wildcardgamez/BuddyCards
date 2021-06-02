@@ -1,6 +1,5 @@
 package com.wildcard.buddycards.integration.fd;
 
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 

@@ -1,6 +1,5 @@
 package com.wildcard.buddycards.blocks.tiles;
 
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.IClearable;
 import net.minecraft.item.ItemStack;

@@ -24,12 +24,14 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import java.util.List;
 
 public class PackItem extends Item {
-    public PackItem(int setNumber) {
+    public PackItem(int setNumber, String modId) {
         super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(16));
         SET_NUMBER = setNumber;
+        SPECIFIC_MOD = modId;
     }
 
     final int SET_NUMBER;
+    final String SPECIFIC_MOD;
 
     @Override
     public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -67,13 +69,7 @@ public class PackItem extends Item {
 
     @Override
     public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
-            return;
-        else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
-            return;
-        else if(SET_NUMBER == 6 && !ModList.get().isLoaded("aquaculture"))
-            return;
-        else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
+        if(!ModList.get().isLoaded(SPECIFIC_MOD))
             return;
         super.fillItemCategory(group, items);
     }

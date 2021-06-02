@@ -3,7 +3,6 @@ package com.wildcard.buddycards.integration;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.items.MedalTypes;
 import com.wildcard.buddycards.util.ConfigManager;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,7 +1,6 @@
 package com.wildcard.buddycards.blocks;
 
 import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,13 +38,15 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     public static final DirectionProperty DIR = HorizontalBlock.FACING;
     protected static final VoxelShape VAULT_SHAPE = Block.box(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 
-    public BuddysteelVaultBlock(int setNumber) {
+    public BuddysteelVaultBlock(int setNumber, String modId) {
         super(Properties.copy(Blocks.IRON_BLOCK).strength(5, 1200));
         this.registerDefaultState(this.stateDefinition.any().setValue(DIR, Direction.NORTH));
         SET_NUMBER = setNumber;
+        SPECIFIC_MOD = modId;
     }
 
     final int SET_NUMBER;
+    final String SPECIFIC_MOD;
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -142,13 +143,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
 
     @Override
     public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
-            return;
-        else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
-            return;
-        else if(SET_NUMBER == 6 && !ModList.get().isLoaded("aquaculture"))
-            return;
-        else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
+        if(!ModList.get().isLoaded(SPECIFIC_MOD))
             return;
         super.fillItemCategory(group, items);
     }

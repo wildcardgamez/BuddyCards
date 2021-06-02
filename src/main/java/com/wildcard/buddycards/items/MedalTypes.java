@@ -1,6 +1,5 @@
 package com.wildcard.buddycards.items;
 
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.EffectInstance;

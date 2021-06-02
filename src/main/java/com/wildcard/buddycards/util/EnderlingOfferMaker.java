@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.util;
 
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MerchantOffer;
@@ -9,19 +10,19 @@ import java.util.Random;
 
 public class EnderlingOfferMaker {
     public static MerchantOffer createCardBuyOffer() {
-        ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), getZylexValueOfCard(card));
+        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
+        ItemStack zylex = new ItemStack(BuddycardsItems.ZYLEX.get(), getZylexValueOfCard(card));
         return new MerchantOffer(card, zylex, 1, 2, 1);
     }
 
     public static MerchantOffer createBulkCardBuyOffer() {
-        ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get(), 8);
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), getZylexValueOfCard(card) * 6);
+        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get(), 8);
+        ItemStack zylex = new ItemStack(BuddycardsItems.ZYLEX.get(), getZylexValueOfCard(card) * 6);
         return new MerchantOffer(card, zylex, 1, 6, 1);
     }
 
     public static MerchantOffer createGradedCardBuyOffer() {
-        ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
         CompoundNBT nbt = new CompoundNBT();
         int i = (int) (Math.random() * 200) + 1;
         int grade;
@@ -36,15 +37,15 @@ public class EnderlingOfferMaker {
         nbt.putInt("grade", grade);
         card.setTag(nbt);
         int val = getZylexValueOfCard(card);
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), val);
+        ItemStack zylex = new ItemStack(BuddycardsItems.ZYLEX.get(), val);
         if(val > 64) {
-            zylex = new ItemStack(RegistryHandler.ZYLEX_BLOCK.get(), (int) (val / 9 + .5));
+            zylex = new ItemStack(BuddycardsItems.ZYLEX_BLOCK.get(), (int) (val / 9 + .5));
         }
         return new MerchantOffer(card, zylex, 3, grade * 2, 1);
     }
 
     public static MerchantOffer createGradedCardSellOffer() {
-        ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
         CompoundNBT nbt = new CompoundNBT();
         int i = (int) (Math.random() * 200) + 1;
         int grade;
@@ -61,20 +62,20 @@ public class EnderlingOfferMaker {
         nbt.putInt("grade", grade);
         card.setTag(nbt);
         int val = getZylexValueOfCard(card);
-        ItemStack zylex = new ItemStack(RegistryHandler.ZYLEX.get(), val);
+        ItemStack zylex = new ItemStack(BuddycardsItems.ZYLEX.get(), val);
         if(val > 64) {
-            zylex = new ItemStack(RegistryHandler.ZYLEX_BLOCK.get(), (int) (val / 9 + .5));
+            zylex = new ItemStack(BuddycardsItems.ZYLEX_BLOCK_ITEM.get(), (int) (val / 9 + .5));
         }
         return new MerchantOffer(zylex, card, 1, grade, 1);
     }
 
     public static MerchantOffer createCardTradeOffer() {
-        ItemStack card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
-        ItemStack card2 = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
+        ItemStack card2 = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
         CompoundNBT nbt = new CompoundNBT();
         while(Math.abs(getZylexValueOfCard(card) - getZylexValueOfCard(card2)) > 2) {
-            card = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
-            card2 = new ItemStack(CardRegistry.LOADED_CARDS.get((int)(Math.random() * (CardRegistry.LOADED_CARDS.size()))).get());
+            card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
+            card2 = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
         }
         int i = (int) (Math.random() * 200) + 1;
         int grade;
@@ -100,21 +101,21 @@ public class EnderlingOfferMaker {
 
     public static MerchantOffer createPackOffer() {
         if(Math.random() > .5)
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), 6 + (int) (Math.random()*3)), new ItemStack(RegistryHandler.PACK_END.get()), 1, 5, 1);
-        return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), 13 + (int) (Math.random()*4)), new ItemStack(RegistryHandler.PACK_MYSTERY.get()), 1, 8, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), 6 + (int) (Math.random()*3)), new ItemStack(BuddycardsItems.END_SET.PACK.get()), 1, 5, 1);
+        return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), 13 + (int) (Math.random()*4)), new ItemStack(BuddycardsItems.PACK_MYSTERY.get()), 1, 8, 1);
     }
 
     public static MerchantOffer createGenericOffer() {
         int amount = (int) (Math.random() * 12) + 1;
         double random = Math.random();
         if(random > .92)
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + 1 + (int) (Math.random()/2*amount)), new ItemStack(RegistryHandler.CARD_STAND.get(), amount/3 + 1), 3, amount, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), amount + 1 + (int) (Math.random()/2*amount)), new ItemStack(BuddycardsItems.CARD_STAND.get(), amount/3 + 1), 3, amount, 1);
         if(random > .86)
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + (int) (Math.random()/2*amount)), new ItemStack(RegistryHandler.GRADING_SLEEVE.get(), amount/3 + 1), 3, amount, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), amount + (int) (Math.random()/2*amount)), new ItemStack(BuddycardsItems.GRADING_SLEEVE.get(), amount/3 + 1), 3, amount, 1);
         if(random > .8)
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), amount + (int) (Math.random()*2*amount)), new ItemStack(RegistryHandler.BUDDYSTEEL_NUGGET.get(), amount), 3, amount*2, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), amount + (int) (Math.random()*2*amount)), new ItemStack(BuddycardsItems.BUDDYSTEEL_NUGGET.get(), amount), 3, amount*2, 1);
         if(random > .75)
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX.get(), 6 + (int) (Math.random()*4)), new ItemStack(RegistryHandler.ENDER_BINDER.get()), 1, 6, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), 6 + (int) (Math.random()*4)), new ItemStack(BuddycardsItems.ENDER_BINDER.get()), 1, 6, 1);
         if(random > .3)
             return createBulkCardBuyOffer();
         else
@@ -124,22 +125,22 @@ public class EnderlingOfferMaker {
     public static MerchantOffer createSpecialtyOffer(Random random) {
         double rand = Math.random() * 2;
         if(rand%1 > .92) {
-            ItemStack medal = new ItemStack(RegistryHandler.ZYLEX_MEDAL.get());
+            ItemStack medal = new ItemStack(BuddycardsItems.ZYLEX_MEDAL.get());
             if((int) rand != 0)
                 EnchantmentHelper.enchantItem(random, medal, 15, true);
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) (rand * 2)), medal, 1, 32, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX_TOKEN.get(), 2 + (int) (rand * 2)), medal, 1, 32, 1);
         }
         else if(rand%1 > .8) {
-            ItemStack boots = new ItemStack(RegistryHandler.ZYLEX_BOOTS.get());
+            ItemStack boots = new ItemStack(BuddycardsItems.ZYLEX_BOOTS.get());
             if((int) rand != 0)
                 EnchantmentHelper.enchantItem(random, boots, 15, true);
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), boots, 1, 32, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX_TOKEN.get(), 2 + (int) rand), boots, 1, 32, 1);
         }
         else if(rand%1 > .4) {
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(RegistryHandler.ZYLEX_RING.get()), 1, 32, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(BuddycardsItems.ZYLEX_RING.get()), 1, 32, 1);
         }
         else {
-            return new MerchantOffer(new ItemStack(RegistryHandler.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(RegistryHandler.PACK_MYSTERY.get()), 2 + (int) (rand*2), 32, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(BuddycardsItems.PACK_MYSTERY.get()), 2 + (int) (rand*2), 32, 1);
         }
     }
 

@@ -2,7 +2,6 @@ package com.wildcard.buddycards.blocks;
 
 import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 import com.wildcard.buddycards.items.CardItem;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -27,8 +26,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class CardStandBlock extends Block{
     protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 1.0D, 11.0D);

@@ -3,7 +3,6 @@ package com.wildcard.buddycards.container;
 import com.wildcard.buddycards.inventory.BinderInventory;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.EnderBinderSaveData;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

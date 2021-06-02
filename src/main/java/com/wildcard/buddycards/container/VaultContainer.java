@@ -2,7 +2,6 @@ package com.wildcard.buddycards.container;
 
 import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
 import com.wildcard.buddycards.items.CardItem;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

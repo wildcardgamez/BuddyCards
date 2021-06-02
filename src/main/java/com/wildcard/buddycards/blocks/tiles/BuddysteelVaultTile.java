@@ -3,7 +3,6 @@ package com.wildcard.buddycards.blocks.tiles;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.VaultContainer;
 import com.wildcard.buddycards.items.CardItem;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

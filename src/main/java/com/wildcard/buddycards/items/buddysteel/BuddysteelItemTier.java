@@ -1,14 +1,14 @@
 package com.wildcard.buddycards.items.buddysteel;
 
-import com.wildcard.buddycards.util.RegistryHandler;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
 
 public enum BuddysteelItemTier implements IItemTier {
-    BUDDYSTEEL(2048, 6f, 0, 2, 8, new LazyValue<>(() -> Ingredient.of(RegistryHandler.BUDDYSTEEL_INGOT.get()))),
-    PERFECT_BUDDYSTEEL(3072, 7.5f, 0, 3, 10, new LazyValue<>(() -> Ingredient.of(RegistryHandler.PERFECT_BUDDYSTEEL_INGOT.get()))),
-    LUMINIS(1024, 8f, 0, 3, 12, new LazyValue<>(() -> Ingredient.of(RegistryHandler.LUMINIS.get())));
+    BUDDYSTEEL(2048, 6f, 0, 2, 8, new LazyValue<>(() -> Ingredient.of(BuddycardsItems.BUDDYSTEEL_INGOT.get()))),
+    PERFECT_BUDDYSTEEL(3072, 7.5f, 0, 3, 10, new LazyValue<>(() -> Ingredient.of(BuddycardsItems.PERFECT_BUDDYSTEEL_INGOT.get()))),
+    LUMINIS(1024, 8f, 0, 3, 12, new LazyValue<>(() -> Ingredient.of(BuddycardsItems.LUMINIS.get())));
 
     BuddysteelItemTier(int uses, float speed, float dmg, int level, int ench, LazyValue<Ingredient> mat) {
         this.uses = uses;

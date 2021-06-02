@@ -1,8 +1,8 @@
 package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.util.ConfigManager;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -21,66 +21,25 @@ import java.util.List;
 
 public class CardItem extends Item {
     /**
-     * Sets up a card number for a set with 27 cards
+     * Sets up a card number for a set
      * @param setNumber set number for card
      * @param cardNumber card number for card
      * @param isShiny is it a shiny card
      */
-    public CardItem(int setNumber, int cardNumber, boolean isShiny) {
+    public CardItem(int setNumber, int cardNumber, boolean isShiny, Rarity rarity, String modId) {
         super(new Item.Properties().tab(BuddyCards.CARDS_TAB));
         SET_NUMBER = setNumber;
         CARD_NUMBER = cardNumber;
         SHINY = isShiny;
-        if(CARD_NUMBER <= 12)
-            rarity = Rarity.COMMON;
-        else if(CARD_NUMBER <= 21)
-            rarity = Rarity.UNCOMMON;
-        else if(CARD_NUMBER <= 25)
-            rarity = Rarity.RARE;
-        else
-            rarity = Rarity.EPIC;
+        RARITY = rarity;
+        MOD_ID = modId;
     }
 
-    /**
-     * Sets up a card number for a set with less or more than 27 cards
-     * @param setNumber set number for card
-     * @param cardNumber card number for card
-     * @param isShiny is it a shiny card
-     * @param raritySeperators the final common uncommon and rare card numbers to setup the rarities based on card number
-     */
-    public CardItem(int setNumber, int cardNumber, boolean isShiny, int[] raritySeperators) {
-        super(new Item.Properties().tab(BuddyCards.CARDS_TAB));
-        SET_NUMBER = setNumber;
-        CARD_NUMBER = cardNumber;
-        SHINY = isShiny;
-        if(CARD_NUMBER <= raritySeperators[0])
-            rarity = Rarity.COMMON;
-        else if(CARD_NUMBER <= raritySeperators[1])
-            rarity = Rarity.UNCOMMON;
-        else if(CARD_NUMBER <= raritySeperators[2])
-            rarity = Rarity.RARE;
-        else
-            rarity = Rarity.EPIC;
-    }
-
-    public CardItem(int setNumber, int cardNumber, boolean isShiny, Item.Properties properties) {
-        super(properties);
-        SET_NUMBER = setNumber;
-        CARD_NUMBER = cardNumber;
-        SHINY = isShiny;
-        if(CARD_NUMBER <= 12)
-            rarity = Rarity.COMMON;
-        else if(CARD_NUMBER <= 21)
-            rarity = Rarity.UNCOMMON;
-        else if(CARD_NUMBER <= 25)
-            rarity = Rarity.RARE;
-        else
-            rarity = Rarity.EPIC;
-    }
     public final int SET_NUMBER;
     public final int CARD_NUMBER;
     public final boolean SHINY;
-    private final Rarity rarity;
+    private final Rarity RARITY;
+    private final String MOD_ID;
 
     @Override
     public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -110,19 +69,13 @@ public class CardItem extends Item {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return rarity;
+        return RARITY;
     }
 
     @Override
     public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
         //Only show cards in the creative menu when the respective mod is loaded
-        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
-            return;
-        else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
-            return;
-        else if(SET_NUMBER == 6 && !ModList.get().isLoaded("aquaculture"))
-            return;
-        else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
+        if(!ModList.get().isLoaded(MOD_ID))
             return;
         super.fillItemCategory(group, items);
     }
@@ -130,7 +83,7 @@ public class CardItem extends Item {
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         if (handIn == Hand.MAIN_HAND)
-            return tryGrade(RegistryHandler.GRADING_SLEEVE.get(), worldIn, playerIn, handIn);
+            return tryGrade(BuddycardsItems.GRADING_SLEEVE.get(), worldIn, playerIn, handIn);
         return super.use(worldIn, playerIn, handIn);
     }
 
@@ -148,8 +101,8 @@ public class CardItem extends Item {
                 //Count how many extra rolls the player has based on effects and ring
                 int k = 0;
                 if (ModList.get().isLoaded("curios") &&
-                        CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), playerIn).isPresent() &&
-                        CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), playerIn).get().right.getItem().equals(RegistryHandler.ZYLEX_RING.get()))
+                        CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), playerIn).isPresent() &&
+                        CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), playerIn).get().right.getItem().equals(BuddycardsItems.ZYLEX_RING.get()))
                     k++;
                 if (playerIn.hasEffect(RegistryHandler.GRADING_LUCK.get()))
                     k += playerIn.getEffect(RegistryHandler.GRADING_LUCK.get()).getAmplifier();
@@ -184,11 +137,11 @@ public class CardItem extends Item {
 
     public int getPointValue(ItemStack card) {
         double points = 0;
-        if(card.getRarity() == rarity.COMMON)
+        if(card.getRarity() == RARITY.COMMON)
             points = ConfigManager.challengePointsCommon.get();
-        else if(card.getRarity() == rarity.UNCOMMON)
+        else if(card.getRarity() == RARITY.UNCOMMON)
             points = ConfigManager.challengePointsUncommon.get();
-        else if(card.getRarity() == rarity.RARE)
+        else if(card.getRarity() == RARITY.RARE)
             points = ConfigManager.challengePointsRare.get();
         else
             points = ConfigManager.challengePointsEpic.get();
