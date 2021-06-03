@@ -69,8 +69,8 @@ public class BuddycardsItems {
         public BuddycardSet(int setNumber, String modId, MedalTypes medalType) {
             PACK = ITEMS.register("pack." + setNumber, () -> new PackItem(setNumber, modId));
             BINDER = ITEMS.register("binder." + setNumber, () -> new BinderItem(setNumber, modId));
-            VAULT = BuddycardsBlocks.BLOCKS.register("vault." + setNumber, () -> new BuddysteelVaultBlock(setNumber, modId));
-            VAULT_ITEM = ITEMS.register("vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
+            VAULT = BuddycardsBlocks.BLOCKS.register("buddysteel_vault." + setNumber, () -> new BuddysteelVaultBlock(setNumber, modId));
+            VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
             MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType));
             SET_NUMBER = setNumber;
             MOD_ID = modId;

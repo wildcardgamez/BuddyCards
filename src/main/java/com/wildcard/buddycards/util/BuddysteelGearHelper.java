@@ -32,33 +32,26 @@ public class BuddysteelGearHelper {
     }
 
     public static float getRatio(ServerPlayerEntity player) {
-        int max = 6;
+        int max = 3;
         float sets = 0;
         sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set1"))).getPercent();
         sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set2"))).getPercent();
         sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set3"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set1s"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set2s"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set3s"))).getPercent();
         if (ModList.get().isLoaded("byg")) {
-            max += 2;
+            max++;
             sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set4"))).getPercent();
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set4s"))).getPercent();
         }
         if (ModList.get().isLoaded("create")) {
-            max += 2;
+            max++;
             sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set5"))).getPercent();
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set5s"))).getPercent();
         }
         if (ModList.get().isLoaded("aquaculture")) {
-            max += 2;
+            max++;
             sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set6"))).getPercent();
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set6s"))).getPercent();
         }
         if (ModList.get().isLoaded("farmersdelight")) {
-            max += 2;
+            max++;
             sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set7"))).getPercent();
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set7s"))).getPercent();
         }
         return sets / max;
     }
