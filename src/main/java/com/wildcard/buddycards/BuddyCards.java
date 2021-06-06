@@ -89,26 +89,7 @@ public class BuddyCards
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> ScreenManager.register(BuddycardsMisc.BINDER_CONTAINER.get(), BinderScreen::new));
-        event.enqueueWork(() -> ScreenManager.register(BuddycardsMisc.VAULT_CONTAINER.get(), VaultScreen::new));
-        for (RegistryObject<CardItem> card: BuddycardsItems.ALL_CARDS) {
-            event.enqueueWork(() -> ItemModelsProperties.register(card.get(), new ResourceLocation("grade"), (stack, world, entity) -> {
-                if(stack.getTag() != null)
-                    return stack.getTag().getInt("grade");
-                return 0;
-            }));
-        }
-        if (ModList.get().isLoaded("aquaculture")) {
-            event.enqueueWork(() -> ItemModelsProperties.register(AquacultureIntegration.BUDDYSTEEL_FISHING_ROD.get(), new ResourceLocation("cast"), (stack, world, entity) -> {
-                if(entity instanceof PlayerEntity && (entity.getItemInHand(Hand.MAIN_HAND) == stack || entity.getItemInHand(Hand.OFF_HAND) == stack) && ((PlayerEntity) entity).fishing != null)
-                    return 1;
-                else
-                    return 0;
-            }));
-        }
-        ClientRegistry.bindTileEntityRenderer(BuddycardsEntities.CARD_DISPLAY_TILE.get(), CardDisplayTileRenderer::new);
-        ClientRegistry.bindTileEntityRenderer(BuddycardsEntities.CARD_STAND_TILE.get(), CardStandTileRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(BuddycardsEntities.ENDERLING.get(), EnderlingRenderer::new);
+        ClientStuff.clientSetup(event);
     }
 
     public static final ItemGroup TAB = new ItemGroup("buddycards") {
