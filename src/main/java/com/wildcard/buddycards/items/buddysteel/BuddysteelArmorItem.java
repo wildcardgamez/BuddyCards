@@ -65,7 +65,6 @@ public class BuddysteelArmorItem extends ArmorItem {
         return multimap;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Nullable
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
@@ -76,12 +75,11 @@ public class BuddysteelArmorItem extends ArmorItem {
         return super.getArmorTexture(stack, entity, slot, type);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL) || material.equals(BuddysteelArmorMaterial.ZYLEX))
             return (A) new PerfectBuddysteelArmorModel(slot);
-        return _default;
+        return super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
     }
 }

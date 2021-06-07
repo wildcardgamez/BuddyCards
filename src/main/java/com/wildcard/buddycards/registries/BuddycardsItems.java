@@ -5,10 +5,7 @@ import com.wildcard.buddycards.blocks.BuddysteelVaultBlock;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.Rarity;
+import net.minecraft.item.*;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -67,7 +64,7 @@ public class BuddycardsItems {
         private final String MOD_ID;
 
         public BuddycardSet(int setNumber, String modId, MedalTypes medalType) {
-            PACK = ITEMS.register("pack." + setNumber, () -> new PackItem(setNumber, modId));
+            PACK = ITEMS.register("pack." + setNumber, () -> new PackItem(setNumber, modId, 4, 1));
             BINDER = ITEMS.register("binder." + setNumber, () -> new BinderItem(setNumber, modId));
             VAULT = BuddycardsBlocks.BLOCKS.register("buddysteel_vault." + setNumber, () -> new BuddysteelVaultBlock(setNumber, modId));
             VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
@@ -134,7 +131,7 @@ public class BuddycardsItems {
     //Non-set Items
     public static final RegistryObject<Item> CHALLENGE_BINDER = ITEMS.register("challenge_binder", ChallengeBinder::new);
     public static final RegistryObject<Item> ENDER_BINDER = ITEMS.register("ender_binder", EnderBinderItem::new);
-    public static final RegistryObject<Item> MYSTERY_PACK = ITEMS.register("mystery_pack", () -> new PackItem(0, "buddycards"));
+    public static final RegistryObject<Item> MYSTERY_PACK = ITEMS.register("mystery_pack", () -> new PackItem(0, "buddycards", 9, 2));
 
     //Buddysteel Luminis & Zylex
     public static final RegistryObject<BlockItem> BUDDYSTEEL_BLOCK_ITEM = ITEMS.register("buddysteel_block", () -> new BlockItem(BuddycardsBlocks.BUDDYSTEEL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));

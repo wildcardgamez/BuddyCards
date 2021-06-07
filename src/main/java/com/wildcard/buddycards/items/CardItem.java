@@ -86,6 +86,10 @@ public class CardItem extends Item {
         return RARITY;
     }
 
+    public Rarity getRarity() {
+        return RARITY;
+    }
+
     @Override
     public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
         //Only show cards in the creative menu when the respective mod is loaded

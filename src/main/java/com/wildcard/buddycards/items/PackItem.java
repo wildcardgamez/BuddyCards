@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -10,6 +11,7 @@ import net.minecraft.item.Rarity;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootTable;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
@@ -19,19 +21,26 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PackItem extends Item {
-    public PackItem(int setNumber, String modId) {
+    public PackItem(int setNumber, String modId, int cards, int shinyCards) {
         super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(16));
         SET_NUMBER = setNumber;
         SPECIFIC_MOD = modId;
+        CARDS = cards;
+        SHINY_CARDS = shinyCards;
     }
 
     final int SET_NUMBER;
     final String SPECIFIC_MOD;
+    final int CARDS;
+    final int SHINY_CARDS;
 
     @Override
     public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -48,19 +57,34 @@ public class PackItem extends Item {
 
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        //Prematurely delete the pack item so the card items can go in the same slot
-        playerIn.getItemInHand(handIn).shrink(1);
         if(worldIn instanceof ServerWorld) {
-            //Generate the associated loot table with the pack and give the cards to the player on server side
-            ServerWorld server = (ServerWorld) worldIn;
-            LootContext.Builder builder = (new LootContext.Builder(server).withRandom(worldIn.random));
-            ResourceLocation resourcelocation;
-            if(SET_NUMBER == 0)
-                resourcelocation = new ResourceLocation(BuddyCards.MOD_ID, "item/packs/mystery");
-            else
-                resourcelocation = new ResourceLocation(BuddyCards.MOD_ID, "item/packs/" + SET_NUMBER);
-            LootTable loottable = server.getServer().getLootTables().get(resourcelocation);
-            List<ItemStack> cards = loottable.getRandomItems(builder.create(LootParameterSets.EMPTY));
+            //Prematurely delete the pack item so the card items can go in the same slot
+            playerIn.getItemInHand(handIn).shrink(1);
+            //For each card roll the rarity, and get a card from the list that matches
+            NonNullList<ItemStack> cards = NonNullList.create();
+            for (int i = 0; i < CARDS; i++) {
+                float rand = worldIn.random.nextFloat();
+                Rarity rarity;
+                if (rand < .5)
+                    rarity = Rarity.COMMON;
+                else if (rand < .8)
+                    rarity = Rarity.UNCOMMON;
+                else if (rand < .95)
+                    rarity = Rarity.RARE;
+                else
+                    rarity = Rarity.EPIC;
+                ItemStack card;
+                if (SET_NUMBER == 0)
+                    card = new ItemStack(getRandomCardOfRarity(BuddycardsItems.ALL_CARDS, rarity));
+                else
+                    card = new ItemStack(getRandomCardOfRarity(BuddycardsItems.SETS.get(SET_NUMBER).CARDS, rarity));
+                if (i >= CARDS - SHINY_CARDS) {
+                    CompoundNBT nbt = new CompoundNBT();
+                    nbt.putBoolean("foil", true);
+                    card.setTag(nbt);
+                }
+                cards.add(card);
+            }
             cards.forEach((card) -> ItemHandlerHelper.giveItemToPlayer(playerIn, card));
             return ActionResult.consume(playerIn.getItemInHand(handIn));
         }
@@ -72,6 +96,22 @@ public class PackItem extends Item {
         if(!ModList.get().isLoaded(SPECIFIC_MOD))
             return;
         super.fillItemCategory(group, items);
+    }
+
+    public CardItem getRandomCardOfRarity(HashMap<Integer, RegistryObject<CardItem>> cards, Rarity rarity) {
+        CardItem card = cards.get((int)(Math.random() * cards.size()) + 1).get();
+        while (card.getRarity() != rarity) {
+            card = cards.get((int)(Math.random() * cards.size()) + 1).get();
+        }
+        return card;
+    }
+
+    public CardItem getRandomCardOfRarity(ArrayList<RegistryObject<CardItem>> cards, Rarity rarity) {
+        CardItem card = cards.get((int)(Math.random() * cards.size())).get();
+        while (card.getRarity() != rarity) {
+            card = cards.get((int)(Math.random() * cards.size())).get();
+        }
+        return card;
     }
 
 }
