@@ -2,8 +2,10 @@ package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsItems;
+import com.wildcard.buddycards.util.BuddycardsCollectionSaveData;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -85,7 +87,11 @@ public class PackItem extends Item {
                 }
                 cards.add(card);
             }
-            cards.forEach((card) -> ItemHandlerHelper.giveItemToPlayer(playerIn, card));
+            cards.forEach((card) -> {
+                //Give the card and add to the players collection
+                ItemHandlerHelper.giveItemToPlayer(playerIn, card);
+                BuddycardsCollectionSaveData.get(((ServerPlayerEntity) playerIn).getLevel()).addCard(playerIn, card);
+            });
             return ActionResult.consume(playerIn.getItemInHand(handIn));
         }
         return ActionResult.success(playerIn.getItemInHand(handIn));
@@ -99,7 +105,7 @@ public class PackItem extends Item {
     }
 
     public CardItem getRandomCardOfRarity(HashMap<Integer, RegistryObject<CardItem>> cards, Rarity rarity) {
-        CardItem card = cards.get((int)(Math.random() * cards.size()) + 1).get();
+        CardItem card = cards.get((int)(Math.random() * cards.size())).get();
         while (card.getRarity() != rarity) {
             card = cards.get((int)(Math.random() * cards.size()) + 1).get();
         }

@@ -32,27 +32,6 @@ public class BuddysteelGearHelper {
     }
 
     public static float getRatio(ServerPlayerEntity player) {
-        int max = 3;
-        float sets = 0;
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set1"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set2"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set3"))).getPercent();
-        if (ModList.get().isLoaded("byg")) {
-            max += 1;
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set4"))).getPercent();
-        }
-        if (ModList.get().isLoaded("create")) {
-            max += 1;
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set5"))).getPercent();
-        }
-        if (ModList.get().isLoaded("aquaculture")) {
-            max += 1;
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set6"))).getPercent();
-        }
-        if (ModList.get().isLoaded("farmersdelight")) {
-            max += 1;
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set7"))).getPercent();
-        }
-        return sets / max;
+        return BuddycardsCollectionSaveData.get((player).getLevel()).getPower(player);
     }
 }
