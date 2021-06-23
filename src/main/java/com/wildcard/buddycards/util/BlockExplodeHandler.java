@@ -58,7 +58,7 @@ public class BlockExplodeHandler
 		event.getExplosion().clearToBlow();
 		event.getAffectedBlocks().addAll(replacedExplosion);
 		//Check if the explosion creates a luminis item, and create it if so
-		if(Math.random() * 2.5 < deepLuminisBlocks) {
+		if(Math.random() * 2 < deepLuminisBlocks) {
 			InventoryHelper.dropItemStack(event.getWorld(), event.getExplosion().getPosition().x, event.getExplosion().getPosition().y, event.getExplosion().getPosition().z,
 					createLuminisDrop(event.getWorld().getRandom(), deepLuminisBlocks));
 		}

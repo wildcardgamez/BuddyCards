@@ -57,7 +57,9 @@ public class BuddysteelArmorItem extends ArmorItem {
         if (slot == this.getSlot() && stack.hasTag()) {
             multimap = LinkedHashMultimap.create();
             UUID uuid = ARMOR_MODIFIERS[slot.getIndex()];
-            float ratio = stack.getTag().getFloat("completion");
+            float ratio = 0;
+            if(stack.getTag().contains("completion"))
+                ratio = stack.getTag().getFloat("completion");
             int perfect = material.equals(BuddysteelArmorMaterial.BUDDYSTEEL) ? 0 : 1;
             multimap.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier", DAMAGE_REDUCTION_ARRAY[(int) (3 * ratio) + perfect][slot.getIndex()], AttributeModifier.Operation.ADDITION));
             multimap.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "Armor toughness", (int) (ratio * 2) + perfect, AttributeModifier.Operation.ADDITION));
@@ -67,6 +69,7 @@ public class BuddysteelArmorItem extends ArmorItem {
 
     @Nullable
     @Override
+    @OnlyIn(Dist.CLIENT)
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
         if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL))
             return BuddyCards.MOD_ID + ":textures/models/armor/perfect_buddysteel.png";
@@ -77,6 +80,7 @@ public class BuddysteelArmorItem extends ArmorItem {
 
     @Nullable
     @Override
+    @OnlyIn(Dist.CLIENT)
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL) || material.equals(BuddysteelArmorMaterial.ZYLEX))
             return (A) new PerfectBuddysteelArmorModel(slot);

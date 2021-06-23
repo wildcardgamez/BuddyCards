@@ -1,15 +1,17 @@
 package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.RegistryObject;
 
 import java.util.List;
 
@@ -32,6 +34,13 @@ public class BuddysteelGearHelper {
     }
 
     public static float getRatio(ServerPlayerEntity player) {
-        return BuddycardsCollectionSaveData.get((player).getLevel()).getPower(player);
+        int i = 0;
+        int total = 0;
+        for (RegistryObject<CardItem> card : BuddycardsItems.LOADED_CARDS) {
+            if(player.getStats().getValue(Stats.ITEM_PICKED_UP.get(card.get())) > 0)
+                i++;
+            total++;
+        }
+        return (float)i/total;
     }
 }

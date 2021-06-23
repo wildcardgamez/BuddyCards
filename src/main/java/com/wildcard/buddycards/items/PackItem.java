@@ -2,7 +2,6 @@ package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import com.wildcard.buddycards.util.BuddycardsCollectionSaveData;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -10,14 +9,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootTable;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -27,7 +22,6 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class PackItem extends Item {
@@ -91,9 +85,8 @@ public class PackItem extends Item {
             if (SET_NUMBER == 7)
                 cards.add(new ItemStack(getRandomGummyCard(BuddycardsItems.SETS.get(SET_NUMBER).CARDS)));
             cards.forEach((card) -> {
-                //Give the card and add to the players collection
+                //Give each card
                 ItemHandlerHelper.giveItemToPlayer(playerIn, card);
-                BuddycardsCollectionSaveData.get(((ServerPlayerEntity) playerIn).getLevel()).addCard(playerIn, card);
             });
             return ActionResult.consume(playerIn.getItemInHand(handIn));
         }

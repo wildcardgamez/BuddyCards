@@ -3,7 +3,6 @@ package com.wildcard.buddycards.items;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
-import com.wildcard.buddycards.util.BuddycardsCollectionSaveData;
 import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
@@ -120,9 +119,6 @@ public class CardItem extends Item {
             card.setTag(nbt);
             ItemHandlerHelper.giveItemToPlayer(playerIn, card);
         }
-        //Refresh card in Players collection
-        if (playerIn instanceof ServerPlayerEntity)
-            BuddycardsCollectionSaveData.get(((ServerPlayerEntity) playerIn).getLevel()).addCard(playerIn, playerIn.getItemInHand(handIn));
         //If its in the main hand try to grade it (Checks off hand)
         if (handIn == Hand.MAIN_HAND)
             return tryGrade(BuddycardsItems.GRADING_SLEEVE.get(), worldIn, playerIn, handIn);

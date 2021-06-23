@@ -41,7 +41,7 @@ public class BuddysteelHoeItem extends HoeItem {
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         float eff = super.getDestroySpeed(stack, state);
-        if (stack.hasTag() && eff == speed)
+        if (stack.hasTag() && stack.getTag().contains("completion") && eff == speed)
             return eff + (int) (4 * stack.getTag().getFloat("completion"));
         else
             return eff;
@@ -49,7 +49,7 @@ public class BuddysteelHoeItem extends HoeItem {
 
     @Override
     public int getHarvestLevel(ItemStack stack, ToolType tool, PlayerEntity player, BlockState state) {
-        if (!stack.hasTag())
+        if (!stack.hasTag() || !stack.getTag().contains("completion"))
             return super.getHarvestLevel(stack, tool, player, state);
         else
             return super.getHarvestLevel(stack, tool, player, state) + (int) (2 * stack.getTag().getFloat("completion"));
