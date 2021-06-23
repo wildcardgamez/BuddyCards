@@ -3,10 +3,6 @@
   "injection": "buddycards:inject/fd_buddybeans",
   "conditions": [
     {
-      "condition": "forge:mod_loaded",
-      "modid": "farmersdelight"
-    },
-    {
       "condition": "minecraft:random_chance",
       "chance": 0.005
     },
