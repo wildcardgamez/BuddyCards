@@ -53,7 +53,8 @@ public class CardModelGen extends ItemModelProvider {
             final ResourceLocation location2 = new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card." + setNum + "." + cardNum + "s");
             ItemModelBuilder cards = factory.apply(location2)
                     .parent(factory.apply(new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card")))
-                    .texture("layer0", new ResourceLocation(BuddyCards.MOD_ID, getSetFolder(setNum) + cardNum));
+                    .texture("layer0", new ResourceLocation(BuddyCards.MOD_ID, getSetFolder(setNum) + cardNum))
+                    .texture("layer1", new ResourceLocation(BuddyCards.MOD_ID, "items/foil_warning"));
             cards.override().predicate(new ResourceLocation("grade"), 1).model(genGradedCardModel(setNum, cardNum, 1, true));
             cards.override().predicate(new ResourceLocation("grade"), 2).model(genGradedCardModel(setNum, cardNum, 2, true));
             cards.override().predicate(new ResourceLocation("grade"), 3).model(genGradedCardModel(setNum, cardNum, 3, true));
@@ -98,6 +99,8 @@ public class CardModelGen extends ItemModelProvider {
         ItemModelBuilder card = factory.apply(location)
                 .parent(factory.apply(new ResourceLocation(BuddyCards.MOD_ID, ModelProvider.ITEM_FOLDER + "/card")))
                 .texture("layer0", new ResourceLocation(BuddyCards.MOD_ID, getSetFolder(setNum) + cardNum));
+        if(shiny)
+            card.texture("layer1", new ResourceLocation(BuddyCards.MOD_ID, "items/foil_warning"));
         generatedModels.put(location, card.texture("layer1", new ResourceLocation(BuddyCards.MOD_ID,"items/grade/" + grade)));
         return card;
     }

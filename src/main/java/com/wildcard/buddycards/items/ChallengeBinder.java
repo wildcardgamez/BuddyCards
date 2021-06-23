@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ChallengeBinder extends BinderItem{
     public ChallengeBinder() {
-        super(1);
+        super(1, "buddycards");
     }
 
     @Override

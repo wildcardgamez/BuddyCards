@@ -68,7 +68,9 @@ public class BuddysteelAxeItem extends AxeItem {
         Multimap<Attribute, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
         if (stack.hasTag() && slot == EquipmentSlotType.MAINHAND) {
             multimap = LinkedHashMultimap.create();
-            float ratio = stack.getTag().getFloat("completion");
+            float ratio = 0;
+            if(stack.getTag().contains("completion"))
+                ratio = stack.getTag().getFloat("completion");
             multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.getAttackDamage() + 2 + (int) (ratio*8)/2, AttributeModifier.Operation.ADDITION));
             multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -3.1, AttributeModifier.Operation.ADDITION));
         }

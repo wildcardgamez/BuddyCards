@@ -4,6 +4,8 @@ import com.wildcard.buddycards.integration.aquaculture.BuddysteelFishingRodItem;
 import com.wildcard.buddycards.integration.fd.BuddysteelFoodKnifeItem;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
+import com.wildcard.buddycards.registries.BuddycardsItems;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.entity.item.ItemEntity;
@@ -24,7 +26,7 @@ import java.util.stream.StreamSupport;
 public class EnchantmentHandler {
     private Map<String, NonNullList<ItemStack>> items = new HashMap<String, NonNullList<ItemStack>>();
 
-    public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", i -> canBuddyBind(i));
+    public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", EnchantmentHandler::canBuddyBind);
     public static final EnchantmentType BUDDY_MEDAL = EnchantmentType.create("BUDDY_MEDAL", i -> (i instanceof MedalItem));
     public static final EnchantmentType BUDDY_BINDER = EnchantmentType.create("BUDDY_BINDER", i -> (i instanceof BinderItem));
 
@@ -35,7 +37,7 @@ public class EnchantmentHandler {
             boolean empty = true;
             NonNullList<ItemStack> itemsToSave = NonNullList.create();
             for (ItemEntity i: event.getDrops()) {
-                switch(EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.BUDDY_BINDING.get(), i.getItem())) {
+                switch(EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.BUDDY_BINDING.get(), i.getItem())) {
                     case 1:
                         if (Math.random() < .3)
                             break;
@@ -76,8 +78,6 @@ public class EnchantmentHandler {
             return true;
         if (ModList.get().isLoaded("farmersdelight") && item instanceof BuddysteelFoodKnifeItem)
             return true;
-        if (item.equals(RegistryHandler.ZYLEX_RING) || item.equals(RegistryHandler.LUMINIS_RING))
-            return true;
-        return false;
+        return item.equals(BuddycardsItems.ZYLEX_RING.get()) || item.equals(BuddycardsItems.LUMINIS_RING.get());
     }
 }

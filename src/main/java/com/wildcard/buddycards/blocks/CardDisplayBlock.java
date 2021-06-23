@@ -2,7 +2,7 @@ package com.wildcard.buddycards.blocks;
 
 import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
 import com.wildcard.buddycards.items.CardItem;
-import com.wildcard.buddycards.util.RegistryHandler;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -31,8 +31,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class CardDisplayBlock extends Block {
     public static final DirectionProperty DIR = BlockStateProperties.HORIZONTAL_FACING;
@@ -148,7 +146,7 @@ public class CardDisplayBlock extends Block {
         if (world.getBlockEntity(pos) instanceof CardDisplayTile) {
             CardDisplayTile displayTile = (CardDisplayTile) world.getBlockEntity(pos);
             ItemStack stack = player.getItemInHand(hand);
-            if(stack.getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
+            if(stack.getItem() == BuddycardsItems.BUDDYSTEEL_KEY.get()) {
                 if (displayTile.isLocked()) {
                     if (displayTile.toggleLock(player.getUUID()))
                         player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_display.unlock"), true);

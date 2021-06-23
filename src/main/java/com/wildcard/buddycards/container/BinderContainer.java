@@ -2,8 +2,8 @@ package com.wildcard.buddycards.container;
 
 import com.wildcard.buddycards.inventory.BinderInventory;
 import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.EnderBinderSaveData;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,11 +18,11 @@ public class BinderContainer extends Container {
     private static int[] slotsForLevel = {54, 72, 96, 120};
 
     public BinderContainer(int id, PlayerInventory playerInventory) {
-        this(id, playerInventory, new BinderInventory(slotsForLevel[EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.EXTRA_PAGE.get(), playerInventory.getSelected())], playerInventory.getSelected()));
+        this(id, playerInventory, new BinderInventory(slotsForLevel[EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.EXTRA_PAGE.get(), playerInventory.getSelected())], playerInventory.getSelected()));
     }
 
     public BinderContainer(int id, PlayerInventory playerInv, BinderInventory binderInvIn) {
-        super(RegistryHandler.BINDER_CONTAINER.get(), id);
+        super(BuddycardsMisc.BINDER_CONTAINER.get(), id);
         checkContainerSize(binderInvIn, binderInvIn.getContainerSize());
         binderInv = binderInvIn;
 

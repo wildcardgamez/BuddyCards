@@ -1,15 +1,17 @@
 package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.RegistryObject;
 
 import java.util.List;
 
@@ -32,34 +34,13 @@ public class BuddysteelGearHelper {
     }
 
     public static float getRatio(ServerPlayerEntity player) {
-        int max = 6;
-        float sets = 0;
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set1"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set2"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set3"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set1s"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set2s"))).getPercent();
-        sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set3s"))).getPercent();
-        if (ModList.get().isLoaded("byg")) {
-            max += 2;
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set4"))).getPercent();
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set4s"))).getPercent();
+        int i = 0;
+        int total = 0;
+        for (RegistryObject<CardItem> card : BuddycardsItems.LOADED_CARDS) {
+            if(player.getStats().getValue(Stats.ITEM_PICKED_UP.get(card.get())) > 0)
+                i++;
+            total++;
         }
-        if (ModList.get().isLoaded("create")) {
-            max += 2;
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set5"))).getPercent();
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set5s"))).getPercent();
-        }
-        if (ModList.get().isLoaded("aquaculture")) {
-            max += 2;
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set6"))).getPercent();
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set6s"))).getPercent();
-        }
-        if (ModList.get().isLoaded("farmersdelight")) {
-            max += 2;
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set7"))).getPercent();
-            sets += player.getAdvancements().getOrStartProgress(player.server.getAdvancements().getAdvancement(new ResourceLocation(BuddyCards.MOD_ID, "main/complete_set7s"))).getPercent();
-        }
-        return sets / max;
+        return (float)i/total;
     }
 }

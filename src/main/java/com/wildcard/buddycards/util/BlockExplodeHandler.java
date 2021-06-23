@@ -9,6 +9,8 @@ import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
 import com.wildcard.buddycards.blocks.CardStandBlock;
 import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 
+import com.wildcard.buddycards.registries.BuddycardsBlocks;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.inventory.InventoryHelper;
@@ -44,7 +46,7 @@ public class BlockExplodeHandler
 				}
 			}
 			//Count the block if it's deep luminis
-			else if (targetBlock.getBlock().equals(RegistryHandler.DEEP_LUMINIS_BLOCK.get())) {
+			else if (targetBlock.getBlock().equals(BuddycardsBlocks.DEEP_LUMINIS_BLOCK.get())) {
 				deepLuminisBlocks++;
 				replacedExplosion.add(event.getAffectedBlocks().get(i));
 			} else {
@@ -56,7 +58,7 @@ public class BlockExplodeHandler
 		event.getExplosion().clearToBlow();
 		event.getAffectedBlocks().addAll(replacedExplosion);
 		//Check if the explosion creates a luminis item, and create it if so
-		if(Math.random() * 2.5 < deepLuminisBlocks) {
+		if(Math.random() * 2 < deepLuminisBlocks) {
 			InventoryHelper.dropItemStack(event.getWorld(), event.getExplosion().getPosition().x, event.getExplosion().getPosition().y, event.getExplosion().getPosition().z,
 					createLuminisDrop(event.getWorld().getRandom(), deepLuminisBlocks));
 		}
@@ -65,20 +67,20 @@ public class BlockExplodeHandler
 	public static ItemStack createLuminisDrop(Random random, int luminisIn) {
 		double rand = Math.random() * 2;
 		if(rand%1 > .92) {
-			ItemStack medal = new ItemStack(RegistryHandler.LUMINIS_MEDAL.get());
+			ItemStack medal = new ItemStack(BuddycardsItems.LUMINIS_MEDAL.get());
 			if((int) rand != 0)
 				EnchantmentHelper.enchantItem(random, medal, 10 * luminisIn, true);
 			return medal;
 		}
 		else if(rand%1 > .8) {
-			ItemStack pick = new ItemStack(RegistryHandler.LUMINIS_PICKAXE.get());
+			ItemStack pick = new ItemStack(BuddycardsItems.LUMINIS_PICKAXE.get());
 			if((int) rand != 0)
 				EnchantmentHelper.enchantItem(random, pick, 10 * luminisIn, true);
 			return pick;
 		}
 		else if(rand%1 > .4)
-			return new ItemStack(RegistryHandler.LUMINIS_RING.get(), 1);
+			return new ItemStack(BuddycardsItems.LUMINIS_RING.get(), 1);
 		else
-			return new ItemStack(RegistryHandler.LUMINIS.get(), (int) (rand * 32));
+			return new ItemStack(BuddycardsItems.LUMINIS.get(), (int) (rand * 32));
 	}
 }

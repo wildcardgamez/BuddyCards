@@ -3,7 +3,8 @@ package com.wildcard.buddycards.items;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.inventory.BinderInventory;
-import com.wildcard.buddycards.util.RegistryHandler;
+import com.wildcard.buddycards.registries.BuddycardsItems;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -21,12 +22,14 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class BinderItem extends Item {
-    public BinderItem(int setNumber) {
+    public BinderItem(int setNumber, String modId) {
         super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1));
         SET_NUMBER = setNumber;
+        SPECIFIC_MOD = modId;
     }
 
     final int SET_NUMBER;
+    final String SPECIFIC_MOD;
 
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
@@ -35,7 +38,7 @@ public class BinderItem extends Item {
         CompoundNBT nbt = binder.getTag();
         if(playerIn instanceof ServerPlayerEntity) {
             //If there is a key, go through and try to lock it
-            if (playerIn.getItemInHand(Hand.OFF_HAND).getItem().equals(RegistryHandler.BUDDYSTEEL_KEY.get())) {
+            if (playerIn.getItemInHand(Hand.OFF_HAND).getItem().equals(BuddycardsItems.BUDDYSTEEL_KEY.get())) {
                 if (nbt == null || !nbt.contains("locked") || !nbt.getBoolean("locked")) {
                     nbt.putBoolean("locked", true);
                     nbt.putString("player", playerIn.getStringUUID());
@@ -53,7 +56,7 @@ public class BinderItem extends Item {
             } else if (nbt == null || !nbt.contains("locked") || !nbt.getBoolean("locked")) {
                 //Find the amount of slots and then open the binder GUI
                 int slots = 54;
-                switch (EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.EXTRA_PAGE.get(), binder)) {
+                switch (EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.EXTRA_PAGE.get(), binder)) {
                     case 3:
                         slots += 24;
                     case 2:
@@ -74,13 +77,7 @@ public class BinderItem extends Item {
 
     @Override
     public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
-            return;
-        else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
-            return;
-        else if(SET_NUMBER == 6 && !ModList.get().isLoaded("aquaculture"))
-            return;
-        else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
+        if(!ModList.get().isLoaded(SPECIFIC_MOD))
             return;
         super.fillItemCategory(group, items);
     }

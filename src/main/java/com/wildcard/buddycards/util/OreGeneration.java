@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.registries.BuddycardsBlocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -17,7 +18,7 @@ public class OreGeneration {
 
     public static void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            LUMINIS_ORE = Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, RegistryHandler.LUMINIS_ORE.get()
+            LUMINIS_ORE = Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BuddycardsBlocks.LUMINIS_ORE.get()
                     .defaultBlockState(), ConfigManager.luminisVeinSize.get())).range(ConfigManager.luminisMaxY.get()).squared().count(ConfigManager.luminisPerChunk.get());
             Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(BuddyCards.MOD_ID, "luminis_ore"), LUMINIS_ORE);
         });

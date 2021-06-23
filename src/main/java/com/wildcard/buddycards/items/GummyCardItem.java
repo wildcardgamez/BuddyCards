@@ -2,15 +2,11 @@ package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.util.ConfigManager;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -19,7 +15,7 @@ import java.util.List;
 
 public class GummyCardItem extends CardItem {
     public GummyCardItem(int cardNumber) {
-        super(7, cardNumber, false, new Item.Properties().tab(BuddyCards.CARDS_TAB).food(new Food.Builder().nutrition(2).saturationMod(0.3F).fast().build()));
+        super(7, cardNumber, Rarity.COMMON, "buddycards", new Item.Properties().tab(BuddyCards.CARDS_TAB).food(new Food.Builder().nutrition(2).saturationMod(0.3F).fast().build()));
     }
 
     @Override
@@ -39,10 +35,5 @@ public class GummyCardItem extends CardItem {
         if (ConfigManager.challengeMode.get())
             tooltip.add(new TranslationTextComponent("item.buddycards.points_info").append(
                     "" + ((CardItem)stack.getItem()).getPointValue(stack)));
-    }
-
-    @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        return super.use(worldIn, playerIn, handIn);
     }
 }

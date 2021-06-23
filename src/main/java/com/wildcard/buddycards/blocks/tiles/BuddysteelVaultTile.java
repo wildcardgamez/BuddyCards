@@ -3,7 +3,8 @@ package com.wildcard.buddycards.blocks.tiles;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.VaultContainer;
 import com.wildcard.buddycards.items.CardItem;
-import com.wildcard.buddycards.util.RegistryHandler;
+import com.wildcard.buddycards.registries.BuddycardsEntities;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -44,7 +45,7 @@ public class BuddysteelVaultTile extends TileEntity implements INamedContainerPr
     private String player = "";
 
     public BuddysteelVaultTile() {
-        super(RegistryHandler.VAULT_TILE.get());
+        super(BuddycardsEntities.VAULT_TILE.get());
     }
 
     @Override

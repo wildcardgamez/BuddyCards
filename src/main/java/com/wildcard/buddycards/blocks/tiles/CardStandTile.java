@@ -1,6 +1,6 @@
 package com.wildcard.buddycards.blocks.tiles;
 
-import com.wildcard.buddycards.util.RegistryHandler;
+import com.wildcard.buddycards.registries.BuddycardsEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.IClearable;
 import net.minecraft.item.ItemStack;
@@ -18,7 +18,7 @@ public class CardStandTile extends TileEntity implements IClearable {
     private String player = "";
 
     public CardStandTile() {
-        super(RegistryHandler.CARD_STAND_TILE.get());
+        super(BuddycardsEntities.CARD_STAND_TILE.get());
     }
 
     public void setCard(ItemStack stack) {

@@ -1,7 +1,7 @@
 package com.wildcard.buddycards.blocks;
 
 import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
-import com.wildcard.buddycards.util.RegistryHandler;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,13 +39,15 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     public static final DirectionProperty DIR = HorizontalBlock.FACING;
     protected static final VoxelShape VAULT_SHAPE = Block.box(1.0D, 1.0D, 1.0D, 15.0D, 15.0D, 15.0D);
 
-    public BuddysteelVaultBlock(int setNumber) {
+    public BuddysteelVaultBlock(int setNumber, String modId) {
         super(Properties.copy(Blocks.IRON_BLOCK).strength(5, 1200));
         this.registerDefaultState(this.stateDefinition.any().setValue(DIR, Direction.NORTH));
         SET_NUMBER = setNumber;
+        SPECIFIC_MOD = modId;
     }
 
     final int SET_NUMBER;
+    final String SPECIFIC_MOD;
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -92,7 +94,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand handIn, BlockRayTraceResult hit) {
         TileEntity tileentity = worldIn.getBlockEntity(pos);
         if(playerIn instanceof ServerPlayerEntity && tileentity instanceof BuddysteelVaultTile) {
-            if(playerIn.getItemInHand(handIn).getItem() == RegistryHandler.BUDDYSTEEL_KEY.get()) {
+            if(playerIn.getItemInHand(handIn).getItem() == BuddycardsItems.BUDDYSTEEL_KEY.get()) {
                 if (((BuddysteelVaultTile)tileentity).isLocked()) {
                     if (((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUUID()))
                         playerIn.displayClientMessage(new TranslationTextComponent("block.buddycards.vault.unlock"), true);
@@ -118,10 +120,10 @@ public class BuddysteelVaultBlock extends ContainerBlock {
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
         if (world.getBlockEntity(pos) instanceof BuddysteelVaultTile) {
-            if (player.getItemInHand(Hand.MAIN_HAND).getItem() == RegistryHandler.ZYLEX_RING.get() ||
+            if (player.getItemInHand(Hand.MAIN_HAND).getItem() == BuddycardsItems.ZYLEX_RING.get() ||
                     (ModList.get().isLoaded("curios") &&
-                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), player).isPresent() &&
-                            CuriosApi.getCuriosHelper().findEquippedCurio(RegistryHandler.ZYLEX_RING.get(), player).get().right.getItem().equals(RegistryHandler.ZYLEX_RING.get()))) {
+                            CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), player).isPresent() &&
+                            CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), player).get().right.getItem().equals(BuddycardsItems.ZYLEX_RING.get()))) {
                 ItemStack i = new ItemStack(state.getBlock().asItem());
                 CompoundNBT nbt = new CompoundNBT();
                 nbt.put("BlockEntityTag", world.getBlockEntity(pos).save(new CompoundNBT()));
@@ -142,13 +144,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
 
     @Override
     public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
-        if(SET_NUMBER == 4 && !ModList.get().isLoaded("byg"))
-            return;
-        else if(SET_NUMBER == 5 && !ModList.get().isLoaded("create"))
-            return;
-        else if(SET_NUMBER == 6 && !ModList.get().isLoaded("aquaculture"))
-            return;
-        else if(SET_NUMBER == 7 && !ModList.get().isLoaded("farmersdelight"))
+        if(!ModList.get().isLoaded(SPECIFIC_MOD))
             return;
         super.fillItemCategory(group, items);
     }

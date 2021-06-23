@@ -19,16 +19,16 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:buddysteel_helmet"
+            "item": "buddycards:buddysteel_helmet"
           },
           {
-            "item": "minecraft:buddysteel_chestplate"
+            "item": "buddycards:buddysteel_chestplate"
           },
           {
-            "item": "minecraft:buddysteel_leggings"
+            "item": "buddycards:buddysteel_leggings"
           },
           {
-            "item": "minecraft:buddysteel_boots"
+            "item": "buddycards:buddysteel_boots"
           }
         ]
       }

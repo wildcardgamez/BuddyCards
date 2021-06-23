@@ -2,8 +2,8 @@ package com.wildcard.buddycards.integration;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.items.MedalTypes;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.ConfigManager;
-import com.wildcard.buddycards.util.RegistryHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -43,7 +43,7 @@ public class CuriosIntegration {
             @Override
             public void curioTick(String identifier, int index, LivingEntity livingEntity) {
                 if (livingEntity instanceof PlayerEntity && ConfigManager.doMedalEffects.get()) {
-                    int mod = EnchantmentHelper.getItemEnchantmentLevel(RegistryHandler.BUDDY_BOOST.get(), itemStack);
+                    int mod = EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.BUDDY_BOOST.get(), itemStack);
                     if(type.equals(MedalTypes.PERFECT) && itemStack.hasTag() && itemStack.getTag().contains("completion"))
                         mod += (int) (itemStack.getTag().getDouble("completion") * 3);
                     type.applyEffect((PlayerEntity) livingEntity, mod);

@@ -1,6 +1,6 @@
 package com.wildcard.buddycards.items;
 
-import com.wildcard.buddycards.util.RegistryHandler;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.EffectInstance;
@@ -47,14 +47,14 @@ public enum MedalTypes {
     }, Rarity.UNCOMMON),
     ZYLEX((player, mod) -> {
         if (mod > 0)
-            player.addEffect(new EffectInstance(RegistryHandler.GRADING_LUCK.get(), 300, mod - 1, true, false));
+            player.addEffect(new EffectInstance(BuddycardsMisc.GRADING_LUCK.get(), 300, mod - 1, true, false));
     }, Rarity.RARE),
     LUMNIS((player, mod) -> {
         if (mod > 0)
-            player.addEffect(new EffectInstance(RegistryHandler.GRADING_LUCK.get(), 300, mod - 1, true, false));
+            player.addEffect(new EffectInstance(BuddycardsMisc.GRADING_LUCK.get(), 300, mod - 1, true, false));
     }, Rarity.RARE),
     PERFECT((player, mod) -> {
-        player.addEffect(new EffectInstance(RegistryHandler.GRADING_LUCK.get(), 300, mod, true, false));
+        player.addEffect(new EffectInstance(BuddycardsMisc.GRADING_LUCK.get(), 300, mod, true, false));
     }, Rarity.EPIC);
 
     MedalTypes(MedalEffect effect, Rarity rarity) {
