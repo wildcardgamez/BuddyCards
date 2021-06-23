@@ -347,6 +347,7 @@
   "item.buddycards.medal.desc": "Obtained by ",
   "item.buddycards.grade_info": "Grade ",
   "item.buddycards.points_info": "Points: ",
+  "item.buddycards.foil_warning": "§cRIGHT CLICK TO FIX FOIL CARD! IF YOU DO NOT IT WILL BE DELETED WHEN TRANSITIONING TO 1.17",
   "item.buddycards.grade_1": "D",
   "item.buddycards.grade_2": "C",
   "item.buddycards.grade_3": "B",

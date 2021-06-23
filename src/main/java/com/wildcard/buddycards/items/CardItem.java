@@ -13,11 +13,14 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
@@ -75,6 +78,8 @@ public class CardItem extends Item {
         if (ConfigManager.challengeMode.get())
             tooltip.add(new TranslationTextComponent("item.buddycards.points_info").append(
                     "" + ((CardItem)stack.getItem()).getPointValue(stack)));
+        if (stack.getItem().getRegistryName().toString().endsWith("s"))
+            tooltip.add(new TranslationTextComponent("item.buddycards.foil_warning"));
     }
 
     @Override
@@ -102,6 +107,19 @@ public class CardItem extends Item {
 
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        //TEMPORARY! FIX OLD FOIL CARDS...
+        if(worldIn instanceof ServerWorld && playerIn.getItemInHand(handIn).getItem().getRegistryName().toString().endsWith("s")) {
+            CompoundNBT nbt = new CompoundNBT();
+            if (playerIn.getItemInHand(handIn).hasTag())
+                nbt = playerIn.getItemInHand(handIn).getTag();
+            nbt.putBoolean("foil", true);
+            int count = playerIn.getItemInHand(handIn).getCount();
+            String name = playerIn.getItemInHand(handIn).getItem().getRegistryName().toString();
+            ItemStack card = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(name.substring(0, name.length() - 1))), count);
+            playerIn.getItemInHand(handIn).shrink(count);
+            card.setTag(nbt);
+            ItemHandlerHelper.giveItemToPlayer(playerIn, card);
+        }
         //Refresh card in Players collection
         if (playerIn instanceof ServerPlayerEntity)
             BuddycardsCollectionSaveData.get(((ServerPlayerEntity) playerIn).getLevel()).addCard(playerIn, playerIn.getItemInHand(handIn));
