@@ -24,7 +24,7 @@
     {
       "type": "spotlight",
       "title": "Base Set Cards",
-      "item": "buddycards:card.1.26s",
+      "item": "buddycards:card.1.26{\"foil\":true}",
       "text": "Cards number 1-12 are common with no colored corners, cards number 13-21 are uncommon with 2 yellow corners, cards number 22-25 are rare with 4 blue corners, and cards 26 and 27 are epics with 2 yellow and 2 purple corners. Both shiny and non shiny cards have the same odds for card rarity."
     },
     {
