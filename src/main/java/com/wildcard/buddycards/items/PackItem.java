@@ -2,6 +2,7 @@ package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsItems;
+import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -70,8 +71,12 @@ public class PackItem extends Item {
                 else
                     rarity = Rarity.EPIC;
                 ItemStack card;
-                if (SET_NUMBER == 0)
-                    card = new ItemStack(getRandomCardOfRarity(BuddycardsItems.ALL_CARDS, rarity));
+                if (SET_NUMBER == 0) {
+                    if (ConfigManager.loadedMysteryCardsOnly.get())
+                        card = new ItemStack(getRandomCardOfRarity(BuddycardsItems.LOADED_CARDS, rarity));
+                    else
+                        card = new ItemStack(getRandomCardOfRarity(BuddycardsItems.ALL_CARDS, rarity));
+                }
                 else
                     card = new ItemStack(getRandomCardOfRarity(BuddycardsItems.SETS.get(SET_NUMBER).CARDS, rarity));
                 if (i >= CARDS - SHINY_CARDS) {

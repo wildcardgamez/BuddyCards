@@ -37,6 +37,7 @@ public class ConfigManager {
     public static ForgeConfigSpec.IntValue witherMaxPacks;
 
     public static ForgeConfigSpec.BooleanValue doMedalEffects;
+    public static ForgeConfigSpec.BooleanValue loadedMysteryCardsOnly;
 
     public static ForgeConfigSpec.DoubleValue enderlingChanceEnd;
     public static ForgeConfigSpec.DoubleValue enderlingChanceNether;
@@ -117,6 +118,8 @@ public class ConfigManager {
 
         doMedalEffects = builder.comment("\nEnables medal effects, default is true")
                 .define("misc.doMedalEffects", true);
+        loadedMysteryCardsOnly = builder.comment("\nMystery packs can be used to find any card in the mod, loaded or not, default is false")
+                .define("misc.boringMysteryPacks", false);
 
         aquacultureFishingChance = builder.comment("\nOdds of fishing up an Aquaculture set card or pack while using a buddycard hook, 0-1, default is .075")
                 .defineInRange("integration.aquacultureFishingChance", .05, 0, 1);
