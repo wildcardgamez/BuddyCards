@@ -1,5 +1,7 @@
 package com.wildcard.buddycards.blocks;
 
+import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.items.GummyCardItem;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.block.AbstractBlock;
@@ -46,10 +48,7 @@ public class LuminisOreBlock extends OreBlock {
                             CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.PERFECT_BUDDYSTEEL_MEDAL.get(), player).get().right.getItem().equals(BuddycardsItems.PERFECT_BUDDYSTEEL_MEDAL.get())))) {
                 i += .3;
                 if (Math.random() < ConfigManager.cardLuminisOdds.get()) {
-                    ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int) (Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
-                    while (!card.getItem().isFoil(card) || card.getRarity() == Rarity.EPIC) {
-                        card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int) (Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
-                    }
+                    ItemStack card = new ItemStack(getRandomLoadedCard());
                     InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), card);
                 }
             }
@@ -57,5 +56,13 @@ public class LuminisOreBlock extends OreBlock {
                 InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(BuddycardsItems.DEEP_LUMINIS_CRYSTAL.get()));
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
+    }
+
+    public static CardItem getRandomLoadedCard() {
+        CardItem card = BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * BuddycardsItems.LOADED_CARDS.size())).get();
+        while (card instanceof GummyCardItem || card.getRegistryName().toString().endsWith("s") || card.getRarity() == Rarity.EPIC) {
+            card = BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * BuddycardsItems.LOADED_CARDS.size())).get();
+        }
+        return card;
     }
 }

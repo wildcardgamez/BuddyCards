@@ -100,7 +100,7 @@ public class PackItem extends Item {
         super.fillItemCategory(group, items);
     }
 
-    public CardItem getRandomCardOfRarity(ArrayList<RegistryObject<CardItem>> cards, Rarity rarity) {
+    public static CardItem getRandomCardOfRarity(ArrayList<RegistryObject<CardItem>> cards, Rarity rarity) {
         CardItem card = cards.get((int)(Math.random() * cards.size())).get();
         while (card.getRarity() != rarity || card instanceof GummyCardItem || card.getRegistryName().toString().endsWith("s")) {
             card = cards.get((int)(Math.random() * cards.size())).get();
@@ -108,7 +108,7 @@ public class PackItem extends Item {
         return card;
     }
 
-    public CardItem getRandomGummyCard(ArrayList<RegistryObject<CardItem>> cards) {
+    public static CardItem getRandomGummyCard(ArrayList<RegistryObject<CardItem>> cards) {
         CardItem card = cards.get((int)(Math.random() * cards.size())).get();
         while (!(card instanceof GummyCardItem)) {
             card = cards.get((int)(Math.random() * cards.size())).get();

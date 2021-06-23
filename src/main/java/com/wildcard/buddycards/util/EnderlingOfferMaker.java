@@ -1,28 +1,38 @@
 package com.wildcard.buddycards.util;
 
+import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.items.GummyCardItem;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MerchantOffer;
+import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.fml.RegistryObject;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class EnderlingOfferMaker {
     public static MerchantOffer createCardBuyOffer() {
-        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
+        ItemStack card = new ItemStack(getRandomLoadedCard());
         ItemStack zylex = new ItemStack(BuddycardsItems.ZYLEX.get(), getZylexValueOfCard(card));
+        if(Math.random() < .3) {
+            CompoundNBT nbt = new CompoundNBT();
+            nbt.putBoolean("foil", true);
+            card.setTag(nbt);
+        }
         return new MerchantOffer(card, zylex, 1, 2, 1);
     }
 
     public static MerchantOffer createBulkCardBuyOffer() {
-        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get(), 8);
+        ItemStack card = new ItemStack(getRandomLoadedCard(), 8);
         ItemStack zylex = new ItemStack(BuddycardsItems.ZYLEX.get(), getZylexValueOfCard(card) * 6);
         return new MerchantOffer(card, zylex, 1, 6, 1);
     }
 
     public static MerchantOffer createGradedCardBuyOffer() {
-        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
+        ItemStack card = new ItemStack(getRandomLoadedCard());
         CompoundNBT nbt = new CompoundNBT();
         int i = (int) (Math.random() * 200) + 1;
         int grade;
@@ -34,6 +44,8 @@ public class EnderlingOfferMaker {
             grade = 3;
         else
             grade = 4;
+        if(Math.random() < .3)
+            nbt.putBoolean("foil", true);
         nbt.putInt("grade", grade);
         card.setTag(nbt);
         int val = getZylexValueOfCard(card);
@@ -45,7 +57,7 @@ public class EnderlingOfferMaker {
     }
 
     public static MerchantOffer createGradedCardSellOffer() {
-        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
+        ItemStack card = new ItemStack(getRandomLoadedCard());
         CompoundNBT nbt = new CompoundNBT();
         int i = (int) (Math.random() * 200) + 1;
         int grade;
@@ -59,6 +71,8 @@ public class EnderlingOfferMaker {
             grade = 4;
         else
             grade = 5;
+        if(Math.random() < .3)
+            nbt.putBoolean("foil", true);
         nbt.putInt("grade", grade);
         card.setTag(nbt);
         int val = getZylexValueOfCard(card);
@@ -70,12 +84,12 @@ public class EnderlingOfferMaker {
     }
 
     public static MerchantOffer createCardTradeOffer() {
-        ItemStack card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
-        ItemStack card2 = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
+        ItemStack card = new ItemStack(getRandomLoadedCard());
+        ItemStack card2 = new ItemStack(getRandomLoadedCard());
         CompoundNBT nbt = new CompoundNBT();
         while(Math.abs(getZylexValueOfCard(card) - getZylexValueOfCard(card2)) > 2) {
-            card = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
-            card2 = new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());
+            card = new ItemStack(getRandomLoadedCard());
+            card2 = new ItemStack(getRandomLoadedCard());
         }
         int i = (int) (Math.random() * 200) + 1;
         int grade;
@@ -91,11 +105,12 @@ public class EnderlingOfferMaker {
             grade = 4;
         else
             grade = 5;
-        if(grade > 0) {
+        if(Math.random() < .3)
+            nbt.putBoolean("foil", true);
+        if(grade > 0)
             nbt.putInt("grade", grade);
-            card.setTag(nbt);
-            card2.setTag(nbt);
-        }
+        card.setTag(nbt);
+        card2.setTag(nbt);
         return new MerchantOffer(card, card2, 1, grade * 2, 1);
     }
 
@@ -168,5 +183,13 @@ public class EnderlingOfferMaker {
         }
         int fval = (int) value;
         return Math.max(fval, 1);
+    }
+
+    public static CardItem getRandomLoadedCard() {
+        CardItem card = BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * BuddycardsItems.LOADED_CARDS.size())).get();
+        while (card instanceof GummyCardItem || card.getRegistryName().toString().endsWith("s")) {
+            card = BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * BuddycardsItems.LOADED_CARDS.size())).get();
+        }
+        return card;
     }
 }
