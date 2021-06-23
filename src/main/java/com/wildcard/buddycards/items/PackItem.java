@@ -87,6 +87,9 @@ public class PackItem extends Item {
                 }
                 cards.add(card);
             }
+            //If set 7, include a gummycard
+            if (SET_NUMBER == 7)
+                cards.add(new ItemStack(getRandomGummyCard(BuddycardsItems.SETS.get(SET_NUMBER).CARDS)));
             cards.forEach((card) -> {
                 //Give the card and add to the players collection
                 ItemHandlerHelper.giveItemToPlayer(playerIn, card);
@@ -104,17 +107,17 @@ public class PackItem extends Item {
         super.fillItemCategory(group, items);
     }
 
-    public CardItem getRandomCardOfRarity(HashMap<Integer, RegistryObject<CardItem>> cards, Rarity rarity) {
+    public CardItem getRandomCardOfRarity(ArrayList<RegistryObject<CardItem>> cards, Rarity rarity) {
         CardItem card = cards.get((int)(Math.random() * cards.size())).get();
-        while (card.getRarity() != rarity) {
-            card = cards.get((int)(Math.random() * cards.size()) + 1).get();
+        while (card.getRarity() != rarity || card instanceof GummyCardItem || card.getRegistryName().toString().endsWith("s")) {
+            card = cards.get((int)(Math.random() * cards.size())).get();
         }
         return card;
     }
 
-    public CardItem getRandomCardOfRarity(ArrayList<RegistryObject<CardItem>> cards, Rarity rarity) {
+    public CardItem getRandomGummyCard(ArrayList<RegistryObject<CardItem>> cards) {
         CardItem card = cards.get((int)(Math.random() * cards.size())).get();
-        while (card.getRarity() != rarity) {
+        while (!(card instanceof GummyCardItem)) {
             card = cards.get((int)(Math.random() * cards.size())).get();
         }
         return card;

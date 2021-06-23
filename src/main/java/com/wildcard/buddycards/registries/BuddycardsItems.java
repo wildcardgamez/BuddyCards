@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class BuddycardsItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BuddyCards.MOD_ID);
-    public static HashMap<Integer, BuddycardSet> SETS;
+    public static HashMap<Integer, BuddycardSet> SETS = new HashMap<>();
 
     public static void init() {
         initSets();
@@ -50,8 +50,8 @@ public class BuddycardsItems {
     public static final BuddycardSet END_SET = new BuddycardSet(3, "buddycards", MedalTypes.END_SET);
     public static final BuddycardSet BYG_SET = new BuddycardSet(4, "byg", MedalTypes.BYG_SET);
     public static final BuddycardSet CREATE_SET = new BuddycardSet(5, "create", MedalTypes.CREATE_SET);
-    public static final BuddycardSet AQUACULTURE_SET = new BuddycardSet(6, "aquaculture", MedalTypes.AQUACULTURE_SET);
-    public static final BuddycardSet FD_SET = new BuddycardSet(7, "farmersdelight", MedalTypes.FD_SET);
+    public static final BuddycardSet AQUACULTURE_SET = new BuddycardSet(6, "aquaculture", MedalTypes.AQUACULTURE_SET, 3);
+    public static final BuddycardSet FD_SET = new BuddycardSet(7, "farmersdelight", MedalTypes.FD_SET, 3);
 
     static public class BuddycardSet {
         public final ArrayList<RegistryObject<CardItem>> CARDS = new ArrayList<>();
@@ -65,6 +65,16 @@ public class BuddycardsItems {
 
         public BuddycardSet(int setNumber, String modId, MedalTypes medalType) {
             PACK = ITEMS.register("pack." + setNumber, () -> new PackItem(setNumber, modId, 4, 1));
+            BINDER = ITEMS.register("binder." + setNumber, () -> new BinderItem(setNumber, modId));
+            VAULT = BuddycardsBlocks.BLOCKS.register("buddysteel_vault." + setNumber, () -> new BuddysteelVaultBlock(setNumber, modId));
+            VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
+            MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType));
+            SET_NUMBER = setNumber;
+            MOD_ID = modId;
+        }
+
+        public BuddycardSet(int setNumber, String modId, MedalTypes medalType, int cardsPerPack) {
+            PACK = ITEMS.register("pack." + setNumber, () -> new PackItem(setNumber, modId, cardsPerPack, 1));
             BINDER = ITEMS.register("binder." + setNumber, () -> new BinderItem(setNumber, modId));
             VAULT = BuddycardsBlocks.BLOCKS.register("buddysteel_vault." + setNumber, () -> new BuddysteelVaultBlock(setNumber, modId));
             VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
@@ -136,6 +146,7 @@ public class BuddycardsItems {
                     LOADED_CARDS.add(card);
                 ALL_CARDS.add(card);
             }
+            SETS.put(SET_NUMBER, this);
         }
 
         public boolean isLoaded() {
