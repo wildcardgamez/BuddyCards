@@ -119,7 +119,7 @@ public class BuddysteelVaultBlock extends ContainerBlock {
 
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
-        if (world.getBlockEntity(pos) instanceof BuddysteelVaultTile) {
+        if (world.getBlockEntity(pos) instanceof BuddysteelVaultTile && !player.isCreative()) {
             if (player.getItemInHand(Hand.MAIN_HAND).getItem() == BuddycardsItems.ZYLEX_RING.get() ||
                     (ModList.get().isLoaded("curios") &&
                             CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), player).isPresent() &&
