@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "buddycards:buddysteel_ingot"
+    "buddycards:buddysteel_ingot",
+    "buddycards:perfect_buddysteel_ingot"
   ]
 }
