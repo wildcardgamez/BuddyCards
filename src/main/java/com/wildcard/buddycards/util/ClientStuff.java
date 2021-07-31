@@ -20,6 +20,9 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fmlclient.registry.ClientRegistry;
+import net.minecraftforge.fmlclient.registry.RenderingRegistry;
+import net.minecraftforge.fmllegacy.RegistryObject;
 
 public class ClientStuff {
     public static void clientSetup(FMLClientSetupEvent event) {

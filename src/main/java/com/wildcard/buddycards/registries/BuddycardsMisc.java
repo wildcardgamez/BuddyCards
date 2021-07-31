@@ -8,21 +8,19 @@ import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
 import com.wildcard.buddycards.enchantment.EnchantmentBuddyBoost;
 import com.wildcard.buddycards.enchantment.EnchantmentExtraPage;
 import com.wildcard.buddycards.loot.LootInjection;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.Items;
-import net.minecraft.potion.*;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class BuddycardsMisc {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, BuddyCards.MOD_ID);

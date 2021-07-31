@@ -66,13 +66,13 @@ public class BinderScreen extends AbstractContainerScreen<BinderContainer> {
         this.font.draw(matrixStack, title, 8.0f, 6.0f, 4210752);
         int size = menu.getItems().size();
         if (size == 90)
-            this.font.draw(matrixStack, inventory.getDisplayName(),8.0f, 128.0f, 4210752);
+            this.font.draw(matrixStack, playerInventoryTitle,8.0f, 128.0f, 4210752);
         else if (size == 108)
-            this.font.draw(matrixStack, inventory.getDisplayName(),35.0f, 128.0f, 4210752);
+            this.font.draw(matrixStack, playerInventoryTitle,35.0f, 128.0f, 4210752);
         else if (size == 132)
-            this.font.draw(matrixStack, inventory.getDisplayName(),35.0f, 164.0f, 4210752);
+            this.font.draw(matrixStack, playerInventoryTitle,35.0f, 164.0f, 4210752);
         else if (size == 156)
-            this.font.draw(matrixStack, inventory.getDisplayName(),35.0f, 200.0f, 4210752);
+            this.font.draw(matrixStack, playerInventoryTitle,35.0f, 200.0f, 4210752);
     }
 
     @Override
@@ -81,19 +81,19 @@ public class BinderScreen extends AbstractContainerScreen<BinderContainer> {
         int size = menu.getItems().size();
         assert this.minecraft != null;
         if (size == 90) {
-            this.minecraft.getTextureManager().bind(TEXTURE1);
+            this.minecraft.getTextureManager().bindForSetup(TEXTURE1);
             blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
         }
         else if (size == 108) {
-            this.minecraft.getTextureManager().bind(TEXTURE2);
+            this.minecraft.getTextureManager().bindForSetup(TEXTURE2);
             blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
         }
         else if (size == 132) {
-            this.minecraft.getTextureManager().bind(TEXTURE3);
+            this.minecraft.getTextureManager().bindForSetup(TEXTURE3);
             blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight, 512, 512);
         }
         else if (size == 156) {
-            this.minecraft.getTextureManager().bind(TEXTURE4);
+            this.minecraft.getTextureManager().bindForSetup(TEXTURE4);
             blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight, 512, 512);
         }
     }

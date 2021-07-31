@@ -4,12 +4,12 @@ import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.items.MedalTypes;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.ConfigManager;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -41,12 +41,17 @@ public class CuriosIntegration {
             }
 
             @Override
+            public ItemStack getStack() {
+                return itemStack;
+            }
+
+            @Override
             public void curioTick(String identifier, int index, LivingEntity livingEntity) {
-                if (livingEntity instanceof PlayerEntity && ConfigManager.doMedalEffects.get()) {
+                if (livingEntity instanceof Player && ConfigManager.doMedalEffects.get()) {
                     int mod = EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.BUDDY_BOOST.get(), itemStack);
                     if(type.equals(MedalTypes.PERFECT) && itemStack.hasTag() && itemStack.getTag().contains("completion"))
                         mod += (int) (itemStack.getTag().getDouble("completion") * 3);
-                    type.applyEffect((PlayerEntity) livingEntity, mod);
+                    type.applyEffect((Player) livingEntity, mod);
                 }
             }
         };

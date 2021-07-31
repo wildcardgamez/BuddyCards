@@ -98,7 +98,7 @@ repositories {
     mavenCentral()
     maven { url 'https://maven.theillusivec4.top/' }
     //maven { url 'https://maven.blamejared.com' }
-    //maven { url 'http://girafi.dk/maven/' }
+    maven { url 'http://girafi.dk/maven/' }
     //maven { url 'https://www.cursemaven.com'}
 }
 
@@ -111,7 +111,7 @@ dependencies {
     //compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
     //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
 
-    //compileOnly fg.deobf("com.teammetallurgy.aquaculture:aquaculture2_1.16.4:1.16.4-2.1.10")
+    compileOnly fg.deobf("com.teammetallurgy.aquaculture:aquaculture2_1.17.1:1.17.1-2.2.1")
 
     //compileOnly fg.deobf("curse.maven:farmers_delight-398521:3295974")
     //implementation fg.deobf("curse.maven:jei-238222:3189632")

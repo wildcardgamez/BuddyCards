@@ -2,6 +2,7 @@ package com.wildcard.buddycards.blocks.tiles;
 
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsEntities;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.ContainerHelper;
@@ -14,13 +15,13 @@ import net.minecraft.core.NonNullList;
 
 import java.util.UUID;
 
-public class CardDisplayTile extends BlockEntity implements Clearable {
+public class CardDisplayBlockEntity extends BlockEntity implements Clearable {
     private final NonNullList<ItemStack> inventory = NonNullList.withSize(6, ItemStack.EMPTY);
     private boolean locked = false;
     private String player = "";
 
-    public CardDisplayTile() {
-        super(BuddycardsEntities.CARD_DISPLAY_TILE.get());
+    public CardDisplayBlockEntity(BlockPos pos, BlockState state) {
+        super(BuddycardsEntities.CARD_DISPLAY_TILE.get(), pos, state);
     }
 
     public void putCardInSlot(ItemStack stack, int pos) {
@@ -66,8 +67,8 @@ public class CardDisplayTile extends BlockEntity implements Clearable {
     }
 
     @Override
-    public void load(BlockState state, CompoundTag nbt) {
-        super.load(state, nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         this.inventory.clear();
         ContainerHelper.loadAllItems(nbt, this.inventory);
         this.locked = nbt.getBoolean("locked");
@@ -86,7 +87,7 @@ public class CardDisplayTile extends BlockEntity implements Clearable {
 
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        this.load(this.getBlockState(), pkt.getTag());
+        this.load(pkt.getTag());
     }
 
     public NonNullList<ItemStack> getInventory() {

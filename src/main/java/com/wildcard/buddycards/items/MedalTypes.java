@@ -1,11 +1,11 @@
 package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.registries.BuddycardsMisc;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import vectorwing.farmersdelight.registry.ModEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Rarity;
 
 public enum MedalTypes {
     BASE_SET((player, mod) -> {
@@ -38,23 +38,23 @@ public enum MedalTypes {
             player.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 300, 0, true, false));
     }, Rarity.UNCOMMON),
     FD_SET((player, mod) -> {
-        player.addEffect(new MobEffectInstance(ModEffects.NOURISHED.get(), 300, 0, true, false));
-        if (mod > 0 && player.getFoodData().getFoodLevel() > 19) {
-            player.addEffect(new EffectInstance(ModEffects.COMFORT.get(), 300, 0, true, false));
-            if (mod > 1)
-                player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 300, 0, true, false));
-        }
+        //player.addEffect(new MobEffectInstance(ModEffects.NOURISHED.get(), 300, 0, true, false));
+        //if (mod > 0 && player.getFoodData().getFoodLevel() > 19) {
+        //    player.addEffect(new MobEffectInstance(ModEffects.COMFORT.get(), 300, 0, true, false));
+        //    if (mod > 1)
+        //        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 0, true, false));
+        //}
     }, Rarity.UNCOMMON),
     ZYLEX((player, mod) -> {
         if (mod > 0)
-            player.addEffect(new EffectInstance(BuddycardsMisc.GRADING_LUCK.get(), 300, mod - 1, true, false));
+            player.addEffect(new MobEffectInstance(BuddycardsMisc.GRADING_LUCK.get(), 300, mod - 1, true, false));
     }, Rarity.RARE),
     LUMNIS((player, mod) -> {
         if (mod > 0)
-            player.addEffect(new EffectInstance(BuddycardsMisc.GRADING_LUCK.get(), 300, mod - 1, true, false));
+            player.addEffect(new MobEffectInstance(BuddycardsMisc.GRADING_LUCK.get(), 300, mod - 1, true, false));
     }, Rarity.RARE),
     PERFECT((player, mod) -> {
-        player.addEffect(new EffectInstance(BuddycardsMisc.GRADING_LUCK.get(), 300, mod, true, false));
+        player.addEffect(new MobEffectInstance(BuddycardsMisc.GRADING_LUCK.get(), 300, mod, true, false));
     }, Rarity.EPIC);
 
     MedalTypes(MedalEffect effect, Rarity rarity) {
@@ -64,7 +64,7 @@ public enum MedalTypes {
     private final MedalEffect effect;
     private final Rarity rarity;
 
-    public void applyEffect(PlayerEntity player, int mod) {
+    public void applyEffect(Player player, int mod) {
         effect.applyEffect(player, mod);
     }
 
@@ -74,5 +74,5 @@ public enum MedalTypes {
 }
 
 interface MedalEffect {
-    void applyEffect(PlayerEntity player, int mod);
+    void applyEffect(Player player, int mod);
 }

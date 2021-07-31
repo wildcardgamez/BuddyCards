@@ -2,7 +2,7 @@ package com.wildcard.buddycards.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wildcard.buddycards.blocks.CardDisplayBlock;
-import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
+import com.wildcard.buddycards.blocks.tiles.CardDisplayBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
@@ -15,13 +15,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class CardDisplayTileRenderer extends BlockEntityRenderer<CardDisplayTile> {
+public class CardDisplayTileRenderer extends BlockEntityRenderer<CardDisplayBlockEntity> {
     public CardDisplayTileRenderer(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     @Override
-    public void render(CardDisplayTile tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(CardDisplayBlockEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         switch(tileEntityIn.getBlockState().getValue(CardDisplayBlock.DIR)) {
             case NORTH: {
                 matrixStackIn.pushPose();

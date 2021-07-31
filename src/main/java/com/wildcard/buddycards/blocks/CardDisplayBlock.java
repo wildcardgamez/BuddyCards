@@ -1,6 +1,6 @@
 package com.wildcard.buddycards.blocks;
 
-import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
+import com.wildcard.buddycards.blocks.tiles.CardDisplayBlockEntity;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.world.level.block.Block;
@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -37,7 +36,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class CardDisplayBlock extends Block {
     public static final DirectionProperty DIR = BlockStateProperties.HORIZONTAL_FACING;
@@ -130,28 +128,18 @@ public class CardDisplayBlock extends Block {
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         BlockEntity tileentity = worldIn.getBlockEntity(pos);
-        if (tileentity instanceof CardDisplayTile) {
+        if (tileentity instanceof CardDisplayBlockEntity) {
             tileentity.clearRemoved();
-            worldIn.setBlockEntity(pos, tileentity);
+            worldIn.setBlockEntity(tileentity);
         }
-    }
-
-    @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-        return new CardDisplayTile();
-    }
-
-    @Override
-    public boolean  hasTileEntity(BlockState state) {
-        return true;
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         int slot = getSlot(state.getValue(DIR), hit.getLocation());
-        if (world.getBlockEntity(pos) instanceof CardDisplayTile) {
-            CardDisplayTile displayTile = (CardDisplayTile) world.getBlockEntity(pos);
+        if (world.getBlockEntity(pos) instanceof CardDisplayBlockEntity) {
+            CardDisplayBlockEntity displayTile = (CardDisplayBlockEntity) world.getBlockEntity(pos);
             ItemStack stack = player.getItemInHand(hand);
             if(stack.getItem() == BuddycardsItems.BUDDYSTEEL_KEY.get()) {
                 if (displayTile.isLocked()) {
@@ -270,8 +258,8 @@ public class CardDisplayBlock extends Block {
 
     @Override
     public boolean removedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        if (world.getBlockEntity(pos) instanceof CardDisplayTile)
-            Containers.dropContents(world, pos, ((CardDisplayTile) (world.getBlockEntity(pos))).getInventory());
+        if (world.getBlockEntity(pos) instanceof CardDisplayBlockEntity)
+            Containers.dropContents(world, pos, ((CardDisplayBlockEntity) (world.getBlockEntity(pos))).getInventory());
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 
@@ -285,7 +273,7 @@ public class CardDisplayBlock extends Block {
     @Override
     public boolean canEntityDestroy(BlockState state, BlockGetter world, BlockPos pos, Entity entity)
     {
-    	CardDisplayTile displayTile = (CardDisplayTile) world.getBlockEntity(pos);
+    	CardDisplayBlockEntity displayTile = (CardDisplayBlockEntity) world.getBlockEntity(pos);
     	if ( displayTile.isLocked() )
     	{
     		return false;
@@ -297,7 +285,7 @@ public class CardDisplayBlock extends Block {
     @Override
     public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player)
     {
-    	CardDisplayTile displayTile = (CardDisplayTile) world.getBlockEntity(pos);
+    	CardDisplayBlockEntity displayTile = (CardDisplayBlockEntity) world.getBlockEntity(pos);
     	if ( displayTile.isLocked() )
     	{
     		return false;
@@ -314,8 +302,8 @@ public class CardDisplayBlock extends Block {
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos) {
         BlockEntity tileentity = world.getBlockEntity(pos);
-        if (tileentity instanceof CardDisplayTile) {
-            return ((CardDisplayTile) tileentity).getCardsAmt();
+        if (tileentity instanceof CardDisplayBlockEntity) {
+            return ((CardDisplayBlockEntity) tileentity).getCardsAmt();
         }
         else
             return 0;

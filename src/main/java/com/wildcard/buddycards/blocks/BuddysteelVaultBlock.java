@@ -1,6 +1,6 @@
 package com.wildcard.buddycards.blocks;
 
-import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
+import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultBlockEntity;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,6 +8,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -72,10 +73,10 @@ public class BuddysteelVaultBlock extends BaseEntityBlock {
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         BlockEntity tileentity = worldIn.getBlockEntity(pos);
-        if (tileentity instanceof BuddysteelVaultTile) {
+        if (tileentity instanceof BuddysteelVaultBlockEntity) {
             tileentity.clearRemoved();
             if(stack.hasCustomHoverName())
-                ((BuddysteelVaultTile) tileentity).setDisplayName(stack.getHoverName());
+                ((BuddysteelVaultBlockEntity) tileentity).setDisplayName(stack.getHoverName());
             worldIn.setBlockEntity(tileentity);
         }
     }
@@ -83,33 +84,33 @@ public class BuddysteelVaultBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player playerIn, InteractionHand handIn, BlockHitResult hit) {
         BlockEntity tileentity = worldIn.getBlockEntity(pos);
-        if(playerIn instanceof ServerPlayer && tileentity instanceof BuddysteelVaultTile) {
+        if(playerIn instanceof ServerPlayer && tileentity instanceof BuddysteelVaultBlockEntity) {
             if(playerIn.getItemInHand(handIn).getItem() == BuddycardsItems.BUDDYSTEEL_KEY.get()) {
-                if (((BuddysteelVaultTile)tileentity).isLocked()) {
-                    if (((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUUID()))
+                if (((BuddysteelVaultBlockEntity)tileentity).isLocked()) {
+                    if (((BuddysteelVaultBlockEntity)tileentity).toggleLock(playerIn.getUUID()))
                         playerIn.displayClientMessage(new TranslatableComponent("block.buddycards.vault.unlock"), true);
                     else
                         playerIn.displayClientMessage(new TranslatableComponent("block.buddycards.vault.fail_unlock"), true);
                 }
                 else {
-                    ((BuddysteelVaultTile)tileentity).toggleLock(playerIn.getUUID());
+                    ((BuddysteelVaultBlockEntity)tileentity).toggleLock(playerIn.getUUID());
                     playerIn.displayClientMessage(new TranslatableComponent("block.buddycards.vault.lock"), true);
                 }
                 return InteractionResult.SUCCESS;
             }
-            NetworkHooks.openGui((ServerPlayer) playerIn, (BuddysteelVaultTile)tileentity, pos);
+            NetworkHooks.openGui((ServerPlayer) playerIn, (BuddysteelVaultBlockEntity)tileentity, pos);
         }
         return InteractionResult.SUCCESS;
     }
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new BuddysteelVaultTile();
+        return new BuddysteelVaultBlockEntity();
     }
 
     @Override
     public boolean removedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        if (world.getBlockEntity(pos) instanceof BuddysteelVaultTile && !player.isCreative()) {
+        if (world.getBlockEntity(pos) instanceof BuddysteelVaultBlockEntity && !player.isCreative()) {
             if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() == BuddycardsItems.ZYLEX_RING.get() ||
                     (ModList.get().isLoaded("curios") &&
                             CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), player).isPresent() &&
@@ -118,15 +119,15 @@ public class BuddysteelVaultBlock extends BaseEntityBlock {
                 CompoundTag nbt = new CompoundTag();
                 nbt.put("BlockEntityTag", world.getBlockEntity(pos).save(new CompoundTag()));
                 i.setTag(nbt);
-                InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), i);
+                Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), i);
             }
             else {
                 IItemHandler handler = world.getBlockEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(new ItemStackHandler());
                 for (int i = 0; i < handler.getSlots(); i++) {
-                    InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), handler.getStackInSlot(i));
+                    Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), handler.getStackInSlot(i));
                 }
                 if(!player.isCreative())
-                    Helper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock().asItem()));
+                    Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock().asItem()));
             }
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);

@@ -1,6 +1,6 @@
 package com.wildcard.buddycards.container;
 
-import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
+import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultBlockEntity;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
 import net.minecraft.world.entity.player.Player;
@@ -14,13 +14,13 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class VaultContainer extends AbstractContainerMenu {
     IItemHandler handler;
-    BuddysteelVaultTile tile;
+    BuddysteelVaultBlockEntity tile;
 
     public VaultContainer(int id, Inventory playerInv) {
-        this(id, playerInv, new ItemStackHandler(120), new BuddysteelVaultTile());
+        this(id, playerInv, new ItemStackHandler(120), new BuddysteelVaultBlockEntity());
     }
     
-    public VaultContainer(int id, Inventory playerInv, IItemHandler handlerIn, BuddysteelVaultTile tileIn) {
+    public VaultContainer(int id, Inventory playerInv, IItemHandler handlerIn, BuddysteelVaultBlockEntity tileIn) {
         super(BuddycardsMisc.VAULT_CONTAINER.get(), id);
         tile = tileIn;
         handler = handlerIn;

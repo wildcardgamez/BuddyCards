@@ -1,9 +1,9 @@
 package com.wildcard.buddycards.registries;
 
 import com.wildcard.buddycards.BuddyCards;
-import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
-import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
-import com.wildcard.buddycards.blocks.tiles.CardStandTile;
+import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultBlockEntity;
+import com.wildcard.buddycards.blocks.tiles.CardDisplayBlockEntity;
+import com.wildcard.buddycards.blocks.tiles.CardStandBlockEntity;
 import com.wildcard.buddycards.entities.EnderlingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
@@ -23,8 +23,8 @@ public class BuddycardsEntities {
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    public static final RegistryObject<BlockEntityType<CardDisplayTile>> CARD_DISPLAY_TILE = TILE_ENTITIES.register("card_display",
-            () -> BlockEntityType.Builder.of(CardDisplayTile::new, BuddycardsBlocks.OAK_CARD_DISPLAY.get(), BuddycardsBlocks.SPRUCE_CARD_DISPLAY.get(),
+    public static final RegistryObject<BlockEntityType<CardDisplayBlockEntity>> CARD_DISPLAY_TILE = TILE_ENTITIES.register("card_display",
+            () -> BlockEntityType.Builder.of(CardDisplayBlockEntity::new, BuddycardsBlocks.OAK_CARD_DISPLAY.get(), BuddycardsBlocks.SPRUCE_CARD_DISPLAY.get(),
                     BuddycardsBlocks.BIRCH_CARD_DISPLAY.get(), BuddycardsBlocks.JUNGLE_CARD_DISPLAY.get(), BuddycardsBlocks.ACACIA_CARD_DISPLAY.get(), BuddycardsBlocks.DARK_OAK_CARD_DISPLAY.get(),
                     BuddycardsBlocks.CRIMSON_CARD_DISPLAY.get(), BuddycardsBlocks.WARPED_CARD_DISPLAY.get(), BuddycardsBlocks.ASPEN_CARD_DISPLAY.get(), BuddycardsBlocks.BAOBAB_CARD_DISPLAY.get(),
                     BuddycardsBlocks.BLUE_ENCHANTED_CARD_DISPLAY.get(), BuddycardsBlocks.BULBIS_CARD_DISPLAY.get(), BuddycardsBlocks.CHERRY_CARD_DISPLAY.get(), BuddycardsBlocks.CIKA_CARD_DISPLAY.get(),
@@ -35,11 +35,11 @@ public class BuddycardsEntities {
                     BuddycardsBlocks.RAINBOW_EUCALYPTUS_CARD_DISPLAY.get(), BuddycardsBlocks.REDWOOD_CARD_DISPLAY.get(), BuddycardsBlocks.SKYRIS_CARD_DISPLAY.get(), BuddycardsBlocks.SYTHIAN_CARD_DISPLAY.get(),
                     BuddycardsBlocks.WILLOW_CARD_DISPLAY.get(), BuddycardsBlocks.WITCH_HAZEL_CARD_DISPLAY.get(), BuddycardsBlocks.ZELKOVA_CARD_DISPLAY.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<CardStandTile>> CARD_STAND_TILE = TILE_ENTITIES.register("card_stand",
-            () -> BlockEntityType.Builder.of(CardStandTile::new, BuddycardsBlocks.CARD_STAND.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CardStandBlockEntity>> CARD_STAND_TILE = TILE_ENTITIES.register("card_stand",
+            () -> BlockEntityType.Builder.of(CardStandBlockEntity::new, BuddycardsBlocks.CARD_STAND.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<BuddysteelVaultTile>> VAULT_TILE = TILE_ENTITIES.register("buddysteel_vault",
-            () -> BlockEntityType.Builder.of(BuddysteelVaultTile::new, BuddycardsItems.BASE_SET.VAULT.get(), BuddycardsItems.NETHER_SET.VAULT.get(),
+    public static final RegistryObject<BlockEntityType<BuddysteelVaultBlockEntity>> VAULT_TILE = TILE_ENTITIES.register("buddysteel_vault",
+            () -> BlockEntityType.Builder.of(BuddysteelVaultBlockEntity::new, BuddycardsItems.BASE_SET.VAULT.get(), BuddycardsItems.NETHER_SET.VAULT.get(),
                     BuddycardsItems.END_SET.VAULT.get(), BuddycardsItems.BYG_SET.VAULT.get(), BuddycardsItems.CREATE_SET.VAULT.get(), BuddycardsItems.AQUACULTURE_SET.VAULT.get(),
                     BuddycardsItems.FD_SET.VAULT.get()).build(null));
 

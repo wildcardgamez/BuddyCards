@@ -1,7 +1,7 @@
 package com.wildcard.buddycards.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.wildcard.buddycards.blocks.tiles.CardStandTile;
+import com.wildcard.buddycards.blocks.tiles.CardStandBlockEntity;
 import com.wildcard.buddycards.items.CardItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,13 +15,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class CardStandTileRenderer extends BlockEntityRenderer<CardStandTile> {
+public class CardStandTileRenderer extends BlockEntityRenderer<CardStandBlockEntity> {
     public CardStandTileRenderer(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     @Override
-    public void render(CardStandTile tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(CardStandBlockEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if(tileEntityIn.getCard().getItem() instanceof CardItem) {
             matrixStackIn.pushPose();
             matrixStackIn.translate(0.5, 0.25, 0.5);

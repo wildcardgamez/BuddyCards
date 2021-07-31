@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.blocks.tiles;
 
 import com.wildcard.buddycards.registries.BuddycardsEntities;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
@@ -11,14 +12,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.UUID;
 
-public class CardStandTile extends BlockEntity implements Clearable {
+public class CardStandBlockEntity extends BlockEntity implements Clearable {
     private ItemStack card = ItemStack.EMPTY;
     private int dir = 0;
     private boolean locked = false;
     private String player = "";
 
-    public CardStandTile() {
-        super(BuddycardsEntities.CARD_STAND_TILE.get());
+    public CardStandBlockEntity(BlockPos pos, BlockState state) {
+        super(BuddycardsEntities.CARD_STAND_TILE.get(), pos, state);
     }
 
     public void setCard(ItemStack stack) {
@@ -77,8 +78,8 @@ public class CardStandTile extends BlockEntity implements Clearable {
     }
 
     @Override
-    public void load(BlockState state, CompoundTag nbt) {
-        super.load(state, nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         this.card = ItemStack.of((CompoundTag) nbt.get("card"));
         this.dir = nbt.getInt("dir");
         this.locked = nbt.getBoolean("locked");
@@ -97,7 +98,7 @@ public class CardStandTile extends BlockEntity implements Clearable {
 
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        this.load(this.getBlockState(), pkt.getTag());
+        this.load(pkt.getTag());
     }
 
     @Override

@@ -5,9 +5,9 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 import com.wildcard.buddycards.blocks.CardDisplayBlock;
-import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
+import com.wildcard.buddycards.blocks.tiles.CardDisplayBlockEntity;
 import com.wildcard.buddycards.blocks.CardStandBlock;
-import com.wildcard.buddycards.blocks.tiles.CardStandTile;
+import com.wildcard.buddycards.blocks.tiles.CardStandBlockEntity;
 
 import com.wildcard.buddycards.registries.BuddycardsBlocks;
 import com.wildcard.buddycards.registries.BuddycardsItems;
@@ -33,14 +33,14 @@ public class BlockExplodeHandler
 
 			// exclude this block from the explosion if it is a locked CardDisplayBlock
 			if (targetBlock.getBlock() instanceof CardDisplayBlock) {
-				CardDisplayTile tile = (CardDisplayTile) event.getWorld().getBlockEntity(event.getAffectedBlocks().get(i));
+				CardDisplayBlockEntity tile = (CardDisplayBlockEntity) event.getWorld().getBlockEntity(event.getAffectedBlocks().get(i));
 				if (!tile.isLocked()) {
 					replacedExplosion.add(event.getAffectedBlocks().get(i));
 				}
 			}
 			// exclude this block from the explosion if it is a locked CardStandBlock
 			else if (targetBlock.getBlock() instanceof CardStandBlock) {
-				CardStandTile tile = (CardStandTile) event.getWorld().getBlockEntity(event.getAffectedBlocks().get(i));
+				CardStandBlockEntity tile = (CardStandBlockEntity) event.getWorld().getBlockEntity(event.getAffectedBlocks().get(i));
 				if (!tile.isLocked()) {
 					replacedExplosion.add(event.getAffectedBlocks().get(i));
 				}

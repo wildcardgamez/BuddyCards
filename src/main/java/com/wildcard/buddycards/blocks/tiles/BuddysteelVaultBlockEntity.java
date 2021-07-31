@@ -5,6 +5,7 @@ import com.wildcard.buddycards.container.VaultContainer;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsEntities;
 import com.wildcard.buddycards.registries.BuddycardsItems;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -25,7 +26,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class BuddysteelVaultTile extends BlockEntity implements MenuProvider {
+public class BuddysteelVaultBlockEntity extends BlockEntity implements MenuProvider {
     private LazyOptional<ItemStackHandler> handler = LazyOptional.of(() -> new ItemStackHandler(120) {
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
@@ -44,8 +45,8 @@ public class BuddysteelVaultTile extends BlockEntity implements MenuProvider {
     private boolean locked = false;
     private String player = "";
 
-    public BuddysteelVaultTile() {
-        super(BuddycardsEntities.VAULT_TILE.get());
+    public BuddysteelVaultBlockEntity(BlockPos pos, BlockState state) {
+        super(BuddycardsEntities.VAULT_TILE.get(), pos, state);
     }
 
     @Override
@@ -88,8 +89,8 @@ public class BuddysteelVaultTile extends BlockEntity implements MenuProvider {
     }
 
     @Override
-    public void load(BlockState state, CompoundTag tag) {
-        super.load(state, tag);
+    public void load(CompoundTag tag) {
+        super.load(tag);
         this.locked = tag.getBoolean("locked");
         this.player = tag.getString("player");
         if(tag.contains("name"))
