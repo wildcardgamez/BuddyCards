@@ -4,24 +4,24 @@ import com.wildcard.buddycards.inventory.BinderInventory;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.EnderBinderSaveData;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
-public class BinderContainer extends Container {
+public class BinderContainer extends AbstractContainerMenu {
 
     private final BinderInventory binderInv;
     private static int[] slotsForLevel = {54, 72, 96, 120};
 
-    public BinderContainer(int id, PlayerInventory playerInventory) {
+    public BinderContainer(int id, Inventory playerInventory) {
         this(id, playerInventory, new BinderInventory(slotsForLevel[EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.EXTRA_PAGE.get(), playerInventory.getSelected())], playerInventory.getSelected()));
     }
 
-    public BinderContainer(int id, PlayerInventory playerInv, BinderInventory binderInvIn) {
+    public BinderContainer(int id, Inventory playerInv, BinderInventory binderInvIn) {
         super(BuddycardsMisc.BINDER_CONTAINER.get(), id);
         checkContainerSize(binderInvIn, binderInvIn.getContainerSize());
         binderInv = binderInvIn;
@@ -104,12 +104,12 @@ public class BinderContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
+    public boolean stillValid(Player playerIn) {
         return true;
     }
 
     public class BinderSlot extends Slot {
-        public BinderSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+        public BinderSlot(Container inventoryIn, int index, int xPosition, int yPosition) {
             super(inventoryIn, index, xPosition, yPosition);
         }
 
@@ -120,13 +120,13 @@ public class BinderContainer extends Container {
         }
     }
     public class InvSlot extends Slot {
-        public InvSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+        public InvSlot(Container inventoryIn, int index, int xPosition, int yPosition) {
             super(inventoryIn, index, xPosition, yPosition);
         }
 
         //Only let the stack move if it isn't the open binder
         @Override
-        public boolean mayPickup(PlayerEntity playerIn) {
+        public boolean mayPickup(Player playerIn) {
             return !(this.getItem().equals(((BinderInventory)binderInv).binder));
         }
 
@@ -137,7 +137,7 @@ public class BinderContainer extends Container {
     }
 
     @Override
-    public void removed(PlayerEntity playerIn) {
+    public void removed(Player playerIn) {
         //Run the code to check the inventory and convert to nbt
         if(!binderInv.ender)
             binderInv.stopOpen(playerIn);
@@ -147,7 +147,7 @@ public class BinderContainer extends Container {
     }
 
     @Override
-    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
         if(slot != null && slot.hasItem())

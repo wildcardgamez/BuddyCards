@@ -1,7 +1,7 @@
 package com.wildcard.buddycards.integration.fd;
 
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
 public class FarmersDelightIntegration {

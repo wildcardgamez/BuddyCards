@@ -5,19 +5,19 @@ import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.inventory.BinderInventory;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.SimpleNamedContainerProvider;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -32,27 +32,27 @@ public class BinderItem extends Item {
     final String SPECIFIC_MOD;
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn)
     {
         ItemStack binder = playerIn.getItemInHand(handIn);
-        CompoundNBT nbt = binder.getTag();
-        if(playerIn instanceof ServerPlayerEntity) {
+        CompoundTag nbt = binder.getTag();
+        if(playerIn instanceof ServerPlayer) {
             //If there is a key, go through and try to lock it
-            if (playerIn.getItemInHand(Hand.OFF_HAND).getItem().equals(BuddycardsItems.BUDDYSTEEL_KEY.get())) {
+            if (playerIn.getItemInHand(InteractionHand.OFF_HAND).getItem().equals(BuddycardsItems.BUDDYSTEEL_KEY.get())) {
                 if (nbt == null || !nbt.contains("locked") || !nbt.getBoolean("locked")) {
                     nbt.putBoolean("locked", true);
                     nbt.putString("player", playerIn.getStringUUID());
                     binder.setTag(nbt);
-                    playerIn.displayClientMessage(new TranslationTextComponent("item.buddycards.binder.lock"), true);
+                    playerIn.displayClientMessage(new TranslatableComponent("item.buddycards.binder.lock"), true);
                 } else if (nbt.getString("player").equals(playerIn.getStringUUID())) {
                     nbt.putBoolean("locked", false);
                     nbt.remove("player");
                     binder.setTag(nbt);
-                    playerIn.displayClientMessage(new TranslationTextComponent("item.buddycards.binder.unlock"), true);
+                    playerIn.displayClientMessage(new TranslatableComponent("item.buddycards.binder.unlock"), true);
                 } else {
-                    playerIn.displayClientMessage(new TranslationTextComponent("item.buddycards.binder.fail_unlock"), true);
+                    playerIn.displayClientMessage(new TranslatableComponent("item.buddycards.binder.fail_unlock"), true);
                 }
-                return ActionResult.success(playerIn.getItemInHand(handIn));
+                return InteractionResultHolder.success(playerIn.getItemInHand(handIn));
             } else if (nbt == null || !nbt.contains("locked") || !nbt.getBoolean("locked")) {
                 //Find the amount of slots and then open the binder GUI
                 int slots = 54;
@@ -65,18 +65,18 @@ public class BinderItem extends Item {
                         slots += 18;
                 }
                 int finalSlots = slots;
-                NetworkHooks.openGui((ServerPlayerEntity) playerIn, new SimpleNamedContainerProvider(
+                NetworkHooks.openGui((ServerPlayer) playerIn, new SimpleMenuProvider(
                         (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, new BinderInventory(finalSlots, binder))
                         , playerIn.getItemInHand(handIn).getHoverName()));
             } else {
-                playerIn.displayClientMessage(new TranslationTextComponent("item.buddycards.binder.lock"), true);
+                playerIn.displayClientMessage(new TranslatableComponent("item.buddycards.binder.lock"), true);
             }
         }
-        return ActionResult.success(binder);
+        return InteractionResultHolder.success(binder);
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         if(!ModList.get().isLoaded(SPECIFIC_MOD))
             return;
         super.fillItemCategory(group, items);

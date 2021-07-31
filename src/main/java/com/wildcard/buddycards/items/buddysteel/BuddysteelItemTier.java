@@ -1,16 +1,16 @@
 package com.wildcard.buddycards.items.buddysteel;
 
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyValue;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.util.LazyLoadedValue;
 
-public enum BuddysteelItemTier implements IItemTier {
-    BUDDYSTEEL(2048, 6f, 0, 2, 8, new LazyValue<>(() -> Ingredient.of(BuddycardsItems.BUDDYSTEEL_INGOT.get()))),
-    PERFECT_BUDDYSTEEL(3072, 7.5f, 0, 3, 10, new LazyValue<>(() -> Ingredient.of(BuddycardsItems.PERFECT_BUDDYSTEEL_INGOT.get()))),
-    LUMINIS(1024, 8f, 0, 3, 12, new LazyValue<>(() -> Ingredient.of(BuddycardsItems.LUMINIS.get())));
+public enum BuddysteelItemTier implements Tier {
+    BUDDYSTEEL(2048, 6f, 0, 2, 8, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.BUDDYSTEEL_INGOT.get()))),
+    PERFECT_BUDDYSTEEL(3072, 7.5f, 0, 3, 10, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.PERFECT_BUDDYSTEEL_INGOT.get()))),
+    LUMINIS(1024, 8f, 0, 3, 12, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.LUMINIS.get())));
 
-    BuddysteelItemTier(int uses, float speed, float dmg, int level, int ench, LazyValue<Ingredient> mat) {
+    BuddysteelItemTier(int uses, float speed, float dmg, int level, int ench, LazyLoadedValue<Ingredient> mat) {
         this.uses = uses;
         this.speed = speed;
         this.dmg = dmg;
@@ -23,7 +23,7 @@ public enum BuddysteelItemTier implements IItemTier {
     float dmg;
     int level;
     int ench;
-    LazyValue<Ingredient> mat;
+    LazyLoadedValue<Ingredient> mat;
 
     @Override
     public int getUses() {

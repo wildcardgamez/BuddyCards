@@ -2,43 +2,43 @@ package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.registries.BuddycardsMisc;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Rarity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import vectorwing.farmersdelight.registry.ModEffects;
 
 public enum MedalTypes {
     BASE_SET((player, mod) -> {
-        player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 300, mod, true, false));
+        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, mod, true, false));
     }, Rarity.UNCOMMON),
     NETHER_SET((player, mod) -> {
-        player.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 300, 0, true, false));
+        player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 300, 0, true, false));
         if(mod > 0 && player.isOnFire()) {
-            player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 1800, 0, true, false));
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1800, 0, true, false));
             if (mod > 1)
-                player.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 300, 0, true, false));
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 300, 0, true, false));
         }
     }, Rarity.UNCOMMON),
     END_SET((player, mod) -> {
-        player.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 300, mod / 2, true, false));
-        if (player.hasEffect(Effects.LEVITATION) && mod > 0)
-            player.removeEffect(Effects.LEVITATION);
+        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 300, mod / 2, true, false));
+        if (player.hasEffect(MobEffects.LEVITATION) && mod > 0)
+            player.removeEffect(MobEffects.LEVITATION);
     }, Rarity.UNCOMMON),
     BYG_SET((player, mod) -> {
-        player.addEffect(new EffectInstance(Effects.JUMP, 300, mod / 2, true, false));
+        player.addEffect(new MobEffectInstance(MobEffects.JUMP, 300, mod / 2, true, false));
         if (mod > 0)
-            player.addEffect(new EffectInstance(Effects.MOVEMENT_SPEED, 300, 0, true, false));
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 300, 0, true, false));
     }, Rarity.UNCOMMON),
     CREATE_SET((player, mod) -> {
-        player.addEffect(new EffectInstance(Effects.DIG_SPEED, 300, mod, true, false));
+        player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 300, mod, true, false));
     }, Rarity.UNCOMMON),
     AQUACULTURE_SET((player, mod) -> {
-        player.addEffect(new EffectInstance(Effects.LUCK, 300, mod / 2, true, false));
+        player.addEffect(new MobEffectInstance(MobEffects.LUCK, 300, mod / 2, true, false));
         if (mod > 0)
-            player.addEffect(new EffectInstance(Effects.DOLPHINS_GRACE, 300, 0, true, false));
+            player.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 300, 0, true, false));
     }, Rarity.UNCOMMON),
     FD_SET((player, mod) -> {
-        player.addEffect(new EffectInstance(ModEffects.NOURISHED.get(), 300, 0, true, false));
+        player.addEffect(new MobEffectInstance(ModEffects.NOURISHED.get(), 300, 0, true, false));
         if (mod > 0 && player.getFoodData().getFoodLevel() > 19) {
             player.addEffect(new EffectInstance(ModEffects.COMFORT.get(), 300, 0, true, false));
             if (mod > 1)

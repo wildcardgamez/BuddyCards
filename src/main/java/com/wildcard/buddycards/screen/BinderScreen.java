@@ -1,21 +1,21 @@
 package com.wildcard.buddycards.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.BinderContainer;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 
-public class BinderScreen extends ContainerScreen<BinderContainer> {
+public class BinderScreen extends AbstractContainerScreen<BinderContainer> {
 
     private static final ResourceLocation TEXTURE1 = new ResourceLocation(BuddyCards.MOD_ID, "textures/gui/binder.png");
     private static final ResourceLocation TEXTURE2 = new ResourceLocation(BuddyCards.MOD_ID, "textures/gui/binder2.png");
     private static final ResourceLocation TEXTURE3 = new ResourceLocation(BuddyCards.MOD_ID, "textures/gui/binder3.png");
     private static final ResourceLocation TEXTURE4 = new ResourceLocation(BuddyCards.MOD_ID, "textures/gui/binder4.png");
 
-    public BinderScreen(BinderContainer container, PlayerInventory playerInventory, ITextComponent title) {
+    public BinderScreen(BinderContainer container, Inventory playerInventory, Component title) {
         super(container, playerInventory, title);
         //set up sizes for the gui
         int size = container.getItems().size();
@@ -54,14 +54,14 @@ public class BinderScreen extends ContainerScreen<BinderContainer> {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void renderLabels(MatrixStack matrixStack, int x, int y) {
+    protected void renderLabels(PoseStack matrixStack, int x, int y) {
         //Draw the name of the binder and the inventory titles
         this.font.draw(matrixStack, title, 8.0f, 6.0f, 4210752);
         int size = menu.getItems().size();
@@ -76,7 +76,7 @@ public class BinderScreen extends ContainerScreen<BinderContainer> {
     }
 
     @Override
-    protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         //Place the texture for the binder gui
         int size = menu.getItems().size();
         assert this.minecraft != null;

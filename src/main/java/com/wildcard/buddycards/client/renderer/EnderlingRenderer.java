@@ -4,16 +4,16 @@ import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.client.models.EnderlingModel;
 import com.wildcard.buddycards.entities.EnderlingEntity;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.AbstractEyesLayer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EnderlingRenderer extends MobRenderer<EnderlingEntity, EnderlingModel> {
-    public EnderlingRenderer(EntityRendererManager renderManagerIn) {
+    public EnderlingRenderer(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn, new EnderlingModel(), .6f);
         this.addLayer(new EnderlingEyesLayer(this));
     }
@@ -24,10 +24,10 @@ public class EnderlingRenderer extends MobRenderer<EnderlingEntity, EnderlingMod
     }
 
     @OnlyIn(Dist.CLIENT)
-    public class EnderlingEyesLayer extends AbstractEyesLayer<EnderlingEntity, EnderlingModel> {
+    public class EnderlingEyesLayer extends EyesLayer<EnderlingEntity, EnderlingModel> {
         private final RenderType RENDER_TYPE = RenderType.eyes(new ResourceLocation("textures/entity/enderman/enderman_eyes.png"));
 
-        public EnderlingEyesLayer(IEntityRenderer<EnderlingEntity, EnderlingModel> rendererIn) {
+        public EnderlingEyesLayer(RenderLayerParent<EnderlingEntity, EnderlingModel> rendererIn) {
             super(rendererIn);
         }
 

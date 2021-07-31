@@ -3,21 +3,21 @@ package com.wildcard.buddycards.items;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.util.ConfigManager;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -40,10 +40,10 @@ public class PackItem extends Item {
     final int SHINY_CARDS;
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         //Set name and explanation of what the pack is
-        tooltip.add(new TranslationTextComponent("item.buddycards.set." + SET_NUMBER));
-        tooltip.add(new TranslationTextComponent("item.buddycards.contains." + SET_NUMBER));
+        tooltip.add(new TranslatableComponent("item.buddycards.set." + SET_NUMBER));
+        tooltip.add(new TranslatableComponent("item.buddycards.contains." + SET_NUMBER));
     }
 
     @Override
@@ -53,8 +53,8 @@ public class PackItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if(worldIn instanceof ServerWorld) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+        if(worldIn instanceof ServerLevel) {
             //Prematurely delete the pack item so the card items can go in the same slot
             playerIn.getItemInHand(handIn).shrink(1);
             //For each card roll the rarity, and get a card from the list that matches
@@ -80,7 +80,7 @@ public class PackItem extends Item {
                 else
                     card = new ItemStack(getRandomCardOfRarity(BuddycardsItems.SETS.get(SET_NUMBER).CARDS, rarity));
                 if (i >= CARDS - SHINY_CARDS) {
-                    CompoundNBT nbt = new CompoundNBT();
+                    CompoundTag nbt = new CompoundTag();
                     nbt.putBoolean("foil", true);
                     card.setTag(nbt);
                 }
@@ -93,13 +93,13 @@ public class PackItem extends Item {
                 //Give each card
                 ItemHandlerHelper.giveItemToPlayer(playerIn, card);
             });
-            return ActionResult.consume(playerIn.getItemInHand(handIn));
+            return InteractionResultHolder.consume(playerIn.getItemInHand(handIn));
         }
-        return ActionResult.success(playerIn.getItemInHand(handIn));
+        return InteractionResultHolder.success(playerIn.getItemInHand(handIn));
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         if(!ModList.get().isLoaded(SPECIFIC_MOD))
             return;
         super.fillItemCategory(group, items);

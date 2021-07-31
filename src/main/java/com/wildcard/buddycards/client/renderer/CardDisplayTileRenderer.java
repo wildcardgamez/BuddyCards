@@ -1,27 +1,27 @@
 package com.wildcard.buddycards.client.renderer;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.wildcard.buddycards.blocks.CardDisplayBlock;
 import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.item.ItemStack;
+import com.mojang.math.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile> {
-    public CardDisplayTileRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
+public class CardDisplayTileRenderer extends BlockEntityRenderer<CardDisplayTile> {
+    public CardDisplayTileRenderer(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     @Override
-    public void render(CardDisplayTile tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(CardDisplayTile tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         switch(tileEntityIn.getBlockState().getValue(CardDisplayBlock.DIR)) {
             case NORTH: {
                 matrixStackIn.pushPose();
@@ -29,8 +29,8 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180));
                 ItemStack itemstack = tileEntityIn.getCardInSlot(1);
-                IBakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                BakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.5, 0.75, 0.13);
@@ -38,7 +38,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180));
                 itemstack = tileEntityIn.getCardInSlot(2);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.8125, 0.75, 0.125);
@@ -46,7 +46,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180));
                 itemstack = tileEntityIn.getCardInSlot(3);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.1875, 0.25, 0.125);
@@ -54,7 +54,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180));
                 itemstack = tileEntityIn.getCardInSlot(4);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.5, 0.25, 0.13);
@@ -62,7 +62,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180));
                 itemstack = tileEntityIn.getCardInSlot(5);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.8125, 0.25, 0.125);
@@ -70,7 +70,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180));
                 itemstack = tileEntityIn.getCardInSlot(6);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 break;
             }
@@ -80,8 +80,8 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90));
                 ItemStack itemstack = tileEntityIn.getCardInSlot(1);
-                IBakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                BakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.87, 0.75, 0.5);
@@ -89,7 +89,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90));
                 itemstack = tileEntityIn.getCardInSlot(2);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.875, 0.75, 0.8125);
@@ -97,7 +97,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90));
                 itemstack = tileEntityIn.getCardInSlot(3);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.875, 0.25, 0.1875);
@@ -105,7 +105,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90));
                 itemstack = tileEntityIn.getCardInSlot(4);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.87, 0.25, 0.5);
@@ -113,7 +113,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90));
                 itemstack = tileEntityIn.getCardInSlot(5);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.875, 0.25, 0.8125);
@@ -121,7 +121,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90));
                 itemstack = tileEntityIn.getCardInSlot(6);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 break;
             }
@@ -130,43 +130,43 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.translate(0.8125, 0.75, 0.875);
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 ItemStack itemstack = tileEntityIn.getCardInSlot(1);
-                IBakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                BakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.5, 0.75, 0.87);
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 itemstack = tileEntityIn.getCardInSlot(2);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.1875, 0.75, 0.875);
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 itemstack = tileEntityIn.getCardInSlot(3);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.8125, 0.25, 0.875);
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 itemstack = tileEntityIn.getCardInSlot(4);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.5, 0.25, 0.87);
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 itemstack = tileEntityIn.getCardInSlot(5);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.1875, 0.25, 0.875);
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 itemstack = tileEntityIn.getCardInSlot(6);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 break;
             }
@@ -176,8 +176,8 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(270));
                 ItemStack itemstack = tileEntityIn.getCardInSlot(1);
-                IBakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                BakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.13, 0.75, 0.5);
@@ -185,7 +185,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(270));
                 itemstack = tileEntityIn.getCardInSlot(2);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.125, 0.75, 0.1875);
@@ -193,7 +193,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(270));
                 itemstack = tileEntityIn.getCardInSlot(3);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.125, 0.25, 0.8125);
@@ -201,7 +201,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(270));
                 itemstack = tileEntityIn.getCardInSlot(4);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.13, 0.25, 0.5);
@@ -209,7 +209,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(270));
                 itemstack = tileEntityIn.getCardInSlot(5);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 matrixStackIn.pushPose();
                 matrixStackIn.translate(0.125, 0.25, 0.1875);
@@ -217,7 +217,7 @@ public class CardDisplayTileRenderer extends TileEntityRenderer<CardDisplayTile>
                 matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(270));
                 itemstack = tileEntityIn.getCardInSlot(6);
                 ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemstack, tileEntityIn.getLevel(), null);
-                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemstack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
                 break;
             }

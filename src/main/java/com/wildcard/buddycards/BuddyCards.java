@@ -16,11 +16,11 @@ import com.wildcard.buddycards.screen.BinderScreen;
 import com.wildcard.buddycards.screen.VaultScreen;
 import com.wildcard.buddycards.util.*;
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -84,7 +84,7 @@ public class BuddyCards
             MinecraftForge.EVENT_BUS.register(new AquacultureIntegration());
         event.enqueueWork(BuddycardsMisc::brewingSetup);
         DeferredWorkQueue.runLater(() -> {
-            GlobalEntityTypeAttributes.put(BuddycardsEntities.ENDERLING.get(), EnderlingEntity.setupAttributes().build());
+            DefaultAttributes.put(BuddycardsEntities.ENDERLING.get(), EnderlingEntity.setupAttributes().build());
         });
     }
 
@@ -92,14 +92,14 @@ public class BuddyCards
         ClientStuff.clientSetup(event);
     }
 
-    public static final ItemGroup TAB = new ItemGroup("buddycards") {
+    public static final CreativeModeTab TAB = new CreativeModeTab("buddycards") {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(BuddycardsItems.BASE_SET.PACK.get());
         }
     };
 
-    public static final ItemGroup CARDS_TAB = new ItemGroup("buddycards_cards") {
+    public static final CreativeModeTab CARDS_TAB = new CreativeModeTab("buddycards_cards") {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(BuddycardsItems.LOADED_CARDS.get((int)(Math.random() * (BuddycardsItems.LOADED_CARDS.size()))).get());

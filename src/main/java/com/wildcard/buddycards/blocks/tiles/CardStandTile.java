@@ -1,17 +1,17 @@
 package com.wildcard.buddycards.blocks.tiles;
 
 import com.wildcard.buddycards.registries.BuddycardsEntities;
-import net.minecraft.block.BlockState;
-import net.minecraft.inventory.IClearable;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.Clearable;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.UUID;
 
-public class CardStandTile extends TileEntity implements IClearable {
+public class CardStandTile extends BlockEntity implements Clearable {
     private ItemStack card = ItemStack.EMPTY;
     private int dir = 0;
     private boolean locked = false;
@@ -67,9 +67,9 @@ public class CardStandTile extends TileEntity implements IClearable {
     }
 
     @Override
-    public CompoundNBT save(CompoundNBT compound) {
+    public CompoundTag save(CompoundTag compound) {
         super.save(compound);
-        compound.put("card", this.card.save(new CompoundNBT()));
+        compound.put("card", this.card.save(new CompoundTag()));
         compound.putInt("dir", this.dir);
         compound.putBoolean("locked", this.locked);
         compound.putString("player", this.player);
@@ -77,26 +77,26 @@ public class CardStandTile extends TileEntity implements IClearable {
     }
 
     @Override
-    public void load(BlockState state, CompoundNBT nbt) {
+    public void load(BlockState state, CompoundTag nbt) {
         super.load(state, nbt);
-        this.card = ItemStack.of((CompoundNBT) nbt.get("card"));
+        this.card = ItemStack.of((CompoundTag) nbt.get("card"));
         this.dir = nbt.getInt("dir");
         this.locked = nbt.getBoolean("locked");
         this.player = nbt.getString("player");
     }
 
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.worldPosition, 0, this.getUpdateTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return new ClientboundBlockEntityDataPacket(this.worldPosition, 0, this.getUpdateTag());
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        return this.save(new CompoundNBT());
+    public CompoundTag getUpdateTag() {
+        return this.save(new CompoundTag());
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         this.load(this.getBlockState(), pkt.getTag());
     }
 

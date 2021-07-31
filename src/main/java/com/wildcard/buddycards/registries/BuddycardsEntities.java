@@ -5,17 +5,17 @@ import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
 import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
 import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 import com.wildcard.buddycards.entities.EnderlingEntity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class BuddycardsEntities {
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, BuddyCards.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, BuddyCards.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, BuddyCards.MOD_ID);
 
     public static void init() {
@@ -23,8 +23,8 @@ public class BuddycardsEntities {
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    public static final RegistryObject<TileEntityType<CardDisplayTile>> CARD_DISPLAY_TILE = TILE_ENTITIES.register("card_display",
-            () -> TileEntityType.Builder.of(CardDisplayTile::new, BuddycardsBlocks.OAK_CARD_DISPLAY.get(), BuddycardsBlocks.SPRUCE_CARD_DISPLAY.get(),
+    public static final RegistryObject<BlockEntityType<CardDisplayTile>> CARD_DISPLAY_TILE = TILE_ENTITIES.register("card_display",
+            () -> BlockEntityType.Builder.of(CardDisplayTile::new, BuddycardsBlocks.OAK_CARD_DISPLAY.get(), BuddycardsBlocks.SPRUCE_CARD_DISPLAY.get(),
                     BuddycardsBlocks.BIRCH_CARD_DISPLAY.get(), BuddycardsBlocks.JUNGLE_CARD_DISPLAY.get(), BuddycardsBlocks.ACACIA_CARD_DISPLAY.get(), BuddycardsBlocks.DARK_OAK_CARD_DISPLAY.get(),
                     BuddycardsBlocks.CRIMSON_CARD_DISPLAY.get(), BuddycardsBlocks.WARPED_CARD_DISPLAY.get(), BuddycardsBlocks.ASPEN_CARD_DISPLAY.get(), BuddycardsBlocks.BAOBAB_CARD_DISPLAY.get(),
                     BuddycardsBlocks.BLUE_ENCHANTED_CARD_DISPLAY.get(), BuddycardsBlocks.BULBIS_CARD_DISPLAY.get(), BuddycardsBlocks.CHERRY_CARD_DISPLAY.get(), BuddycardsBlocks.CIKA_CARD_DISPLAY.get(),
@@ -35,16 +35,16 @@ public class BuddycardsEntities {
                     BuddycardsBlocks.RAINBOW_EUCALYPTUS_CARD_DISPLAY.get(), BuddycardsBlocks.REDWOOD_CARD_DISPLAY.get(), BuddycardsBlocks.SKYRIS_CARD_DISPLAY.get(), BuddycardsBlocks.SYTHIAN_CARD_DISPLAY.get(),
                     BuddycardsBlocks.WILLOW_CARD_DISPLAY.get(), BuddycardsBlocks.WITCH_HAZEL_CARD_DISPLAY.get(), BuddycardsBlocks.ZELKOVA_CARD_DISPLAY.get()).build(null));
 
-    public static final RegistryObject<TileEntityType<CardStandTile>> CARD_STAND_TILE = TILE_ENTITIES.register("card_stand",
-            () -> TileEntityType.Builder.of(CardStandTile::new, BuddycardsBlocks.CARD_STAND.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CardStandTile>> CARD_STAND_TILE = TILE_ENTITIES.register("card_stand",
+            () -> BlockEntityType.Builder.of(CardStandTile::new, BuddycardsBlocks.CARD_STAND.get()).build(null));
 
-    public static final RegistryObject<TileEntityType<BuddysteelVaultTile>> VAULT_TILE = TILE_ENTITIES.register("buddysteel_vault",
-            () -> TileEntityType.Builder.of(BuddysteelVaultTile::new, BuddycardsItems.BASE_SET.VAULT.get(), BuddycardsItems.NETHER_SET.VAULT.get(),
+    public static final RegistryObject<BlockEntityType<BuddysteelVaultTile>> VAULT_TILE = TILE_ENTITIES.register("buddysteel_vault",
+            () -> BlockEntityType.Builder.of(BuddysteelVaultTile::new, BuddycardsItems.BASE_SET.VAULT.get(), BuddycardsItems.NETHER_SET.VAULT.get(),
                     BuddycardsItems.END_SET.VAULT.get(), BuddycardsItems.BYG_SET.VAULT.get(), BuddycardsItems.CREATE_SET.VAULT.get(), BuddycardsItems.AQUACULTURE_SET.VAULT.get(),
                     BuddycardsItems.FD_SET.VAULT.get()).build(null));
 
     //Entities
     public static RegistryObject<EntityType<EnderlingEntity>> ENDERLING = ENTITIES.register("enderling",
-            () -> EntityType.Builder.of(EnderlingEntity::new, EntityClassification.CREATURE).sized(.6f, 1.8f).build(new ResourceLocation(BuddyCards.MOD_ID, "enderling").toString()));
+            () -> EntityType.Builder.of(EnderlingEntity::new, MobCategory.CREATURE).sized(.6f, 1.8f).build(new ResourceLocation(BuddyCards.MOD_ID, "enderling").toString()));
 
 }

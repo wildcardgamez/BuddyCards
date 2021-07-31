@@ -2,14 +2,14 @@ package com.wildcard.buddycards.inventory;
 
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.util.ConfigManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraftforge.common.util.Constants;
 
-public class BinderInventory extends Inventory {
+public class BinderInventory extends SimpleContainer {
     public BinderInventory(int slots, ItemStack binderIn) {
         super(slots);
         binder = binderIn;
@@ -24,7 +24,7 @@ public class BinderInventory extends Inventory {
     public boolean ender;
 
     @Override
-    public void startOpen(PlayerEntity player)
+    public void startOpen(Player player)
     {
         //Set all slots in the binder as empty by default
         for(int i = 0; i < this.getContainerSize(); i++) {
@@ -34,10 +34,10 @@ public class BinderInventory extends Inventory {
         if(binder.hasTag())
         {
             //If the binder has nbt data, turn it into items
-            CompoundNBT nbt = binder.getTag();
-            ListNBT list = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
+            CompoundTag nbt = binder.getTag();
+            ListTag list = nbt.getList("Items", Constants.NBT.TAG_COMPOUND);
             for(int i = 0; i < list.size(); i++) {
-                CompoundNBT compoundnbt = list.getCompound(i);
+                CompoundTag compoundnbt = list.getCompound(i);
                 int k = compoundnbt.getByte("Slot") & 255;
                 if (k >= 0 && k < this.getContainerSize()) {
                     this.setItem(k, ItemStack.of(compoundnbt));
@@ -47,7 +47,7 @@ public class BinderInventory extends Inventory {
     }
 
     @Override
-    public void stopOpen(PlayerEntity player)
+    public void stopOpen(Player player)
     {
         boolean calcPoints = ConfigManager.challengeMode.get();
         int points = 0;
@@ -55,16 +55,16 @@ public class BinderInventory extends Inventory {
         if(!binder.isEmpty())
         {
             //When the binder has cards in it, turn them into nbt data and put them in the binder
-            CompoundNBT nbt;
+            CompoundTag nbt;
             if(binder.hasTag())
                 nbt = binder.getTag();
             else
-                nbt = new CompoundNBT();
-            ListNBT list = new ListNBT();
+                nbt = new CompoundTag();
+            ListTag list = new ListTag();
             for(int i = 0; i < this.getContainerSize(); i++) {
                 ItemStack itemstack = this.getItem(i);
                 if (!itemstack.isEmpty()) {
-                    CompoundNBT compoundnbt = new CompoundNBT();
+                    CompoundTag compoundnbt = new CompoundTag();
                     if (calcPoints)
                         points += ((CardItem)itemstack.getItem()).getPointValue(itemstack) * itemstack.getCount();
                     compoundnbt.putByte("Slot", (byte)i);

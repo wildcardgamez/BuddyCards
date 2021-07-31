@@ -3,30 +3,36 @@ package com.wildcard.buddycards.blocks;
 import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.Containers;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
+
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class CardStandBlock extends Block{
     protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 1.0D, 11.0D);
@@ -44,17 +50,17 @@ public class CardStandBlock extends Block{
     final String NEEDED_MOD;
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
-    public VoxelShape getOcclusionShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return VoxelShapes.empty();
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
+        return Shapes.empty();
     }
 
     @Override
-    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        TileEntity tileentity = worldIn.getBlockEntity(pos);
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        BlockEntity tileentity = worldIn.getBlockEntity(pos);
         if (tileentity instanceof CardStandTile) {
             tileentity.clearRemoved();
             worldIn.setBlockEntity(pos, tileentity);
@@ -62,7 +68,7 @@ public class CardStandBlock extends Block{
     }
 
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
         return new CardStandTile();
     }
 
@@ -73,24 +79,24 @@ public class CardStandBlock extends Block{
 
     @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (world.getBlockEntity(pos) instanceof CardStandTile) {
             CardStandTile standTile = (CardStandTile) world.getBlockEntity(pos);
             ItemStack stack = player.getItemInHand(hand);
             if(stack.getItem() == BuddycardsItems.BUDDYSTEEL_KEY.get()) {
                 if (standTile.isLocked()) {
                     if (standTile.toggleLock(player.getUUID()))
-                        player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_stand.unlock"), true);
+                        player.displayClientMessage(new TranslatableComponent("block.buddycards.card_stand.unlock"), true);
                     else
-                        player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_stand.fail_unlock"), true);
+                        player.displayClientMessage(new TranslatableComponent("block.buddycards.card_stand.fail_unlock"), true);
                 }
                 else {
                     standTile.toggleLock(player.getUUID());
-                    player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_stand.lock"), true);
+                    player.displayClientMessage(new TranslatableComponent("block.buddycards.card_stand.lock"), true);
                 }
             }
             else if (standTile.isLocked())
-                player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_stand.lock"), true);
+                player.displayClientMessage(new TranslatableComponent("block.buddycards.card_stand.lock"), true);
             else if(standTile.getCard().getItem() instanceof CardItem) {
                 ItemStack oldCard = standTile.getCard();
                 if (stack.getItem() instanceof CardItem) {
@@ -114,25 +120,25 @@ public class CardStandBlock extends Block{
             }
         }
         world.updateNeighbourForOutputSignal(pos, this);
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
+    public boolean removedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         if (world.getBlockEntity(pos) instanceof CardStandTile)
-            InventoryHelper.dropContents(world, pos, NonNullList.withSize(1, ((CardStandTile) (world.getBlockEntity(pos))).getCard()));
+            Containers.dropContents(world, pos, NonNullList.withSize(1, ((CardStandTile) (world.getBlockEntity(pos))).getCard()));
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         if(NEEDED_MOD != "" && !ModList.get().isLoaded(NEEDED_MOD))
             return;
         super.fillItemCategory(group, items);
     }
 
     @Override
-    public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity)
+    public boolean canEntityDestroy(BlockState state, BlockGetter world, BlockPos pos, Entity entity)
     {
     	CardStandTile displayTile = (CardStandTile) world.getBlockEntity(pos);
     	if ( displayTile.isLocked() )
@@ -144,7 +150,7 @@ public class CardStandBlock extends Block{
     }
 
     @Override
-    public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player)
+    public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player)
     {
     	CardStandTile displayTile = (CardStandTile) world.getBlockEntity(pos);
     	if ( displayTile.isLocked() )
@@ -163,8 +169,8 @@ public class CardStandBlock extends Block{
 
     @SuppressWarnings("deprecation")
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, World world, BlockPos pos) {
-        TileEntity tileentity = world.getBlockEntity(pos);
+    public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos) {
+        BlockEntity tileentity = world.getBlockEntity(pos);
         if (tileentity instanceof CardStandTile && ((CardStandTile) tileentity).getCard().isEmpty()) {
             return 10;
         }
@@ -173,7 +179,7 @@ public class CardStandBlock extends Block{
     }
 
     @Override
-    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         BlockPos blockpos = pos.below();
         return canSupportRigidBlock(worldIn, blockpos) || canSupportCenter(worldIn, blockpos, Direction.UP);
     }

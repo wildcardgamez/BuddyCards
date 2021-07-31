@@ -3,24 +3,24 @@ package com.wildcard.buddycards.container;
 import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class VaultContainer extends Container {
+public class VaultContainer extends AbstractContainerMenu {
     IItemHandler handler;
     BuddysteelVaultTile tile;
 
-    public VaultContainer(int id, PlayerInventory playerInv) {
+    public VaultContainer(int id, Inventory playerInv) {
         this(id, playerInv, new ItemStackHandler(120), new BuddysteelVaultTile());
     }
     
-    public VaultContainer(int id, PlayerInventory playerInv, IItemHandler handlerIn, BuddysteelVaultTile tileIn) {
+    public VaultContainer(int id, Inventory playerInv, IItemHandler handlerIn, BuddysteelVaultTile tileIn) {
         super(BuddycardsMisc.VAULT_CONTAINER.get(), id);
         tile = tileIn;
         handler = handlerIn;
@@ -47,7 +47,7 @@ public class VaultContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
+    public boolean stillValid(Player playerIn) {
         return true;
     }
 
@@ -63,7 +63,7 @@ public class VaultContainer extends Container {
 
         //Only let unlocked vaults be manipulated
         @Override
-        public boolean mayPickup(PlayerEntity playerIn) {
+        public boolean mayPickup(Player playerIn) {
             return !tile.isLocked() && super.mayPickup(playerIn);
         }
     }
@@ -80,13 +80,13 @@ public class VaultContainer extends Container {
 
         //Only let unlocked vaults be manipulated
         @Override
-        public boolean mayPickup(PlayerEntity playerIn) {
+        public boolean mayPickup(Player playerIn) {
             return !tile.isLocked() && super.mayPickup(playerIn);
         }
     }
 
     @Override
-    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
         if(slot != null && slot.hasItem())

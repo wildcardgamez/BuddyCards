@@ -2,19 +2,19 @@ package com.wildcard.buddycards.items.buddysteel;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyValue;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.util.LazyLoadedValue;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 
-public enum BuddysteelArmorMaterial implements IArmorMaterial {
-    BUDDYSTEEL(8, 40, new int[]{1, 4, 5, 2}, new LazyValue<>(() -> Ingredient.of(BuddycardsItems.BUDDYSTEEL_INGOT.get())), "buddysteel"),
-    PERFECT_BUDDYSTEEL(10, 45, new int[]{2, 5, 6, 2}, new LazyValue<>(() -> Ingredient.of(BuddycardsItems.PERFECT_BUDDYSTEEL_INGOT.get())), "perfect_buddysteel"),
-    ZYLEX(12, 43, new int[]{2, 5, 6, 2}, new LazyValue<>(() -> Ingredient.of(BuddycardsItems.ZYLEX_TOKEN.get())), "zylex");
+public enum BuddysteelArmorMaterial implements ArmorMaterial {
+    BUDDYSTEEL(8, 40, new int[]{1, 4, 5, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.BUDDYSTEEL_INGOT.get())), "buddysteel"),
+    PERFECT_BUDDYSTEEL(10, 45, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.PERFECT_BUDDYSTEEL_INGOT.get())), "perfect_buddysteel"),
+    ZYLEX(12, 43, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.ZYLEX_TOKEN.get())), "zylex");
 
-    BuddysteelArmorMaterial(int enchVal, int dura, int[] red, LazyValue<Ingredient> mat, String nameIn) {
+    BuddysteelArmorMaterial(int enchVal, int dura, int[] red, LazyLoadedValue<Ingredient> mat, String nameIn) {
         ench = enchVal;
         duraMult = dura;
         material = mat;
@@ -23,19 +23,19 @@ public enum BuddysteelArmorMaterial implements IArmorMaterial {
     }
     int ench;
     int duraMult;
-    LazyValue<Ingredient> material;
+    LazyLoadedValue<Ingredient> material;
     String name;
     int[] dam_red;
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
 
     @Override
-    public int getDurabilityForSlot(EquipmentSlotType slotIn) {
+    public int getDurabilityForSlot(EquipmentSlot slotIn) {
         return HEALTH_PER_SLOT[slotIn.getIndex()] * duraMult;
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlotType slotIn) {
+    public int getDefenseForSlot(EquipmentSlot slotIn) {
         return dam_red[slotIn.getIndex()];
     }
 

@@ -5,19 +5,20 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1+', changing: true
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
-version = '1.16.5-2.5.0'
+version = '1.17.1-2.6.0'
 group = 'com.wildcard.buddycards' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'buddycards'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '16' // Need this here so eclipse task generates correctly.
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
@@ -26,7 +27,7 @@ minecraft {
     // stable_#            Stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: "official", version: "1.16.5"
+    mappings channel: "official", version: "1.17.1"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     
      accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -96,24 +97,24 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
     mavenCentral()
     maven { url 'https://maven.theillusivec4.top/' }
-    maven { url 'https://maven.blamejared.com' }
-    maven { url 'http://girafi.dk/maven/' }
-    maven { url 'https://www.cursemaven.com'}
+    //maven { url 'https://maven.blamejared.com' }
+    //maven { url 'http://girafi.dk/maven/' }
+    //maven { url 'https://www.cursemaven.com'}
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.2'
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.0.0:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.0.0")
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
+    //compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
+    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
 
-    compileOnly fg.deobf("com.teammetallurgy.aquaculture:aquaculture2_1.16.4:1.16.4-2.1.10")
+    //compileOnly fg.deobf("com.teammetallurgy.aquaculture:aquaculture2_1.16.4:1.16.4-2.1.10")
 
-    compileOnly fg.deobf("curse.maven:farmers_delight-398521:3295974")
-    implementation fg.deobf("curse.maven:jei-238222:3189632")
+    //compileOnly fg.deobf("curse.maven:farmers_delight-398521:3295974")
+    //implementation fg.deobf("curse.maven:jei-238222:3189632")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

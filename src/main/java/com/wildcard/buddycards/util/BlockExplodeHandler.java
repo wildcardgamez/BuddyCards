@@ -11,12 +11,12 @@ import com.wildcard.buddycards.blocks.tiles.CardStandTile;
 
 import com.wildcard.buddycards.registries.BuddycardsBlocks;
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.Containers;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.item.MerchantOffer;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -59,7 +59,7 @@ public class BlockExplodeHandler
 		event.getAffectedBlocks().addAll(replacedExplosion);
 		//Check if the explosion creates a luminis item, and create it if so
 		if(Math.random() * 2 < deepLuminisBlocks) {
-			InventoryHelper.dropItemStack(event.getWorld(), event.getExplosion().getPosition().x, event.getExplosion().getPosition().y, event.getExplosion().getPosition().z,
+			Containers.dropItemStack(event.getWorld(), event.getExplosion().getPosition().x, event.getExplosion().getPosition().y, event.getExplosion().getPosition().z,
 					createLuminisDrop(event.getWorld().getRandom(), deepLuminisBlocks));
 		}
 	}

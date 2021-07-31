@@ -2,45 +2,55 @@ package com.wildcard.buddycards.entities;
 
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.util.EnderlingOfferMaker;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.merchant.IMerchant;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.MerchantOffer;
-import net.minecraft.item.MerchantOffers;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.npc.Npc;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.trading.Merchant;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, INameable {
+public class EnderlingEntity extends PathfinderMob implements Npc, Merchant, Nameable {
     public static final Ingredient TEMPTATION_ITEMS = Ingredient.of(BuddycardsItems.MYSTERY_PACK.get(), BuddycardsItems.END_SET.PACK.get(), BuddycardsItems.ZYLEX.get());
-    private PlayerEntity customer;
+    private Player customer;
     private MerchantOffers offers;
     private int resets;
 
-    public EnderlingEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public EnderlingEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
         this.maxUpStep = 1.0F;
-        this.setPathfindingMalus(PathNodeType.WATER, -1.0F);
+        this.setPathfindingMalus(BlockPathTypes.WATER, -1.0F);
     }
 
-    public static AttributeModifierMap.MutableAttribute setupAttributes() {
-        return MobEntity.createLivingAttributes()
+    public static AttributeSupplier.Builder setupAttributes() {
+        return Mob.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, .5D)
                 .add(Attributes.FOLLOW_RANGE, 6.0f);
@@ -49,18 +59,18 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1f));
         this.goalSelector.addGoal(1, new TradeWithPlayerGoal(this));
         this.goalSelector.addGoal(2, new TemptGoal(this, .75f, TEMPTATION_ITEMS, false));
-        this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, .5f, 0.0f));
-        this.goalSelector.addGoal(4, new LookAtGoal(this, LivingEntity.class, 8.0f));
-        this.goalSelector.addGoal(5, new LookRandomlyGoal(this));
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, .5f, 0.0f));
+        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, LivingEntity.class, 8.0f));
+        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(6, new FollowMobGoal(this, 0.6f, 1.5f, 6.0f));
     }
 
     @Override
-    protected int getExperienceReward(PlayerEntity player) {
+    protected int getExperienceReward(Player player) {
         return 1 + this.level.random.nextInt(3);
     }
 
@@ -104,7 +114,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     }
 
     private boolean teleport(double p_70825_1_, double p_70825_3_, double p_70825_5_) {
-        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable(p_70825_1_, p_70825_3_, p_70825_5_);
+        BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos(p_70825_1_, p_70825_3_, p_70825_5_);
         while(blockpos$mutable.getY() > 0 && !this.level.getBlockState(blockpos$mutable).getMaterial().blocksMotion()) {
             blockpos$mutable.move(Direction.DOWN);
         }
@@ -138,13 +148,13 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     }
 
     @Override
-    public void setTradingPlayer(@Nullable PlayerEntity player) {
+    public void setTradingPlayer(@Nullable Player player) {
         customer = player;
     }
 
     @Nullable
     @Override
-    public PlayerEntity getTradingPlayer() {
+    public Player getTradingPlayer() {
         return customer;
     }
 
@@ -191,7 +201,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
         }
     }
 
-    public void readAdditionalSaveData(CompoundNBT compound) {
+    public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         if (compound.contains("Offers", 10)) {
             offers = new MerchantOffers(compound.getCompound("Offers"));
@@ -199,7 +209,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
         resets = compound.getInt("Resets");
     }
 
-    public void addAdditionalSaveData(CompoundNBT compound) {
+    public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         if (offers != null) {
             compound.put("Offers", offers.createTag());
@@ -213,7 +223,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     }
 
     @Override
-    public World getLevel() {
+    public Level getLevel() {
         return level;
     }
 
@@ -238,7 +248,7 @@ public class EnderlingEntity extends CreatureEntity implements INPC, IMerchant, 
     }
 
     @Override
-    protected ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
         if(offers != null && !this.level.isClientSide && (heldItem.getItem() == BuddycardsItems.ZYLEX_TOKEN.get() || (ModList.get().isLoaded("curios") && ((
                 CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_MEDAL.get(), player).isPresent() &&

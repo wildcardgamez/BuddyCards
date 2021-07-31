@@ -6,13 +6,13 @@ import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,14 +26,14 @@ import java.util.stream.StreamSupport;
 public class EnchantmentHandler {
     private Map<String, NonNullList<ItemStack>> items = new HashMap<String, NonNullList<ItemStack>>();
 
-    public static final EnchantmentType BUDDY_BINDABLE = EnchantmentType.create("BUDDY_BINDABLE", EnchantmentHandler::canBuddyBind);
-    public static final EnchantmentType BUDDY_MEDAL = EnchantmentType.create("BUDDY_MEDAL", i -> (i instanceof MedalItem));
-    public static final EnchantmentType BUDDY_BINDER = EnchantmentType.create("BUDDY_BINDER", i -> (i instanceof BinderItem));
+    public static final EnchantmentCategory BUDDY_BINDABLE = EnchantmentCategory.create("BUDDY_BINDABLE", EnchantmentHandler::canBuddyBind);
+    public static final EnchantmentCategory BUDDY_MEDAL = EnchantmentCategory.create("BUDDY_MEDAL", i -> (i instanceof MedalItem));
+    public static final EnchantmentCategory BUDDY_BINDER = EnchantmentCategory.create("BUDDY_BINDER", i -> (i instanceof BinderItem));
 
     @SubscribeEvent
     public void drop(LivingDropsEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+        if (event.getEntityLiving() instanceof Player) {
+            Player player = (Player) event.getEntityLiving();
             boolean empty = true;
             NonNullList<ItemStack> itemsToSave = NonNullList.create();
             for (ItemEntity i: event.getDrops()) {
@@ -62,7 +62,7 @@ public class EnchantmentHandler {
 
     @SubscribeEvent
     public void respawn(PlayerEvent.Clone event) {
-        PlayerEntity player = event.getPlayer();
+        Player player = event.getPlayer();
         if (event.isWasDeath() && items.containsKey(player.getUUID().toString())) {
             for (ItemStack i : items.get(player.getUUID().toString())) {
                 player.addItem(i);

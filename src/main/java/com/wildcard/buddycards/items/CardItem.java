@@ -4,25 +4,30 @@ import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.ConfigManager;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
+
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 
 public class CardItem extends Item {
     /**
@@ -60,25 +65,25 @@ public class CardItem extends Item {
     private final String MOD_ID;
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         //Add the card description
-        tooltip.add(new TranslationTextComponent("item.buddycards.card." + SET_NUMBER + "." + CARD_NUMBER + ".tooltip"));
-        TranslationTextComponent cn = new TranslationTextComponent("item.buddycards.number_separator");
+        tooltip.add(new TranslatableComponent("item.buddycards.card." + SET_NUMBER + "." + CARD_NUMBER + ".tooltip"));
+        TranslatableComponent cn = new TranslatableComponent("item.buddycards.number_separator");
         cn.append("" + CARD_NUMBER);
         //Add the star to the prefix when it's a shiny variant
         if (isFoil(stack))
-            cn.append(new TranslationTextComponent("item.buddycards.shiny_symbol"));
+            cn.append(new TranslatableComponent("item.buddycards.shiny_symbol"));
         //Add the card info (SetName - Card# Shiny symbol)
-        tooltip.add(new TranslationTextComponent("item.buddycards.set." + SET_NUMBER).append(cn));
+        tooltip.add(new TranslatableComponent("item.buddycards.set." + SET_NUMBER).append(cn));
         //Add the grading if the card is graded
         if (stack.getTag() != null && stack.getTag().getInt("grade") != 0)
-            tooltip.add(new TranslationTextComponent("item.buddycards.grade_info").append(
-                    new TranslationTextComponent("item.buddycards.grade_" + stack.getTag().getInt("grade"))));
+            tooltip.add(new TranslatableComponent("item.buddycards.grade_info").append(
+                    new TranslatableComponent("item.buddycards.grade_" + stack.getTag().getInt("grade"))));
         if (ConfigManager.challengeMode.get())
-            tooltip.add(new TranslationTextComponent("item.buddycards.points_info").append(
+            tooltip.add(new TranslatableComponent("item.buddycards.points_info").append(
                     "" + ((CardItem)stack.getItem()).getPointValue(stack)));
         if (stack.getItem().getRegistryName().toString().endsWith("s"))
-            tooltip.add(new TranslationTextComponent("item.buddycards.foil_warning"));
+            tooltip.add(new TranslatableComponent("item.buddycards.foil_warning"));
     }
 
     @Override
@@ -97,7 +102,7 @@ public class CardItem extends Item {
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         //Only show cards in the creative menu when the respective mod is loaded
         if(!ModList.get().isLoaded(MOD_ID))
             return;
@@ -105,10 +110,10 @@ public class CardItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         //TEMPORARY! FIX OLD FOIL CARDS...
-        if(worldIn instanceof ServerWorld && playerIn.getItemInHand(handIn).getItem().getRegistryName().toString().endsWith("s")) {
-            CompoundNBT nbt = new CompoundNBT();
+        if(worldIn instanceof ServerLevel && playerIn.getItemInHand(handIn).getItem().getRegistryName().toString().endsWith("s")) {
+            CompoundTag nbt = new CompoundTag();
             if (playerIn.getItemInHand(handIn).hasTag())
                 nbt = playerIn.getItemInHand(handIn).getTag();
             nbt.putBoolean("foil", true);
@@ -120,19 +125,19 @@ public class CardItem extends Item {
             ItemHandlerHelper.giveItemToPlayer(playerIn, card);
         }
         //If its in the main hand try to grade it (Checks off hand)
-        if (handIn == Hand.MAIN_HAND)
+        if (handIn == InteractionHand.MAIN_HAND)
             return tryGrade(BuddycardsItems.GRADING_SLEEVE.get(), worldIn, playerIn, handIn);
         return super.use(worldIn, playerIn, handIn);
     }
 
-    public ActionResult<ItemStack> tryGrade(Item gradingSleeve, World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if (playerIn.getItemInHand(Hand.OFF_HAND).getItem().equals(gradingSleeve)) {
-            CompoundNBT nbt = playerIn.getItemInHand(handIn).getTag();
+    public InteractionResultHolder<ItemStack> tryGrade(Item gradingSleeve, Level worldIn, Player playerIn, InteractionHand handIn) {
+        if (playerIn.getItemInHand(InteractionHand.OFF_HAND).getItem().equals(gradingSleeve)) {
+            CompoundTag nbt = playerIn.getItemInHand(handIn).getTag();
             if (nbt == null)
-                nbt = new CompoundNBT();
+                nbt = new CompoundTag();
             if (nbt.getInt("grade") == 0) {
                 //Take the grading sleeve
-                playerIn.getItemInHand(Hand.OFF_HAND).shrink(1);
+                playerIn.getItemInHand(InteractionHand.OFF_HAND).shrink(1);
                 //Get a grade using maths for rarity
                 int i = (int) (Math.random() * 500) + 1;
                 int grade;

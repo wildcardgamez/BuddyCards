@@ -1,10 +1,10 @@
 package com.wildcard.buddycards.effects;
 
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 
-public class GradingLuckEffect extends Effect {
+public class GradingLuckEffect extends MobEffect {
     public GradingLuckEffect() {
-        super(EffectType.BENEFICIAL, 16769464);
+        super(MobEffectCategory.BENEFICIAL, 16769464);
     }
 }

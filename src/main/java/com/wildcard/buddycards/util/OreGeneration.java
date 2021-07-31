@@ -2,30 +2,32 @@ package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsBlocks;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+
+import ConfiguredFeature;
 
 public class OreGeneration {
     public static ConfiguredFeature<?,?> LUMINIS_ORE;
 
     public static void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            LUMINIS_ORE = Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BuddycardsBlocks.LUMINIS_ORE.get()
+            LUMINIS_ORE = Feature.ORE.configured(new OreConfiguration(OreConfiguration.Predicates.NATURAL_STONE, BuddycardsBlocks.LUMINIS_ORE.get()
                     .defaultBlockState(), ConfigManager.luminisVeinSize.get())).range(ConfigManager.luminisMaxY.get()).squared().count(ConfigManager.luminisPerChunk.get());
-            Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(BuddyCards.MOD_ID, "luminis_ore"), LUMINIS_ORE);
+            Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(BuddyCards.MOD_ID, "luminis_ore"), LUMINIS_ORE);
         });
     }
 
     @SubscribeEvent
     public void genOres(final BiomeLoadingEvent event) {
-        event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).add(() -> LUMINIS_ORE);
+        event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> LUMINIS_ORE);
     }
 }

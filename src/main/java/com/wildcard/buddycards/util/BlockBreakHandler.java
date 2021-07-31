@@ -5,9 +5,9 @@ import com.wildcard.buddycards.blocks.*;
 import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultTile;
 import com.wildcard.buddycards.blocks.tiles.CardDisplayTile;
 import com.wildcard.buddycards.blocks.tiles.CardStandTile;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -18,7 +18,7 @@ public class BlockBreakHandler
     {
     	BlockState targetBlock = event.getWorld().getBlockState(event.getPos());
     	// I think it is possible for the player to be null if something like the EnderDragon is doing this?
-    	PlayerEntity player = event.getPlayer();
+    	Player player = event.getPlayer();
     	if ( player == null ) {
 			return;
 		}
@@ -27,7 +27,7 @@ public class BlockBreakHandler
 			CardDisplayTile tile = (CardDisplayTile) event.getWorld().getBlockEntity(event.getPos());
 
 			if (tile.isLocked() && !player.isCreative()) {
-				player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
+				player.displayClientMessage(new TranslatableComponent("block.buddycards.card_display.lock"), true);
 				event.setCanceled(true);
 			}
 		}
@@ -35,7 +35,7 @@ public class BlockBreakHandler
     	if (targetBlock.getBlock() instanceof CardStandBlock) {
 			CardStandTile tile = (CardStandTile) event.getWorld().getBlockEntity(event.getPos());
 			if (tile.isLocked() && !player.isCreative()) {
-				player.displayClientMessage(new TranslationTextComponent("block.buddycards.card_display.lock"), true);
+				player.displayClientMessage(new TranslatableComponent("block.buddycards.card_display.lock"), true);
 				event.setCanceled(true);
 			}
 		}
@@ -43,7 +43,7 @@ public class BlockBreakHandler
 		if (targetBlock.getBlock() instanceof BuddysteelVaultBlock) {
 			BuddysteelVaultTile tile = (BuddysteelVaultTile) event.getWorld().getBlockEntity(event.getPos());
 			if (tile.isLocked() && !player.isCreative()) {
-				player.displayClientMessage(new TranslationTextComponent("block.buddycards.vault.lock"), true);
+				player.displayClientMessage(new TranslatableComponent("block.buddycards.vault.lock"), true);
 				event.setCanceled(true);
 			}
 		}

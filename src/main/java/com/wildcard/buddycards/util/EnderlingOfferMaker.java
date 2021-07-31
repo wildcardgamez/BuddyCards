@@ -3,22 +3,24 @@ package com.wildcard.buddycards.util;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.items.GummyCardItem;
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.MerchantOffer;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.item.Rarity;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import MerchantOffer;
 
 public class EnderlingOfferMaker {
     public static MerchantOffer createCardBuyOffer() {
         ItemStack card = new ItemStack(getRandomLoadedCard());
         ItemStack zylex = new ItemStack(BuddycardsItems.ZYLEX.get(), getZylexValueOfCard(card));
         if(Math.random() < .3) {
-            CompoundNBT nbt = new CompoundNBT();
+            CompoundTag nbt = new CompoundTag();
             nbt.putBoolean("foil", true);
             card.setTag(nbt);
         }
@@ -33,7 +35,7 @@ public class EnderlingOfferMaker {
 
     public static MerchantOffer createGradedCardBuyOffer() {
         ItemStack card = new ItemStack(getRandomLoadedCard());
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         int i = (int) (Math.random() * 200) + 1;
         int grade;
         if (i < 20)
@@ -58,7 +60,7 @@ public class EnderlingOfferMaker {
 
     public static MerchantOffer createGradedCardSellOffer() {
         ItemStack card = new ItemStack(getRandomLoadedCard());
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         int i = (int) (Math.random() * 200) + 1;
         int grade;
         if (i < 50)
@@ -86,7 +88,7 @@ public class EnderlingOfferMaker {
     public static MerchantOffer createCardTradeOffer() {
         ItemStack card = new ItemStack(getRandomLoadedCard());
         ItemStack card2 = new ItemStack(getRandomLoadedCard());
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         while(Math.abs(getZylexValueOfCard(card) - getZylexValueOfCard(card2)) > 2) {
             card = new ItemStack(getRandomLoadedCard());
             card2 = new ItemStack(getRandomLoadedCard());

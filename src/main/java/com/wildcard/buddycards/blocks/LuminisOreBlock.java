@@ -4,20 +4,20 @@ import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.items.GummyCardItem;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.util.ConfigManager;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.OreBlock;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -25,16 +25,16 @@ import java.util.Random;
 
 public class LuminisOreBlock extends OreBlock {
     public LuminisOreBlock() {
-        super(AbstractBlock.Properties.copy(Blocks.GOLD_ORE).lightLevel((state) -> 1));
+        super(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE).lightLevel((state) -> 1));
     }
 
     @Override
     protected int xpOnDrop(Random random) {
-        return MathHelper.nextInt(random, 1, 5);
+        return Mth.nextInt(random, 1, 5);
     }
 
     @Override
-    public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
+    public boolean removedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, player.getMainHandItem()) == 0) {
             double i = player.getMainHandItem().equals(BuddycardsItems.LUMINIS_PICKAXE.get()) ? 1 : 1.4;
             if (ModList.get().isLoaded("curios") &&
