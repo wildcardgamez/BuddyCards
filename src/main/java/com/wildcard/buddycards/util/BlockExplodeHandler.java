@@ -1,24 +1,22 @@
 package com.wildcard.buddycards.util;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
 import com.wildcard.buddycards.blocks.CardDisplayBlock;
-import com.wildcard.buddycards.blocks.tiles.CardDisplayBlockEntity;
 import com.wildcard.buddycards.blocks.CardStandBlock;
+import com.wildcard.buddycards.blocks.tiles.CardDisplayBlockEntity;
 import com.wildcard.buddycards.blocks.tiles.CardStandBlockEntity;
-
 import com.wildcard.buddycards.registries.BuddycardsBlocks;
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.item.MerchantOffer;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockExplodeHandler 
 {

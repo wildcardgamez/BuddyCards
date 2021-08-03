@@ -1,10 +1,8 @@
 package com.wildcard.buddycards.enchantment;
 
 import com.wildcard.buddycards.util.EnchantmentHandler;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.entity.EquipmentSlot;
-
-import net.minecraft.world.item.enchantment.Enchantment.Rarity;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public class EnchantmentBuddyBinding extends Enchantment {
     public EnchantmentBuddyBinding() {

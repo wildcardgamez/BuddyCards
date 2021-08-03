@@ -5,9 +5,15 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wildcard.buddycards.entities.EnderlingEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 
-public class EnderlingModel extends EntityModel<EnderlingEntity> {
+public class EnderlingModel<T extends EnderlingEntity> extends EntityModel<EnderlingEntity> {
     private final ModelPart torso;
     private final ModelPart head;
     private final ModelPart ll;
@@ -15,35 +21,43 @@ public class EnderlingModel extends EntityModel<EnderlingEntity> {
     private final ModelPart la;
     private final ModelPart ra;
 
-    public EnderlingModel() {
-        texWidth = 64;
-        texHeight = 32;
+    public EnderlingModel(ModelPart part) {
+        torso = part.getChild("torso");
+        head = part.getChild("head");
+        ll = part.getChild("ll");
+        rl = part.getChild("rl");
+        la = part.getChild("la");
+        ra = part.getChild("ra");
+    }
 
-        torso = new ModelPart(this);
-        torso.setPos(0.0F, 8.0F, 0.0F);
-        torso.texOffs(32, 4).addBox(-3.0F, -4.0F, -2.0F, 6.0F, 8.0F, 4.0F, 0.0F, false);
-        torso.texOffs(32, 16).addBox(-4.0F, -3.0F, 2.0F, 8.0F, 6.0F, 2.0F, 0.0F, false);
-        torso.texOffs(26, 16).addBox(-1.0F, -2.0F, 3.5F, 2.0F, 3.0F, 1.0F, 0.0F, false);
-
-        head = new ModelPart(this);
-        head.setPos(0.0F, 4.0F, 0.0F);
-        head.texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
-
-        ll = new ModelPart(this);
-        ll.setPos(2.0F, 12.0F, 0.0F);
-        ll.texOffs(0, 18).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F, 0.0F, true);
-
-        rl = new ModelPart(this);
-        rl.setPos(-2.0F, 12.0F, 0.0F);
-        rl.texOffs(0, 18).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 12.0F, 2.0F, 0.0F, false);
-
-        la = new ModelPart(this);
-        la.setPos(3.0F, 5.0F, 0.0F);
-        la.texOffs(8, 18).addBox(0.0F, -1.0F, -1.0F, 2.0F, 12.0F, 2.0F, 0.0F, true);
-
-        ra = new ModelPart(this);
-        ra.setPos(-3.0F, 5.0F, 0.0F);
-        ra.texOffs(8, 18).addBox(-2.0F, -1.0F, -1.0F, 2.0F, 12.0F, 2.0F, 0.0F, false);
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        partdefinition.addOrReplaceChild("torso", CubeListBuilder.create()
+                .texOffs(32, 4)
+                .addBox(-3, -4, -2, 6, 8, 4)
+                .texOffs(32, 16)
+                .addBox(-4, -3, 2, 8, 6, 2)
+                .texOffs(26, 16)
+                .addBox(-1, -2, 3.5f, 2, 3, 1), PartPose.offset(0, 8, 0));
+        partdefinition.addOrReplaceChild("head", CubeListBuilder.create()
+                .texOffs(0, 0)
+                .addBox(-4, -8, -4, 8, 8, 8), PartPose.offset(0, 4, 0));
+        partdefinition.addOrReplaceChild("ll", CubeListBuilder.create()
+                .texOffs(0, 18)
+                .mirror()
+                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(2, 12, 0));
+        partdefinition.addOrReplaceChild("rl", CubeListBuilder.create()
+                .texOffs(0, 18)
+                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(-2, 12, 0));
+        partdefinition.addOrReplaceChild("la", CubeListBuilder.create()
+                .texOffs(8, 18)
+                .mirror()
+                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(3, 5, 0));
+        partdefinition.addOrReplaceChild("ra", CubeListBuilder.create()
+                .texOffs(8, 18)
+                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(-3, 5, 0));
+        return  LayerDefinition.create(meshdefinition, 64, 32);
     }
 
     public void setupAnim(EnderlingEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {

@@ -5,21 +5,21 @@ import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.inventory.BinderInventory;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
 public class BinderItem extends Item {
     public BinderItem(int setNumber, String modId) {
@@ -66,7 +66,7 @@ public class BinderItem extends Item {
                 }
                 int finalSlots = slots;
                 NetworkHooks.openGui((ServerPlayer) playerIn, new SimpleMenuProvider(
-                        (id, playerInventory, entity) -> new BinderContainer(id, playerIn.inventory, new BinderInventory(finalSlots, binder))
+                        (id, playerInventory, entity) -> new BinderContainer(id, playerIn.getInventory(), new BinderInventory(finalSlots, binder))
                         , playerIn.getItemInHand(handIn).getHoverName()));
             } else {
                 playerIn.displayClientMessage(new TranslatableComponent("item.buddycards.binder.lock"), true);

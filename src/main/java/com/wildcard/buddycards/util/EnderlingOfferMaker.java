@@ -3,17 +3,12 @@ package com.wildcard.buddycards.util;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.items.GummyCardItem;
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.trading.MerchantOffer;
 
-import java.util.ArrayList;
 import java.util.Random;
-
-import MerchantOffer;
 
 public class EnderlingOfferMaker {
     public static MerchantOffer createCardBuyOffer() {

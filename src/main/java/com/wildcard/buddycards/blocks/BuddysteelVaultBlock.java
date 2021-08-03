@@ -105,7 +105,7 @@ public class BuddysteelVaultBlock extends BaseEntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new BuddysteelVaultBlockEntity();
+        return new BuddysteelVaultBlockEntity(pos, state);
     }
 
     @Override

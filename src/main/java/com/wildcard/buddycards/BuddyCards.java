@@ -1,35 +1,21 @@
 package com.wildcard.buddycards;
 
-import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
-import com.wildcard.buddycards.client.renderer.CardStandTileRenderer;
-import com.wildcard.buddycards.client.renderer.EnderlingRenderer;
 import com.wildcard.buddycards.entities.EnderlingEntity;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.integration.aquaculture.AquacultureIntegration;
 import com.wildcard.buddycards.integration.fd.FarmersDelightIntegration;
-import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsBlocks;
 import com.wildcard.buddycards.registries.BuddycardsEntities;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
-import com.wildcard.buddycards.screen.BinderScreen;
-import com.wildcard.buddycards.screen.VaultScreen;
 import com.wildcard.buddycards.util.*;
-import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -83,9 +69,6 @@ public class BuddyCards
         if (ModList.get().isLoaded("aquaculture"))
             MinecraftForge.EVENT_BUS.register(new AquacultureIntegration());
         event.enqueueWork(BuddycardsMisc::brewingSetup);
-        DeferredWorkQueue.runLater(() -> {
-            DefaultAttributes.put(BuddycardsEntities.ENDERLING.get(), EnderlingEntity.setupAttributes().build());
-        });
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

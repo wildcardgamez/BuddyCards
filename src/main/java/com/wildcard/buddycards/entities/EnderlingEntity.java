@@ -31,6 +31,7 @@ import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -120,7 +121,7 @@ public class EnderlingEntity extends PathfinderMob implements Npc, Merchant, Nam
         }
         BlockState blockstate = this.level.getBlockState(blockpos$mutable);
         if (blockstate.getMaterial().blocksMotion() && !blockstate.getFluidState().is(FluidTags.WATER)) {
-            net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(this, p_70825_1_, p_70825_3_, p_70825_5_, 0);
+            EntityTeleportEvent event = new EntityTeleportEvent(this, p_70825_1_, p_70825_3_, p_70825_5_);
             if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return false;
             boolean success = this.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
             if (success && !this.isSilent()) {
@@ -271,13 +272,13 @@ public class EnderlingEntity extends PathfinderMob implements Npc, Merchant, Nam
         }
         if(heldItem.getItem() == Items.NAME_TAG) {
             heldItem.interactLivingEntity(player, this, hand);
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
         else if(this.isAlive() && customer == null && !this.level.isClientSide) {
             getOffers();
             this.setTradingPlayer(player);
             this.openTradingScreen(player, this.getDisplayName(), 1);
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
         return super.mobInteract(player, hand);
     }
@@ -300,7 +301,7 @@ public class EnderlingEntity extends PathfinderMob implements Npc, Merchant, Nam
             } else if (this.enderling.hurtMarked) {
                 return false;
             } else {
-                PlayerEntity playerentity = this.enderling.getTradingPlayer();
+                Player playerentity = this.enderling.getTradingPlayer();
                 if (playerentity == null) {
                     return false;
                 } else if (this.enderling.distanceToSqr(playerentity) > 16.0D) {

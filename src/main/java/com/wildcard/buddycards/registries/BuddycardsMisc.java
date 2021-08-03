@@ -57,9 +57,9 @@ public class BuddycardsMisc {
     public static final RegistryObject<Potion> GRADING_LUCK_LONG = POTIONS.register("grading_luck_long", () -> new Potion(new MobEffectInstance(GRADING_LUCK.get(), 9600)));
 
     public static void brewingSetup() {
-        PotionBrewing.addMix(Potions.AWKWARD, BuddycardsItems.ZYLEX.get(), GRADING_LUCK_NORMAL.get());
-        PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.GLOWSTONE_DUST, GRADING_LUCK_STRONG.get());
-        PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.REDSTONE, GRADING_LUCK_LONG.get());
+        //PotionBrewing.addMix(Potions.AWKWARD, BuddycardsItems.ZYLEX.get(), GRADING_LUCK_NORMAL.get());
+        //PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.GLOWSTONE_DUST, GRADING_LUCK_STRONG.get());
+        //PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.REDSTONE, GRADING_LUCK_LONG.get());
     }
 
     //GLMs

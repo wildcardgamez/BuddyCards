@@ -1,24 +1,27 @@
 package com.wildcard.buddycards.util;
 
 import com.wildcard.buddycards.integration.aquaculture.BuddysteelFishingRodItem;
-import com.wildcard.buddycards.integration.fd.BuddysteelFoodKnifeItem;
-import com.wildcard.buddycards.items.*;
+import com.wildcard.buddycards.items.BinderItem;
+import com.wildcard.buddycards.items.MedalItem;
 import com.wildcard.buddycards.items.buddysteel.*;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -76,8 +79,8 @@ public class EnchantmentHandler {
             return true;
         if (ModList.get().isLoaded("aquaculture") && item instanceof BuddysteelFishingRodItem)
             return true;
-        if (ModList.get().isLoaded("farmersdelight") && item instanceof BuddysteelFoodKnifeItem)
-            return true;
+        //if (ModList.get().isLoaded("farmersdelight") && item instanceof BuddysteelFoodKnifeItem)
+        //    return true;
         return item.equals(BuddycardsItems.ZYLEX_RING.get()) || item.equals(BuddycardsItems.LUMINIS_RING.get());
     }
 }

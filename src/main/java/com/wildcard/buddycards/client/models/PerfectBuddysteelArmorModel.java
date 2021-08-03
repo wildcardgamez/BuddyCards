@@ -6,7 +6,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
-
+/*
 public class PerfectBuddysteelArmorModel extends HumanoidModel<LivingEntity> {
     private final EquipmentSlot slot;
 
@@ -131,4 +131,4 @@ public class PerfectBuddysteelArmorModel extends HumanoidModel<LivingEntity> {
         modelRenderer.yRot = y;
         modelRenderer.zRot = z;
     }
-}
+}*/

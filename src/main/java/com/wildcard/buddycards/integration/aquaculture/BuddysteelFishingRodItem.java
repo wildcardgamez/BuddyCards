@@ -2,18 +2,19 @@ package com.wildcard.buddycards.integration.aquaculture;
 
 import com.teammetallurgy.aquaculture.item.AquaFishingRodItem;
 import com.wildcard.buddycards.BuddyCards;
-import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import com.wildcard.buddycards.items.buddysteel.BuddysteelItemTier;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import com.wildcard.buddycards.util.BuddysteelGearHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class BuddysteelFishingRodItem extends AquaFishingRodItem {
@@ -22,9 +23,9 @@ public class BuddysteelFishingRodItem extends AquaFishingRodItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        BuddysteelGearHelper.addInformation(stack, tooltip);
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+    public void appendHoverText(@Nonnull ItemStack stack, @Nullable net.minecraft.world.level.Level level, @Nonnull List<Component> tooltips, @Nonnull TooltipFlag tooltipFlag) {
+        BuddysteelGearHelper.addInformation(stack, tooltips);
+        super.appendHoverText(stack, level, tooltips, tooltipFlag);
     }
 
     @Override
@@ -32,9 +33,10 @@ public class BuddysteelFishingRodItem extends AquaFishingRodItem {
         return Rarity.UNCOMMON;
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        BuddysteelGearHelper.setTag(playerIn, handIn);
-        return super.use(worldIn, playerIn, handIn);
+    public InteractionResultHolder<ItemStack> use(@Nonnull net.minecraft.world.level.Level level, Player player, @Nonnull InteractionHand hand) {
+        BuddysteelGearHelper.setTag(player, hand);
+        return super.use(level, player, hand);
     }
 }

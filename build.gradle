@@ -18,7 +18,7 @@ version = '1.17.1-2.6.0'
 group = 'com.wildcard.buddycards' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'buddycards'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '16' // Need this here so eclipse task generates correctly.
+java.toolchain.languageVersion = JavaLanguageVersion.of(16) // Need this here so eclipse task generates correctly.
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
@@ -96,17 +96,17 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     mavenCentral()
-    maven { url 'https://maven.theillusivec4.top/' }
+    maven { url = "https://maven.theillusivec4.top/" }
     //maven { url 'https://maven.blamejared.com' }
-    maven { url 'http://girafi.dk/maven/' }
+    maven { url 'https://girafi.dk/maven/' }
     //maven { url 'https://www.cursemaven.com'}
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.2'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.18'
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.0.0:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.0.0")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.0.0:api")
 
     //compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
     //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")

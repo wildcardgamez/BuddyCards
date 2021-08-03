@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.Constants;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
+/*
 public class EnderBinderSaveData extends SavedData {
     private final static HashMap<UUID, BinderInventory> INVENTORIES = new HashMap<UUID,BinderInventory>();
 
@@ -24,7 +24,7 @@ public class EnderBinderSaveData extends SavedData {
     }
 
     @Override
-    public void load(CompoundTag nbt) {
+    public void data(CompoundTag nbt) {
         ListTag list = nbt.getList("ebdata", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < list.size(); i++) {
             CompoundTag compound = list.getCompound(i);
@@ -54,3 +54,4 @@ public class EnderBinderSaveData extends SavedData {
         return(INVENTORIES.get(uuid));
     }
 }
+*/
