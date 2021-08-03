@@ -3,7 +3,7 @@ package com.wildcard.buddycards.client.renderer;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.client.models.EnderlingModel;
 import com.wildcard.buddycards.entities.EnderlingEntity;
-import com.wildcard.buddycards.registries.BuddycardsEntities;
+import com.wildcard.buddycards.util.ClientStuff;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EnderlingRenderer  extends MobRenderer<EnderlingEntity, EnderlingModel<EnderlingEntity>> {
     public EnderlingRenderer(EntityRendererProvider.Context context) {
-        super(context, new EnderlingModel(context.bakeLayer(BuddycardsEntities.ENDERLING_LAYER)), .6f);
+        super(context, new EnderlingModel(context.bakeLayer(ClientStuff.ENDERLING_LAYER)), .6f);
         this.addLayer(new EnderlingEyesLayer(this));
     }
 

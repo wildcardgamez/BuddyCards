@@ -4,15 +4,11 @@ import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultBlockEntity;
 import com.wildcard.buddycards.blocks.tiles.CardDisplayBlockEntity;
 import com.wildcard.buddycards.blocks.tiles.CardStandBlockEntity;
-import com.wildcard.buddycards.client.models.EnderlingModel;
-import com.wildcard.buddycards.client.renderer.EnderlingRenderer;
 import com.wildcard.buddycards.entities.EnderlingEntity;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -58,17 +54,5 @@ public class BuddycardsEntities {
     @SubscribeEvent
     public static void setupAttributes(EntityAttributeCreationEvent event) {
         event.put(ENDERLING.get(), EnderlingEntity.setupAttributes().build());
-    }
-
-    public static ModelLayerLocation ENDERLING_LAYER = new ModelLayerLocation(new ResourceLocation(BuddyCards.MOD_ID, "enderling"), "enderling");
-
-    @SubscribeEvent
-    public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ENDERLING.get(), EnderlingRenderer::new);
-    }
-
-    @SubscribeEvent
-    public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ENDERLING_LAYER, EnderlingModel::createBodyLayer);
     }
 }

@@ -1,5 +1,7 @@
 package com.wildcard.buddycards.util;
 
+import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.client.models.EnderlingModel;
 import com.wildcard.buddycards.client.renderer.CardDisplayBlockRenderer;
 import com.wildcard.buddycards.client.renderer.CardStandBlockRenderer;
 import com.wildcard.buddycards.client.renderer.EnderlingRenderer;
@@ -11,16 +13,21 @@ import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.screen.BinderScreen;
 import com.wildcard.buddycards.screen.VaultScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fmllegacy.RegistryObject;
 
+@Mod.EventBusSubscriber(modid = BuddyCards.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientStuff {
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> MenuScreens.register(BuddycardsMisc.BINDER_CONTAINER.get(), BinderScreen::new));
@@ -45,5 +52,17 @@ public class ClientStuff {
         EntityRenderers.register(BuddycardsEntities.ENDERLING.get(), EnderlingRenderer::new);
         BlockEntityRenderers.register(BuddycardsEntities.CARD_DISPLAY_TILE.get(), CardDisplayBlockRenderer::new);
         BlockEntityRenderers.register(BuddycardsEntities.CARD_STAND_TILE.get(), CardStandBlockRenderer::new);
+    }
+
+    public static ModelLayerLocation ENDERLING_LAYER = new ModelLayerLocation(new ResourceLocation(BuddyCards.MOD_ID, "enderling"), "enderling");
+
+    @SubscribeEvent
+    public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(BuddycardsEntities.ENDERLING.get(), EnderlingRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ENDERLING_LAYER, EnderlingModel::createBodyLayer);
     }
 }
