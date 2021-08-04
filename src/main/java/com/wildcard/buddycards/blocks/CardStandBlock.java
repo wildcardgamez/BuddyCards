@@ -1,9 +1,12 @@
 package com.wildcard.buddycards.blocks;
 
+import com.wildcard.buddycards.blocks.tiles.CardDisplayBlockEntity;
 import com.wildcard.buddycards.blocks.tiles.CardStandBlockEntity;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsItems;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.Entity;
@@ -32,7 +35,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 
-public class CardStandBlock extends Block{
+public class CardStandBlock extends BaseEntityBlock {
     protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 1.0D, 11.0D);
 
     public CardStandBlock() {
@@ -47,13 +50,20 @@ public class CardStandBlock extends Block{
 
     final String NEEDED_MOD;
 
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new CardStandBlockEntity(blockPos, blockState);
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState p_49232_) {
+        return RenderShape.MODEL;
+    }
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return SHAPE;
-    }
-
-    public VoxelShape getOcclusionShape(BlockState state, BlockGetter worldIn, BlockPos pos) {
-        return Shapes.empty();
     }
 
     @Override

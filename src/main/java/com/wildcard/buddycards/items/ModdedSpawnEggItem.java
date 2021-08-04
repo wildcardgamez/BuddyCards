@@ -60,6 +60,6 @@ public class ModdedSpawnEggItem extends SpawnEggItem {
 
     @SubscribeEvent
     public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {
-        initSpawnEggItems();
+        //initSpawnEggItems();
     }
 }

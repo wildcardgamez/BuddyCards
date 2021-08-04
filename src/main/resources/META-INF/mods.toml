@@ -30,7 +30,16 @@ displayName="Buddycards" #mandatory
 #logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
 authors="Wildcard_Gamer" #optional
-# The description text for the mod (multi line!) (#mandatory)
+credits="
+Minor Contributors:
+Catastrophe573
+
+Translators:
+French - Eitsuko
+Hebrew - SeniorDee
+Korean - 우리집 컴터
+Chinese - Wuguisp
+"
 description='''
 A fun mod that brings out the collector in all of us.
 Explore the world and find packs of collectable Buddycards from different sets.
@@ -42,7 +51,7 @@ Explore the world and find packs of collectable Buddycards from different sets.
     # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
     # The version range of the dependency
-    versionRange="[37.0.2,)" #mandatory
+    versionRange="[37.0.22,)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER

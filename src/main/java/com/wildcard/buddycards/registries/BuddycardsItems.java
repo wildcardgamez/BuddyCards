@@ -99,49 +99,38 @@ public class BuddycardsItems {
             for(int i = 1; i <= 12; i++) {
                 int finalI = i;
                 CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.COMMON, MOD_ID)));
-                CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i + "s", () -> new CardItem(SET_NUMBER, finalI, Rarity.COMMON, MOD_ID)));
             }
             for (int i = 13; i <= 21; i++) {
                 int finalI = i;
                 CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.UNCOMMON, MOD_ID)));
-                CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i + "s", () -> new CardItem(SET_NUMBER, finalI, Rarity.UNCOMMON, MOD_ID)));
             }
             for (int i = 22; i <= 25; i++) {
                 int finalI = i;
                 CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.RARE, MOD_ID)));
-                CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i + "s", () -> new CardItem(SET_NUMBER, finalI, Rarity.RARE, MOD_ID)));
             }
             CARDS.add(ITEMS.register("card." + SET_NUMBER + ".26", () -> new CardItem(SET_NUMBER, 26, Rarity.EPIC, MOD_ID)));
-            CARDS.add(ITEMS.register("card." + SET_NUMBER + ".26s", () -> new CardItem(SET_NUMBER, 26, Rarity.EPIC, MOD_ID)));
             CARDS.add(ITEMS.register("card." + SET_NUMBER + ".27", () -> new CardItem(SET_NUMBER, 27, Rarity.EPIC, MOD_ID)));
-            CARDS.add(ITEMS.register("card." + SET_NUMBER + ".27s", () -> new CardItem(SET_NUMBER, 27, Rarity.EPIC, MOD_ID)));
         }
 
         public void addCards18() {
             for(int i = 1; i <= 7; i++) {
                 int finalI = i;
                 CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.COMMON, MOD_ID)));
-                CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i + "s", () -> new CardItem(SET_NUMBER, finalI, Rarity.COMMON, MOD_ID)));
             }
             for (int i = 8; i <= 13; i++) {
                 int finalI = i;
                 CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.UNCOMMON, MOD_ID)));
-                CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i + "s", () -> new CardItem(SET_NUMBER, finalI, Rarity.UNCOMMON, MOD_ID)));
             }
             for (int i = 14; i <= 16; i++) {
                 int finalI = i;
                 CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.RARE, MOD_ID)));
-                CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + i + "s", () -> new CardItem(SET_NUMBER, finalI, Rarity.RARE, MOD_ID)));
             }
             CARDS.add(ITEMS.register("card." + SET_NUMBER + ".17", () -> new CardItem(SET_NUMBER, 17, Rarity.EPIC, MOD_ID)));
-            CARDS.add(ITEMS.register("card." + SET_NUMBER + ".17s", () -> new CardItem(SET_NUMBER, 17, Rarity.EPIC, MOD_ID)));
             CARDS.add(ITEMS.register("card." + SET_NUMBER + ".18", () -> new CardItem(SET_NUMBER, 18, Rarity.EPIC, MOD_ID)));
-            CARDS.add(ITEMS.register("card." + SET_NUMBER + ".18s", () -> new CardItem(SET_NUMBER, 18, Rarity.EPIC, MOD_ID)));
         }
 
         public void addCard(int number, Rarity rarity) {
             CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + number, () -> new CardItem(SET_NUMBER, number, rarity, MOD_ID)));
-            CARDS.add(ITEMS.register("card." + SET_NUMBER + "." + number + "s", () -> new CardItem(SET_NUMBER, number, rarity, MOD_ID)));
         }
 
         public void addGummyCards() {
@@ -273,6 +262,5 @@ public class BuddycardsItems {
     public static final RegistryObject<BlockItem> ZELKOVA_CARD_DISPLAY_ITEM = ITEMS.register("zelkova_card_display", () -> new BlockItem(BuddycardsBlocks.ZELKOVA_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
 
     //Eggs
-    public static final RegistryObject<ModdedSpawnEggItem> ENDERLING_SPAWN_EGG = ITEMS.register("spawn_egg_enderling", () ->
-            new ModdedSpawnEggItem(BuddycardsEntities.ENDERLING, 0x2E2744, 0x9A72CC, new Item.Properties().tab(BuddyCards.TAB)));
+    //public static final RegistryObject<ModdedSpawnEggItem> ENDERLING_SPAWN_EGG = ITEMS.register("spawn_egg_enderling", () -> new ModdedSpawnEggItem(BuddycardsEntities.ENDERLING, 0x2E2744, 0x9A72CC, new Item.Properties().tab(BuddyCards.TAB)));
 }

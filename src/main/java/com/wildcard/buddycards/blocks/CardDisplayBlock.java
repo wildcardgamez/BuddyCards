@@ -3,9 +3,8 @@ package com.wildcard.buddycards.blocks;
 import com.wildcard.buddycards.blocks.tiles.CardDisplayBlockEntity;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsItems;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -35,9 +34,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.level.block.Rotation;
 
-public class CardDisplayBlock extends Block {
+public class CardDisplayBlock extends BaseEntityBlock {
     public static final DirectionProperty DIR = BlockStateProperties.HORIZONTAL_FACING;
     protected static final VoxelShape NSHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 3.0D);
     protected static final VoxelShape ESHAPE = Block.box(13.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -57,6 +55,17 @@ public class CardDisplayBlock extends Block {
     }
 
     final String NEEDED_MOD;
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new CardDisplayBlockEntity(blockPos, blockState);
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState p_49232_) {
+        return RenderShape.MODEL;
+    }
 
     @SuppressWarnings("deprecation")
     @Override

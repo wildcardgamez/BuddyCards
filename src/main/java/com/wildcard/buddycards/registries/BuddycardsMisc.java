@@ -24,8 +24,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class BuddycardsMisc {
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, BuddyCards.MOD_ID);
-    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, BuddyCards.MOD_ID);
-    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, BuddyCards.MOD_ID);
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, BuddyCards.MOD_ID);
+    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, BuddyCards.MOD_ID);
     public static final DeferredRegister<GlobalLootModifierSerializer<?>> GLMS = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, BuddyCards.MOD_ID);
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, BuddyCards.MOD_ID);
 
@@ -57,9 +57,9 @@ public class BuddycardsMisc {
     public static final RegistryObject<Potion> GRADING_LUCK_LONG = POTIONS.register("grading_luck_long", () -> new Potion(new MobEffectInstance(GRADING_LUCK.get(), 9600)));
 
     public static void brewingSetup() {
-        //PotionBrewing.addMix(Potions.AWKWARD, BuddycardsItems.ZYLEX.get(), GRADING_LUCK_NORMAL.get());
-        //PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.GLOWSTONE_DUST, GRADING_LUCK_STRONG.get());
-        //PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.REDSTONE, GRADING_LUCK_LONG.get());
+        PotionBrewing.addMix(Potions.AWKWARD, BuddycardsItems.ZYLEX.get(), GRADING_LUCK_NORMAL.get());
+        PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.GLOWSTONE_DUST, GRADING_LUCK_STRONG.get());
+        PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.REDSTONE, GRADING_LUCK_LONG.get());
     }
 
     //GLMs
