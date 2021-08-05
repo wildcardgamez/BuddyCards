@@ -39,16 +39,5 @@ public class BuddysteelFoodKnifeItem extends KnifeItem {
         }
         return multimap;
     }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        //Add an alternative with max power for creative menu
-        ItemStack maxed = new ItemStack(this);
-        CompoundTag nbt = new CompoundTag();
-        nbt.putFloat("completion", 1);
-        maxed.setTag(nbt);
-        items.add(maxed);
-        super.fillItemCategory(group, items);
-    }
 }
 */

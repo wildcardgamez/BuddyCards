@@ -4,9 +4,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.wildcard.buddycards.items.buddysteel.BuddysteelItemTier;
 import com.wildcard.buddycards.items.buddysteel.BuddysteelSwordItem;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -45,16 +42,5 @@ public class BuddysteelFilletKnifeItem extends BuddysteelSwordItem {
             multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.2, AttributeModifier.Operation.ADDITION));
         }
         return multimap;
-    }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        //Add an alternative with max power for creative menu
-        ItemStack maxed = new ItemStack(this);
-        CompoundTag nbt = new CompoundTag();
-        nbt.putFloat("completion", 1);
-        maxed.setTag(nbt);
-        items.add(maxed);
-        super.fillItemCategory(group, items);
     }
 }

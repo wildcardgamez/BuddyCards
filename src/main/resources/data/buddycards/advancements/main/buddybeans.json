@@ -23,7 +23,7 @@
       "conditions": {
         "items": [
           {
-            "items":"buddycards:buddybeans"
+            "item":"buddycards:buddybeans"
           }
         ]
       }

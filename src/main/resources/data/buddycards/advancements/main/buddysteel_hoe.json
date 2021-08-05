@@ -19,7 +19,7 @@
       "conditions": {
         "items": [
           {
-            "items":"buddycards:buddysteel_hoe"
+            "item":"buddycards:buddysteel_hoe"
           }
         ]
       }

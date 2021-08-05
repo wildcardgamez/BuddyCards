@@ -4,8 +4,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -19,7 +17,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -75,16 +72,5 @@ public class BuddysteelArmorItem extends ArmorItem {
         if (material.equals(BuddysteelArmorMaterial.ZYLEX))
             return BuddyCards.MOD_ID + ":textures/models/armor/zylex.png";
         return super.getArmorTexture(stack, entity, slot, type);
-    }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        //Add an alternative with max power for creative menu
-        ItemStack maxed = new ItemStack(this);
-        CompoundTag nbt = new CompoundTag();
-        nbt.putFloat("completion", 1);
-        maxed.setTag(nbt);
-        items.add(maxed);
-        super.fillItemCategory(group, items);
     }
 }

@@ -136,7 +136,7 @@ public class BuddycardsItems {
         public void addGummyCards() {
             for(int i = 1; i <= 6; i++) {
                 int finalI = i;
-                CARDS.add(ITEMS.register("card." + SET_NUMBER + ".gummy" + i, () -> new GummyCardItem(finalI)));
+                CARDS.add(ITEMS.register("card." + SET_NUMBER + ".gummy" + i, () -> new CardItem(SET_NUMBER, finalI, Rarity.COMMON, MOD_ID)));
             }
         }
 

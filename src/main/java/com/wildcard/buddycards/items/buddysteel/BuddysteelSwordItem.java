@@ -4,8 +4,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -51,16 +49,5 @@ public class BuddysteelSwordItem extends SwordItem {
             multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.4, AttributeModifier.Operation.ADDITION));
         }
         return multimap;
-    }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        //Add an alternative with max power for creative menu
-        ItemStack maxed = new ItemStack(this);
-        CompoundTag nbt = new CompoundTag();
-        nbt.putFloat("completion", 1);
-        maxed.setTag(nbt);
-        items.add(maxed);
-        super.fillItemCategory(group, items);
     }
 }

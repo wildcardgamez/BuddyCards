@@ -15,12 +15,16 @@ import java.util.UUID;
 public class EnderBinderSaveData extends SavedData {
     private final static HashMap<UUID, BinderInventory> INVENTORIES = new HashMap<UUID,BinderInventory>();
 
+    public EnderBinderSaveData() {
+        super(BuddyCards.MOD_ID + "_ebdata");
+    }
+
     public static EnderBinderSaveData get(ServerLevel world) {
-        return world.getDataStorage().get(EnderBinderSaveData::new, BuddyCards.MOD_ID + "_ebdata");
+        return world.getDataStorage().computeIfAbsent(EnderBinderSaveData::new, BuddyCards.MOD_ID + "_ebdata");
     }
 
     @Override
-    public void load(CompoundTag nbt) {
+    public void data(CompoundTag nbt) {
         ListTag list = nbt.getList("ebdata", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < list.size(); i++) {
             CompoundTag compound = list.getCompound(i);
@@ -50,4 +54,4 @@ public class EnderBinderSaveData extends SavedData {
         return(INVENTORIES.get(uuid));
     }
 }
- */
+*/

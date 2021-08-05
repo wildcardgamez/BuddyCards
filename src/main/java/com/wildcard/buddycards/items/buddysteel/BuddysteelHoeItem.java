@@ -2,11 +2,12 @@ package com.wildcard.buddycards.items.buddysteel;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
@@ -54,16 +55,5 @@ public class BuddysteelHoeItem extends HoeItem {
             return super.getHarvestLevel(stack, tool, player, state);
         else
             return super.getHarvestLevel(stack, tool, player, state) + (int) (2 * stack.getTag().getFloat("completion"));
-    }
-
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        //Add an alternative with max power for creative menu
-        ItemStack maxed = new ItemStack(this);
-        CompoundTag nbt = new CompoundTag();
-        nbt.putFloat("completion", 1);
-        maxed.setTag(nbt);
-        items.add(maxed);
-        super.fillItemCategory(group, items);
     }
 }
