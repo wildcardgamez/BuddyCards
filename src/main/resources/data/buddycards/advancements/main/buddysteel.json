@@ -18,7 +18,7 @@
       "conditions": {
         "items": [
           {
-            "item":"buddycards:buddysteel_ingot"
+            "items":"buddycards:buddysteel_ingot"
           }
         ]
       }

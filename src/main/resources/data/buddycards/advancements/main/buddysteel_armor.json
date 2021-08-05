@@ -19,16 +19,16 @@
       "conditions": {
         "items": [
           {
-            "item": "buddycards:buddysteel_helmet"
+            "items": "buddycards:buddysteel_helmet"
           },
           {
-            "item": "buddycards:buddysteel_chestplate"
+            "items": "buddycards:buddysteel_chestplate"
           },
           {
-            "item": "buddycards:buddysteel_leggings"
+            "items": "buddycards:buddysteel_leggings"
           },
           {
-            "item": "buddycards:buddysteel_boots"
+            "items": "buddycards:buddysteel_boots"
           }
         ]
       }

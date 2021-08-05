@@ -3,6 +3,9 @@ package com.wildcard.buddycards.items.buddysteel;
 import com.wildcard.buddycards.items.MedalItem;
 import com.wildcard.buddycards.items.MedalTypes;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -28,5 +31,16 @@ public class BuddysteelMedalItem extends MedalItem {
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         BuddysteelGearHelper.setTag(playerIn, handIn);
         return super.use(worldIn, playerIn, handIn);
+    }
+
+    @Override
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        //Add an alternative with max power for creative menu
+        ItemStack maxed = new ItemStack(this);
+        CompoundTag nbt = new CompoundTag();
+        nbt.putFloat("completion", 1);
+        maxed.setTag(nbt);
+        items.add(maxed);
+        super.fillItemCategory(group, items);
     }
 }
