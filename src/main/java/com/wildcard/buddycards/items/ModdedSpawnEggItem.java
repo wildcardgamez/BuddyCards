@@ -20,6 +20,7 @@ import net.minecraftforge.fmllegacy.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = BuddyCards.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -39,7 +40,7 @@ public class ModdedSpawnEggItem extends SpawnEggItem {
     }
 
     public static void initSpawnEggItems() {
-        final Map<EntityType<?>, SpawnEggItem> EGGS = ObfuscationReflectionHelper.getPrivateValue(SpawnEggItem.class, null, "field_195987_b");
+        final HashMap<EntityType<?>, SpawnEggItem> EGGS = new HashMap<>();
         DefaultDispenseItemBehavior dispenserBehavior = new DefaultDispenseItemBehavior() {
             @Override
             protected ItemStack execute(BlockSource source, ItemStack stack) {
@@ -60,6 +61,6 @@ public class ModdedSpawnEggItem extends SpawnEggItem {
 
     @SubscribeEvent
     public static void onRegisterEntities(final RegistryEvent.Register<EntityType<?>> event) {
-        //initSpawnEggItems();
+        initSpawnEggItems();
     }
 }

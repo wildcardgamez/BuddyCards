@@ -262,5 +262,5 @@ public class BuddycardsItems {
     public static final RegistryObject<BlockItem> ZELKOVA_CARD_DISPLAY_ITEM = ITEMS.register("zelkova_card_display", () -> new BlockItem(BuddycardsBlocks.ZELKOVA_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
 
     //Eggs
-    //public static final RegistryObject<ModdedSpawnEggItem> ENDERLING_SPAWN_EGG = ITEMS.register("spawn_egg_enderling", () -> new ModdedSpawnEggItem(BuddycardsEntities.ENDERLING, 0x2E2744, 0x9A72CC, new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<ModdedSpawnEggItem> ENDERLING_SPAWN_EGG = ITEMS.register("spawn_egg_enderling", () -> new ModdedSpawnEggItem(BuddycardsEntities.ENDERLING, 0x2E2744, 0x9A72CC, new Item.Properties().tab(BuddyCards.TAB)));
 }

@@ -98,9 +98,14 @@ public class CardItem extends Item {
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         //Only show cards in the creative menu when the respective mod is loaded
-        if(!ModList.get().isLoaded(MOD_ID))
-            return;
-        super.fillItemCategory(group, items);
+        if (this.allowdedIn(group) && ModList.get().isLoaded(MOD_ID)) {
+            ItemStack foil = new ItemStack(this);
+            CompoundTag nbt = new CompoundTag();
+            nbt.putBoolean("foil", true);
+            foil.setTag(nbt);
+            items.add(new ItemStack(this));
+            items.add(foil);
+        }
     }
 
     @Override
