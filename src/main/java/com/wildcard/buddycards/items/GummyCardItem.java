@@ -2,14 +2,14 @@ package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.util.ConfigManager;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.ModList;
 
 import java.util.List;
 
@@ -35,5 +35,13 @@ public class GummyCardItem extends CardItem {
         if (ConfigManager.challengeMode.get())
             tooltip.add(new TranslatableComponent("item.buddycards.points_info").append(
                     "" + ((CardItem)stack.getItem()).getPointValue(stack)));
+    }
+
+    @Override
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        //Only show cards in the creative menu when the respective mod is loaded
+        if (this.allowdedIn(group) && ModList.get().isLoaded("farmersdelight")) {
+            items.add(new ItemStack(this));
+        }
     }
 }
