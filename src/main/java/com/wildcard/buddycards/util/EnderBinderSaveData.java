@@ -11,20 +11,13 @@ import net.minecraftforge.common.util.Constants;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-/*
 public class EnderBinderSaveData extends SavedData {
     private final static HashMap<UUID, BinderInventory> INVENTORIES = new HashMap<UUID,BinderInventory>();
 
     public EnderBinderSaveData() {
-        super(BuddyCards.MOD_ID + "_ebdata");
     }
 
-    public static EnderBinderSaveData get(ServerLevel world) {
-        return world.getDataStorage().computeIfAbsent(EnderBinderSaveData::new, BuddyCards.MOD_ID + "_ebdata");
-    }
-
-    @Override
-    public void data(CompoundTag nbt) {
+    public EnderBinderSaveData(CompoundTag nbt) {
         ListTag list = nbt.getList("ebdata", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < list.size(); i++) {
             CompoundTag compound = list.getCompound(i);
@@ -32,6 +25,10 @@ public class EnderBinderSaveData extends SavedData {
             inv.fromTag(compound.getList("inv", Constants.NBT.TAG_COMPOUND));
             INVENTORIES.put(UUID.fromString(compound.getString("uuid")), inv);
         }
+    }
+
+    public static EnderBinderSaveData get(ServerLevel world) {
+        return world.getDataStorage().computeIfAbsent(EnderBinderSaveData::new, EnderBinderSaveData::new, BuddyCards.MOD_ID + "_ebdata");
     }
 
     @Override
@@ -54,4 +51,3 @@ public class EnderBinderSaveData extends SavedData {
         return(INVENTORIES.get(uuid));
     }
 }
-*/

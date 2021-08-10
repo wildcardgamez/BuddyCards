@@ -3,6 +3,7 @@ package com.wildcard.buddycards.container;
 import com.wildcard.buddycards.inventory.BinderInventory;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
+import com.wildcard.buddycards.util.EnderBinderSaveData;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -140,8 +141,8 @@ public class BinderContainer extends AbstractContainerMenu {
         //Run the code to check the inventory and convert to nbt
         if(!binderInv.ender)
             binderInv.stopOpen(playerIn);
-        //else
-            //EnderBinderSaveData.get(playerIn.createCommandSourceStack().getLevel()).setDirty();
+        else
+            EnderBinderSaveData.get(playerIn.createCommandSourceStack().getLevel()).setDirty();
         super.removed(playerIn);
     }
 

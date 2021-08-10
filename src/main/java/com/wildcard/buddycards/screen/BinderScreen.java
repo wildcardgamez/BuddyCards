@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.screen;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.BinderContainer;
@@ -81,19 +82,19 @@ public class BinderScreen extends AbstractContainerScreen<BinderContainer> {
         int size = menu.getItems().size();
         assert this.minecraft != null;
         if (size == 90) {
-            this.minecraft.getTextureManager().bindForSetup(TEXTURE1);
+            RenderSystem._setShaderTexture(0, TEXTURE1);
             blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
         }
         else if (size == 108) {
-            this.minecraft.getTextureManager().bindForSetup(TEXTURE2);
+            RenderSystem._setShaderTexture(0, TEXTURE2);
             blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight, 256, 256);
         }
         else if (size == 132) {
-            this.minecraft.getTextureManager().bindForSetup(TEXTURE3);
+            RenderSystem._setShaderTexture(0, TEXTURE3);
             blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight, 512, 512);
         }
         else if (size == 156) {
-            this.minecraft.getTextureManager().bindForSetup(TEXTURE4);
+            RenderSystem._setShaderTexture(0, TEXTURE4);
             blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight, 512, 512);
         }
     }

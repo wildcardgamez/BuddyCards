@@ -1,13 +1,17 @@
 package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.container.BinderContainer;
+import com.wildcard.buddycards.util.EnderBinderSaveData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
 public class EnderBinderItem extends Item{
 
@@ -20,11 +24,10 @@ public class EnderBinderItem extends Item{
     {
         if(playerIn instanceof ServerPlayer) {
             //Open the GUI on server side
-            /*NetworkHooks.openGui((ServerPlayer) playerIn, new SimpleMenuProvider(
+            NetworkHooks.openGui((ServerPlayer) playerIn, new SimpleMenuProvider(
                     (id, playerInventory, entity) -> new BinderContainer(id, playerIn.getInventory(),
                             EnderBinderSaveData.get(((ServerPlayer) playerIn).getLevel()).getOrMakeEnderBinder(playerIn.getUUID()))
                     , playerIn.getItemInHand(handIn).getHoverName()));
-            */
         }
         return InteractionResultHolder.success(playerIn.getItemInHand(handIn));
     }

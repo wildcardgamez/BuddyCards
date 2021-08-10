@@ -3,11 +3,10 @@ package com.wildcard.buddycards.items;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.*;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 

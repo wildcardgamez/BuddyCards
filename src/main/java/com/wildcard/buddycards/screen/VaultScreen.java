@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.screen;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.VaultContainer;
@@ -40,7 +41,7 @@ public class VaultScreen extends AbstractContainerScreen<VaultContainer> {
         //Place the texture for the vault gui
         int size = menu.getItems().size();
         assert this.minecraft != null;
-        this.minecraft.getTextureManager().bindForSetup(TEXTURE);
+        RenderSystem._setShaderTexture(0, TEXTURE);
         blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight, 512, 512);
     }
 }
