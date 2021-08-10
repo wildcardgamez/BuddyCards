@@ -24,39 +24,6 @@
     },
     {
       "type": "item-tag",
-      "name": "Shiny Base Set Card",
-      "content": "buddycards:set1s_cards",
-      "amountRange": {
-        "min": 1,
-        "max": 12
-      },
-      "unitWorth": 400,
-      "weight": 600
-    },
-    {
-      "type": "item-tag",
-      "name": "Nether Set Card",
-      "content": "buddycards:set2_cards",
-      "amountRange": {
-        "min": 1,
-        "max": 24
-      },
-      "unitWorth": 375,
-      "weight": 150
-    },
-    {
-      "type": "item-tag",
-      "name": "End Set Card",
-      "content": "buddycards:set3_cards",
-      "amountRange": {
-        "min": 1,
-        "max": 16
-      },
-      "unitWorth": 400,
-      "weight": 75
-    },
-    {
-      "type": "item-tag",
       "name": "Any Epic Card",
       "content": "buddycards:epic_cards",
       "amountRange": {

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "buddycards:buddysteel_block",
-    "buddycards:zylex_block"
+    "buddycards:zylex_block",
+    "buddycards:deep_luminis_block",
+    "buddycards:perfect_buddysteel_block"
   ]
 }
