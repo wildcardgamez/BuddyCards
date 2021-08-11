@@ -40,12 +40,13 @@ public class EnchantmentHandler {
             boolean empty = true;
             NonNullList<ItemStack> itemsToSave = NonNullList.create();
             for (ItemEntity i: event.getDrops()) {
+                double rand = Math.random();
                 switch(EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.BUDDY_BINDING.get(), i.getItem())) {
                     case 1:
-                        if (Math.random() < .3)
+                        if (rand < .3)
                             break;
                     case 2:
-                        if (Math.random() < .2)
+                        if (rand < .2)
                             break;
                     case 3:
                         itemsToSave.add(i.getItem());
