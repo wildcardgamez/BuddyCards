@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "buddycards:deep_luminis_crystal_block"
+    }
+  ],
+  "result":
+  {
+    "item": "buddycards:deep_luminis_crystal",
+    "count": 9
+  }
+}
