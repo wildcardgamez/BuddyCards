@@ -77,7 +77,7 @@ public class BuddycardsItems {
             VAULT = BuddycardsBlocks.BLOCKS.register("buddysteel_vault." + setNumber, () -> new BuddysteelVaultBlock(setNumber, modId));
             VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
             BB = BuddycardsBlocks.BLOCKS.register("booster_box." + setNumber, () -> new BoosterBoxBlock(setNumber, modId));
-            BB_ITEM = ITEMS.register("booster_box." + setNumber, () -> new BlockItem(BB.get(), new Item.Properties().tab(BuddyCards.TAB)));
+            BB_ITEM = ITEMS.register("booster_box." + setNumber, () -> new BoosterBoxItem(BB.get(), new Item.Properties().tab(BuddyCards.TAB), setNumber));
             MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType));
             SET_NUMBER = setNumber;
             MOD_ID = modId;
