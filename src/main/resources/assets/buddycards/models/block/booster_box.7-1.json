@@ -1,0 +1,9 @@
+{
+	"parent": "buddycards:block/booster_box.1-1",
+	"textures": {
+		"0": "buddycards:blocks/bb/bb_bottom",
+		"1": "buddycards:blocks/bb/bb7_side",
+		"2": "buddycards:blocks/bb/bb7_top",
+		"particle": "buddycards:blocks/bb/bb_bottom"
+	}
+}

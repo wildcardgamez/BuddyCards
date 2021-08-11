@@ -10,8 +10,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -21,12 +23,13 @@ import net.minecraftforge.fml.ModList;
 import javax.annotation.Nullable;
 
 public class BoosterBoxBlock extends Block {
+    public static final DirectionProperty DIR = HorizontalDirectionalBlock.FACING;
     public static final IntegerProperty LAYERS = IntegerProperty.create("layers", 1, 4);
     protected static final VoxelShape[] SHAPE_BY_LAYER = new VoxelShape[]{Shapes.empty(), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
 
     public BoosterBoxBlock(int setNumber, String modId) {
         super(Properties.copy(Blocks.STONE));
-        this.registerDefaultState(this.stateDefinition.any().setValue(LAYERS, Integer.valueOf(1)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(LAYERS, 1).setValue(DIR, Direction.NORTH));
         SET_NUMBER = setNumber;
         SPECIFIC_MOD = modId;
     }
@@ -78,12 +81,13 @@ public class BoosterBoxBlock extends Block {
             int i = blockstate.getValue(LAYERS);
             return blockstate.setValue(LAYERS, Math.min(4, i + 1));
         } else {
-            return super.getStateForPlacement(context);
+            return super.getStateForPlacement(context).setValue(DIR, context.getHorizontalDirection());
         }
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(LAYERS);
+        builder.add(DIR);
     }
 
     @Override
