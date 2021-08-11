@@ -1,12 +1,19 @@
 package com.wildcard.buddycards.blocks;
 
+import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultBlockEntity;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -15,10 +22,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import javax.annotation.Nullable;
 
@@ -28,7 +40,7 @@ public class BoosterBoxBlock extends Block {
     protected static final VoxelShape[] SHAPE_BY_LAYER = new VoxelShape[]{Shapes.empty(), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
 
     public BoosterBoxBlock(int setNumber, String modId) {
-        super(Properties.copy(Blocks.STONE));
+        super(Properties.copy(Blocks.WHITE_WOOL));
         this.registerDefaultState(this.stateDefinition.any().setValue(LAYERS, 1).setValue(DIR, Direction.NORTH));
         SET_NUMBER = setNumber;
         SPECIFIC_MOD = modId;
@@ -95,5 +107,13 @@ public class BoosterBoxBlock extends Block {
         if(!ModList.get().isLoaded(SPECIFIC_MOD))
             return;
         super.fillItemCategory(group, items);
+    }
+
+    @Override
+    public boolean removedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        if (!player.isCreative()) {
+            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(BuddycardsItems.SETS.get(SET_NUMBER).PACK.get(), 6 * state.getValue(LAYERS)));
+        }
+        return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 }
