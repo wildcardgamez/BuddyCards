@@ -105,10 +105,10 @@ public class ConfigManager {
         enderlingChanceOver = builder.comment("\nOdds for an Enderling to spawn with an Enderman in the Overworld, 0-1, default is 1.5%")
                 .defineInRange("enderling.overOdds", .015, 0, 1);
 
-        luminisMaxY = builder.comment("\nMaximum Y value for Luminis to generate, 1-120, default is 24")
-                .defineInRange("luminis.maxY", 24, 1, 120);
-        luminisPerChunk = builder.comment("\nAmount of veins of Luminis generated per chunk, 1-24, default is 1")
-                .defineInRange("luminis.perChunk", 1, 0, 36);
+        luminisMaxY = builder.comment("\nMaximum Y value for Luminis to generate, 1-120, default is 20")
+                .defineInRange("luminis.maxY", 20, 1, 120);
+        luminisPerChunk = builder.comment("\nAmount of veins of Luminis generated per chunk, 1-24, default is 2")
+                .defineInRange("luminis.perChunk", 2, 0, 36);
         luminisVeinSize = builder.comment("\nSize of Luminis veins, 1-36, default is 8")
                 .defineInRange("luminis.veinSize", 8, 1, 36);
         deepLuminisOdds = builder.comment("\nOdds of deep Luminis crystals being dropped by Luminis ore, note this can be doubled with certain gear, 0 for 0%, 1 for 100%, default is 3.5%")

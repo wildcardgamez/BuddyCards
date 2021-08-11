@@ -186,6 +186,9 @@ public class BuddycardsItems {
     public static final RegistryObject<BlockItem> LUMINIS_PANELS_ITEM = ITEMS.register("luminis_panels", () -> new BlockItem(BuddycardsBlocks.LUMINIS_PANELS.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> LUMINIS_PILLAR_ITEM = ITEMS.register("luminis_pillar", () -> new BlockItem(BuddycardsBlocks.LUMINIS_PILLAR.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> LUMINIS_ORE_ITEM = ITEMS.register("luminis_ore", () -> new BlockItem(BuddycardsBlocks.LUMINIS_ORE.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> LUMINIS_ORE_DEEPSLATE_ITEM = ITEMS.register("luminis_ore_deepslate", () -> new BlockItem(BuddycardsBlocks.LUMINIS_ORE_DEEPSLATE.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> LUMINIS_CRYSTAL_BLOCK_ITEM = ITEMS.register("luminis_crystal_block", () -> new BlockItem(BuddycardsBlocks.LUMINIS_CRYSTAL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> DEEP_LUMINIS_CRYSTAL_BLOCK_ITEM = ITEMS.register("deep_luminis_crystal_block", () -> new BlockItem(BuddycardsBlocks.DEEP_LUMINIS_CRYSTAL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS_CRYSTAL = ITEMS.register("luminis_crystal", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS = ITEMS.register("luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS_PANEL = ITEMS.register("luminis_panel", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));

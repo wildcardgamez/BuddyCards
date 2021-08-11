@@ -1,9 +1,11 @@
 package com.wildcard.buddycards.util;
 
+import com.google.common.collect.ImmutableList;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsBlocks;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.data.worldgen.Features;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -19,8 +21,12 @@ public class OreGeneration {
 
     public static void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            LUMINIS_ORE = Feature.ORE.configured(new OreConfiguration(OreConfiguration.Predicates.NATURAL_STONE, BuddycardsBlocks.LUMINIS_ORE.get()
-                    .defaultBlockState(), ConfigManager.luminisVeinSize.get())).rangeTriangle(VerticalAnchor.absolute(5), VerticalAnchor.absolute(ConfigManager.luminisMaxY.get())).squared().count(ConfigManager.luminisPerChunk.get());
+            LUMINIS_ORE = Feature.ORE.configured(new OreConfiguration(ImmutableList.of(
+                    OreConfiguration.target(OreConfiguration.Predicates.STONE_ORE_REPLACEABLES,  BuddycardsBlocks.LUMINIS_ORE.get().defaultBlockState()),
+                    OreConfiguration.target(OreConfiguration.Predicates.DEEPSLATE_ORE_REPLACEABLES, BuddycardsBlocks.LUMINIS_ORE_DEEPSLATE.get().defaultBlockState())),
+                    ConfigManager.luminisVeinSize.get())
+            ).rangeTriangle(VerticalAnchor.bottom(), VerticalAnchor.absolute(ConfigManager.luminisMaxY.get())).squared().count(ConfigManager.luminisPerChunk.get());
+
             Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(BuddyCards.MOD_ID, "luminis_ore"), LUMINIS_ORE);
         });
     }
