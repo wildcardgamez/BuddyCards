@@ -112,7 +112,7 @@ public class BoosterBoxBlock extends Block {
     @Override
     public boolean removedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         if (!player.isCreative()) {
-            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(BuddycardsItems.SETS.get(SET_NUMBER).PACK.get(), 6 * state.getValue(LAYERS)));
+            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock().asItem(), state.getValue(LAYERS)));
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
