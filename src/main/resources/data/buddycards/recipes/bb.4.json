@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "buddycards:pack.4"
+    }
+  },
+  "result": {
+    "item": "buddycards:booster_box.4"
+  }
+}
