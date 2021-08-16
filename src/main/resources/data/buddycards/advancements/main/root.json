@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "tag":"buddycards:packs"
+                        "tag": "buddycards:packs"
                     }
                 ]
             }

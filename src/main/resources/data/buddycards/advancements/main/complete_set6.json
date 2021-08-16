@@ -35,41 +35,41 @@
   ],
   "criteria": {
     "card1": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.1"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.1"]}]}},
     "card2": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.2"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.2"]}]}},
     "card3": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.3"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.3"]}]}},
     "card4": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.4"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.4"]}]}},
     "card5": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.5"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.5"]}]}},
     "card6": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.6"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.6"]}]}},
     "card7": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.7"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.7"]}]}},
     "card8": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.8"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.8"]}]}},
     "card9": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.9"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.9"]}]}},
     "card10": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.10"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.10"]}]}},
     "card11": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.11"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.11"]}]}},
     "card12": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.12"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.12"]}]}},
     "card13": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.13"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.13"]}]}},
     "card14": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.14"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.14"]}]}},
     "card15": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.15"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.15"]}]}},
     "card16": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.16"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.16"]}]}},
     "card17": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.17"}]}},
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.17"]}]}},
     "card18": {
-      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"item":"buddycards:card.6.18"}]}}
+      "trigger": "minecraft:inventory_changed", "conditions": {"items": [{"items":["buddycards:card.6.18"]}]}}
   },
   "rewards" : {
     "loot": ["buddycards:item/medals/6"]
