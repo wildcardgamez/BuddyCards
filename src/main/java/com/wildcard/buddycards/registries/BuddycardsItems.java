@@ -183,17 +183,19 @@ public class BuddycardsItems {
     public static final RegistryObject<Item> ZYLEX_RING = ITEMS.register("zylex_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> ZYLEX_MEDAL = ITEMS.register("zylex_medal", () -> new MedalItem(MedalTypes.ZYLEX));
 
+    public static final RegistryObject<BlockItem> LUMINIS_ORE_ITEM = ITEMS.register("luminis_ore", () -> new BlockItem(BuddycardsBlocks.LUMINIS_ORE.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> LUMINIS_ORE_DEEPSLATE_ITEM = ITEMS.register("luminis_ore_deepslate", () -> new BlockItem(BuddycardsBlocks.LUMINIS_ORE_DEEPSLATE.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> LUMINIS_BLOCK_ITEM = ITEMS.register("luminis_block", () -> new BlockItem(BuddycardsBlocks.LUMINIS_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> LUMINIS_PANELS_ITEM = ITEMS.register("luminis_panels", () -> new BlockItem(BuddycardsBlocks.LUMINIS_PANELS.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> LUMINIS_PILLAR_ITEM = ITEMS.register("luminis_pillar", () -> new BlockItem(BuddycardsBlocks.LUMINIS_PILLAR.get(), new Item.Properties().tab(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> LUMINIS_ORE_ITEM = ITEMS.register("luminis_ore", () -> new BlockItem(BuddycardsBlocks.LUMINIS_ORE.get(), new Item.Properties().tab(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> LUMINIS_ORE_DEEPSLATE_ITEM = ITEMS.register("luminis_ore_deepslate", () -> new BlockItem(BuddycardsBlocks.LUMINIS_ORE_DEEPSLATE.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> LUMINIS_CRYSTAL_BLOCK_ITEM = ITEMS.register("luminis_crystal_block", () -> new BlockItem(BuddycardsBlocks.LUMINIS_CRYSTAL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> LUMINIS_CRYSTAL_PILLAR_ITEM = ITEMS.register("luminis_crystal_pillar", () -> new BlockItem(BuddycardsBlocks.LUMINIS_CRYSTAL_PILLAR.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> DEEP_LUMINIS_BLOCK_ITEM = ITEMS.register("deep_luminis_block", () -> new BlockItem(BuddycardsBlocks.DEEP_LUMINIS_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> DEEP_LUMINIS_CRYSTAL_BLOCK_ITEM = ITEMS.register("deep_luminis_crystal_block", () -> new BlockItem(BuddycardsBlocks.DEEP_LUMINIS_CRYSTAL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> DEEP_LUMINIS_CRYSTAL_PILLAR_ITEM = ITEMS.register("deep_luminis_crystal_pillar", () -> new BlockItem(BuddycardsBlocks.DEEP_LUMINIS_CRYSTAL_PILLAR.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS_CRYSTAL = ITEMS.register("luminis_crystal", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS = ITEMS.register("luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS_PANEL = ITEMS.register("luminis_panel", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
-    public static final RegistryObject<BlockItem> DEEP_LUMINIS_BLOCK_ITEM = ITEMS.register("deep_luminis_block", () -> new BlockItem(BuddycardsBlocks.DEEP_LUMINIS_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> DEEP_LUMINIS_CRYSTAL = ITEMS.register("deep_luminis_crystal", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> DEEP_LUMINIS = ITEMS.register("deep_luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> LUMINIS_PICKAXE = ITEMS.register("luminis_pickaxe", () -> new BuddysteelPickaxeItem(BuddysteelItemTier.LUMINIS, 2));

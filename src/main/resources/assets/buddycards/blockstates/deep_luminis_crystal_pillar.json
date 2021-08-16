@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "buddycards:block/deep_luminis_crystal_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "buddycards:block/deep_luminis_crystal_pillar"
+    },
+    "axis=z": {
+      "model": "buddycards:block/deep_luminis_crystal_pillar_horizontal",
+      "x": 90
+    }
+  }
+}

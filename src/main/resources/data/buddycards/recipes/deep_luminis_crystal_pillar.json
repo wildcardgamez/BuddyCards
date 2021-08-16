@@ -2,15 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XX",
+    "YY",
     "XX"
   ],
   "key": {
     "X": {
       "item": "buddycards:luminis_panel"
+    },
+    "Y": {
+      "item": "buddycards:deep_luminis_crystal"
     }
   },
   "result": {
-    "item": "buddycards:luminis_panels",
+    "item": "buddycards:deep_luminis_crystal_pillar",
     "count": 2
   }
 }
