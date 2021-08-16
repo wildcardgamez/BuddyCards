@@ -236,6 +236,7 @@ public class BuddycardsItems {
     public static final RegistryObject<BlockItem> DARK_OAK_CARD_DISPLAY_ITEM = ITEMS.register("dark_oak_card_display", () -> new BlockItem(BuddycardsBlocks.DARK_OAK_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> CRIMSON_CARD_DISPLAY_ITEM = ITEMS.register("crimson_card_display", () -> new BlockItem(BuddycardsBlocks.CRIMSON_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> WARPED_CARD_DISPLAY_ITEM = ITEMS.register("warped_card_display", () -> new BlockItem(BuddycardsBlocks.WARPED_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> LUMINIS_CARD_DISPLAY_ITEM = ITEMS.register("luminis_card_display", () -> new BlockItem(BuddycardsBlocks.LUMINIS_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> CARD_STAND_ITEM = ITEMS.register("card_stand", () -> new BlockItem(BuddycardsBlocks.CARD_STAND.get(), new Item.Properties().tab(BuddyCards.TAB)));
 
     //Byg Card Display Items

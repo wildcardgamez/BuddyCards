@@ -37,7 +37,7 @@ public class BuddycardsEntities {
                     BuddycardsBlocks.JACARANDA_CARD_DISPLAY.get(), BuddycardsBlocks.LAMENT_CARD_DISPLAY.get(), BuddycardsBlocks.MAHOGANY_CARD_DISPLAY.get(), BuddycardsBlocks.MANGROVE_CARD_DISPLAY.get(),
                     BuddycardsBlocks.MAPLE_CARD_DISPLAY.get(), BuddycardsBlocks.NIGHTSHADE_CARD_DISPLAY.get(), BuddycardsBlocks.PALM_CARD_DISPLAY.get(), BuddycardsBlocks.PINE_CARD_DISPLAY.get(),
                     BuddycardsBlocks.RAINBOW_EUCALYPTUS_CARD_DISPLAY.get(), BuddycardsBlocks.REDWOOD_CARD_DISPLAY.get(), BuddycardsBlocks.SKYRIS_CARD_DISPLAY.get(), BuddycardsBlocks.SYTHIAN_CARD_DISPLAY.get(),
-                    BuddycardsBlocks.WILLOW_CARD_DISPLAY.get(), BuddycardsBlocks.WITCH_HAZEL_CARD_DISPLAY.get(), BuddycardsBlocks.ZELKOVA_CARD_DISPLAY.get()).build(null));
+                    BuddycardsBlocks.WILLOW_CARD_DISPLAY.get(), BuddycardsBlocks.WITCH_HAZEL_CARD_DISPLAY.get(), BuddycardsBlocks.ZELKOVA_CARD_DISPLAY.get(), BuddycardsBlocks.LUMINIS_CARD_DISPLAY.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<CardStandBlockEntity>> CARD_STAND_TILE = TILE_ENTITIES.register("card_stand",
             () -> BlockEntityType.Builder.of(CardStandBlockEntity::new, BuddycardsBlocks.CARD_STAND.get()).build(null));

@@ -48,6 +48,12 @@ public class CardDisplayBlock extends BaseEntityBlock {
         NEEDED_MOD = "";
     }
 
+    public CardDisplayBlock(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(DIR, Direction.NORTH));
+        NEEDED_MOD = "";
+    }
+
     public CardDisplayBlock(String neededMod) {
         super(Properties.copy(Blocks.OAK_PLANKS));
         this.registerDefaultState(this.stateDefinition.any().setValue(DIR, Direction.NORTH));
