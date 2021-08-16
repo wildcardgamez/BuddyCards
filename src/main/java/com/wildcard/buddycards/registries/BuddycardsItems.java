@@ -159,6 +159,7 @@ public class BuddycardsItems {
     public static final RegistryObject<Item> CHALLENGE_BINDER = ITEMS.register("challenge_binder", ChallengeBinder::new);
     public static final RegistryObject<Item> ENDER_BINDER = ITEMS.register("ender_binder", EnderBinderItem::new);
     public static final RegistryObject<Item> MYSTERY_PACK = ITEMS.register("mystery_pack", () -> new PackItem(0, "buddycards", 9, 2));
+    public static final RegistryObject<Item> MYSTERY_BB_ITEM = ITEMS.register("booster_box_mystery", () -> new BoosterBoxItem(BuddycardsBlocks.MYSTERY_BB.get(), new Item.Properties().tab(BuddyCards.TAB), 0));
 
     //Buddysteel Luminis & Zylex
     public static final RegistryObject<BlockItem> BUDDYSTEEL_BLOCK_ITEM = ITEMS.register("buddysteel_block", () -> new BlockItem(BuddycardsBlocks.BUDDYSTEEL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));

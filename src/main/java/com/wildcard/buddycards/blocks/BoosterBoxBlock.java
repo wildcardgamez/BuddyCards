@@ -1,13 +1,9 @@
 package com.wildcard.buddycards.blocks;
 
-import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultBlockEntity;
-import com.wildcard.buddycards.registries.BuddycardsItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -27,10 +23,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import javax.annotation.Nullable;
 
@@ -112,7 +104,7 @@ public class BoosterBoxBlock extends Block {
     @Override
     public boolean removedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         if (!player.isCreative()) {
-            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock().asItem(), state.getValue(LAYERS)));
+                Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock().asItem(), state.getValue(LAYERS)));
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
