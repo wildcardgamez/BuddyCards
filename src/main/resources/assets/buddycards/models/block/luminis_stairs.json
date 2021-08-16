@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "buddycards:blocks/luminis_panels",
+    "top": "buddycards:blocks/luminis_panels",
+    "side": "buddycards:blocks/luminis_panels"
+  }
+}
