@@ -27,6 +27,10 @@
       "type": "crafting",
       "recipe": "buddycards:warped_card_display",
       "recipe2": "buddycards:crimson_card_display"
+    },
+    {
+      "type": "crafting",
+      "recipe": "buddycards:luminis_card_display"
     }
   ]
 }

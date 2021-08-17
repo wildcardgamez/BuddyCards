@@ -15,8 +15,8 @@
     },
     {
       "type": "crafting",
-      "recipe": "buddycards:booster_box_mystery",
-      "recipe2": "buddycards:byg/booster_box.3"
+      "recipe": "buddycards:booster_box.3",
+      "recipe2": "buddycards:byg/booster_box_mystery"
     },
     {
       "type": "crafting",

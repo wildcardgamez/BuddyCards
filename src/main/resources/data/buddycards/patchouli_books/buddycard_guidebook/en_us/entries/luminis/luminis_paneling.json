@@ -13,6 +13,16 @@
       "type": "crafting",
       "recipe": "buddycards:luminis_panels",
       "recipe2": "buddycards:luminis_pillar"
+    },
+    {
+      "type": "crafting",
+      "recipe": "buddycards:luminis_stairs",
+      "recipe2": "buddycards:luminis_slab"
+    },
+    {
+      "type": "crafting",
+      "recipe": "buddycards:luminis_crystal_pillar",
+      "recipe2": "buddycards:deep_luminis_crystal_pillar"
     }
   ]
 }

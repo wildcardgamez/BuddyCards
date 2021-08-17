@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "buddycards:luminis_panels"
+    }
+  },
+  "result": {
+    "item": "buddycards_luminis_stairs",
+    "count": 4
+  }
+}
