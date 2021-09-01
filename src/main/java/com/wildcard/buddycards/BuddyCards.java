@@ -37,7 +37,6 @@ public class BuddyCards
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ConfigManager.config);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(OreGeneration::setup);
 
         ConfigManager.loadConfig(FMLPaths.CONFIGDIR.get().resolve("buddycards-client.toml").toString());
@@ -69,10 +68,6 @@ public class BuddyCards
         if (ModList.get().isLoaded("aquaculture"))
             MinecraftForge.EVENT_BUS.register(new AquacultureIntegration());
         event.enqueueWork(BuddycardsMisc::brewingSetup);
-    }
-
-    private void doClientStuff(final FMLClientSetupEvent event) {
-        ClientStuff.clientSetup(event);
     }
 
     public static final CreativeModeTab TAB = new CreativeModeTab("buddycards") {
