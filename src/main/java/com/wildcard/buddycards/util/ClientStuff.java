@@ -21,7 +21,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -29,7 +28,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fmllegacy.RegistryObject;
 
-@Mod.EventBusSubscriber(modid = BuddyCards.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = BuddyCards.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientStuff {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
@@ -50,9 +49,6 @@ public class ClientStuff {
                     return 0;
             }));
         }
-        //ClientRegistry.bindTileEntityRenderer(BuddycardsEntities.CARD_DISPLAY_TILE.get(), CardDisplayTileRenderer::new);
-        //ClientRegistry.bindTileEntityRenderer(BuddycardsEntities.CARD_STAND_TILE.get(), CardStandTileRenderer::new);
-        EntityRenderers.register(BuddycardsEntities.ENDERLING.get(), EnderlingRenderer::new);
         BlockEntityRenderers.register(BuddycardsEntities.CARD_DISPLAY_TILE.get(), CardDisplayBlockRenderer::new);
         BlockEntityRenderers.register(BuddycardsEntities.CARD_STAND_TILE.get(), CardStandBlockRenderer::new);
     }
