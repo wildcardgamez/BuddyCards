@@ -22,6 +22,10 @@ public class GummyCardItem extends CardItem {
         return Rarity.COMMON;
     }
 
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return false;
+    }
 
     @Override
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
