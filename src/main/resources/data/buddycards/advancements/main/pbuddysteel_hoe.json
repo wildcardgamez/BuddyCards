@@ -1,0 +1,28 @@
+{
+  "display": {
+    "title": {
+      "translate": "advancements.buddycards.main.pbuddysteel_hoe"
+    },
+    "description": {
+      "translate": "advancements.buddycards.main.pbuddysteel_hoe.desc"
+    },
+    "icon": {
+      "item": "buddycards:buddysteel_hoe"
+    },
+    "frame": "goal",
+    "hidden": false
+  },
+  "parent": "buddycards:main/buddysteel_hoe",
+  "criteria": {
+    "pack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items":["buddycards:perfect_buddysteel_hoe"]
+          }
+        ]
+      }
+    }
+  }
+}
