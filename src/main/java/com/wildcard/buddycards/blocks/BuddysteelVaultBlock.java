@@ -73,21 +73,24 @@ public class BuddysteelVaultBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player playerIn, InteractionHand handIn, BlockHitResult hit) {
         BlockEntity tileentity = worldIn.getBlockEntity(pos);
-        if(playerIn instanceof ServerPlayer && tileentity instanceof BuddysteelVaultBlockEntity) {
+        if(tileentity instanceof BuddysteelVaultBlockEntity vault) {
+            //Do locking shenanighans if they have a key
             if(playerIn.getItemInHand(handIn).getItem() == BuddycardsItems.BUDDYSTEEL_KEY.get()) {
-                if (((BuddysteelVaultBlockEntity)tileentity).isLocked()) {
-                    if (((BuddysteelVaultBlockEntity)tileentity).toggleLock(playerIn.getUUID()))
+                if (vault.isLocked()) {
+                    if (vault.toggleLock(playerIn.getUUID()))
                         playerIn.displayClientMessage(new TranslatableComponent("block.buddycards.vault.unlock"), true);
                     else
                         playerIn.displayClientMessage(new TranslatableComponent("block.buddycards.vault.fail_unlock"), true);
                 }
                 else {
-                    ((BuddysteelVaultBlockEntity)tileentity).toggleLock(playerIn.getUUID());
+                    vault.toggleLock(playerIn.getUUID());
                     playerIn.displayClientMessage(new TranslatableComponent("block.buddycards.vault.lock"), true);
                 }
                 return InteractionResult.SUCCESS;
             }
-            NetworkHooks.openGui((ServerPlayer) playerIn, (BuddysteelVaultBlockEntity)tileentity, pos);
+            //Open inventory on serverside
+            if(playerIn instanceof ServerPlayer serverPlayer)
+                NetworkHooks.openGui(serverPlayer, vault, pos);
         }
         return InteractionResult.SUCCESS;
     }

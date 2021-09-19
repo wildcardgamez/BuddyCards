@@ -21,13 +21,14 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
 public class BuddysteelVaultBlockEntity extends BlockEntity implements MenuProvider {
-    private LazyOptional<ItemStackHandler> handler = LazyOptional.of(() -> new ItemStackHandler(120) {
+    private final LazyOptional<ItemStackHandler> handler = LazyOptional.of(() -> new ItemStackHandler(120) {
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
             return !locked && (slot >= 108 || stack.getItem() instanceof CardItem) && super.isItemValid(slot, stack);
@@ -50,8 +51,8 @@ public class BuddysteelVaultBlockEntity extends BlockEntity implements MenuProvi
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory inventory, Player player) {
-        return new VaultContainer(p_createMenu_1_, inventory, handler.orElse(new ItemStackHandler()), this);
+    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+        return new VaultContainer(id, inventory, this);
     }
 
     public boolean isLocked() {
@@ -117,5 +118,9 @@ public class BuddysteelVaultBlockEntity extends BlockEntity implements MenuProvi
         if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
             return handler.cast();
         return super.getCapability(cap, side);
+    }
+
+    public IItemHandler getHandler() {
+        return handler.orElse(new ItemStackHandler(120));
     }
 }

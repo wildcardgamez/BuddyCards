@@ -9,7 +9,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class VaultContainer extends AbstractContainerMenu {
@@ -17,15 +16,13 @@ public class VaultContainer extends AbstractContainerMenu {
     BuddysteelVaultBlockEntity tile;
 
     public VaultContainer(int id, Inventory playerInv) {
-        this(id, playerInv, new ItemStackHandler(120), null);
+        this(id, playerInv, null);
     }
-    
-    public VaultContainer(int id, Inventory playerInv, IItemHandler handlerIn, BuddysteelVaultBlockEntity tileIn) {
+
+    public VaultContainer(int id, Inventory playerInv, BuddysteelVaultBlockEntity tileIn) {
         super(BuddycardsMisc.VAULT_CONTAINER.get(), id);
-        if(tileIn == null)
-            System.out.println("VAULT ENTITY DOES NOT EXIST");
         tile = tileIn;
-        handler = handlerIn;
+        handler = tileIn.getHandler();
         //Set up vault card slots
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 12; x++) {
