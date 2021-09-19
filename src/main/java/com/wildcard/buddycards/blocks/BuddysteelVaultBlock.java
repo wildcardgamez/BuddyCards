@@ -71,17 +71,6 @@ public class BuddysteelVaultBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        BlockEntity tileentity = worldIn.getBlockEntity(pos);
-        if (tileentity instanceof BuddysteelVaultBlockEntity) {
-            tileentity.clearRemoved();
-            if(stack.hasCustomHoverName())
-                ((BuddysteelVaultBlockEntity) tileentity).setDisplayName(stack.getHoverName());
-            worldIn.setBlockEntity(tileentity);
-        }
-    }
-
-    @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player playerIn, InteractionHand handIn, BlockHitResult hit) {
         BlockEntity tileentity = worldIn.getBlockEntity(pos);
         if(playerIn instanceof ServerPlayer && tileentity instanceof BuddysteelVaultBlockEntity) {
@@ -110,19 +99,19 @@ public class BuddysteelVaultBlock extends BaseEntityBlock {
 
     @Override
     public boolean removedByPlayer(BlockState state, Level world, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
-        if (world.getBlockEntity(pos) instanceof BuddysteelVaultBlockEntity && !player.isCreative()) {
+        if (world.getBlockEntity(pos) instanceof BuddysteelVaultBlockEntity vault && !player.isCreative()) {
             if (player.getItemInHand(InteractionHand.MAIN_HAND).getItem() == BuddycardsItems.ZYLEX_RING.get() ||
                     (ModList.get().isLoaded("curios") &&
                             CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), player).isPresent() &&
                             CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.ZYLEX_RING.get(), player).get().right.getItem().equals(BuddycardsItems.ZYLEX_RING.get()))) {
                 ItemStack i = new ItemStack(state.getBlock().asItem());
                 CompoundTag nbt = new CompoundTag();
-                nbt.put("BlockEntityTag", world.getBlockEntity(pos).save(new CompoundTag()));
+                nbt.put("BlockEntityTag", vault.save(new CompoundTag()));
                 i.setTag(nbt);
                 Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), i);
             }
             else {
-                IItemHandler handler = world.getBlockEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(new ItemStackHandler());
+                IItemHandler handler = vault.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(new ItemStackHandler());
                 for (int i = 0; i < handler.getSlots(); i++) {
                     Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), handler.getStackInSlot(i));
                 }

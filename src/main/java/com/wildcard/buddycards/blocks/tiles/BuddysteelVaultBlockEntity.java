@@ -50,8 +50,8 @@ public class BuddysteelVaultBlockEntity extends BlockEntity implements MenuProvi
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
-        return new VaultContainer(p_createMenu_1_, p_createMenu_2_, handler.orElse(new ItemStackHandler()), this);
+    public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory inventory, Player player) {
+        return new VaultContainer(p_createMenu_1_, inventory, handler.orElse(new ItemStackHandler()), this);
     }
 
     public boolean isLocked() {

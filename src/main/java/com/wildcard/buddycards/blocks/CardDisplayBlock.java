@@ -140,15 +140,6 @@ public class CardDisplayBlock extends BaseEntityBlock {
         builder.add(DIR);
     }
 
-    @Override
-    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        BlockEntity tileentity = worldIn.getBlockEntity(pos);
-        if (tileentity instanceof CardDisplayBlockEntity) {
-            tileentity.clearRemoved();
-            worldIn.setBlockEntity(tileentity);
-        }
-    }
-
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {

@@ -22,6 +22,8 @@ public class VaultContainer extends AbstractContainerMenu {
     
     public VaultContainer(int id, Inventory playerInv, IItemHandler handlerIn, BuddysteelVaultBlockEntity tileIn) {
         super(BuddycardsMisc.VAULT_CONTAINER.get(), id);
+        if(tileIn == null)
+            System.out.println("VAULT ENTITY DOES NOT EXIST");
         tile = tileIn;
         handler = handlerIn;
         //Set up vault card slots
