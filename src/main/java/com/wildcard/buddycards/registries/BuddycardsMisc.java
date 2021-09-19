@@ -16,6 +16,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fmllegacy.RegistryObject;
@@ -41,7 +42,7 @@ public class BuddycardsMisc {
     public static final RegistryObject<MenuType<BinderContainer>> BINDER_CONTAINER = CONTAINERS.register("binder",
             () -> new MenuType<>((BinderContainer::new)));
     public static final RegistryObject<MenuType<VaultContainer>> VAULT_CONTAINER = CONTAINERS.register("vault",
-            () -> new MenuType<>((VaultContainer::new)));
+            () -> IForgeContainerType.create((id, inv, data) -> new VaultContainer(id, inv, data.readBlockPos())));
 
     //Enchants
     public static final RegistryObject<Enchantment> BUDDY_BINDING = ENCHANTMENTS.register("buddy_binding", EnchantmentBuddyBinding::new);

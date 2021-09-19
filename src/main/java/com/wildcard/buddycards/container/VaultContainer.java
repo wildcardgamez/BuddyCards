@@ -3,6 +3,7 @@ package com.wildcard.buddycards.container;
 import com.wildcard.buddycards.blocks.tiles.BuddysteelVaultBlockEntity;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -15,14 +16,10 @@ public class VaultContainer extends AbstractContainerMenu {
     IItemHandler handler;
     BuddysteelVaultBlockEntity tile;
 
-    public VaultContainer(int id, Inventory playerInv) {
-        this(id, playerInv, null);
-    }
-
-    public VaultContainer(int id, Inventory playerInv, BuddysteelVaultBlockEntity tileIn) {
+    public VaultContainer(int id, Inventory playerInv, BlockPos pos) {
         super(BuddycardsMisc.VAULT_CONTAINER.get(), id);
-        tile = tileIn;
-        handler = tileIn.getHandler();
+        tile = (BuddysteelVaultBlockEntity) playerInv.player.level.getBlockEntity(pos);
+        handler = tile.getHandler();
         //Set up vault card slots
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 12; x++) {
