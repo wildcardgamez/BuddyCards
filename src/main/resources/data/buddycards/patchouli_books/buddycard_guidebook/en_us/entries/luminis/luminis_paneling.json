@@ -23,6 +23,10 @@
       "type": "crafting",
       "recipe": "buddycards:luminis_crystal_pillar",
       "recipe2": "buddycards:deep_luminis_crystal_pillar"
+    },
+    {
+      "type": "crafting",
+      "recipe": "buddycards:luminis_card_display"
     }
   ]
 }

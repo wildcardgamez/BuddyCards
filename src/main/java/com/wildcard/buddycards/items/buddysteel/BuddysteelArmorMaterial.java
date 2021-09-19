@@ -12,7 +12,8 @@ import net.minecraft.sounds.SoundEvents;
 public enum BuddysteelArmorMaterial implements ArmorMaterial {
     BUDDYSTEEL(8, 40, new int[]{1, 4, 5, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.BUDDYSTEEL_INGOT.get())), "buddysteel"),
     PERFECT_BUDDYSTEEL(10, 45, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.PERFECT_BUDDYSTEEL_INGOT.get())), "perfect_buddysteel"),
-    ZYLEX(12, 43, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.ZYLEX_TOKEN.get())), "zylex");
+    ZYLEX(12, 50, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.ZYLEX.get())), "zylex"),
+    LUMINIS(12, 50, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.DEEP_LUMINIS.get())), "luminis");
 
     BuddysteelArmorMaterial(int enchVal, int dura, int[] red, LazyLoadedValue<Ingredient> mat, String nameIn) {
         ench = enchVal;

@@ -11,13 +11,13 @@
     {
       "type": "spotlight",
       "item": "buddycards:luminis_band",
-      "text": "The Luminis Rings are very useful for finding deep luminis, and will increase your odds of succesfully finding some when worn.",
+      "text": "The Luminis Rings are very useful for finding deep luminis, and will increase your odds of succesfully finding it by 3% when worn.",
       "link_recipe": true
     },
     {
       "type": "spotlight",
       "item": "buddycards:luminis_pickaxe",
-      "text": "The Luminis pickaxe is quite a rare find. They seem to work similarly to a perfect buddysteel pickaxe and will upgrade with your collection, and will also work with the same enchantments. It seems to increase your odds of finding deep luminis as well.",
+      "text": "The Luminis pickaxe is quite a rare find. They seem to work similarly to a perfect buddysteel pickaxe and will upgrade with your collection, and will also work with the same enchantments. It also increases your odds to find deep luminis by 5%",
       "link_recipe": true
     },
     {
@@ -32,7 +32,7 @@
     {
       "type": "spotlight",
       "item": "buddycards:luminis_medal",
-      "text": "The Luminis Medal is quite a neat trinket, and will boost the odds of getting deep luminis, as well as adding a chance to find a random card when mining luminis. Granted, this is very rare, and only works when you have all 3 specialty items.",
+      "text": "The Luminis Medal is quite a neat trinket, and will boost the odds of getting deep luminis by 3%, as well as adding a chance to find a random foil card when mining luminis. Granted, this is only 2% of the time and will never be epic.",
       "link_recipe": true
     },
     {

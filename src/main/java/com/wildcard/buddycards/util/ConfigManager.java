@@ -111,8 +111,8 @@ public class ConfigManager {
                 .defineInRange("luminis.perChunk", 2, 0, 36);
         luminisVeinSize = builder.comment("\nSize of Luminis veins, 1-36, default is 8")
                 .defineInRange("luminis.veinSize", 8, 1, 36);
-        deepLuminisOdds = builder.comment("\nOdds of deep Luminis crystals being dropped by Luminis ore, note this can be doubled with certain gear, 0 for 0%, 1 for 100%, default is 3.5%")
-                .defineInRange("luminis.deepLuminisOdds", .035, 0, 1);
+        deepLuminisOdds = builder.comment("\nOdds of deep Luminis crystals being dropped by Luminis ore, note this can be doubled with certain gear, 0 for 0%, 1 for 100%, default is 4%")
+                .defineInRange("luminis.deepLuminisOdds", .04, 0, 1);
         cardLuminisOdds = builder.comment("\nOdds of a random shiny non-epic card being dropped by Luminis ore when using the Luminis Medal, 0 for 0%, 1 for 100%, default is 2%")
                 .defineInRange("luminis.cardLuminisOdds", .02, 0, 1);
 
