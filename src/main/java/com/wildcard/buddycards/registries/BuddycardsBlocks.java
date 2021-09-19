@@ -34,6 +34,7 @@ public class BuddycardsBlocks {
     public static final RegistryObject<Block> PERFECT_BUDDYSTEEL_BLOCK = BLOCKS.register("perfect_buddysteel_block", () -> new Block(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)));
     //Yannel
     public static final RegistryObject<Block> YANNEL = BLOCKS.register("yannel", YannelCropBlock::new);
+    public static final RegistryObject<Block> YANNEL_SPOOL = BLOCKS.register("yannel_spool", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.PURPLE_WOOL)));
     //Other
     public static final RegistryObject<BoosterBoxBlock> MYSTERY_BB = BuddycardsBlocks.BLOCKS.register("booster_box_mystery", () -> new BoosterBoxBlock(0, BuddyCards.MOD_ID));
     //Card Display Blocks

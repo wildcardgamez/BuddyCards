@@ -205,6 +205,9 @@ public class BuddycardsItems {
     public static final RegistryObject<Item> LUMINIS_MEDAL = ITEMS.register("luminis_medal", () -> new MedalItem(MedalTypes.LUMNIS));
 
     public static final RegistryObject<BlockItem> YANNEL_SEEDS = ITEMS.register("yannel_seeds", () -> new BlockItem(BuddycardsBlocks.YANNEL.get(), new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> YANEL = ITEMS.register("yannel", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<Item> YANEL_FABRIC = ITEMS.register("yannel_fabric", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<BlockItem> YANNEL_SPOOL = ITEMS.register("yannel_spool", () -> new BlockItem(BuddycardsBlocks.YANNEL_SPOOL.get(), new Item.Properties().tab(BuddyCards.TAB)));
 
     public static final RegistryObject<BlockItem> PERFECT_BUDDYSTEEL_BLOCK_ITEM = ITEMS.register("perfect_buddysteel_block", () -> new BlockItem(BuddycardsBlocks.PERFECT_BUDDYSTEEL_BLOCK.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> PERFECT_BUDDYSTEEL_INGOT = ITEMS.register("perfect_buddysteel_ingot", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));

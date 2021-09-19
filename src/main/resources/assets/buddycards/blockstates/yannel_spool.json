@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "buddycards:block/yannel_spool_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "buddycards:block/yannel_spool"
+    },
+    "axis=z": {
+      "model": "buddycards:block/yannel_spool_horizontal",
+      "x": 90
+    }
+  }
+}
