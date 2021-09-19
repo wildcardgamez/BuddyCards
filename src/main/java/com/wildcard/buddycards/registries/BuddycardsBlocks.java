@@ -1,10 +1,7 @@
 package com.wildcard.buddycards.registries;
 
 import com.wildcard.buddycards.BuddyCards;
-import com.wildcard.buddycards.blocks.BoosterBoxBlock;
-import com.wildcard.buddycards.blocks.CardDisplayBlock;
-import com.wildcard.buddycards.blocks.CardStandBlock;
-import com.wildcard.buddycards.blocks.LuminisOreBlock;
+import com.wildcard.buddycards.blocks.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -35,6 +32,8 @@ public class BuddycardsBlocks {
     public static final RegistryObject<Block> DEEP_LUMINIS_CRYSTAL_BLOCK = BLOCKS.register("deep_luminis_crystal_block", () -> new Block(BlockBehaviour.Properties.copy(DEEP_LUMINIS_BLOCK.get()).sound(SoundType.AMETHYST)));
     public static final RegistryObject<Block> DEEP_LUMINIS_CRYSTAL_PILLAR = BLOCKS.register("deep_luminis_crystal_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(DEEP_LUMINIS_CRYSTAL_BLOCK.get())));
     public static final RegistryObject<Block> PERFECT_BUDDYSTEEL_BLOCK = BLOCKS.register("perfect_buddysteel_block", () -> new Block(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)));
+    //Yannel
+    public static final RegistryObject<Block> YANNEL = BLOCKS.register("yannel", YannelCropBlock::new);
     //Other
     public static final RegistryObject<BoosterBoxBlock> MYSTERY_BB = BuddycardsBlocks.BLOCKS.register("booster_box_mystery", () -> new BoosterBoxBlock(0, BuddyCards.MOD_ID));
     //Card Display Blocks

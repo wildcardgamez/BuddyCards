@@ -7,6 +7,7 @@ import com.wildcard.buddycards.client.renderer.CardStandBlockRenderer;
 import com.wildcard.buddycards.client.renderer.EnderlingRenderer;
 import com.wildcard.buddycards.integration.aquaculture.AquacultureIntegration;
 import com.wildcard.buddycards.items.CardItem;
+import com.wildcard.buddycards.registries.BuddycardsBlocks;
 import com.wildcard.buddycards.registries.BuddycardsEntities;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
@@ -14,6 +15,8 @@ import com.wildcard.buddycards.screen.BinderScreen;
 import com.wildcard.buddycards.screen.VaultScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -49,6 +52,7 @@ public class ClientStuff {
                     return 0;
             }));
         }
+        event.enqueueWork(() -> ItemBlockRenderTypes.setRenderLayer(BuddycardsBlocks.YANNEL.get(), RenderType.cutout()));
     }
 
     public static ModelLayerLocation ENDERLING_LAYER = new ModelLayerLocation(new ResourceLocation(BuddyCards.MOD_ID, "enderling"), "enderling");
