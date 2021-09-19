@@ -49,8 +49,6 @@ public class ClientStuff {
                     return 0;
             }));
         }
-        BlockEntityRenderers.register(BuddycardsEntities.CARD_DISPLAY_TILE.get(), CardDisplayBlockRenderer::new);
-        BlockEntityRenderers.register(BuddycardsEntities.CARD_STAND_TILE.get(), CardStandBlockRenderer::new);
     }
 
     public static ModelLayerLocation ENDERLING_LAYER = new ModelLayerLocation(new ResourceLocation(BuddyCards.MOD_ID, "enderling"), "enderling");
@@ -58,6 +56,8 @@ public class ClientStuff {
     @SubscribeEvent
     public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(BuddycardsEntities.ENDERLING.get(), EnderlingRenderer::new);
+        event.registerBlockEntityRenderer(BuddycardsEntities.CARD_DISPLAY_TILE.get(), CardDisplayBlockRenderer::new);
+        event.registerBlockEntityRenderer(BuddycardsEntities.CARD_STAND_TILE.get(), CardStandBlockRenderer::new);
     }
 
     @SubscribeEvent
