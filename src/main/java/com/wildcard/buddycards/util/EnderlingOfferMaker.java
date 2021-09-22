@@ -126,8 +126,12 @@ public class EnderlingOfferMaker {
             return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), amount + (int) (Math.random()/2*amount)), new ItemStack(BuddycardsItems.GRADING_SLEEVE.get(), amount/3 + 1), 3, amount, 1);
         if(random > .8)
             return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), amount + (int) (Math.random()*2*amount)), new ItemStack(BuddycardsItems.BUDDYSTEEL_NUGGET.get(), amount), 3, amount*2, 1);
-        if(random > .75)
+        if(random > .7)
             return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), 6 + (int) (Math.random()*4)), new ItemStack(BuddycardsItems.ENDER_BINDER.get()), 1, 6, 1);
+        if(random > .6)
+            return new MerchantOffer(new ItemStack(BuddycardsItems.YANEL_FABRIC.get(), amount), new ItemStack(BuddycardsItems.ZYLEX.get(), amount), 1, 6, 1);
+        if(random > .45)
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX.get(), 2 + (int) (Math.random()*4)), new ItemStack(BuddycardsItems.YANNEL_SEEDS.get(), amount), 1, 6, 1);
         if(random > .3)
             return createBulkCardBuyOffer();
         else
@@ -136,7 +140,7 @@ public class EnderlingOfferMaker {
 
     public static MerchantOffer createSpecialtyOffer(Random random) {
         double rand = Math.random() * 2;
-        if(rand%1 > .92) {
+        if(rand%1 > .9) {
             ItemStack medal = new ItemStack(BuddycardsItems.ZYLEX_MEDAL.get());
             if((int) rand != 0)
                 EnchantmentHelper.enchantItem(random, medal, 15, true);
@@ -148,11 +152,17 @@ public class EnderlingOfferMaker {
                 EnchantmentHelper.enchantItem(random, boots, 15, true);
             return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX_TOKEN.get(), 2 + (int) rand), boots, 1, 32, 1);
         }
-        else if(rand%1 > .4) {
+        else if(rand%1 > .7) {
+            ItemStack boots = new ItemStack(BuddycardsItems.ZYLEX_HOE.get());
+            if((int) rand != 0)
+                EnchantmentHelper.enchantItem(random, boots, 15, true);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX_TOKEN.get(), 2 + (int) rand), boots, 1, 32, 1);
+        }
+        else if(rand%1 > .3) {
             return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(BuddycardsItems.ZYLEX_RING.get()), 1, 32, 1);
         }
         else {
-            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX_TOKEN.get(), 2 + (int) rand), new ItemStack(BuddycardsItems.MYSTERY_PACK.get()), 2 + (int) (rand*2), 32, 1);
+            return new MerchantOffer(new ItemStack(BuddycardsItems.ZYLEX_TOKEN.get(), 2 + (int) (rand * 2)), new ItemStack(BuddycardsItems.MYSTERY_PACK.get()), 2 + (int) (rand*5), 32, 1);
         }
     }
 

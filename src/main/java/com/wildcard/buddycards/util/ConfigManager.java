@@ -70,8 +70,6 @@ public class ConfigManager {
 
     public static ForgeConfigSpec.DoubleValue aquacultureFishingChance;
 
-
-
     public static void init()
     {
         builder.comment("Buddycards config");

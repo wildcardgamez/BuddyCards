@@ -15,7 +15,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.OreBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.fml.ModList;
@@ -23,7 +22,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 
 public class LuminisOreBlock extends OreBlock {
     public LuminisOreBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.GOLD_ORE).lightLevel((state) -> 1));
+        super(Properties.copy(Blocks.GOLD_ORE).lightLevel((state) -> 1));
     }
 
     @Override

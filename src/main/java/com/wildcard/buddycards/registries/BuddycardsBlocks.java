@@ -2,8 +2,7 @@ package com.wildcard.buddycards.registries;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.blocks.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.*;;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,24 +16,24 @@ public class BuddycardsBlocks {
     }
 
     //Buddysteel Luminis and Zylex
-    public static final RegistryObject<Block> BUDDYSTEEL_BLOCK = BLOCKS.register("buddysteel_block", () -> new Block(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> ZYLEX_BLOCK = BLOCKS.register("zylex_block", () -> new Block(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> BUDDYSTEEL_BLOCK = BLOCKS.register("buddysteel_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> ZYLEX_BLOCK = BLOCKS.register("zylex_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> LUMINIS_ORE = BLOCKS.register("luminis_ore", LuminisOreBlock::new);
     public static final RegistryObject<Block> LUMINIS_ORE_DEEPSLATE = BLOCKS.register("luminis_ore_deepslate", LuminisOreBlock::new);
-    public static final RegistryObject<Block> LUMINIS_BLOCK = BLOCKS.register("luminis_block", () -> new Block(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.GOLD_BLOCK).lightLevel((state) -> 10)));
-    public static final RegistryObject<Block> LUMINIS_PANELS = BLOCKS.register("luminis_panels", () -> new Block(BlockBehaviour.Properties.copy(LUMINIS_BLOCK.get())));
-    public static final RegistryObject<Block> LUMINIS_SLAB = BLOCKS.register("luminis_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(LUMINIS_BLOCK.get())));
-    public static final RegistryObject<Block> LUMINIS_STAIRS = BLOCKS.register("luminis_stairs", () -> new StairBlock(() -> LUMINIS_PANELS.get().defaultBlockState(), BlockBehaviour.Properties.copy(LUMINIS_BLOCK.get())));
-    public static final RegistryObject<Block> LUMINIS_PILLAR = BLOCKS.register("luminis_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(LUMINIS_BLOCK.get())));
-    public static final RegistryObject<Block> LUMINIS_CRYSTAL_BLOCK = BLOCKS.register("luminis_crystal_block", () -> new Block(BlockBehaviour.Properties.copy(LUMINIS_BLOCK.get()).sound(SoundType.AMETHYST)));
-    public static final RegistryObject<Block> LUMINIS_CRYSTAL_PILLAR = BLOCKS.register("luminis_crystal_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(LUMINIS_CRYSTAL_BLOCK.get())));
-    public static final RegistryObject<Block> DEEP_LUMINIS_BLOCK = BLOCKS.register("deep_luminis_block", () -> new Block(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.GOLD_BLOCK).lightLevel((state) -> 8)));
-    public static final RegistryObject<Block> DEEP_LUMINIS_CRYSTAL_BLOCK = BLOCKS.register("deep_luminis_crystal_block", () -> new Block(BlockBehaviour.Properties.copy(DEEP_LUMINIS_BLOCK.get()).sound(SoundType.AMETHYST)));
-    public static final RegistryObject<Block> DEEP_LUMINIS_CRYSTAL_PILLAR = BLOCKS.register("deep_luminis_crystal_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(DEEP_LUMINIS_CRYSTAL_BLOCK.get())));
-    public static final RegistryObject<Block> PERFECT_BUDDYSTEEL_BLOCK = BLOCKS.register("perfect_buddysteel_block", () -> new Block(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> LUMINIS_BLOCK = BLOCKS.register("luminis_block", () -> new Block(Block.Properties.copy(Blocks.GOLD_BLOCK).lightLevel((state) -> 10)));
+    public static final RegistryObject<Block> LUMINIS_PANELS = BLOCKS.register("luminis_panels", () -> new Block(Block.Properties.copy(LUMINIS_BLOCK.get())));
+    public static final RegistryObject<Block> LUMINIS_SLAB = BLOCKS.register("luminis_slab", () -> new SlabBlock(Block.Properties.copy(LUMINIS_BLOCK.get())));
+    public static final RegistryObject<Block> LUMINIS_STAIRS = BLOCKS.register("luminis_stairs", () -> new StairBlock(() -> LUMINIS_PANELS.get().defaultBlockState(), Block.Properties.copy(LUMINIS_BLOCK.get())));
+    public static final RegistryObject<Block> LUMINIS_PILLAR = BLOCKS.register("luminis_pillar", () -> new RotatedPillarBlock(Block.Properties.copy(LUMINIS_BLOCK.get())));
+    public static final RegistryObject<Block> LUMINIS_CRYSTAL_BLOCK = BLOCKS.register("luminis_crystal_block", () -> new Block(Block.Properties.copy(LUMINIS_BLOCK.get()).sound(SoundType.AMETHYST)));
+    public static final RegistryObject<Block> LUMINIS_CRYSTAL_PILLAR = BLOCKS.register("luminis_crystal_pillar", () -> new RotatedPillarBlock(Block.Properties.copy(LUMINIS_CRYSTAL_BLOCK.get())));
+    public static final RegistryObject<Block> DEEP_LUMINIS_BLOCK = BLOCKS.register("deep_luminis_block", () -> new Block(Block.Properties.copy(Blocks.GOLD_BLOCK).lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> DEEP_LUMINIS_CRYSTAL_BLOCK = BLOCKS.register("deep_luminis_crystal_block", () -> new Block(Block.Properties.copy(DEEP_LUMINIS_BLOCK.get()).sound(SoundType.AMETHYST)));
+    public static final RegistryObject<Block> DEEP_LUMINIS_CRYSTAL_PILLAR = BLOCKS.register("deep_luminis_crystal_pillar", () -> new RotatedPillarBlock(Block.Properties.copy(DEEP_LUMINIS_CRYSTAL_BLOCK.get())));
+    public static final RegistryObject<Block> PERFECT_BUDDYSTEEL_BLOCK = BLOCKS.register("perfect_buddysteel_block", () -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)));
     //Yannel
     public static final RegistryObject<Block> YANNEL = BLOCKS.register("yannel", YannelCropBlock::new);
-    public static final RegistryObject<Block> YANNEL_SPOOL = BLOCKS.register("yannel_spool", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.PURPLE_WOOL)));
+    public static final RegistryObject<Block> YANNEL_SPOOL = BLOCKS.register("yannel_spool", () -> new RotatedPillarBlock(Block.Properties.copy(Blocks.PURPLE_WOOL)));
     //Other
     public static final RegistryObject<BoosterBoxBlock> MYSTERY_BB = BuddycardsBlocks.BLOCKS.register("booster_box_mystery", () -> new BoosterBoxBlock(0, BuddyCards.MOD_ID));
     //Card Display Blocks
@@ -46,7 +45,7 @@ public class BuddycardsBlocks {
     public static final RegistryObject<Block> DARK_OAK_CARD_DISPLAY = BLOCKS.register("dark_oak_card_display", CardDisplayBlock::new);
     public static final RegistryObject<Block> CRIMSON_CARD_DISPLAY = BLOCKS.register("crimson_card_display", CardDisplayBlock::new);
     public static final RegistryObject<Block> WARPED_CARD_DISPLAY = BLOCKS.register("warped_card_display", CardDisplayBlock::new);
-    public static final RegistryObject<Block> LUMINIS_CARD_DISPLAY = BLOCKS.register("luminis_card_display", () -> new CardDisplayBlock(BlockBehaviour.Properties.copy(LUMINIS_PANELS.get())));
+    public static final RegistryObject<Block> LUMINIS_CARD_DISPLAY = BLOCKS.register("luminis_card_display", () -> new CardDisplayBlock(Block.Properties.copy(LUMINIS_PANELS.get())));
     public static final RegistryObject<Block> CARD_STAND = BLOCKS.register("card_stand", CardStandBlock::new);
     //Byg Card Display Blocks
     public static final RegistryObject<Block> ASPEN_CARD_DISPLAY = BLOCKS.register("aspen_card_display", () -> new CardDisplayBlock("byg"));

@@ -8,6 +8,7 @@ import net.minecraft.util.LazyLoadedValue;
 public enum BuddysteelItemTier implements Tier {
     BUDDYSTEEL(2048, 6f, 0, 2, 8, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.BUDDYSTEEL_INGOT.get()))),
     PERFECT_BUDDYSTEEL(3072, 7.5f, 0, 3, 10, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.PERFECT_BUDDYSTEEL_INGOT.get()))),
+    ZYLEX(1024, 8f, 0, 3, 15, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.ZYLEX.get()))),
     LUMINIS(1024, 8f, 0, 3, 12, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.LUMINIS.get())));
 
     BuddysteelItemTier(int uses, float speed, float dmg, int level, int ench, LazyLoadedValue<Ingredient> mat) {
