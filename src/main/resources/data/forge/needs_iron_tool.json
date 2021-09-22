@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "buddycards:buddysteel_block",
+    "buddycards:buddysteel_vault.1",
+    "buddycards:buddysteel_vault.2",
+    "buddycards:buddysteel_vault.3",
+    "buddycards:buddysteel_vault.4",
+    "buddycards:buddysteel_vault.5",
+    "buddycards:buddysteel_vault.6",
+    "buddycards:buddysteel_vault.7",
+    "buddycards:deep_luminis_block",
+    "buddycards:deep_luminis_crystal_block",
+    "buddycards:deep_luminis_crystal_pillar",
+    "buddycards:luminis_block",
+    "buddycards:luminis_card_display",
+    "buddycards:luminis_crystal_block",
+    "buddycards:luminis_crystal_pillar",
+    "buddycards:luminis_ore",
+    "buddycards:luminis_ore_deepslate",
+    "buddycards:luminis_panels",
+    "buddycards:luminis_pillar",
+    "buddycards:luminis_slab",
+    "buddycards:luminis_stairs",
+    "buddycards:perfect_buddysteel_block",
+    "buddycards:zylex_block"
+  ]
+}
