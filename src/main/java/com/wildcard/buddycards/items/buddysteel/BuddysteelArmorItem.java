@@ -3,6 +3,7 @@ package com.wildcard.buddycards.items.buddysteel;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.client.models.PerfectBuddysteelArmorModel;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.NonNullList;
@@ -32,7 +33,7 @@ public class BuddysteelArmorItem extends ArmorItem implements IItemRenderPropert
     private static final int[][] DAMAGE_REDUCTION_ARRAY = new int[][] {{1, 4, 5, 2}, {2, 5, 6, 2}, {3, 6, 8, 3}, {4, 7, 9, 4}, {5, 8, 10, 5}};
 
     public BuddysteelArmorItem(ArmorMaterial materialIn, EquipmentSlot slot) {
-        super(materialIn, slot, new Item.Properties().tab(BuddyCards.TAB));
+        super(materialIn, slot, new Item.Properties().tab(BuddyCards.TAB).);
     }
 
     @Override
@@ -68,11 +69,11 @@ public class BuddysteelArmorItem extends ArmorItem implements IItemRenderPropert
         return multimap;
     }
 
-    /*@Override
+    @Override
     @OnlyIn(Dist.CLIENT)
     public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-        if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL) || material.equals(BuddysteelArmorMaterial.ZYLEX))
-            return (A) new PerfectBuddysteelArmorModel(slot);
+        if (!material.equals(BuddysteelArmorMaterial.BUDDYSTEEL))
+            return (A) new PerfectBuddysteelArmorModel(PerfectBuddysteelArmorModel.createBodyLayer().bakeRoot(), slot);
         return IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
     }
 
@@ -82,10 +83,10 @@ public class BuddysteelArmorItem extends ArmorItem implements IItemRenderPropert
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL))
             return BuddyCards.MOD_ID + ":textures/models/armor/perfect_buddysteel.png";
-        if (material.equals(BuddysteelArmorMaterial.ZYLEX))
-            return BuddyCards.MOD_ID + ":textures/models/armor/zylex.png";
+        if (material.equals(BuddysteelArmorMaterial.ZYLEX) || material.equals(BuddysteelArmorMaterial.LUMINIS))
+            return BuddyCards.MOD_ID + ":textures/models/armor/zylu.png";
         return super.getArmorTexture(stack, entity, slot, type);
-    }*/
+    }
 
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
