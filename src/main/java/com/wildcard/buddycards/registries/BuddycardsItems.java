@@ -201,7 +201,7 @@ public class BuddycardsItems {
     public static final RegistryObject<Item> LUMINIS_PANEL = ITEMS.register("luminis_panel", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> DEEP_LUMINIS_CRYSTAL = ITEMS.register("deep_luminis_crystal", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> DEEP_LUMINIS = ITEMS.register("deep_luminis", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
-    public static final RegistryObject<Item> LUMINIS_BOOTS = ITEMS.register("luminis_helmet", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.ZYLEX, EquipmentSlot.HEAD));
+    public static final RegistryObject<Item> LUMINIS_HELMET = ITEMS.register("luminis_helmet", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.LUMINIS, EquipmentSlot.HEAD));
     public static final RegistryObject<Item> LUMINIS_PICKAXE = ITEMS.register("luminis_pickaxe", () -> new BuddysteelPickaxeItem(BuddysteelItemTier.LUMINIS, 2));
     public static final RegistryObject<Item> LUMINIS_RING = ITEMS.register("luminis_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> LUMINIS_MEDAL = ITEMS.register("luminis_medal", () -> new MedalItem(MedalTypes.LUMNIS));

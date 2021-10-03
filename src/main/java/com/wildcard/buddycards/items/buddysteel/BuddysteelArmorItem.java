@@ -3,6 +3,7 @@ package com.wildcard.buddycards.items.buddysteel;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.client.PerfectBuddysteelArmorLayers;
 import com.wildcard.buddycards.client.models.PerfectBuddysteelArmorModel;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import net.minecraft.client.model.HumanoidModel;
@@ -27,13 +28,14 @@ import net.minecraftforge.client.IItemRenderProperties;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
-public class BuddysteelArmorItem extends ArmorItem implements IItemRenderProperties {
+public class BuddysteelArmorItem extends ArmorItem {
     private static final UUID[] ARMOR_MODIFIERS = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"), UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"), UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
     private static final int[][] DAMAGE_REDUCTION_ARRAY = new int[][] {{1, 4, 5, 2}, {2, 5, 6, 2}, {3, 6, 8, 3}, {4, 7, 9, 4}, {5, 8, 10, 5}};
 
     public BuddysteelArmorItem(ArmorMaterial materialIn, EquipmentSlot slot) {
-        super(materialIn, slot, new Item.Properties().tab(BuddyCards.TAB).);
+        super(materialIn, slot, new Item.Properties().tab(BuddyCards.TAB));
     }
 
     @Override
@@ -70,25 +72,6 @@ public class BuddysteelArmorItem extends ArmorItem implements IItemRenderPropert
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-        if (!material.equals(BuddysteelArmorMaterial.BUDDYSTEEL))
-            return (A) new PerfectBuddysteelArmorModel(PerfectBuddysteelArmorModel.createBodyLayer().bakeRoot(), slot);
-        return IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
-    }
-
-    @Nullable
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        if (material.equals(BuddysteelArmorMaterial.PERFECT_BUDDYSTEEL))
-            return BuddyCards.MOD_ID + ":textures/models/armor/perfect_buddysteel.png";
-        if (material.equals(BuddysteelArmorMaterial.ZYLEX) || material.equals(BuddysteelArmorMaterial.LUMINIS))
-            return BuddyCards.MOD_ID + ":textures/models/armor/zylu.png";
-        return super.getArmorTexture(stack, entity, slot, type);
-    }
-
-    @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         //Add an alternative with max power for creative menu
         if (this.allowdedIn(group)) {
@@ -98,6 +81,23 @@ public class BuddysteelArmorItem extends ArmorItem implements IItemRenderPropert
             maxed.setTag(nbt);
             items.add(new ItemStack(this));
             items.add(maxed);
+        }
+    }
+
+    public static final Render renderStuff = new Render();
+
+    @Override
+    public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+        consumer.accept(renderStuff);
+    }
+
+    private static final class Render implements IItemRenderProperties {
+        @Override
+        @OnlyIn(Dist.CLIENT)
+        public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
+            if (!((ArmorItem)itemStack.getItem()).getMaterial().equals(BuddysteelArmorMaterial.BUDDYSTEEL))
+                return (A) PerfectBuddysteelArmorLayers.getArmor(armorSlot);
+            return IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
         }
     }
 }
