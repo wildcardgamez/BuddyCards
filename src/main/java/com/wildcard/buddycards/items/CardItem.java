@@ -110,19 +110,6 @@ public class CardItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        //TEMPORARY! FIX OLD FOIL CARDS...
-        if(worldIn instanceof ServerLevel && playerIn.getItemInHand(handIn).getItem().getRegistryName().toString().endsWith("s")) {
-            CompoundTag nbt = new CompoundTag();
-            if (playerIn.getItemInHand(handIn).hasTag())
-                nbt = playerIn.getItemInHand(handIn).getTag();
-            nbt.putBoolean("foil", true);
-            int count = playerIn.getItemInHand(handIn).getCount();
-            String name = playerIn.getItemInHand(handIn).getItem().getRegistryName().toString();
-            ItemStack card = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(name.substring(0, name.length() - 1))), count);
-            playerIn.getItemInHand(handIn).shrink(count);
-            card.setTag(nbt);
-            ItemHandlerHelper.giveItemToPlayer(playerIn, card);
-        }
         //If its in the main hand try to grade it (Checks off hand)
         if (handIn == InteractionHand.MAIN_HAND)
             return tryGrade(BuddycardsItems.GRADING_SLEEVE.get(), worldIn, playerIn, handIn);
