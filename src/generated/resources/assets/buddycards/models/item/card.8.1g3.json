@@ -1,0 +1,7 @@
+{
+  "parent": "buddycards:item/card",
+  "textures": {
+    "layer0": "buddycards:items/promo_set/1",
+    "layer1": "buddycards:items/grade/3"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "buddycards:item/card",
+  "textures": {
+    "layer0": "buddycards:items/promo_set/2"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "minecraft:grade": 1.0
+      },
+      "model": "buddycards:item/card.8.2g1"
+    },
+    {
+      "predicate": {
+        "minecraft:grade": 2.0
+      },
+      "model": "buddycards:item/card.8.2g2"
+    },
+    {
+      "predicate": {
+        "minecraft:grade": 3.0
+      },
+      "model": "buddycards:item/card.8.2g3"
+    },
+    {
+      "predicate": {
+        "minecraft:grade": 4.0
+      },
+      "model": "buddycards:item/card.8.2g4"
+    },
+    {
+      "predicate": {
+        "minecraft:grade": 5.0
+      },
+      "model": "buddycards:item/card.8.2g5"
+    }
+  ]
+}

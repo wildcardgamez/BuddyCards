@@ -30,6 +30,9 @@ public class CardModelGen extends ItemModelProvider {
         for (int i = 1; i<= 6; i++) {
             genGummyCardModels(i);
         }
+        for (int i = 1; i <= 3; i++) {
+            genCardModels(8, i);
+        }
     }
 
     /**
@@ -66,6 +69,7 @@ public class CardModelGen extends ItemModelProvider {
             case 5: return "items/create_set/";
             case 6: return "items/aquaculture_set/";
             case 7: return "items/fd_set/";
+            case 8: return "items/promo_set/";
             default: return "error";
         }
     }

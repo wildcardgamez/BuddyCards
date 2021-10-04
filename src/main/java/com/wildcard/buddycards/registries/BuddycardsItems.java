@@ -14,6 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import net.minecraft.world.food.FoodProperties;
@@ -49,6 +50,7 @@ public class BuddycardsItems {
         FD_SET.addCards18();
         FD_SET.addGummyCards();
         FD_SET.finishCards();
+        setUpHolidayCards();
     }
 
     public static final BuddycardSet BASE_SET = new BuddycardSet(1, "buddycards", MedalTypes.BASE_SET);
@@ -58,6 +60,21 @@ public class BuddycardsItems {
     public static final BuddycardSet CREATE_SET = new BuddycardSet(5, "create", MedalTypes.CREATE_SET);
     public static final BuddycardSet AQUACULTURE_SET = new BuddycardSet(6, "aquaculture", MedalTypes.AQUACULTURE_SET, 3);
     public static final BuddycardSet FD_SET = new BuddycardSet(7, "farmersdelight", MedalTypes.FD_SET, 3);
+
+    static public void setUpHolidayCards() {
+        ArrayList<RegistryObject<CardItem>> CARDS = new ArrayList<>();
+        for (int i = 1; i <= 3; i++) {
+            int finalI = i;
+            CARDS.add(ITEMS.register("card.8." + i, () -> new CardItem(8, finalI, Rarity.RARE, "buddycards")));
+        }
+        Calendar calendar = Calendar.getInstance();
+        if(calendar.get(Calendar.MONTH) == Calendar.OCTOBER && calendar.get(Calendar.DATE) >= 30) {
+            for(RegistryObject<CardItem> card : CARDS) {
+                LOADED_CARDS.add(card);
+                ALL_CARDS.add(card);
+            }
+        }
+    }
 
     static public class BuddycardSet {
         public final ArrayList<RegistryObject<CardItem>> CARDS = new ArrayList<>();

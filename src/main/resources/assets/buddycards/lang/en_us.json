@@ -608,5 +608,15 @@
   "advancements.buddycards.main.buddygummy": "Tasty Gummies",
   "advancements.buddycards.main.buddygummy.desc": "Chop up Buddygummies into Assorted Gummies",
   "advancements.buddycards.main.complete_set7": "Farmer's Delight Set",
-  "advancements.buddycards.main.complete_set7.desc": "Get every card from the farmer's delight set"
+  "advancements.buddycards.main.complete_set7.desc": "Get every card from the farmer's delight set",
+
+  "item.buddycards.card.8.1": "Yin",
+  "item.buddycards.card.8.1.tooltip": "Everybody thinks she's bad luck. Well she is.",
+  "item.buddycards.promo.1": "Halloween Promo - 1",
+  "item.buddycards.card.8.2": "Spoopy",
+  "item.buddycards.card.8.2.tooltip": "Voted most popular Buddycard of 2021.",
+  "item.buddycards.promo.2": "Halloween Promo - 2",
+  "item.buddycards.card.8.3": "Vwoop",
+  "item.buddycards.card.8.3.tooltip": "Your candies, hand'em over.",
+  "item.buddycards.promo.3": "Halloween Promo - 3"
 }

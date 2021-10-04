@@ -21,6 +21,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class CardItem extends Item {
@@ -62,13 +63,22 @@ public class CardItem extends Item {
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         //Add the card description
         tooltip.add(new TranslatableComponent("item.buddycards.card." + SET_NUMBER + "." + CARD_NUMBER + ".tooltip"));
-        TranslatableComponent cn = new TranslatableComponent("item.buddycards.number_separator");
-        cn.append("" + CARD_NUMBER);
-        //Add the star to the prefix when it's a shiny variant
-        if (isFoil(stack))
-            cn.append(new TranslatableComponent("item.buddycards.shiny_symbol"));
-        //Add the card info (SetName - Card# Shiny symbol)
-        tooltip.add(new TranslatableComponent("item.buddycards.set." + SET_NUMBER).append(cn));
+        if(SET_NUMBER == 8) {
+            TranslatableComponent cn = new TranslatableComponent("item.buddycards.promo." + CARD_NUMBER);
+            if (isFoil(stack))
+                cn.append(new TranslatableComponent("item.buddycards.shiny_symbol"));
+            tooltip.add(cn);
+        }
+        else {
+            TranslatableComponent cn = new TranslatableComponent("item.buddycards.number_separator");
+            cn.append("" + CARD_NUMBER);
+            //Add the star to the prefix when it's a shiny variant
+            if (isFoil(stack))
+                cn.append(new TranslatableComponent("item.buddycards.shiny_symbol"));
+            //Add the card info (SetName - Card# Shiny symbol) or (Promo Type - Shiny symbol)
+
+            tooltip.add(new TranslatableComponent("item.buddycards.set." + SET_NUMBER).append(cn));
+        }
         //Add the grading if the card is graded
         if (stack.getTag() != null && stack.getTag().getInt("grade") != 0)
             tooltip.add(new TranslatableComponent("item.buddycards.grade_info").append(
@@ -98,13 +108,23 @@ public class CardItem extends Item {
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
         //Only show cards in the creative menu when the respective mod is loaded
-        if (this.allowdedIn(group) && ModList.get().isLoaded(MOD_ID)) {
-            ItemStack foil = new ItemStack(this);
-            CompoundTag nbt = new CompoundTag();
-            nbt.putBoolean("foil", true);
-            foil.setTag(nbt);
-            items.add(new ItemStack(this));
-            items.add(foil);
+        if(this.allowdedIn(group)) {
+            boolean doFill = false;
+            if (SET_NUMBER == 8) {
+                Calendar calendar = Calendar.getInstance();
+                if (CARD_NUMBER <= 3 && calendar.get(Calendar.MONTH) == Calendar.OCTOBER && calendar.get(Calendar.DATE) >= 30)
+                    doFill = true;
+            }
+            else if (ModList.get().isLoaded(MOD_ID))
+                doFill = true;
+            if (doFill) {
+                ItemStack foil = new ItemStack(this);
+                CompoundTag nbt = new CompoundTag();
+                nbt.putBoolean("foil", true);
+                foil.setTag(nbt);
+                items.add(new ItemStack(this));
+                items.add(foil);
+            }
         }
     }
 
