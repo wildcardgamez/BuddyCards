@@ -38,20 +38,20 @@ public class PerfectBuddysteelArmorModel<T extends LivingEntity> extends Humanoi
 		if(!slot.equals(EquipmentSlot.LEGS)) {
 			partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(1.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-			PartDefinition left_leg = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-2.5F, 0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.0F)).mirror(false), PartPose.offset(2.5F, 18.0F, 0.0F));
-			left_leg.addOrReplaceChild("left_tongue_r1", CubeListBuilder.create().texOffs(18, 42).addBox(-2.0F, -1.0F, -2.0F, 5.0F, 2.0F, 4.0F, new CubeDeformation(1.1F)), PartPose.offsetAndRotation(0.0F, 5.5F, 0.0F, 0.0F, 0.0F, -0.2618F));
+			PartDefinition left_leg = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-2.0F, 0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.0F)).mirror(false), PartPose.offset(2.5F, 18.0F, 0.0F));
+			left_leg.addOrReplaceChild("left_tongue_r1", CubeListBuilder.create().texOffs(18, 42).addBox(-2.0F, -1.0F, -2.0F, 5.0F, 2.0F, 4.0F, new CubeDeformation(1.1F)), PartPose.offsetAndRotation(1.0F, 5.5F, 0.0F, 0.0F, 0.0F, -0.2618F));
 
-			PartDefinition right_leg = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-1.5F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.0F)), PartPose.offset(-2.5F, 18.0F, 0.0F));
-			right_leg.addOrReplaceChild("right_tongue_r1", CubeListBuilder.create().texOffs(0, 42).addBox(-3.0F, -1.0F, -2.0F, 5.0F, 2.0F, 4.0F, new CubeDeformation(1.1F)), PartPose.offsetAndRotation(0.0F, 5.5F, 0.0F, 0.0F, 0.0F, 0.2618F));
+			PartDefinition right_leg = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(1.0F)), PartPose.offset(-2.5F, 18.0F, 0.0F));
+			right_leg.addOrReplaceChild("right_tongue_r1", CubeListBuilder.create().texOffs(0, 42).addBox(-3.0F, -1.0F, -2.0F, 5.0F, 2.0F, 4.0F, new CubeDeformation(1.1F)), PartPose.offsetAndRotation(-1.0F, 5.5F, 0.0F, 0.0F, 0.0F, 0.2618F));
 		}
 		else {
 			partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 48).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.5F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-			PartDefinition left_leg2 = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 48).mirror().addBox(-2.5F, 0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.5F)).mirror(false), PartPose.offset(2.5F, 16.75F, 0.0F));
-			left_leg2.addOrReplaceChild("left_bump_r1", CubeListBuilder.create().texOffs(36, 37).addBox(-1.0F, -0.5F, -2.0F, 3.0F, 1.0F, 4.0F, new CubeDeformation(0.7F)), PartPose.offsetAndRotation(0.0F, 3.25F, 0.0F, 0.0F, 0.0F, -0.3927F));
+			PartDefinition left_leg2 = partdefinition.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 48).mirror().addBox(-2.0F, 0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.5F)).mirror(false), PartPose.offset(2.5F, 16.75F, 0.0F));
+			left_leg2.addOrReplaceChild("left_bump_r1", CubeListBuilder.create().texOffs(36, 37).addBox(-1.0F, -0.5F, -2.0F, 3.0F, 1.0F, 4.0F, new CubeDeformation(0.7F)), PartPose.offsetAndRotation(1.0F, 3.25F, 0.0F, 0.0F, 0.0F, -0.3927F));
 
-			PartDefinition right_leg2 = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 48).addBox(-1.5F, 0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.5F)), PartPose.offset(-2.5F, 16.75F, 0.0F));
-			right_leg2.addOrReplaceChild("right_bump_r1", CubeListBuilder.create().texOffs(36, 32).addBox(-2.0F, -0.5F, -2.0F, 3.0F, 1.0F, 4.0F, new CubeDeformation(0.7F)), PartPose.offsetAndRotation(0.0F, 3.25F, 0.0F, 0.0F, 0.0F, 0.3927F));
+			PartDefinition right_leg2 = partdefinition.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 48).addBox(-2.0F, 0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.5F)), PartPose.offset(-2.5F, 16.75F, 0.0F));
+			right_leg2.addOrReplaceChild("right_bump_r1", CubeListBuilder.create().texOffs(36, 32).addBox(-2.0F, -0.5F, -2.0F, 3.0F, 1.0F, 4.0F, new CubeDeformation(0.7F)), PartPose.offsetAndRotation(-1.0F, 3.25F, 0.0F, 0.0F, 0.0F, 0.3927F));
 		}
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
