@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "buddycards:yannel_fabric"
+    }
+  },
+  "result": {
+    "item": "buddycards:yannel_spool"
+  }
+}

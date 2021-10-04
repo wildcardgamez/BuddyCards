@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "X": {
+      "item": "buddycards:yannel"
+    }
+  },
+  "result": {
+    "item": "buddycards:yannel_fabric"
+  }
+}

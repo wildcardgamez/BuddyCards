@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "buddycards:yannel"
+    }
+  ],
+  "result":
+  {
+    "item": "buddycards:yannel_seeds",
+    "count": 1
+  }
+}
