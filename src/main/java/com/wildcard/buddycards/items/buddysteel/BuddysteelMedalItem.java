@@ -1,5 +1,6 @@
 package com.wildcard.buddycards.items.buddysteel;
 
+import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.items.MedalItem;
 import com.wildcard.buddycards.items.MedalTypes;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class BuddysteelMedalItem extends MedalItem {
     public BuddysteelMedalItem(MedalTypes type) {
-        super(MedalTypes.PERFECT);
+        super(MedalTypes.PERFECT, BuddyCards.MOD_ID);
     }
 
     @Override

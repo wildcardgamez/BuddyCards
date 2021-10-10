@@ -95,7 +95,7 @@ public class BuddycardsItems {
             VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
             BB = BuddycardsBlocks.BLOCKS.register("booster_box." + setNumber, () -> new BoosterBoxBlock(setNumber, modId));
             BB_ITEM = ITEMS.register("booster_box." + setNumber, () -> new BoosterBoxItem(BB.get(), new Item.Properties().tab(BuddyCards.TAB), setNumber));
-            MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType));
+            MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType, modId));
             SET_NUMBER = setNumber;
             MOD_ID = modId;
         }
@@ -107,7 +107,7 @@ public class BuddycardsItems {
             VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
             BB = BuddycardsBlocks.BLOCKS.register("booster_box." + setNumber, () -> new BoosterBoxBlock(setNumber, modId));
             BB_ITEM = ITEMS.register("booster_box." + setNumber, () -> new BlockItem(BB.get(), new Item.Properties().tab(BuddyCards.TAB)));
-            MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType));
+            MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType, modId));
             SET_NUMBER = setNumber;
             MOD_ID = modId;
         }
@@ -199,7 +199,7 @@ public class BuddycardsItems {
     public static final RegistryObject<Item> ZYLEX_BOOTS = ITEMS.register("zylex_boots", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.ZYLEX, EquipmentSlot.FEET));
     public static final RegistryObject<Item> ZYLEX_HOE = ITEMS.register("zylex_hoe", () -> new BuddysteelHoeItem(BuddysteelItemTier.ZYLEX, 2));
     public static final RegistryObject<Item> ZYLEX_RING = ITEMS.register("zylex_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> ZYLEX_MEDAL = ITEMS.register("zylex_medal", () -> new MedalItem(MedalTypes.ZYLEX));
+    public static final RegistryObject<Item> ZYLEX_MEDAL = ITEMS.register("zylex_medal", () -> new MedalItem(MedalTypes.ZYLEX, BuddyCards.MOD_ID));
 
     public static final RegistryObject<BlockItem> LUMINIS_ORE_ITEM = ITEMS.register("luminis_ore", () -> new BlockItem(BuddycardsBlocks.LUMINIS_ORE.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<BlockItem> LUMINIS_ORE_DEEPSLATE_ITEM = ITEMS.register("luminis_ore_deepslate", () -> new BlockItem(BuddycardsBlocks.LUMINIS_ORE_DEEPSLATE.get(), new Item.Properties().tab(BuddyCards.TAB)));
@@ -221,7 +221,7 @@ public class BuddycardsItems {
     public static final RegistryObject<Item> LUMINIS_HELMET = ITEMS.register("luminis_helmet", () -> new BuddysteelArmorItem(BuddysteelArmorMaterial.LUMINIS, EquipmentSlot.HEAD));
     public static final RegistryObject<Item> LUMINIS_PICKAXE = ITEMS.register("luminis_pickaxe", () -> new BuddysteelPickaxeItem(BuddysteelItemTier.LUMINIS, 2));
     public static final RegistryObject<Item> LUMINIS_RING = ITEMS.register("luminis_band", () -> new Item(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> LUMINIS_MEDAL = ITEMS.register("luminis_medal", () -> new MedalItem(MedalTypes.LUMNIS));
+    public static final RegistryObject<Item> LUMINIS_MEDAL = ITEMS.register("luminis_medal", () -> new MedalItem(MedalTypes.LUMNIS, BuddyCards.MOD_ID));
 
     public static final RegistryObject<BlockItem> YANNEL_SEEDS = ITEMS.register("yannel_seeds", () -> new BlockItem(BuddycardsBlocks.YANNEL.get(), new Item.Properties().tab(BuddyCards.TAB)));
     public static final RegistryObject<Item> YANEL = ITEMS.register("yannel", () -> new Item(new Item.Properties().tab(BuddyCards.TAB)));
