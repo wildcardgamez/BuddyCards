@@ -33,9 +33,12 @@ public enum MedalTypes {
         player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 300, mod, true, false));
     }, Rarity.UNCOMMON),
     AQUACULTURE_SET((player, mod) -> {
-        player.addEffect(new MobEffectInstance(MobEffects.LUCK, 300, mod / 2, true, false));
-        if (mod > 0)
-            player.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, 300, 0, true, false));
+        player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 300, 0, true, false));
+        if (mod > 0 && player.isUnderWater()) {
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1800, 0, true, false));
+            if (mod > 1)
+                player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 300, 0, true, false));
+        }
     }, Rarity.UNCOMMON),
     FD_SET((player, mod) -> {
         //player.addEffect(new MobEffectInstance(ModEffects.NOURISHED.get(), 300, 0, true, false));
