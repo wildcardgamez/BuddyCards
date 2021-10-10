@@ -22,7 +22,7 @@ public class EnchantmentBuddycardBreak extends Enchantment {
 
     @Override
     public int getMaxLevel() {
-        return 4;
+        return 0;
     }
 
     @Override
@@ -44,4 +44,5 @@ public class EnchantmentBuddycardBreak extends Enchantment {
     public boolean isAllowedOnBooks() {
         return false;
     }
+
 }

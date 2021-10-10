@@ -21,7 +21,7 @@ import java.util.List;
 public class BuddysteelGearHelper {
     public static void addInformation(ItemStack stack, List<Component> tooltip) {
         if(!stack.hasTag())
-            tooltip.add(new TranslatableComponent( "item." + BuddyCards.MOD_ID + ".buddysteel_gear.desc1"));
+            tooltip.add(new TranslatableComponent( "item.buddycards.buddysteel_gear.desc"));
     }
 
     public static boolean setTag(Player playerIn, InteractionHand handIn) {
@@ -32,16 +32,16 @@ public class BuddysteelGearHelper {
             ItemStack stack = playerIn.getItemInHand(handIn);
             //If it can have the enchant, make sure it's the right level or change it
             if(BuddyEnchantmentHandler.BUDDY_TOOLS.canEnchant(stack.getItem()))
-                if(setEnchant((int) (ratio * 4), stack, BuddycardsMisc.BUDDY_EFF.get()))
+                if(setEnchant((int) (ratio * 4), stack, BuddycardsMisc.BUDDY_EFF.get(), playerIn))
                     altered = true;
             if(BuddyEnchantmentHandler.BUDDY_ARMOR.canEnchant(stack.getItem()))
-                if(setEnchant((int) (ratio * 4), stack, BuddycardsMisc.BUDDY_PROT.get()))
+                if(setEnchant((int) (ratio * 4), stack, BuddycardsMisc.BUDDY_PROT.get(), playerIn))
                     altered = true;
             if(BuddyEnchantmentHandler.BUDDY_WEAPONS.canEnchant(stack.getItem()))
-                if(setEnchant((int) (ratio * 4), stack, BuddycardsMisc.BUDDY_DMG.get()))
+                if(setEnchant((int) (ratio * 4), stack, BuddycardsMisc.BUDDY_DMG.get(), playerIn))
                     altered = true;
             if(BuddyEnchantmentHandler.BUDDY_MEDAL.canEnchant(stack.getItem()))
-                if(setEnchant((int) (ratio * 5), stack, BuddycardsMisc.BUDDY_BOOST.get()))
+                if(setEnchant((int) (ratio * 5), stack, BuddycardsMisc.BUDDY_BOOST.get(), playerIn))
                     altered = true;
             return altered;
         }
@@ -59,19 +59,16 @@ public class BuddysteelGearHelper {
         return (float)i/total;
     }
 
-    public static boolean setEnchant(int level, ItemStack stack, Enchantment enchantment) {
+    public static boolean setEnchant(int level, ItemStack stack, Enchantment enchantment, Player player) {
         int initialLevel = EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack);
         //Check if changes are needed
-        System.out.println(enchantment.getRegistryName() + " initial vs expected: " + initialLevel + "::" + level);
         if(level == initialLevel)
             return false;
-        CompoundTag tag;
-        if(stack.hasTag())
-            tag = stack.getTag();
-        else
-            tag = new CompoundTag();
-        EnchantmentHelper.setEnchantmentLevel(tag, level);
-        stack.setTag(tag);
+        if(initialLevel != 0) {
+            player.displayClientMessage(new TranslatableComponent("item.buddycards.buddysteel_gear.warn"), true);
+            return false;
+        }
+        stack.enchant(enchantment, level);
         return true;
     }
 }

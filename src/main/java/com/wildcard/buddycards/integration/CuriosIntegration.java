@@ -49,8 +49,6 @@ public class CuriosIntegration {
             public void curioTick(String identifier, int index, LivingEntity livingEntity) {
                 if (livingEntity instanceof Player && ConfigManager.doMedalEffects.get()) {
                     int mod = EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.BUDDY_BOOST.get(), itemStack);
-                    if(type.equals(MedalTypes.PERFECT) && itemStack.hasTag() && itemStack.getTag().contains("completion"))
-                        mod += (int) (itemStack.getTag().getDouble("completion") * 3);
                     type.applyEffect((Player) livingEntity, mod);
                 }
             }
