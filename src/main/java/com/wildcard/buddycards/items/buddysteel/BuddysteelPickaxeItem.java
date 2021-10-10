@@ -1,7 +1,10 @@
 package com.wildcard.buddycards.items.buddysteel;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +16,6 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ToolType;
 
 import java.util.List;
 
@@ -35,24 +37,13 @@ public class BuddysteelPickaxeItem extends PickaxeItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        BuddysteelGearHelper.setTag(playerIn, handIn);
-        return super.use(worldIn, playerIn, handIn);
+        if (!BuddysteelGearHelper.setTag(playerIn, handIn))
+            return super.use(worldIn, playerIn, handIn);
+        return new InteractionResultHolder<>(InteractionResult.SUCCESS, playerIn.getItemInHand(handIn));
     }
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
-        float eff = super.getDestroySpeed(stack, state);
-        if (stack.hasTag() && eff == speed)
-            return eff + (int) (4 * stack.getTag().getFloat("completion"));
-        else
-            return eff;
-    }
-
-    @Override
-    public int getHarvestLevel(ItemStack stack, ToolType tool, Player player, BlockState state) {
-        if (!stack.hasTag())
-            return super.getHarvestLevel(stack, tool, player, state);
-        else
-            return super.getHarvestLevel(stack, tool, player, state) + (int) (2 * stack.getTag().getFloat("completion"));
+        return super.getDestroySpeed(stack, state) + EnchantmentHelper.getItemEnchantmentLevel(BuddycardsMisc.BUDDY_EFF.get(), stack);
     }
 }

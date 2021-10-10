@@ -1,12 +1,12 @@
 package com.wildcard.buddycards.enchantment;
 
-import com.wildcard.buddycards.util.EnchantmentHandler;
+import com.wildcard.buddycards.util.BuddyEnchantmentHandler;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 public class EnchantmentBuddyBoost extends Enchantment {
     public EnchantmentBuddyBoost() {
-        super(Rarity.VERY_RARE, EnchantmentHandler.BUDDY_MEDAL, EquipmentSlot.values());
+        super(Rarity.VERY_RARE, BuddyEnchantmentHandler.BUDDY_MEDAL, EquipmentSlot.values());
     }
 
     public int getMinCost(int par1) {

@@ -99,14 +99,14 @@ repositories {
     maven { url = "https://maven.theillusivec4.top/" }
     //maven { url 'https://maven.blamejared.com' }
     maven { url 'https://girafi.dk/maven/' }
-    //maven { url 'https://www.cursemaven.com'}
+    maven { url 'https://www.cursemaven.com'}
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.25'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.84'
 
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.0.0")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.0.0:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.1.0")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.17.1-5.0.1.0:api")
 
     //compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48:api")
     //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-48")
@@ -114,7 +114,7 @@ dependencies {
     compileOnly fg.deobf("com.teammetallurgy.aquaculture:aquaculture2_1.17.1:1.17.1-2.2.1")
 
     //compileOnly fg.deobf("curse.maven:farmers_delight-398521:3295974")
-    //implementation fg.deobf("curse.maven:jei-238222:3189632")
+    //implementation fg.deobf("curse.maven:jei-238222:3480846")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

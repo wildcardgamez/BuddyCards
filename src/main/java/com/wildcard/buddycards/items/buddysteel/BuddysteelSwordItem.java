@@ -3,9 +3,11 @@ package com.wildcard.buddycards.items.buddysteel;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -13,7 +15,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
@@ -35,19 +39,8 @@ public class BuddysteelSwordItem extends SwordItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        BuddysteelGearHelper.setTag(playerIn, handIn);
-        return super.use(worldIn, playerIn, handIn);
-    }
-
-    @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        Multimap<Attribute, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
-        if (stack.hasTag() && slot == EquipmentSlot.MAINHAND) {
-            multimap = LinkedHashMultimap.create();
-            float ratio = stack.getTag().getFloat("completion");
-            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)this.getDamage() + 2 + (int) (ratio * 6)/2, AttributeModifier.Operation.ADDITION));
-            multimap.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.4, AttributeModifier.Operation.ADDITION));
-        }
-        return multimap;
+        if (!BuddysteelGearHelper.setTag(playerIn, handIn))
+            return super.use(worldIn, playerIn, handIn);
+        return new InteractionResultHolder<>(InteractionResult.SUCCESS, playerIn.getItemInHand(handIn));
     }
 }

@@ -4,9 +4,7 @@ import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.container.VaultContainer;
 import com.wildcard.buddycards.effects.GradingLuckEffect;
-import com.wildcard.buddycards.enchantment.EnchantmentBuddyBinding;
-import com.wildcard.buddycards.enchantment.EnchantmentBuddyBoost;
-import com.wildcard.buddycards.enchantment.EnchantmentExtraPage;
+import com.wildcard.buddycards.enchantment.*;
 import com.wildcard.buddycards.loot.LootInjection;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -48,6 +46,10 @@ public class BuddycardsMisc {
     public static final RegistryObject<Enchantment> BUDDY_BINDING = ENCHANTMENTS.register("buddy_binding", EnchantmentBuddyBinding::new);
     public static final RegistryObject<Enchantment> BUDDY_BOOST = ENCHANTMENTS.register("buddy_boost", EnchantmentBuddyBoost::new);
     public static final RegistryObject<Enchantment> EXTRA_PAGE = ENCHANTMENTS.register("extra_page", EnchantmentExtraPage::new);
+
+    public static final RegistryObject<Enchantment> BUDDY_DMG = ENCHANTMENTS.register("buddycard_blade", EnchantmentBuddycardBlade::new);
+    public static final RegistryObject<Enchantment> BUDDY_PROT = ENCHANTMENTS.register("buddycard_barrier", EnchantmentBuddycardBarrier::new);
+    public static final RegistryObject<Enchantment> BUDDY_EFF = ENCHANTMENTS.register("buddycard_break", EnchantmentBuddycardBreak::new);
 
     //Effects
     public static final RegistryObject<MobEffect> GRADING_LUCK = EFFECTS.register("grading_luck", GradingLuckEffect::new);

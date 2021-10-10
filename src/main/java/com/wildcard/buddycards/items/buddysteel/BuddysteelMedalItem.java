@@ -3,6 +3,7 @@ package com.wildcard.buddycards.items.buddysteel;
 import com.wildcard.buddycards.items.MedalItem;
 import com.wildcard.buddycards.items.MedalTypes;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +27,8 @@ public class BuddysteelMedalItem extends MedalItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        BuddysteelGearHelper.setTag(playerIn, handIn);
-        return super.use(worldIn, playerIn, handIn);
+        if (!BuddysteelGearHelper.setTag(playerIn, handIn))
+            return super.use(worldIn, playerIn, handIn);
+        return new InteractionResultHolder<>(InteractionResult.SUCCESS, playerIn.getItemInHand(handIn));
     }
 }
