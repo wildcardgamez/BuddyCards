@@ -95,7 +95,7 @@ public class BuddycardsItems {
             VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
             BB = BuddycardsBlocks.BLOCKS.register("booster_box." + setNumber, () -> new BoosterBoxBlock(setNumber, modId));
             BB_ITEM = ITEMS.register("booster_box." + setNumber, () -> new BoosterBoxItem(BB.get(), new Item.Properties().tab(BuddyCards.TAB), setNumber));
-            MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType, modId));
+            MEDAL = ITEMS.register("medal." + setNumber, () -> new SetMedalItem(medalType, modId, setNumber));
             SET_NUMBER = setNumber;
             MOD_ID = modId;
         }
@@ -107,7 +107,7 @@ public class BuddycardsItems {
             VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
             BB = BuddycardsBlocks.BLOCKS.register("booster_box." + setNumber, () -> new BoosterBoxBlock(setNumber, modId));
             BB_ITEM = ITEMS.register("booster_box." + setNumber, () -> new BlockItem(BB.get(), new Item.Properties().tab(BuddyCards.TAB)));
-            MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType, modId));
+            MEDAL = ITEMS.register("medal." + setNumber, () -> new SetMedalItem(medalType, modId, setNumber));
             SET_NUMBER = setNumber;
             MOD_ID = modId;
         }
