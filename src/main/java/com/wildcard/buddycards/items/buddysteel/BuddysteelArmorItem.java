@@ -1,7 +1,7 @@
 package com.wildcard.buddycards.items.buddysteel;
 
 import com.wildcard.buddycards.BuddyCards;
-import com.wildcard.buddycards.client.PerfectBuddysteelArmorLayers;
+import com.wildcard.buddycards.client.BuddycardsLayers;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -57,7 +56,7 @@ public class BuddysteelArmorItem extends ArmorItem {
         @OnlyIn(Dist.CLIENT)
         public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
             if (!((ArmorItem)itemStack.getItem()).getMaterial().equals(BuddysteelArmorMaterial.BUDDYSTEEL))
-                return (A) PerfectBuddysteelArmorLayers.getArmor(armorSlot);
+                return (A) BuddycardsLayers.getArmor(armorSlot);
             return IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
         }
     }

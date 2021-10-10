@@ -5,6 +5,7 @@ import com.wildcard.buddycards.client.models.EnderlingModel;
 import com.wildcard.buddycards.client.renderer.CardDisplayBlockRenderer;
 import com.wildcard.buddycards.client.renderer.CardStandBlockRenderer;
 import com.wildcard.buddycards.client.renderer.EnderlingRenderer;
+import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.integration.aquaculture.AquacultureIntegration;
 import com.wildcard.buddycards.items.CardItem;
 import com.wildcard.buddycards.registries.BuddycardsBlocks;
@@ -30,6 +31,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fmllegacy.RegistryObject;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = BuddyCards.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientStuff {
@@ -53,6 +55,9 @@ public class ClientStuff {
             }));
         }
         event.enqueueWork(() -> ItemBlockRenderTypes.setRenderLayer(BuddycardsBlocks.YANNEL.get(), RenderType.cutout()));
+        if(ModList.get().isLoaded("curios")) {
+            CuriosIntegration.setupRenderers();
+        }
     }
 
     public static ModelLayerLocation ENDERLING_LAYER = new ModelLayerLocation(new ResourceLocation(BuddyCards.MOD_ID, "enderling"), "enderling");

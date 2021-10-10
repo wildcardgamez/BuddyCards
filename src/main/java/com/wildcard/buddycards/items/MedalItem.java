@@ -8,8 +8,9 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.ModList;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-public class MedalItem extends Item {
+public class MedalItem extends Item implements ICurioItem {
     public MedalItem(MedalTypes type) {
         super(new Item.Properties().tab(BuddyCards.TAB).stacksTo(1).fireResistant());
         this.type = type;

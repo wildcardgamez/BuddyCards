@@ -1,7 +1,9 @@
 package com.wildcard.buddycards.integration;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.client.renderer.MedalRenderer;
 import com.wildcard.buddycards.items.MedalTypes;
+import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.ConfigManager;
 import net.minecraft.core.Direction;
@@ -20,6 +22,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nonnull;
@@ -68,5 +71,18 @@ public class CuriosIntegration {
     @SubscribeEvent
     public static void LoadTextures(TextureStitchEvent.Pre event) {
         event.addSprite(new ResourceLocation(BuddyCards.MOD_ID, "misc/medal"));
+    }
+
+    public static void setupRenderers() {
+        CuriosRendererRegistry.register(BuddycardsItems.BASE_SET.MEDAL.get(), () -> new MedalRenderer("medal.1"));
+        CuriosRendererRegistry.register(BuddycardsItems.NETHER_SET.MEDAL.get(), () -> new MedalRenderer("medal.2"));
+        CuriosRendererRegistry.register(BuddycardsItems.END_SET.MEDAL.get(), () -> new MedalRenderer("medal.3"));
+        CuriosRendererRegistry.register(BuddycardsItems.BYG_SET.MEDAL.get(), () -> new MedalRenderer("medal.4"));
+        CuriosRendererRegistry.register(BuddycardsItems.CREATE_SET.MEDAL.get(), () -> new MedalRenderer("medal.5"));
+        CuriosRendererRegistry.register(BuddycardsItems.AQUACULTURE_SET.MEDAL.get(), () -> new MedalRenderer("medal.6"));
+        CuriosRendererRegistry.register(BuddycardsItems.FD_SET.MEDAL.get(), () -> new MedalRenderer("medal.7"));
+        CuriosRendererRegistry.register(BuddycardsItems.ZYLEX_MEDAL.get(), () -> new MedalRenderer("zylex_medal"));
+        CuriosRendererRegistry.register(BuddycardsItems.LUMINIS_MEDAL.get(), () -> new MedalRenderer("luminis_medal"));
+        CuriosRendererRegistry.register(BuddycardsItems.PERFECT_BUDDYSTEEL_MEDAL.get(), () -> new MedalRenderer("perfect_buddysteel_medal"));
     }
 }
