@@ -28,6 +28,6 @@ public class YannelCropBlock extends CropBlock {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader levelReader, BlockPos pos) {
-        return levelReader.getBiome(pos).getBiomeCategory().equals(Biome.BiomeCategory.THEEND);
+        return levelReader.getBiome(pos).getBiomeCategory().equals(Biome.BiomeCategory.THEEND) && state.is(Blocks.FARMLAND);
     }
 }
