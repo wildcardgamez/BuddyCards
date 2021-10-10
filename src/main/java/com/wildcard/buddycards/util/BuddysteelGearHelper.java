@@ -20,7 +20,7 @@ import java.util.List;
 
 public class BuddysteelGearHelper {
     public static void addInformation(ItemStack stack, List<Component> tooltip) {
-        if(!stack.hasTag())
+        if(!stack.hasTag() || !stack.getTag().contains("Enchantments"))
             tooltip.add(new TranslatableComponent( "item.buddycards.buddysteel_gear.desc"));
     }
 
