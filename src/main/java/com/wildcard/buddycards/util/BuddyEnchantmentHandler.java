@@ -26,12 +26,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public class EnchantmentHandler {
+public class BuddyEnchantmentHandler {
     private Map<String, NonNullList<ItemStack>> items = new HashMap<String, NonNullList<ItemStack>>();
 
-    public static final EnchantmentCategory BUDDY_BINDABLE = EnchantmentCategory.create("BUDDY_BINDABLE", EnchantmentHandler::canBuddyBind);
+    public static final EnchantmentCategory BUDDY_BINDABLE = EnchantmentCategory.create("BUDDY_BINDABLE", BuddyEnchantmentHandler::canBuddyBind);
     public static final EnchantmentCategory BUDDY_MEDAL = EnchantmentCategory.create("BUDDY_MEDAL", i -> (i instanceof MedalItem));
     public static final EnchantmentCategory BUDDY_BINDER = EnchantmentCategory.create("BUDDY_BINDER", i -> (i instanceof BinderItem));
+    public static final EnchantmentCategory BUDDY_ARMOR = EnchantmentCategory.create("BUDDY_ARMOR", i -> (i instanceof BuddysteelArmorItem));
+    public static final EnchantmentCategory BUDDY_TOOLS = EnchantmentCategory.create("BUDDY_TOOLS", i -> (i instanceof BuddysteelAxeItem || i instanceof  BuddysteelHoeItem || i instanceof BuddysteelPickaxeItem || i instanceof BuddysteelShovelItem));
+    public static final EnchantmentCategory BUDDY_WEAPONS = EnchantmentCategory.create("BUDDY_WEAPONS", i -> (i instanceof BuddysteelAxeItem || i instanceof  BuddysteelSwordItem));
 
     @SubscribeEvent
     public void drop(LivingDropsEvent event) {
