@@ -62,8 +62,11 @@ public class BuddysteelGearHelper {
     public static boolean setEnchant(int level, ItemStack stack, Enchantment enchantment, Player player) {
         int initialLevel = EnchantmentHelper.getItemEnchantmentLevel(enchantment, stack);
         //Check if changes are needed
-        if(level == initialLevel)
+        if(level == initialLevel) {
+            if(level == 0)
+                player.displayClientMessage(new TranslatableComponent("item.buddycards.buddysteel_gear.low"), true);
             return false;
+        }
         if(initialLevel != 0) {
             player.displayClientMessage(new TranslatableComponent("item.buddycards.buddysteel_gear.warn"), true);
             return false;
