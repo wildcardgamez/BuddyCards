@@ -3,6 +3,7 @@ package com.wildcard.buddycards.client.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.client.BuddycardsLayers;
+import com.wildcard.buddycards.client.models.MedalModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -23,6 +24,10 @@ public class MedalRenderer implements ICurioRenderer {
 
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        BuddycardsLayers.medal.renderToBuffer(matrixStack, ItemRenderer.getFoilBuffer(renderTypeBuffer, BuddycardsLayers.medal.renderType(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        MedalModel<LivingEntity> model = BuddycardsLayers.medal;
+        model.setupAnim(slotContext.entity(), limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        model.prepareMobModel(slotContext.entity(), limbSwing, limbSwingAmount, partialTicks);
+        ICurioRenderer.followBodyRotations(slotContext.entity(), model);
+        model.renderToBuffer(matrixStack, ItemRenderer.getFoilBuffer(renderTypeBuffer, BuddycardsLayers.medal.renderType(texture), false, stack.hasFoil()), light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
     }
 }

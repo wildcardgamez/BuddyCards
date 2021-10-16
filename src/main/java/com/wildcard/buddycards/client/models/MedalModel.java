@@ -11,23 +11,15 @@ import net.minecraft.world.entity.LivingEntity;
 public class MedalModel<T extends LivingEntity> extends HumanoidModel<LivingEntity> {
     public MedalModel(ModelPart part) {
         super(part);
-        medal = part.getChild("body").getChild("medal");
     }
-
-    private final ModelPart medal;
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = createMesh(CubeDeformation.NONE, 0);
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        partdefinition.getChild("body").addOrReplaceChild("medal", CubeListBuilder.create().texOffs(0, 2).addBox(1.0F, -6.0F, -3.0F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.2F))
-                .texOffs(0, 0).addBox(0.0F, -8.0F, -2.5F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.2F, 0.2F, 0.4F)), PartPose.offset(0.0F, 9.0F, 0.5F));
+        partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 2).addBox(1.0F, 2.5F, -2.75F, 2.0F, 2.0F, 1.0F, new CubeDeformation(0.2F))
+                .texOffs(0, 0).addBox(0.0F, 0.5F, -2.25F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.2F, 0.2F, 0.4F)), PartPose.offset(0.0F, 0.0F, 0.5F));
         return LayerDefinition.create(meshdefinition, 16, 16);
-    }
-
-    @Override
-    public void setupAnim(LivingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
     }
 
     @Override
