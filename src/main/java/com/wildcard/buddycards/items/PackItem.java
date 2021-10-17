@@ -44,7 +44,7 @@ public class PackItem extends Item {
     @Override
     public Rarity getRarity(ItemStack stack) {
         //All the packs are rare items (Light blue item name)
-        return Rarity.RARE;
+        return SET_NUMBER != 0 ? Rarity.UNCOMMON : Rarity.RARE;
     }
 
     @Override

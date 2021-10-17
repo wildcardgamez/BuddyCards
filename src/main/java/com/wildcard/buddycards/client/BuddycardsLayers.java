@@ -3,6 +3,7 @@ package com.wildcard.buddycards.client;
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.client.models.MedalModel;
 import com.wildcard.buddycards.client.models.PerfectBuddysteelArmorModel;
+import net.minecraft.client.model.ElytraModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,12 +22,14 @@ public class BuddycardsLayers {
     public static final ModelLayerLocation LEGS_LAYER = new ModelLayerLocation(new ResourceLocation(BuddyCards.MOD_ID, "perfect_buddysteel_armor_legs"), "main");
     public static final ModelLayerLocation FEET_LAYER = new ModelLayerLocation(new ResourceLocation(BuddyCards.MOD_ID, "perfect_buddysteel_armor_feet"), "main");
     public static final ModelLayerLocation MEDAL_LAYER = new ModelLayerLocation(new ResourceLocation(BuddyCards.MOD_ID, "medal"), "main");
+    public static final ModelLayerLocation YANNEL_ELYTRA_LAYER = new ModelLayerLocation(new ResourceLocation(BuddyCards.MOD_ID, "yannel_elyta"), "main");
 
     public static PerfectBuddysteelArmorModel<LivingEntity> helmet;
     public static PerfectBuddysteelArmorModel<LivingEntity> chestplate;
     public static PerfectBuddysteelArmorModel<LivingEntity> leggings;
     public static PerfectBuddysteelArmorModel<LivingEntity> boots;
     public static MedalModel<LivingEntity> medal;
+    public static ElytraModel<LivingEntity> yannel_elytra;
 
     @SubscribeEvent
     public static void initLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
@@ -37,6 +40,7 @@ public class BuddycardsLayers {
         event.registerLayerDefinition(FEET_LAYER, () -> PerfectBuddysteelArmorModel.createBodyLayer(EquipmentSlot.FEET));
         if(ModList.get().isLoaded("curios"))
             event.registerLayerDefinition(MEDAL_LAYER, () -> MedalModel.createBodyLayer());
+        event.registerLayerDefinition(YANNEL_ELYTRA_LAYER, () -> ElytraModel.createLayer());
     }
 
     @SubscribeEvent

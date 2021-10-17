@@ -4,10 +4,12 @@ import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.container.BinderContainer;
 import com.wildcard.buddycards.container.VaultContainer;
 import com.wildcard.buddycards.effects.GradingLuckEffect;
+import com.wildcard.buddycards.effects.SafeLandingEffect;
 import com.wildcard.buddycards.enchantment.*;
 import com.wildcard.buddycards.loot.LootInjection;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
@@ -54,16 +56,25 @@ public class BuddycardsMisc {
 
     //Effects
     public static final RegistryObject<MobEffect> GRADING_LUCK = EFFECTS.register("grading_luck", GradingLuckEffect::new);
+    public static final RegistryObject<MobEffect> SAFE_LANDING = EFFECTS.register("safe_landing", SafeLandingEffect::new);
 
     //Potions
     public static final RegistryObject<Potion> GRADING_LUCK_NORMAL = POTIONS.register("grading_luck", () -> new Potion(new MobEffectInstance(GRADING_LUCK.get(), 3600)));
     public static final RegistryObject<Potion> GRADING_LUCK_STRONG = POTIONS.register("grading_luck_strong", () -> new Potion(new MobEffectInstance(GRADING_LUCK.get(), 1800, 1)));
     public static final RegistryObject<Potion> GRADING_LUCK_LONG = POTIONS.register("grading_luck_long", () -> new Potion(new MobEffectInstance(GRADING_LUCK.get(), 9600)));
+    public static final RegistryObject<Potion> SAFE_LANDING_NORMAL = POTIONS.register("safe_landing_normal", () -> new Potion(new MobEffectInstance(SAFE_LANDING.get(), 3600)));
+    public static final RegistryObject<Potion> SAFE_LANDING_LONG = POTIONS.register("safe_landing_long", () -> new Potion(new MobEffectInstance(SAFE_LANDING.get(), 9600)));
+    public static final RegistryObject<Potion> ROCKETEER_NORMAL = POTIONS.register("rocketeer", () -> new Potion(new MobEffectInstance(MobEffects.LEVITATION, 20, 100), new MobEffectInstance(SAFE_LANDING.get(), 3600)));
+    public static final RegistryObject<Potion> ROCKETEER_LONG = POTIONS.register("rocketeer_long", () -> new Potion(new MobEffectInstance(MobEffects.LEVITATION, 20, 100), new MobEffectInstance(SAFE_LANDING.get(), 9600)));
 
     public static void brewingSetup() {
         PotionBrewing.addMix(Potions.AWKWARD, BuddycardsItems.ZYLEX.get(), GRADING_LUCK_NORMAL.get());
         PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.GLOWSTONE_DUST, GRADING_LUCK_STRONG.get());
         PotionBrewing.addMix(GRADING_LUCK_NORMAL.get(), Items.REDSTONE, GRADING_LUCK_LONG.get());
+        PotionBrewing.addMix(Potions.SLOW_FALLING, BuddycardsItems.YANEL.get(), SAFE_LANDING_NORMAL.get());
+        PotionBrewing.addMix(SAFE_LANDING_NORMAL.get(), Items.REDSTONE, SAFE_LANDING_LONG.get());
+        PotionBrewing.addMix(SAFE_LANDING_NORMAL.get(), Items.FIREWORK_ROCKET, ROCKETEER_NORMAL.get());
+        PotionBrewing.addMix(ROCKETEER_LONG.get(), Items.REDSTONE, ROCKETEER_LONG.get());
     }
 
     //GLMs
