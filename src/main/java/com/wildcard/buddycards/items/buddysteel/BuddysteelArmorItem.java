@@ -2,6 +2,7 @@ package com.wildcard.buddycards.items.buddysteel;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.client.BuddycardsLayers;
+import com.wildcard.buddycards.items.BuddycardsArmorMaterial;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
@@ -34,7 +35,7 @@ public class BuddysteelArmorItem extends ArmorItem {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return material.equals(BuddysteelArmorMaterial.BUDDYSTEEL) ? Rarity.UNCOMMON : Rarity.EPIC;
+        return material.equals(BuddycardsArmorMaterial.BUDDYSTEEL) ? Rarity.UNCOMMON : Rarity.EPIC;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class BuddysteelArmorItem extends ArmorItem {
         @Override
         @OnlyIn(Dist.CLIENT)
         public <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default) {
-            if (!((ArmorItem)itemStack.getItem()).getMaterial().equals(BuddysteelArmorMaterial.BUDDYSTEEL))
+            if (!((ArmorItem)itemStack.getItem()).getMaterial().equals(BuddycardsArmorMaterial.BUDDYSTEEL))
                 return (A) BuddycardsLayers.getArmor(armorSlot);
             return IItemRenderProperties.super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
         }

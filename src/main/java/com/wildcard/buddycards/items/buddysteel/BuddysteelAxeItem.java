@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.items.buddysteel;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.items.BuddycardsItemTier;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import net.minecraft.network.chat.Component;
@@ -19,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.List;
 
 public class BuddysteelAxeItem extends AxeItem {
-    public BuddysteelAxeItem(BuddysteelItemTier tier, float damage) {
+    public BuddysteelAxeItem(BuddycardsItemTier tier, float damage) {
         super(tier, damage, -3.1f, new Properties().tab(BuddyCards.TAB));
     }
 
@@ -31,7 +32,7 @@ public class BuddysteelAxeItem extends AxeItem {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return getTier().equals(BuddysteelItemTier.BUDDYSTEEL) ? Rarity.UNCOMMON : Rarity.EPIC;
+        return getTier().equals(BuddycardsItemTier.BUDDYSTEEL) ? Rarity.UNCOMMON : Rarity.EPIC;
     }
 
     @Override

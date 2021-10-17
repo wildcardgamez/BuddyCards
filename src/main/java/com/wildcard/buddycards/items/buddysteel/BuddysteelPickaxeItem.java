@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.items.buddysteel;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.items.BuddycardsItemTier;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import net.minecraft.world.InteractionResult;
@@ -20,7 +21,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class BuddysteelPickaxeItem extends PickaxeItem {
-    public BuddysteelPickaxeItem(BuddysteelItemTier tier, int damage) {
+    public BuddysteelPickaxeItem(BuddycardsItemTier tier, int damage) {
         super(tier, damage, -2.8f, new Item.Properties().tab(BuddyCards.TAB));
     }
 
@@ -32,7 +33,7 @@ public class BuddysteelPickaxeItem extends PickaxeItem {
 
     @Override
     public Rarity getRarity(ItemStack stack) {
-        return getTier().equals(BuddysteelItemTier.BUDDYSTEEL) ? Rarity.UNCOMMON : Rarity.EPIC;
+        return getTier().equals(BuddycardsItemTier.BUDDYSTEEL) ? Rarity.UNCOMMON : Rarity.EPIC;
     }
 
     @Override

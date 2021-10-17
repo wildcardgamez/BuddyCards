@@ -46,6 +46,7 @@ public class BuddycardsMisc {
     public static final RegistryObject<Enchantment> BUDDY_BINDING = ENCHANTMENTS.register("buddy_binding", EnchantmentBuddyBinding::new);
     public static final RegistryObject<Enchantment> BUDDY_BOOST = ENCHANTMENTS.register("buddy_boost", EnchantmentBuddyBoost::new);
     public static final RegistryObject<Enchantment> EXTRA_PAGE = ENCHANTMENTS.register("extra_page", EnchantmentExtraPage::new);
+    public static final RegistryObject<Enchantment> KINETIC_PROT = ENCHANTMENTS.register("kinetic_protection", EnchantmentKineticProtection::new);
 
     public static final RegistryObject<Enchantment> BUDDY_DMG = ENCHANTMENTS.register("buddycard_blade", EnchantmentBuddycardBlade::new);
     public static final RegistryObject<Enchantment> BUDDY_PROT = ENCHANTMENTS.register("buddycard_barrier", EnchantmentBuddycardBarrier::new);

@@ -2,7 +2,7 @@ package com.wildcard.buddycards.integration.aquaculture;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.wildcard.buddycards.items.buddysteel.BuddysteelItemTier;
+import com.wildcard.buddycards.items.BuddycardsItemTier;
 import com.wildcard.buddycards.items.buddysteel.BuddysteelSwordItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -16,7 +16,7 @@ import javax.annotation.Nonnull;
 
 public class BuddysteelFilletKnifeItem extends BuddysteelSwordItem {
     public BuddysteelFilletKnifeItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, 3);
+        super(BuddycardsItemTier.BUDDYSTEEL, 3);
     }
 
     public boolean canApplyAtEnchantingTable(@Nonnull ItemStack stack, Enchantment enchantment) {
@@ -29,7 +29,7 @@ public class BuddysteelFilletKnifeItem extends BuddysteelSwordItem {
 
     @Override
     public float getDamage() {
-        return BuddysteelItemTier.BUDDYSTEEL.getAttackDamageBonus() / 2;
+        return BuddycardsItemTier.BUDDYSTEEL.getAttackDamageBonus() / 2;
     }
 
     @Override

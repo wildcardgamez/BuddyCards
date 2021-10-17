@@ -1,4 +1,4 @@
-package com.wildcard.buddycards.items.buddysteel;
+package com.wildcard.buddycards.items;
 
 import com.wildcard.buddycards.BuddyCards;
 import com.wildcard.buddycards.registries.BuddycardsItems;
@@ -9,13 +9,14 @@ import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 
-public enum BuddysteelArmorMaterial implements ArmorMaterial {
+public enum BuddycardsArmorMaterial implements ArmorMaterial {
     BUDDYSTEEL(8, 40, new int[]{1, 4, 5, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.BUDDYSTEEL_INGOT.get())), "buddysteel"),
     PERFECT_BUDDYSTEEL(10, 45, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.PERFECT_BUDDYSTEEL_INGOT.get())), "perfect_buddysteel"),
     ZYLEX(12, 48, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.ZYLEX.get())), "zylex"),
-    LUMINIS(15, 50, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.LUMINIS.get())), "luminis");
+    LUMINIS(15, 50, new int[]{2, 5, 6, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.LUMINIS.get())), "luminis"),
+    YANNEL(8, 30, new int[]{1, 2, 2, 2}, new LazyLoadedValue<>(() -> Ingredient.of(BuddycardsItems.YANEL_FABRIC.get())), "yannel");
 
-    BuddysteelArmorMaterial(int enchVal, int dura, int[] red, LazyLoadedValue<Ingredient> mat, String nameIn) {
+    BuddycardsArmorMaterial(int enchVal, int dura, int[] red, LazyLoadedValue<Ingredient> mat, String nameIn) {
         ench = enchVal;
         duraMult = dura;
         material = mat;

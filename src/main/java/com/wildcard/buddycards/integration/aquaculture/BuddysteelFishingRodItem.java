@@ -2,7 +2,7 @@ package com.wildcard.buddycards.integration.aquaculture;
 
 import com.teammetallurgy.aquaculture.item.AquaFishingRodItem;
 import com.wildcard.buddycards.BuddyCards;
-import com.wildcard.buddycards.items.buddysteel.BuddysteelItemTier;
+import com.wildcard.buddycards.items.BuddycardsItemTier;
 import com.wildcard.buddycards.util.BuddysteelGearHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class BuddysteelFishingRodItem extends AquaFishingRodItem {
     public BuddysteelFishingRodItem() {
-        super(BuddysteelItemTier.BUDDYSTEEL, new Item.Properties().tab(BuddyCards.TAB).defaultDurability(512));
+        super(BuddycardsItemTier.BUDDYSTEEL, new Item.Properties().tab(BuddyCards.TAB).defaultDurability(512));
     }
 
     @Override
