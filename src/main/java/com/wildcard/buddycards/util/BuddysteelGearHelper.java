@@ -56,6 +56,7 @@ public class BuddysteelGearHelper {
                 i++;
             total++;
         }
+        System.out.println("Player " + player.getName() + " is getting a Buddysteel buff, current power level is " + (float)i/total);
         return (float)i/total;
     }
 

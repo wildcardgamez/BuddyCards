@@ -4,13 +4,13 @@ import com.wildcard.buddycards.integration.aquaculture.BuddysteelFishingRodItem;
 import com.wildcard.buddycards.items.BinderItem;
 import com.wildcard.buddycards.items.MedalItem;
 import com.wildcard.buddycards.items.YannelArmorItem;
-import com.wildcard.buddycards.items.YannelElytraItem;
 import com.wildcard.buddycards.items.buddysteel.*;
 import com.wildcard.buddycards.registries.BuddycardsItems;
 import com.wildcard.buddycards.registries.BuddycardsMisc;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
@@ -37,7 +37,7 @@ public class BuddyEnchantmentHandler {
     public static final EnchantmentCategory BUDDY_ARMOR = EnchantmentCategory.create("BUDDY_ARMOR", i -> (i instanceof BuddysteelArmorItem));
     public static final EnchantmentCategory BUDDY_TOOLS = EnchantmentCategory.create("BUDDY_TOOLS", i -> (i instanceof BuddysteelAxeItem || i instanceof  BuddysteelHoeItem || i instanceof BuddysteelPickaxeItem || i instanceof BuddysteelShovelItem));
     public static final EnchantmentCategory BUDDY_WEAPONS = EnchantmentCategory.create("BUDDY_WEAPONS", i -> (i instanceof BuddysteelAxeItem || i instanceof  BuddysteelSwordItem));
-    public static final EnchantmentCategory YANNEL_ARMOR = EnchantmentCategory.create("YANNEL_ARMOR", i -> (i instanceof YannelArmorItem || i instanceof YannelElytraItem));
+    public static final EnchantmentCategory YANNEL_ARMOR = EnchantmentCategory.create("YANNEL_ARMOR", i -> (i instanceof YannelArmorItem || i instanceof ElytraItem));
 
     @SubscribeEvent
     public void drop(LivingDropsEvent event) {
