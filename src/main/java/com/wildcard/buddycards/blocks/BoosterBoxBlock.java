@@ -74,7 +74,7 @@ public class BoosterBoxBlock extends Block {
                 return true;
             }
         } else {
-            return i == 1;
+            return false;
         }
     }
 
