@@ -6,6 +6,7 @@ import com.wildcard.buddycards.blocks.BuddysteelVaultBlock;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fmllegacy.RegistryObject;
@@ -296,5 +297,5 @@ public class BuddycardsItems {
     public static final RegistryObject<BlockItem> ZELKOVA_CARD_DISPLAY_ITEM = ITEMS.register("zelkova_card_display", () -> new BlockItem(BuddycardsBlocks.ZELKOVA_CARD_DISPLAY.get(), new Item.Properties().tab(BuddyCards.TAB)));
 
     //Eggs
-    public static final RegistryObject<ModdedSpawnEggItem> ENDERLING_SPAWN_EGG = ITEMS.register("spawn_egg_enderling", () -> new ModdedSpawnEggItem(BuddycardsEntities.ENDERLING, 0x2E2744, 0x9A72CC, new Item.Properties().tab(BuddyCards.TAB)));
+    public static final RegistryObject<ForgeSpawnEggItem> ENDERLING_SPAWN_EGG = ITEMS.register("spawn_egg_enderling", () -> new ForgeSpawnEggItem(BuddycardsEntities.ENDERLING, 0x2E2744, 0x9A72CC, new Item.Properties().tab(BuddyCards.TAB)));
 }

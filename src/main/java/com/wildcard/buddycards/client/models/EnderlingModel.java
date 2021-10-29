@@ -51,17 +51,17 @@ public class EnderlingModel<T extends EnderlingEntity> extends EntityModel<Ender
         partdefinition.addOrReplaceChild("ll", CubeListBuilder.create()
                 .texOffs(0, 18)
                 .mirror()
-                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(2, 12, 0));
+                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(1.5f, 12, 0));
         partdefinition.addOrReplaceChild("rl", CubeListBuilder.create()
                 .texOffs(0, 18)
-                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(-2, 12, 0));
+                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(-1.5f, 12, 0));
         partdefinition.addOrReplaceChild("la", CubeListBuilder.create()
                 .texOffs(8, 18)
                 .mirror()
-                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(3, 5, 0));
+                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(4, 4, 0));
         partdefinition.addOrReplaceChild("ra", CubeListBuilder.create()
                 .texOffs(8, 18)
-                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(-3, 5, 0));
+                .addBox(-1, 0, -1, 2, 12, 2), PartPose.offset(-4, 4, 0));
         return  LayerDefinition.create(meshdefinition, 64, 32);
     }
 
