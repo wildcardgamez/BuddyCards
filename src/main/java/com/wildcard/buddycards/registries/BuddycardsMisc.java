@@ -62,7 +62,7 @@ public class BuddycardsMisc {
     public static final RegistryObject<Potion> GRADING_LUCK_NORMAL = POTIONS.register("grading_luck", () -> new Potion(new MobEffectInstance(GRADING_LUCK.get(), 3600)));
     public static final RegistryObject<Potion> GRADING_LUCK_STRONG = POTIONS.register("grading_luck_strong", () -> new Potion(new MobEffectInstance(GRADING_LUCK.get(), 1800, 1)));
     public static final RegistryObject<Potion> GRADING_LUCK_LONG = POTIONS.register("grading_luck_long", () -> new Potion(new MobEffectInstance(GRADING_LUCK.get(), 9600)));
-    public static final RegistryObject<Potion> SAFE_LANDING_NORMAL = POTIONS.register("safe_landing_normal", () -> new Potion(new MobEffectInstance(SAFE_LANDING.get(), 3600)));
+    public static final RegistryObject<Potion> SAFE_LANDING_NORMAL = POTIONS.register("safe_landing", () -> new Potion(new MobEffectInstance(SAFE_LANDING.get(), 3600)));
     public static final RegistryObject<Potion> SAFE_LANDING_LONG = POTIONS.register("safe_landing_long", () -> new Potion(new MobEffectInstance(SAFE_LANDING.get(), 9600)));
     public static final RegistryObject<Potion> ROCKETEER_NORMAL = POTIONS.register("rocketeer", () -> new Potion(new MobEffectInstance(MobEffects.LEVITATION, 20, 100), new MobEffectInstance(SAFE_LANDING.get(), 3600)));
     public static final RegistryObject<Potion> ROCKETEER_LONG = POTIONS.register("rocketeer_long", () -> new Potion(new MobEffectInstance(MobEffects.LEVITATION, 20, 100), new MobEffectInstance(SAFE_LANDING.get(), 9600)));
