@@ -1,6 +1,7 @@
 package com.wildcard.buddycards.registries;
 
 import com.wildcard.buddycards.BuddyCards;
+import com.wildcard.buddycards.blocks.BoosterBoxBlock;
 import com.wildcard.buddycards.blocks.BuddysteelVaultBlock;
 import com.wildcard.buddycards.items.*;
 import com.wildcard.buddycards.items.buddysteel.*;
@@ -59,6 +60,8 @@ public class BuddycardsItems {
         public final RegistryObject<BinderItem> BINDER;
         public final RegistryObject<BuddysteelVaultBlock> VAULT;
         public final RegistryObject<BlockItem> VAULT_ITEM;
+        public final RegistryObject<BoosterBoxBlock> BB;
+        public final RegistryObject<BlockItem> BB_ITEM;
         public final RegistryObject<MedalItem> MEDAL;
         private final int SET_NUMBER;
         private final String MOD_ID;
@@ -68,6 +71,8 @@ public class BuddycardsItems {
             BINDER = ITEMS.register("binder." + setNumber, () -> new BinderItem(setNumber, modId));
             VAULT = BuddycardsBlocks.BLOCKS.register("buddysteel_vault." + setNumber, () -> new BuddysteelVaultBlock(setNumber, modId));
             VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
+            BB = BuddycardsBlocks.BLOCKS.register("booster_box." + setNumber, () -> new BoosterBoxBlock(setNumber, modId));
+            BB_ITEM = ITEMS.register("booster_box." + setNumber, () -> new BlockItem(BB.get(), new Item.Properties().tab(BuddyCards.TAB)));
             MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType));
             SET_NUMBER = setNumber;
             MOD_ID = modId;
@@ -78,6 +83,8 @@ public class BuddycardsItems {
             BINDER = ITEMS.register("binder." + setNumber, () -> new BinderItem(setNumber, modId));
             VAULT = BuddycardsBlocks.BLOCKS.register("buddysteel_vault." + setNumber, () -> new BuddysteelVaultBlock(setNumber, modId));
             VAULT_ITEM = ITEMS.register("buddysteel_vault." + setNumber, () -> new BlockItem(VAULT.get(), new Item.Properties().tab(BuddyCards.TAB)));
+            BB = BuddycardsBlocks.BLOCKS.register("booster_box." + setNumber, () -> new BoosterBoxBlock(setNumber, modId));
+            BB_ITEM = ITEMS.register("booster_box." + setNumber, () -> new BlockItem(BB.get(), new Item.Properties().tab(BuddyCards.TAB)));
             MEDAL = ITEMS.register("medal." + setNumber, () -> new MedalItem(medalType));
             SET_NUMBER = setNumber;
             MOD_ID = modId;
