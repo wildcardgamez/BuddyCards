@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,layers=1": {
+      "model": "buddycards:block/booster_box_mystery-1",
+      "y": 90
+    },
+    "facing=north,layers=1": {
+      "model": "buddycards:block/booster_box_mystery-1"
+    },
+    "facing=south,layers=1": {
+      "model": "buddycards:block/booster_box_mystery-1",
+      "y": 180
+    },
+    "facing=west,layers=1": {
+      "model": "buddycards:block/booster_box_mystery-1",
+      "y": 270
+    },
+    "facing=east,layers=2": {
+      "model": "buddycards:block/booster_box_mystery-2",
+      "y": 90
+    },
+    "facing=north,layers=2": {
+      "model": "buddycards:block/booster_box_mystery-2"
+    },
+    "facing=south,layers=2": {
+      "model": "buddycards:block/booster_box_mystery-2",
+      "y": 180
+    },
+    "facing=west,layers=2": {
+      "model": "buddycards:block/booster_box_mystery-2",
+      "y": 270
+    },
+    "facing=east,layers=3": {
+      "model": "buddycards:block/booster_box_mystery-3",
+      "y": 90
+    },
+    "facing=north,layers=3": {
+      "model": "buddycards:block/booster_box_mystery-3"
+    },
+    "facing=south,layers=3": {
+      "model": "buddycards:block/booster_box_mystery-3",
+      "y": 180
+    },
+    "facing=west,layers=3": {
+      "model": "buddycards:block/booster_box_mystery-3",
+      "y": 270
+    },
+    "facing=east,layers=4": {
+      "model": "buddycards:block/booster_box_mystery-4",
+      "y": 90
+    },
+    "facing=north,layers=4": {
+      "model": "buddycards:block/booster_box_mystery-4"
+    },
+    "facing=south,layers=4": {
+      "model": "buddycards:block/booster_box_mystery-4",
+      "y": 180
+    },
+    "facing=west,layers=4": {
+      "model": "buddycards:block/booster_box_mystery-4",
+      "y": 270
+    }
+  }
+}

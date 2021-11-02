@@ -54,6 +54,8 @@ public class BuddycardsItems {
     public static final BuddycardSet AQUACULTURE_SET = new BuddycardSet(6, "aquaculture", MedalTypes.AQUACULTURE_SET, 3);
     public static final BuddycardSet FD_SET = new BuddycardSet(7, "farmersdelight", MedalTypes.FD_SET, 3);
 
+    public static final RegistryObject<BlockItem> BB_ITEM = ITEMS.register("booster_box_mystery", () -> new BlockItem(BuddycardsBlocks.BB.get(), new Item.Properties().tab(BuddyCards.TAB)));
+
     static public class BuddycardSet {
         public final ArrayList<RegistryObject<CardItem>> CARDS = new ArrayList<>();
         public final RegistryObject<PackItem> PACK;

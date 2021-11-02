@@ -1,10 +1,7 @@
 package com.wildcard.buddycards.registries;
 
 import com.wildcard.buddycards.BuddyCards;
-import com.wildcard.buddycards.blocks.BuddysteelVaultBlock;
-import com.wildcard.buddycards.blocks.CardDisplayBlock;
-import com.wildcard.buddycards.blocks.CardStandBlock;
-import com.wildcard.buddycards.blocks.LuminisOreBlock;
+import com.wildcard.buddycards.blocks.*;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
@@ -69,5 +66,7 @@ public class BuddycardsBlocks {
     public static final RegistryObject<Block> LUMINIS_ORE = BLOCKS.register("luminis_ore", LuminisOreBlock::new);
     public static final RegistryObject<Block> DEEP_LUMINIS_BLOCK = BLOCKS.register("deep_luminis_block", () -> new Block(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.GOLD_BLOCK).lightLevel((state) -> 8)));
     public static final RegistryObject<Block> PERFECT_BUDDYSTEEL_BLOCK = BLOCKS.register("perfect_buddysteel_block", () -> new Block(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<BoosterBoxBlock> BB = BLOCKS.register("booster_box_mystery", () -> new BoosterBoxBlock(0, "buddycards"));
 
 }
