@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "buddycards:booster_box.4"
+    }
+  ],
+  "result":
+  {
+    "item": "buddycards:pack.4",
+    "count": 6
+  }
+}

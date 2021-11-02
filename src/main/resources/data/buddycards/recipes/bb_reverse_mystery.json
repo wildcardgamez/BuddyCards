@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "buddycards:booster_box_mystery"
+    }
+  ],
+  "result":
+  {
+    "item": "buddycards:mystery_pack",
+    "count": 6
+  }
+}
