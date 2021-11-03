@@ -13,9 +13,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.16.5-2.5.1'
+version = '1.16.5-2.5.2'
 group = 'com.wildcard.buddycards' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'buddycards'
+archivesBaseName = 'Buddycards'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
