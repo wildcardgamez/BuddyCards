@@ -155,10 +155,10 @@ public class BinderContainer extends Container {
             stack = slot.getItem().copy();
             if (index < slots.size() - 36)
             {
-                if(!this.moveItemStackTo(slot.getItem(), 54, slots.size(), true))
+                if(!this.moveItemStackTo(slot.getItem(), slots.size() - 36, slots.size(), true))
                     return ItemStack.EMPTY;
             }
-            else if(!this.moveItemStackTo(slot.getItem(), 0, 54, false))
+            else if(!this.moveItemStackTo(slot.getItem(), 0, slots.size() - 36, false))
                 return ItemStack.EMPTY;
             if(slot.getItem().isEmpty())
                 slot.set(ItemStack.EMPTY);
