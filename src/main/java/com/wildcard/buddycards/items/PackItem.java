@@ -102,7 +102,7 @@ public class PackItem extends Item {
 
     public static CardItem getRandomCardOfRarity(ArrayList<RegistryObject<CardItem>> cards, Rarity rarity) {
         CardItem card = cards.get((int)(Math.random() * cards.size())).get();
-        while (card.getRarity() != rarity || card instanceof GummyCardItem || card.getRegistryName().toString().endsWith("s")) {
+        while (card.getRarity() != rarity || card instanceof GummyCardItem) {
             card = cards.get((int)(Math.random() * cards.size())).get();
         }
         return card;
