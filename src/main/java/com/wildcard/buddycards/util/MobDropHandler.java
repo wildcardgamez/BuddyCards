@@ -65,7 +65,7 @@ public class MobDropHandler {
             }
             else if (entity instanceof EnderDragon) {
                 if (Math.random() < ConfigManager.dragonChance.get()) {
-                    drops.add(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(BuddycardsItems.NETHER_SET.PACK.get(),
+                    drops.add(new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(BuddycardsItems.END_SET.PACK.get(),
                             (int) (Math.random() * ConfigManager.dragonMaxPacks.get()) + 1)));
                 }
             }
