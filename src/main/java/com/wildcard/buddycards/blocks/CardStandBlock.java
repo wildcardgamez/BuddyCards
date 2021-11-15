@@ -97,7 +97,8 @@ public class CardStandBlock extends BaseEntityBlock {
                 else {
                     standTile.setCard(ItemStack.EMPTY);
                 }
-                player.addItem(oldCard);
+                if(!player.addItem(oldCard))
+                    Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), oldCard);
                 standTile.setDir((int)((player.getYHeadRot() * 16.0F / 360.0F) + 0.5D) & 15);
             }
             else if(stack.getItem() instanceof CardItem) {
