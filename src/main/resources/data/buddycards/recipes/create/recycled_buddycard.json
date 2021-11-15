@@ -8,25 +8,19 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "minecraft:lapis_block"
-    },
-    {
-      "item": "minecraft:iron_block"
-    },
-    {
       "item": "buddycards:shredded_buddycard"
     },
     {
       "item": "buddycards:shredded_buddycard"
     },
     {
-      "item": "buddycards:shredded_buddycard"
+      "fluid": "minecraft:water",
+      "amount": 250
     }
   ],
   "results": [
     {
-      "item": "buddycards:buddysteel_ingot"
+      "item": "buddycards:recycled_buddycard"
     }
-  ],
-  "heatRequirement": "heated"
+  ]
 }

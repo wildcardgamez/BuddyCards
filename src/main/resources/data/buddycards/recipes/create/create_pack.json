@@ -1,32 +1,45 @@
 {
-  "conditions": [
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "buddycards:luminis_panel"
+  },
+  "transitionalItem": {
+    "item": "buddycards:unfinished_pack"
+  },
+  "sequence": [
     {
-      "type": "forge:mod_loaded",
-      "modid": "create"
-    }
-  ],
-  "type": "create:mixing",
-  "ingredients": [
-    {
-      "item": "buddycards:shredded_buddycard"
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "buddycards:unfinished_pack"
+        },
+        {
+          "item": "buddycards:recycled_buddycard"
+        }
+      ],
+      "results": [
+        {
+          "item": "buddycards:unfinished_pack"
+        }
+      ]
     },
     {
-      "item": "buddycards:shredded_buddycard"
-    },
-    {
-      "item": "buddycards:shredded_buddycard"
-    },
-    {
-      "item": "buddycards:shredded_buddycard"
-    },
-    {
-      "item": "buddycards:shredded_buddycard"
-    },
-    {
-      "item": "create:brass_sheet"
-    },
-    {
-      "item": "buddycards:buddysteel_nugget"
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "buddycards:unfinished_pack"
+        },
+        {
+          "fluid": "minecraft:water",
+          "nbt": {},
+          "amount": 125
+        }
+      ],
+      "results": [
+        {
+          "item": "buddycards:unfinished_pack"
+        }
+      ]
     }
   ],
   "results": [
@@ -34,5 +47,5 @@
       "item": "buddycards:pack.5"
     }
   ],
-  "heatRequirement": "heated"
+  "loops": 4
 }

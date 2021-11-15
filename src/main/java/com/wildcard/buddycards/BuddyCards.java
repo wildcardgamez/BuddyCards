@@ -4,6 +4,7 @@ import com.wildcard.buddycards.client.renderer.CardDisplayTileRenderer;
 import com.wildcard.buddycards.client.renderer.CardStandTileRenderer;
 import com.wildcard.buddycards.client.renderer.EnderlingRenderer;
 import com.wildcard.buddycards.entities.EnderlingEntity;
+import com.wildcard.buddycards.integration.CreateIntegration;
 import com.wildcard.buddycards.integration.CuriosIntegration;
 import com.wildcard.buddycards.integration.aquaculture.AquacultureIntegration;
 import com.wildcard.buddycards.integration.fd.FarmersDelightIntegration;
@@ -60,6 +61,8 @@ public class BuddyCards
             AquacultureIntegration.init();
         if (ModList.get().isLoaded("farmersdelight"))
             FarmersDelightIntegration.init();
+        if (ModList.get().isLoaded("create"))
+            CreateIntegration.init();
         if (ModList.get().isLoaded("curios"))
             CuriosIntegration.Imc();
         BuddycardsBlocks.init();

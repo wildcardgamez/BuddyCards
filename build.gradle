@@ -102,7 +102,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
 
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.4-4.0.3.5")
@@ -114,6 +114,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:farmers_delight-398521:3503844")
     implementation fg.deobf("curse.maven:jei-238222:3502687")
+    implementation fg.deobf("curse.maven:create-328085:3499718")
+    implementation fg.deobf("curse.maven:flywheel-486392:3459739")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
