@@ -171,7 +171,8 @@ public class CardDisplayBlock extends Block {
                 else {
                     displayTile.putCardInSlot(ItemStack.EMPTY, slot);
                 }
-                player.addItem(oldCard);
+                if(!player.addItem(oldCard))
+                    InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), oldCard);
             }
             else if(stack.getItem() instanceof CardItem) {
                 ItemStack card = new ItemStack(stack.getItem(), 1);
