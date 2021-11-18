@@ -1,3 +1,4 @@
+###Warning: this is outdated info, please use the patchouli book
 Thanks for checking out my mod!
 
 A fair warning the code can get messy at times but I try to comment what I can,
