@@ -36,7 +36,7 @@ public class LuminisOreBlock extends OreBlock {
     @Override
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
         if(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, player.getMainHandItem()) == 0) {
-            double i = player.getMainHandItem().equals(BuddycardsItems.LUMINIS_PICKAXE.get()) ? 1 : 1.4;
+            double i = player.getMainHandItem().equals(BuddycardsItems.LUMINIS_PICKAXE.get()) ? 1.4 : 1;
             if (ModList.get().isLoaded("curios") &&
                     CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.LUMINIS_RING.get(), player).isPresent() &&
                     CuriosApi.getCuriosHelper().findEquippedCurio(BuddycardsItems.LUMINIS_RING.get(), player).get().right.getItem().equals(BuddycardsItems.LUMINIS_RING.get()))
