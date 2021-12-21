@@ -3,16 +3,16 @@
   "injection": "buddycards:inject/fd_buddybeans",
   "conditions": [
     {
-      "condition": "minecraft:random_chance",
-      "chance": 0.05
-    },
-    {
       "condition": "minecraft:match_tool",
       "predicate": {
         "items": [
           "buddycards:buddysteel_food_knife"
         ]
       }
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.025
     },
     {
       "condition": "minecraft:alternative",
