@@ -60,11 +60,11 @@ public class BuddycardsBlocks {
     //Buddysteel Luminis and Zylex
     public static final RegistryObject<Block> BUDDYSTEEL_BLOCK = BLOCKS.register("buddysteel_block", () -> new Block(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> ZYLEX_BLOCK = BLOCKS.register("zylex_block", () -> new Block(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.IRON_BLOCK)));
-    public static final RegistryObject<Block> LUMINIS_BLOCK = BLOCKS.register("luminis_block", () -> new Block(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.GOLD_BLOCK).lightLevel((state) -> 10)));
+    public static final RegistryObject<Block> LUMINIS_BLOCK = BLOCKS.register("luminis_block", () -> new Block(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.GOLD_BLOCK).lightLevel((state) -> 10).strength(3, 0)));
     public static final RegistryObject<Block> LUMINIS_PANELS = BLOCKS.register("luminis_panels", () -> new Block(AbstractBlock.Properties.copy(LUMINIS_BLOCK.get())));
     public static final RegistryObject<Block> LUMINIS_PILLAR = BLOCKS.register("luminis_pillar", () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(LUMINIS_BLOCK.get())));
     public static final RegistryObject<Block> LUMINIS_ORE = BLOCKS.register("luminis_ore", LuminisOreBlock::new);
-    public static final RegistryObject<Block> DEEP_LUMINIS_BLOCK = BLOCKS.register("deep_luminis_block", () -> new Block(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.GOLD_BLOCK).lightLevel((state) -> 8)));
+    public static final RegistryObject<Block> DEEP_LUMINIS_BLOCK = BLOCKS.register("deep_luminis_block", () -> new Block(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.GOLD_BLOCK).lightLevel((state) -> 8).strength(3, 0)));
     public static final RegistryObject<Block> PERFECT_BUDDYSTEEL_BLOCK = BLOCKS.register("perfect_buddysteel_block", () -> new Block(AbstractBlock.Properties.copy(net.minecraft.block.Blocks.IRON_BLOCK)));
 
     public static final RegistryObject<BoosterBoxBlock> BB = BLOCKS.register("booster_box_mystery", () -> new BoosterBoxBlock(0, "buddycards"));
