@@ -34,6 +34,9 @@ public class AquacultureIntegration {
     public void onItemFished(ItemFishedEvent event) {
         float oddsOfGettingBuddyLoot = 0f;
         ItemStack rod = event.getPlayer().getMainHandItem();
+        //Make sure it's not in the offhand
+        if(event.getPlayer().getOffhandItem().getItem() instanceof AquaFishingRodItem)
+            rod = event.getPlayer().getOffhandItem();
         //If the rod has a buddysteel hook, give it the chance to get a pack
         if(AquaFishingRodItem.getHookType(rod).equals(BUDDY_HOOK))
             oddsOfGettingBuddyLoot += ConfigManager.aquacultureFishingChance.get();
